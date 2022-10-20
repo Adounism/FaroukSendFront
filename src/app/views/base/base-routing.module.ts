@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { AccordionsComponent } from './accordion/accordions.component';
-import { BreadcrumbsComponent } from './breadcrumbs/breadcrumbs.component';
+import { CustomersComponent } from './customers/customers.component';
+import { SuppliersComponent } from './suppliers/suppliers.component';
 import { CardsComponent } from './cards/cards.component';
 import { CarouselsComponent } from './carousels/carousels.component';
 import { CollapsesComponent } from './collapses/collapses.component';
@@ -30,17 +30,17 @@ const routes: Routes = [
         redirectTo: 'cards',
       },
       {
-        path: 'accordion',
-        component: AccordionsComponent,
+        path: 'customers',
+        component: CustomersComponent,
         data: {
-          title: 'Accordion',
+          title: 'Customers',
         },
       },
       {
-        path: 'breadcrumbs',
-        component: BreadcrumbsComponent,
+        path: 'suppliers',
+        component: SuppliersComponent,
         data: {
-          title: 'Breadcrumbs',
+          title: 'suppliers',
         },
       },
       {

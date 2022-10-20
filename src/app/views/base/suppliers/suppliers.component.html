@@ -1,0 +1,53 @@
+<c-row ngPreserveWhitespaces>
+  <c-col xs="12">
+    <c-card class="mb-4">
+      <c-card-header>
+        <strong>Ajouter un  Fournisseur</strong>
+      </c-card-header>
+      <c-card-body>
+        <p class="text-medium-emphasis small">
+          Veillez fournir les informations du Fournisseur.
+        </p>
+        <form cForm class="row g-3" [formGroup]="profileForm" (ngSubmit)="ajouter()">
+          <c-col [md]="6">
+          <label cLabel for="inputEmail4">Nom du Fournisseur:</label>
+          <input cFormControl id="inputEmail4" name="firstname" formControlName="firstname" type="text" ngModel/>
+          
+  
+          </c-col>
+          <c-col [md]="6">
+          <label cLabel for="inputPassword4">Prenom du Fournisseur:</label>
+          <input cFormControl id="inputPassword4" formControlName="lastname" name="lastname" type="text" ngModel/>
+          </c-col>
+
+          <div  class="typeclient d-flex col-xs-1 align-items-center" style="justify-content: space-evenly;">
+            <c-form-check >
+              <input cFormCheckInput type="radio" value="1" formControlName="induvidual" name="flexRadioDefault" checked ngModel />
+              <label cFormCheckLabel>Induvidual</label>
+            </c-form-check>
+            <c-form-check>
+              <input cFormCheckInput type="radio" value="2" formControlName="groupe" name="flexRadioDefault" ngModel/>
+              <label cFormCheckLabel>Groupe</label>
+            </c-form-check>
+          </div>
+
+
+          <c-col [xs]="12">
+          <label cLabel for="inputAddress">Address du Fournisseur</label>
+          <input cFormControl id="inputAddress" name="adresse" formControlName="adresse" placeholder="1234 Bamako coura" ngModel/>
+          </c-col>
+
+          <c-col [md]="6">
+          <label cLabel for="inputCity">Contact du Fournisseur: </label>
+          <input cFormControl id="inputCity" type="tel"  name="contact" formControlName="contact" placeholder="numero de télephone" ngModel />
+          </c-col>
+
+          <c-col [xs]="12">
+          <button [disabled]="!profileForm.valid" cButton type="submit">Ajouter</button>
+          </c-col>
+          </form>
+      </c-card-body>
+    </c-card>
+
+  </c-col>
+</c-row>

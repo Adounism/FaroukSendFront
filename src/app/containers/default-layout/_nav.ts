@@ -16,13 +16,12 @@ export const navItems: INavData[] = [
   },
   {
     name: 'Ajouter Client',
-    url: '/theme/colors',
+    url: '/base/customers',
     iconComponent: { name: 'cil-people' }
   },
   {
     name: 'Ajouter Fournisseur',
-    url: '/theme/typography',
-    linkProps: { fragment: 'someAnchor' },
+    url: '/base/suppliers',
     iconComponent: { name: 'cil-bookmark' }
   },
   {

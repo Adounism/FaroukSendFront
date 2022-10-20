@@ -1,15 +1,12 @@
 <c-row ngPreserveWhitespaces>
   <c-col xs="12">
-    <app-docs-callout href="components/accordion" name="Accordion"></app-docs-callout>
-  </c-col>
-  <c-col xs="12">
     <c-card class="mb-4">
       <c-card-header>
-        <strong>Envoyer crédit</strong>
+        <strong>Ajouter un  Client</strong>
       </c-card-header>
       <c-card-body>
         <p class="text-medium-emphasis small">
-          Veillez fournir les informations d'envois .
+          Veillez fournir les informations du clients.
         </p>
         <!-- <app-docs-example href="components/accordion">
 
@@ -60,28 +57,41 @@
         </app-docs-example> -->
 
 
-        <form cForm class="row g-3">
+        <form cForm class="row g-3" [formGroup]="profileForm" (ngSubmit)="ajouter()">
           <c-col [md]="6">
-          <label cLabel for="inputEmail4">Email</label>
-          <input cFormControl id="inputEmail4" type="email" />
+          <label cLabel for="inputEmail4">Nom:</label>
+          <input cFormControl id="inputEmail4" name="firstname" formControlName="firstname" type="text" ngModel/>
+          
+  
           </c-col>
           <c-col [md]="6">
-          <label cLabel for="inputPassword4">Password</label>
-          <input cFormControl id="inputPassword4" type="password" />
+          <label cLabel for="inputPassword4">Prenom:</label>
+          <input cFormControl id="inputPassword4" formControlName="lastname" name="lastname" type="text" ngModel/>
           </c-col>
+
+          <div  class="typeclient d-flex col-xs-1 align-items-center" style="justify-content: space-evenly;">
+            <c-form-check >
+              <input cFormCheckInput type="radio" value="1" formControlName="induvidual" name="flexRadioDefault" checked ngModel />
+              <label cFormCheckLabel>Induvidual</label>
+            </c-form-check>
+            <c-form-check>
+              <input cFormCheckInput type="radio" value="2" formControlName="groupe" name="flexRadioDefault" ngModel/>
+              <label cFormCheckLabel>Groupe</label>
+            </c-form-check>
+          </div>
+
+
           <c-col [xs]="12">
           <label cLabel for="inputAddress">Address</label>
-          <input cFormControl id="inputAddress" placeholder="1234 Main St" />
+          <input cFormControl id="inputAddress" name="adresse" formControlName="adresse" placeholder="1234 Bamako coura" ngModel/>
           </c-col>
-          <c-col [xs]="12">
-          <label cLabel for="inputAddress2">Address 2</label>
-          <input cFormControl id="inputAddress2" placeholder="Apartment, studio, or floor" />
-          </c-col>
+
           <c-col [md]="6">
-          <label cLabel for="inputCity">City</label>
-          <input cFormControl id="inputCity" />
+          <label cLabel for="inputCity">Contact: </label>
+          <input cFormControl id="inputCity" type="tel"  name="contact" formControlName="contact" placeholder="numero de télephone" ngModel />
           </c-col>
-          <c-col [md]="4">
+
+          <!-- <c-col [md]="4">
           <label cLabel for="inputState">State</label>
           <select cSelect id="inputState">
           <option>Choose...</option>
@@ -97,15 +107,15 @@
           <input cFormCheckInput id="gridCheck" name="gridCheck" type="checkbox" />
           <label cFormCheckLabel for="gridCheck">Check me out</label>
           </c-form-check>
-          </c-col>
+          </c-col> -->
           <c-col [xs]="12">
-          <button cButton type="submit">Sign in</button>
+          <button [disabled]="!profileForm.valid" cButton type="submit">Ajouter</button>
           </c-col>
           </form>
       </c-card-body>
     </c-card>
 
-    <c-card class="mb-4">
+    <!-- <c-card class="mb-4">
       <c-card-header>
         <strong>Angular Accordion</strong> alwaysOpen
       </c-card-header>
@@ -124,6 +134,6 @@
           </c-accordion>
         </app-docs-example>
       </c-card-body>
-    </c-card>
+    </c-card> -->
   </c-col>
 </c-row>

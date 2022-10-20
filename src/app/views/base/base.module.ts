@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 // CoreUI Modules
 import {
@@ -34,8 +34,8 @@ import { IconModule } from '@coreui/icons-angular';
 import { DocsComponentsModule } from '@docs-components/docs-components.module';
 
 // views
-import { AccordionsComponent } from './accordion/accordions.component';
-import { BreadcrumbsComponent } from './breadcrumbs/breadcrumbs.component';
+import { CustomersComponent } from './customers/customers.component';
+import {  SuppliersComponent } from './suppliers/suppliers.component';
 import { CardsComponent } from './cards/cards.component';
 import { CarouselsComponent } from './carousels/carousels.component';
 import { CollapsesComponent } from './collapses/collapses.component';
@@ -75,6 +75,7 @@ import { BaseRoutingModule } from './base-routing.module';
     TabsModule,
     NavModule,
     TooltipModule,
+    FormsModule,
     CarouselModule,
     FormModule,
     ReactiveFormsModule,
@@ -85,8 +86,8 @@ import { BaseRoutingModule } from './base-routing.module';
     DocsComponentsModule,
   ],
   declarations: [
-    AccordionsComponent,
-    BreadcrumbsComponent,
+    CustomersComponent,
+    SuppliersComponent,
     CardsComponent,
     CarouselsComponent,
     CollapsesComponent,
