@@ -34,6 +34,16 @@ export class SuppliersComponent implements OnInit {
       Validators.minLength(4),
     ]),
 
+    email: new FormControl([
+      Validators.required,
+      Validators.minLength(4),
+    ]),
+
+    typeFournisseur: new FormControl([
+      Validators.required,
+      Validators.minLength(4),
+    ]),
+
   });
 
 

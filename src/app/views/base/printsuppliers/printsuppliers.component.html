@@ -1,0 +1,60 @@
+<c-col xs="12">
+  <c-card class="mb-4">
+    <c-card-header>
+
+        <strong>Liste des Fournisseurs</strong>
+
+
+
+          <button style="float: right;" class="btn float-right" color="primary"  [routerLink]="['/base/suppliers']" cButton> ajouter
+    
+          </button>
+
+
+    </c-card-header>
+    <c-card-body>
+
+      <p class="text-medium-emphasis small">
+        A <code>&lt;caption&gt;</code> functions like a heading for a table. It helps
+        users with screen readers to find a table and understand what it's about and
+        decide if they want to read it.
+      </p>
+
+        <table cTable>
+          <caption>Listes des Fournisseurs</caption>
+          <thead>
+          <tr>
+            <th scope="col">Nom </th>
+            <th scope="col">Prenom </th>
+            <th scope="col">contact</th>
+            <th scope="col">actions</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <!-- <th scope="row">1</th> -->
+            <td>Mark</td>
+            <td>Otto</td>
+            <td>@mdo</td>
+            <td>del or edit</td>
+          </tr>
+          <tr>
+            <!-- <th scope="row">2</th> -->
+            <td>Jacob</td>
+            <td>Thornton</td>
+            <td>@fat</td>
+            <td>del or edit</td>
+
+          </tr>
+          <tr>
+            <!-- <th scope="row">3</th> -->
+            <td>Larry</td>
+            <td>the Bird</td>
+            <td>@twitter</td>
+            <td>del or edit</td>
+          </tr>
+          </tbody>
+        </table>
+    </c-card-body>
+  </c-card>
+</c-col>

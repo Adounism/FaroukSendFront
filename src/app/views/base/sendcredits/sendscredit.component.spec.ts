@@ -7,16 +7,16 @@ import { IconModule } from '@coreui/icons-angular';
 import { IconSetService } from '@coreui/icons-angular';
 import { iconSubset } from '../../../icons/icon-subset';
 import { DocsComponentsModule } from '../../../../components';
-import { CarouselsComponent } from './carousels.component';
+import { SendcreditComponent } from './sendcredit.component';
 
-describe('CarouselsComponent', () => {
-  let component: CarouselsComponent;
-  let fixture: ComponentFixture<CarouselsComponent>;
+describe('SendcreditComponent', () => {
+  let component: SendcreditComponent;
+  let fixture: ComponentFixture<SendcreditComponent>;
   let iconSetService: IconSetService
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ CarouselsComponent ],
+      declarations: [ SendcreditComponent ],
       imports: [CarouselModule, NoopAnimationsModule, CardModule, GridModule, IconModule, DocsComponentsModule, RouterTestingModule],
       providers: [IconSetService]
     })
@@ -27,7 +27,7 @@ describe('CarouselsComponent', () => {
     iconSetService = TestBed.inject(IconSetService);
     iconSetService.icons = { ...iconSubset };
 
-    fixture = TestBed.createComponent(CarouselsComponent);
+    fixture = TestBed.createComponent(SendcreditComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

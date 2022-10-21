@@ -37,10 +37,11 @@ import { DocsComponentsModule } from '@docs-components/docs-components.module';
 import { CustomersComponent } from './customers/customers.component';
 import {  SuppliersComponent } from './suppliers/suppliers.component';
 import { CardsComponent } from './cards/cards.component';
-import { CarouselsComponent } from './carousels/carousels.component';
-import { CollapsesComponent } from './collapses/collapses.component';
+import { SendcreditComponent } from './sendcredits/sendcredit.component';
+import { OrangemoneyComponent } from './collapses/orangemoney.component';
 import { ListGroupsComponent } from './list-groups/list-groups.component';
-import { NavsComponent } from './navs/navs.component';
+import { PrintcustomersComponent } from './printcustomers/printcustomers.component';
+import {PrintsupplierComponent } from './printsuppliers/printsuppliers.component';
 import { PaginationsComponent } from './paginations/paginations.component';
 import { PlaceholdersComponent } from './placeholders/placeholders.component';
 import { PopoversComponent } from './popovers/popovers.component';
@@ -89,10 +90,11 @@ import { BaseRoutingModule } from './base-routing.module';
     CustomersComponent,
     SuppliersComponent,
     CardsComponent,
-    CarouselsComponent,
-    CollapsesComponent,
+    SendcreditComponent,
+    OrangemoneyComponent,
     ListGroupsComponent,
-    NavsComponent,
+    PrintcustomersComponent,
+    PrintsupplierComponent,
     PaginationsComponent,
     PopoversComponent,
     ProgressComponent,

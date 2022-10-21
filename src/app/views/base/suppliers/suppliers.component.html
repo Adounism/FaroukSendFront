@@ -20,16 +20,29 @@
           <input cFormControl id="inputPassword4" formControlName="lastname" name="lastname" type="text" ngModel/>
           </c-col>
 
-          <div  class="typeclient d-flex col-xs-1 align-items-center" style="justify-content: space-evenly;">
-            <c-form-check >
-              <input cFormCheckInput type="radio" value="1" formControlName="induvidual" name="flexRadioDefault" checked ngModel />
-              <label cFormCheckLabel>Induvidual</label>
-            </c-form-check>
-            <c-form-check>
-              <input cFormCheckInput type="radio" value="2" formControlName="groupe" name="flexRadioDefault" ngModel/>
-              <label cFormCheckLabel>Groupe</label>
-            </c-form-check>
-          </div>
+          <c-row [gutter]="{g: 2}">
+            <c-col [md]>
+              <div cFormFloating>
+                <input
+                  cFormControl
+                  id="floatingInputGrid"
+                  type="email"
+                  value="email@example.com"
+                 formControlName="email" ngModel/>
+                <label cLabel for="floatingInputGrid">Email address</label>
+              </div>
+            </c-col>
+            <c-col [md]>
+              <div cFormFloating>
+                <select cSelect id="floatingSelectGrid" aria-label="Type de Fournisseur" formControlName="typeFournisseur" ngModel>
+                  <!-- <option>Type de Fournisseur</option> -->
+                  <option value="1">Induvidual</option>
+                  <option value="2">Groupe</option>
+                </select>
+                <label cLabel for="floatingSelectGrid">Selectionner le type de Fournisseur</label>
+              </div>
+            </c-col>
+          </c-row>
 
 
           <c-col [xs]="12">

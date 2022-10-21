@@ -15,13 +15,14 @@ export const navItems: INavData[] = [
     name: 'Contacts'
   },
   {
-    name: 'Ajouter Client',
-    url: '/base/customers',
+    name: 'Gestion Client',
+    url: '/base/listcustomers',
     iconComponent: { name: 'cil-people' }
   },
   {
-    name: 'Ajouter Fournisseur',
-    url: '/base/suppliers',
+    name: 'Gestion Fournisseur',
+    // url: '/base/suppliers',
+    url: '/base/listsuppliers',
     iconComponent: { name: 'cil-bookmark' }
   },
   {
@@ -29,13 +30,17 @@ export const navItems: INavData[] = [
     title: true
   },
   {
-    name: 'Tranfert Crédit',
+    name: 'Tranfert',
     url: '/base',
     iconComponent: { name: 'cil-share' },
     children: [
       {
         name: 'Envoyer crédit',
-        url: '/base/accordion'
+        url: '/base/sendcredit'
+      },
+      {
+       name: 'Operations Orange Money',
+       url: '/base/orangemoney'
       },
       {
         name: 'Liste des transactions',
@@ -45,6 +50,10 @@ export const navItems: INavData[] = [
         name: 'Historique clients',
         url: '/base/cards'
       },
+      // {
+      //   name: 'Navs & Tabs',
+      //   url: '/base/navs'
+      // },
       // {
       //   name: 'Carousel',
       //   url: '/base/carousel'
@@ -56,10 +65,6 @@ export const navItems: INavData[] = [
       // {
       //   name: 'List Group',
       //   url: '/base/list-group'
-      // },
-      // {
-      //   name: 'Navs & Tabs',
-      //   url: '/base/navs'
       // },
       // {
       //   name: 'Pagination',

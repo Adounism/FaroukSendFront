@@ -4,10 +4,11 @@ import { RouterModule, Routes } from '@angular/router';
 import { CustomersComponent } from './customers/customers.component';
 import { SuppliersComponent } from './suppliers/suppliers.component';
 import { CardsComponent } from './cards/cards.component';
-import { CarouselsComponent } from './carousels/carousels.component';
-import { CollapsesComponent } from './collapses/collapses.component';
+import { SendcreditComponent } from './sendcredits/sendcredit.component';
+import { OrangemoneyComponent } from './collapses/orangemoney.component';
 import { ListGroupsComponent } from './list-groups/list-groups.component';
-import { NavsComponent } from './navs/navs.component';
+import { PrintcustomersComponent } from './printcustomers/printcustomers.component';
+import {PrintsupplierComponent } from './printsuppliers/printsuppliers.component';
 import { PaginationsComponent } from './paginations/paginations.component';
 import { PopoversComponent } from './popovers/popovers.component';
 import { ProgressComponent } from './progress/progress.component';
@@ -33,14 +34,14 @@ const routes: Routes = [
         path: 'customers',
         component: CustomersComponent,
         data: {
-          title: 'Customers',
+          title: 'Ajouter un client',
         },
       },
       {
         path: 'suppliers',
         component: SuppliersComponent,
         data: {
-          title: 'suppliers',
+          title: 'Ajouter un founisseur',
         },
       },
       {
@@ -51,17 +52,17 @@ const routes: Routes = [
         },
       },
       {
-        path: 'carousel',
-        component: CarouselsComponent,
+        path: 'sendcredit',
+        component: SendcreditComponent,
         data: {
-          title: 'Carousel',
+          title: 'Send Credit',
         },
       },
       {
-        path: 'collapse',
-        component: CollapsesComponent,
+        path: 'orangemoney',
+        component: OrangemoneyComponent,
         data: {
-          title: 'Collapse',
+          title: 'Orange Money opérations',
         },
       },
       {
@@ -72,12 +73,21 @@ const routes: Routes = [
         },
       },
       {
-        path: 'navs',
-        component: NavsComponent,
+        path: 'listcustomers',
+        component: PrintcustomersComponent,
         data: {
-          title: 'Navs & Tabs',
+          title: 'List des Clients',
         },
       },
+
+      {
+        path: 'listsuppliers',
+        component: PrintsupplierComponent,
+        data: {
+          title: 'List des Fournisseurs',
+        },
+      },
+
       {
         path: 'pagination',
         component: PaginationsComponent,

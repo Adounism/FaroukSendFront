@@ -6,16 +6,16 @@ import { ButtonModule, CardModule, CollapseModule, GridModule } from '@coreui/an
 import { IconSetService } from '@coreui/icons-angular';
 import { iconSubset } from '../../../icons/icon-subset';
 import { DocsComponentsModule } from '../../../../components';
-import { CollapsesComponent } from './collapses.component';
+import { OrangemoneyComponent } from './orangemoney.component';
 
 describe('CollapsesComponent', () => {
-  let component: CollapsesComponent;
-  let fixture: ComponentFixture<CollapsesComponent>;
+  let component: OrangemoneyComponent;
+  let fixture: ComponentFixture<OrangemoneyComponent>;
   let iconSetService: IconSetService;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [CollapsesComponent],
+      declarations: [OrangemoneyComponent],
       imports: [CardModule, CollapseModule, NoopAnimationsModule, GridModule, ButtonModule, DocsComponentsModule, RouterTestingModule],
       providers: [IconSetService]
     })
@@ -26,7 +26,7 @@ describe('CollapsesComponent', () => {
     iconSetService = TestBed.inject(IconSetService);
     iconSetService.icons = { ...iconSubset };
 
-    fixture = TestBed.createComponent(CollapsesComponent);
+    fixture = TestBed.createComponent(OrangemoneyComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

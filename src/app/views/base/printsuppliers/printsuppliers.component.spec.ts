@@ -4,17 +4,17 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { CardModule, DropdownModule, GridModule, NavModule } from '@coreui/angular';
 import { IconSetService } from '@coreui/icons-angular';
 import { iconSubset } from '../../../icons/icon-subset';
-import { NavsComponent } from './navs.component';
+import { PrintsupplierComponent } from './printsuppliers.component';
 import { DocsComponentsModule } from '../../../../components';
 
-describe('NavsComponent', () => {
-  let component: NavsComponent;
-  let fixture: ComponentFixture<NavsComponent>;
+describe('PrintsupplierComponent', () => {
+  let component: PrintsupplierComponent;
+  let fixture: ComponentFixture<PrintsupplierComponent>;
   let iconSetService: IconSetService;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [NavsComponent],
+      declarations: [PrintsupplierComponent],
       imports: [GridModule, CardModule, RouterTestingModule, NavModule, DropdownModule, DocsComponentsModule],
       providers: [IconSetService]
     })
@@ -25,7 +25,7 @@ describe('NavsComponent', () => {
     iconSetService = TestBed.inject(IconSetService);
     iconSetService.icons = { ...iconSubset };
 
-    fixture = TestBed.createComponent(NavsComponent);
+    fixture = TestBed.createComponent(PrintsupplierComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

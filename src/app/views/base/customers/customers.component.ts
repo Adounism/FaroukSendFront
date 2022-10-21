@@ -30,6 +30,18 @@ export class CustomersComponent {
       Validators.minLength(4),
     ]),
 
+    
+    email: new FormControl([
+      Validators.required,
+      Validators.minLength(4),
+    ]),
+
+    
+    typeClient: new FormControl([
+      Validators.required,
+      Validators.minLength(4),
+    ]),
+
   });
 
   constructor(
