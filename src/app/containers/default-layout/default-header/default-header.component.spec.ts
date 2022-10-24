@@ -11,7 +11,7 @@ import {
 } from '@coreui/angular';
 import { IconSetService } from '@coreui/icons-angular';
 import { iconSubset } from '../../../icons/icon-subset';
-import { DefaultHeaderComponent } from './default-header.component';
+import { DefaultHeaderComponent } from './printorangemoney.component';
 import { RouterTestingModule } from '@angular/router/testing';
 
 describe('DefaultHeaderComponent', () => {

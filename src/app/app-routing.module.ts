@@ -86,6 +86,7 @@ const routes: Routes = [
   {
     path: 'customer',
     component: CustomerComponent,
+    
     data: {
       title: 'Customers'
     }

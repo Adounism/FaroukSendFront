@@ -1,0 +1,69 @@
+<c-row ngPreserveWhitespaces>
+  <c-col xs="12">
+    <c-card class="mb-4">
+      <c-card-header>
+        <strong>Faire une opération Orange Money</strong>
+      </c-card-header>
+      <c-card-body>
+        <p class="text-medium-emphasis small">
+          Veillez fournir les informations du clients et le Montant.
+        </p>
+ 
+
+
+        <form cForm class="row g-3" [formGroup]="sendcreditForm" (ngSubmit)="ajouter()">
+
+
+          <c-col [md]="4" >
+            <div cFormFloating>
+              <select cSelect id="floatingSelectGrid" formControlName="client" ngModel>
+             
+                <option value="1">client A</option>
+                <option value="2">client B</option>
+              </select>
+              <label cLabel for="floatingSelectGrid">sélectionner le contact</label>
+            </div>
+          </c-col>
+
+          <div style="display: inline-flex; justify-content: center;">
+
+            <div class="form-check form-check-inline" style="display: flex; align-items: center">
+              <input class="form-check-input" type="radio" value="1" formControlName="credit" id="flexRadioDefault1" ngModel>
+              <label class="form-check-label"  for="flexRadioDefault1">
+                Crédit
+              </label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" value="2" formControlName="uv" id="flexRadioDefault2" ngModel=""checked>
+              <label class="form-check-label" for="flexRadioDefault2">
+               UV
+              </label>
+            </div>
+          </div>
+
+          
+
+          <c-row [gutter]="{g: 2}">
+              <c-col [md]="4">
+                  <label cLabel for="inputState">Numéro</label>
+                  <select cSelect id="inputState" >
+                  <option>345678</option>
+                  <option>0987654</option>
+                  </select>
+                  </c-col>
+                  <c-col [md]="2">
+                  <label cLabel for="inputZip">Montant</label>
+                  <input cFormControl id="inputZip" />
+                  </c-col>
+
+          </c-row>
+
+      
+          <c-col [xs]="12">
+          <button [disabled]="!sendcreditForm.valid" cButton type="submit">Ajouter</button>
+          </c-col>
+          </form>
+      </c-card-body>
+    </c-card>
+  </c-col>
+</c-row>

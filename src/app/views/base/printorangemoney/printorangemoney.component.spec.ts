@@ -6,16 +6,16 @@ import { BadgeModule, ButtonModule, CardModule, FormModule, GridModule, ListGrou
 import { IconSetService } from '@coreui/icons-angular';
 import { iconSubset } from '../../../icons/icon-subset';
 import { DocsComponentsModule } from '../../../../components';
-import { ListGroupsComponent } from './list-groups.component';
+import { PrintOrangeMoneyComponent } from './printorangemoney.component';
 
-describe('ListGroupsComponent', () => {
-  let component: ListGroupsComponent;
-  let fixture: ComponentFixture<ListGroupsComponent>;
+describe('PrintOrangeMoneyComponent', () => {
+  let component: PrintOrangeMoneyComponent;
+  let fixture: ComponentFixture<PrintOrangeMoneyComponent>;
   let iconSetService: IconSetService;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ListGroupsComponent],
+      declarations: [PrintOrangeMoneyComponent],
       imports: [ListGroupModule, ButtonModule, ReactiveFormsModule, BadgeModule, FormModule, GridModule, CardModule, DocsComponentsModule, RouterTestingModule],
       providers: [IconSetService]
     })
@@ -26,7 +26,7 @@ describe('ListGroupsComponent', () => {
     iconSetService = TestBed.inject(IconSetService);
     iconSetService.icons = { ...iconSubset };
 
-    fixture = TestBed.createComponent(ListGroupsComponent);
+    fixture = TestBed.createComponent(PrintOrangeMoneyComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

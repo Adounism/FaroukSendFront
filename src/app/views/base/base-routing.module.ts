@@ -5,18 +5,19 @@ import { CustomersComponent } from './customers/customers.component';
 import { SuppliersComponent } from './suppliers/suppliers.component';
 import { CardsComponent } from './cards/cards.component';
 import { SendcreditComponent } from './sendcredits/sendcredit.component';
-import { OrangemoneyComponent } from './collapses/orangemoney.component';
-import { ListGroupsComponent } from './list-groups/list-groups.component';
+import { OrangemoneyComponent } from './orangemoney/orangemoney.component';
+import { PrintOrangeMoneyComponent } from './printorangemoney/printorangemoney.component';
 import { PrintcustomersComponent } from './printcustomers/printcustomers.component';
 import {PrintsupplierComponent } from './printsuppliers/printsuppliers.component';
 import { PaginationsComponent } from './paginations/paginations.component';
-import { PopoversComponent } from './popovers/popovers.component';
+import { PrintAchatComponent } from './listeachat/printachat.component';
 import { ProgressComponent } from './progress/progress.component';
 import { SpinnersComponent } from './spinners/spinners.component';
 import { TablesComponent } from './tables/tables.component';
 import { TooltipsComponent } from './tooltips/tooltips.component';
 import { TabsComponent } from './tabs/tabs.component';
 import { PlaceholdersComponent } from './placeholders/placeholders.component';
+import { AuthGuard } from 'src/app/guard/auth.guard';
 
 const routes: Routes = [
   {
@@ -33,6 +34,7 @@ const routes: Routes = [
       {
         path: 'customers',
         component: CustomersComponent,
+        // canActivate:[AuthGuard],
         data: {
           title: 'Ajouter un client',
         },
@@ -40,6 +42,7 @@ const routes: Routes = [
       {
         path: 'suppliers',
         component: SuppliersComponent,
+        // canActivate:[AuthGuard],
         data: {
           title: 'Ajouter un founisseur',
         },
@@ -47,6 +50,7 @@ const routes: Routes = [
       {
         path: 'cards',
         component: CardsComponent,
+        // canActivate:[AuthGuard],
         data: {
           title: 'Cards',
         },
@@ -54,6 +58,7 @@ const routes: Routes = [
       {
         path: 'sendcredit',
         component: SendcreditComponent,
+        // canActivate:[AuthGuard],
         data: {
           title: 'Send Credit',
         },
@@ -61,20 +66,23 @@ const routes: Routes = [
       {
         path: 'orangemoney',
         component: OrangemoneyComponent,
+        // canActivate:[AuthGuard],
         data: {
           title: 'Orange Money opérations',
         },
       },
       {
-        path: 'list-group',
-        component: ListGroupsComponent,
+        path: 'orangemoneyop',
+        component: PrintOrangeMoneyComponent,
+        // canActivate:[AuthGuard],
         data: {
-          title: 'List Group',
+          title: 'Liste des opérations orange Money',
         },
       },
       {
         path: 'listcustomers',
         component: PrintcustomersComponent,
+        // canActivate:[AuthGuard],
         data: {
           title: 'List des Clients',
         },
@@ -83,6 +91,7 @@ const routes: Routes = [
       {
         path: 'listsuppliers',
         component: PrintsupplierComponent,
+        // canActivate:[AuthGuard],
         data: {
           title: 'List des Fournisseurs',
         },
@@ -91,6 +100,7 @@ const routes: Routes = [
       {
         path: 'pagination',
         component: PaginationsComponent,
+        // canActivate:[AuthGuard],
         data: {
           title: 'Pagination',
         },
@@ -98,20 +108,23 @@ const routes: Routes = [
       {
         path: 'placeholder',
         component: PlaceholdersComponent,
+        // canActivate:[AuthGuard],
         data: {
           title: 'Placeholder',
         },
       },
       {
-        path: 'popovers',
-        component: PopoversComponent,
+        path: 'listeachats',
+        component: PrintAchatComponent,
+        // canActivate:[AuthGuard],
         data: {
-          title: 'Popovers',
+          title: 'Liste des Achats effectuers',
         },
       },
       {
         path: 'progress',
         component: ProgressComponent,
+        // canActivate:[AuthGuard],
         data: {
           title: 'Progress',
         },
@@ -119,6 +132,7 @@ const routes: Routes = [
       {
         path: 'spinners',
         component: SpinnersComponent,
+        // canActivate:[AuthGuard],
         data: {
           title: 'Spinners',
         },
@@ -126,6 +140,7 @@ const routes: Routes = [
       {
         path: 'tables',
         component: TablesComponent,
+        // canActivate:[AuthGuard],
         data: {
           title: 'Tables',
         },
@@ -133,6 +148,7 @@ const routes: Routes = [
       {
         path: 'tabs',
         component: TabsComponent,
+        // canActivate:[AuthGuard],
         data: {
           title: 'Tabs',
         },
@@ -140,6 +156,7 @@ const routes: Routes = [
       {
         path: 'tooltips',
         component: TooltipsComponent,
+        // canActivate:[AuthGuard],
         data: {
           title: 'Tooltips',
         },

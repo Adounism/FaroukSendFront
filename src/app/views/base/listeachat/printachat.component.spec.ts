@@ -1,32 +1,31 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 
-import { ButtonModule, CardModule, GridModule } from '@coreui/angular';
-import { IconModule } from '@coreui/icons-angular';
+import { ButtonModule, CardModule, GridModule, PopoverModule } from '@coreui/angular';
 import { IconSetService } from '@coreui/icons-angular';
 import { iconSubset } from '../../../icons/icon-subset';
 import { DocsComponentsModule } from '../../../../components';
-import { ButtonsComponent } from './buttons.component';
+import { PrintAchatComponent } from './printachat.component';
 
-describe('ButtonsComponent', () => {
-  let component: ButtonsComponent;
-  let fixture: ComponentFixture<ButtonsComponent>;
-  let iconSetService: IconSetService
+describe('PrintAchatComponent', () => {
+  let component: PrintAchatComponent;
+  let fixture: ComponentFixture<PrintAchatComponent>;
+  let iconSetService: IconSetService;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ButtonsComponent ],
-      imports: [CardModule, GridModule, ButtonModule, RouterTestingModule, IconModule, DocsComponentsModule],
+      declarations: [PrintAchatComponent],
+      imports: [CardModule, GridModule, PopoverModule, ButtonModule, DocsComponentsModule, RouterTestingModule],
       providers: [IconSetService]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {
     iconSetService = TestBed.inject(IconSetService);
     iconSetService.icons = { ...iconSubset };
 
-    fixture = TestBed.createComponent(ButtonsComponent);
+    fixture = TestBed.createComponent(PrintAchatComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

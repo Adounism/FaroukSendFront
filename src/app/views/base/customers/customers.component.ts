@@ -1,58 +1,51 @@
-import { Component } from '@angular/core';
-import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
-
+import { Component, OnInit } from '@angular/core';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  NgForm,
+  Validators,
+} from '@angular/forms';
 
 @Component({
   selector: 'app-customers',
   templateUrl: './customers.component.html',
-  styleUrls: ['./customers.component.scss']
+  styleUrls: ['./customers.component.scss'],
 })
-export class CustomersComponent {
+export class CustomersComponent implements OnInit {
+  profileForm!: FormGroup;
 
-  customerForm?: FormGroup;
+  submitted = false;
 
-  profileForm = new FormGroup({
-    firstname: new FormControl([
-      Validators.required,
-      Validators.minLength(4),
-    ]),
-    lastname: new FormControl([
-      Validators.required,
-      Validators.minLength(4),
-    ]),
-    adresse: new FormControl([
-      Validators.required,
-      Validators.minLength(4),
-    ]),
+  constructor(private fb: FormBuilder) {}
 
-    contact: new FormControl([
-      Validators.required,
-      Validators.minLength(4),
-    ]),
+  ngOnInit(): void {
+    this.profileForm = this.fb.group({
+      firstname: ['', [Validators.required]],
+      lastname: ['', [Validators.required]],
+      adresse: ['', [Validators.nullValidator]],
 
+      contact: ['', [Validators.required, Validators.minLength(4)]],
+
+      email: ['', [Validators.nullValidator]],
+
+      typeClient:['', [Validators.required]]
+    });
+  }
+
+  get registerFormControl() {
+    //console.log(this.profileForm.controls);
     
-    email: new FormControl([
-      Validators.required,
-      Validators.minLength(4),
-    ]),
+    return this.profileForm.controls;
+  }
 
-    
-    typeClient: new FormControl([
-      Validators.required,
-      Validators.minLength(4),
-    ]),
+  ajouter() {
 
-  });
+    this.submitted = true;
+    if(this.profileForm.valid){
 
-  constructor(
-  ) { }
-
-
-
-  ajouter(){
-
-    console.log(this.profileForm.value);
-    
-
+      console.log("Forme valide succes");
+      
+    }
   }
 }

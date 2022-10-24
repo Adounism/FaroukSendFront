@@ -14,16 +14,55 @@
         <form cForm class="row g-3" [formGroup]="sendcreditForm" (ngSubmit)="ajouter()">
 
 
-            <c-col [md]="4">
-              <div cFormFloating>
-                <select cSelect id="floatingSelectGrid" formControlName="client" ngModel>
+          <c-col [md]="4" >
+            <div cFormFloating>
+              <select cSelect id="floatingSelectGrid" formControlName="client" ngModel>
              
-                  <option value="1">client A</option>
-                  <option value="2">client B</option>
-                </select>
-                <label cLabel for="floatingSelectGrid">sélectionner le contact</label>
-              </div>
-            </c-col>
+                <option value="1">client A</option>
+                <option value="2">client B</option>
+              </select>
+              <label cLabel for="floatingSelectGrid">sélectionner le contact</label>
+            </div>
+
+            <!-- <div class="form-check form-check-inline" style="margin-left: 30px;">
+              <input
+                mdbCheckbox
+                class="form-check-input"
+                type="checkbox"
+                id="inlineCheckbox1"
+                value="retrait"
+              />
+              <label class="form-check-label" for="inlineCheckbox1">Rétrait</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input
+                mdbCheckbox
+                class="form-check-input"
+                type="checkbox"
+                id="inlineCheckbox2"
+                value="depot"
+              />
+              <label class="form-check-label" for="inlineCheckbox2">Depot</label>
+            </div> -->
+          </c-col>
+
+          <div style="display: inline-flex; justify-content: center;">
+
+            <div class="form-check form-check-inline" style="display: flex; align-items: center">
+              <input class="form-check-input" type="radio" value="1" formControlName="flexRadioDefault" id="flexRadioDefault1" ngModel>
+              <label class="form-check-label"  for="flexRadioDefault1">
+                Depot
+              </label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" value="2" formControlName="flexRadioDefault" id="flexRadioDefault2" ngModel=""checked>
+              <label class="form-check-label" for="flexRadioDefault2">
+               Retrait
+              </label>
+            </div>
+          </div>
+
+          
 
           <c-row [gutter]="{g: 2}">
 

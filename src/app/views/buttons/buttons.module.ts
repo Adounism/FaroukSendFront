@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { DocsComponentsModule } from '@docs-components/docs-components.module';
-import { ButtonsComponent } from './buttons/buttons.component';
+
 import { ButtonGroupsComponent } from './button-groups/button-groups.component';
 import { DropdownsComponent } from './dropdowns/dropdowns.component';
 
@@ -24,10 +24,11 @@ import {
 } from '@coreui/angular';
 
 import { IconModule } from '@coreui/icons-angular';
+import { AchatComponent } from './achats/achat.component';
 
 @NgModule({
   declarations: [
-    ButtonsComponent,
+    AchatComponent,
     ButtonGroupsComponent,
     DropdownsComponent,
   ],

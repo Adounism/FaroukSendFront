@@ -1,24 +1,17 @@
 <c-col xs="12">
   <c-card class="mb-4">
     <c-card-header>
-
-        <strong>Liste des Fournisseurs</strong>
-
-
-
-          <button style="float: right;" class="btn float-right" color="primary"  [routerLink]="['/base/suppliers']" cButton> ajouter
-    
-          </button>
-
-
+      <strong>Liste des Fournisseurs</strong>
+        <button style="float: right;" class="btn float-right" color="primary"  [routerLink]="['/base/suppliers']" cButton> ajouter
+        </button>
     </c-card-header>
     <c-card-body>
 
-      <p class="text-medium-emphasis small">
+      <!-- <p class="text-medium-emphasis small">
         A <code>&lt;caption&gt;</code> functions like a heading for a table. It helps
         users with screen readers to find a table and understand what it's about and
         decide if they want to read it.
-      </p>
+      </p> -->
 
         <table cTable>
           <caption>Listes des Fournisseurs</caption>
@@ -36,15 +29,31 @@
             <td>Mark</td>
             <td>Otto</td>
             <td>@mdo</td>
-            <td>del or edit</td>
+            <td>
+              <button type="button" rel="tooltip" class="btn btn-danger btn-just-icon btn-sm">
+                <svg cIcon class="me-2" name="cil-trash"></svg>
+            </button>
+            <button type="button" rel="tooltip" class="btn btn-info btn-just-icon btn-sm" data-original-title="" title="">
+              <svg cIcon class="me-2" name="cil-pencil"></svg>
+            </button>
+            </td>
           </tr>
           <tr>
             <!-- <th scope="row">2</th> -->
             <td>Jacob</td>
             <td>Thornton</td>
-            <td>@fat</td>
-            <td>del or edit</td>
-
+            <td>@fat </td>
+            <td>
+              <button type="button" rel="tooltip" class="btn btn-danger btn-just-icon btn-sm">
+                <svg cIcon class="me-2" name="cil-trash"></svg>
+            </button>
+            <button type="button" rel="tooltip" class="btn btn-info btn-just-icon btn-sm" data-original-title="" title="">
+              <svg cIcon class="me-2" name="cil-pencil"></svg>
+            </button>
+            <!-- <button type="button" rel="tooltip" class="btn btn-danger btn-just-icon btn-sm" data-original-title="" title="">
+                <i class="material-icons">close</i>
+            </button> -->
+            </td>
           </tr>
           <tr>
             <!-- <th scope="row">3</th> -->

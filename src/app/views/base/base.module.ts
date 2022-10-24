@@ -38,13 +38,13 @@ import { CustomersComponent } from './customers/customers.component';
 import {  SuppliersComponent } from './suppliers/suppliers.component';
 import { CardsComponent } from './cards/cards.component';
 import { SendcreditComponent } from './sendcredits/sendcredit.component';
-import { OrangemoneyComponent } from './collapses/orangemoney.component';
-import { ListGroupsComponent } from './list-groups/list-groups.component';
+import { OrangemoneyComponent } from './orangemoney/orangemoney.component';
+import {  PrintOrangeMoneyComponent } from './printorangemoney/printorangemoney.component';
 import { PrintcustomersComponent } from './printcustomers/printcustomers.component';
 import {PrintsupplierComponent } from './printsuppliers/printsuppliers.component';
 import { PaginationsComponent } from './paginations/paginations.component';
 import { PlaceholdersComponent } from './placeholders/placeholders.component';
-import { PopoversComponent } from './popovers/popovers.component';
+import { PrintAchatComponent } from './listeachat/printachat.component';
 import { ProgressComponent } from './progress/progress.component';
 import { SpinnersComponent } from './spinners/spinners.component';
 import { TablesComponent } from './tables/tables.component';
@@ -92,11 +92,11 @@ import { BaseRoutingModule } from './base-routing.module';
     CardsComponent,
     SendcreditComponent,
     OrangemoneyComponent,
-    ListGroupsComponent,
+    PrintOrangeMoneyComponent,
     PrintcustomersComponent,
     PrintsupplierComponent,
     PaginationsComponent,
-    PopoversComponent,
+    PrintAchatComponent,
     ProgressComponent,
     SpinnersComponent,
     TablesComponent,

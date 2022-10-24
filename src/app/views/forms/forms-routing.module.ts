@@ -9,6 +9,7 @@ import { SelectComponent } from './select/select.component';
 import { ChecksRadiosComponent } from './checks-radios/checks-radios.component';
 import { LayoutComponent } from './layout/layout.component';
 import { ValidationComponent } from './validation/validation.component';
+import { AuthGuard } from 'src/app/guard/auth.guard';
 
 const routes: Routes = [
   {
@@ -25,6 +26,7 @@ const routes: Routes = [
       {
         path: 'form-control',
         component: FormControlsComponent,
+        // canActivate:[AuthGuard],
         data: {
           title: 'Form Control'
         }
@@ -32,6 +34,7 @@ const routes: Routes = [
       {
         path: 'select',
         component: SelectComponent,
+        // canActivate:[AuthGuard],
         data: {
           title: 'Select'
         }
@@ -39,6 +42,7 @@ const routes: Routes = [
       {
         path: 'checks-radios',
         component: ChecksRadiosComponent,
+        // canActivate:[AuthGuard],
         data: {
           title: 'Checks & Radios'
         }
@@ -46,6 +50,7 @@ const routes: Routes = [
       {
         path: 'range',
         component: RangesComponent,
+        // canActivate:[AuthGuard],
         data: {
           title: 'Range'
         }
@@ -53,6 +58,7 @@ const routes: Routes = [
       {
         path: 'input-group',
         component: InputGroupsComponent,
+        canActivate:[AuthGuard],
         data: {
           title: 'Input Group'
         }
@@ -60,6 +66,7 @@ const routes: Routes = [
       {
         path: 'floating-labels',
         component: FloatingLabelsComponent,
+        canActivate:[AuthGuard],
         data: {
           title: 'Floating Labels'
         }
@@ -67,6 +74,7 @@ const routes: Routes = [
       {
         path: 'layout',
         component: LayoutComponent,
+        canActivate:[AuthGuard],
         data: {
           title: 'Layout'
         }
@@ -74,6 +82,7 @@ const routes: Routes = [
       {
         path: 'validation',
         component: ValidationComponent,
+        // canActivate:[AuthGuard],
         data: {
           title: 'Validation'
         }

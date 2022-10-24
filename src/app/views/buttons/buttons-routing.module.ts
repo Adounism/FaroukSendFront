@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from 'src/app/guard/auth.guard';
 
-import { ButtonsComponent } from './buttons/buttons.component';
+import { AchatComponent } from './achats/achat.component';
 import { ButtonGroupsComponent } from './button-groups/button-groups.component';
 import { DropdownsComponent } from './dropdowns/dropdowns.component';
 
@@ -18,15 +19,17 @@ const routes: Routes = [
         redirectTo: 'buttons'
       },
       {
-        path: 'buttons',
-        component: ButtonsComponent,
+        path: 'achats',
+        component: AchatComponent,
+        // canActivate:[AuthGuard],
         data: {
-          title: 'Buttons'
+          title: 'Enregister un Achat'
         }
       },
       {
         path: 'button-groups',
         component: ButtonGroupsComponent,
+        // canActivate:[AuthGuard],
         data: {
           title: 'Button groups'
         }
@@ -34,6 +37,7 @@ const routes: Routes = [
       {
         path: 'dropdowns',
         component: DropdownsComponent,
+        // canActivate:[AuthGuard],
         data: {
           title: 'Dropdowns'
         }

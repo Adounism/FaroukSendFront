@@ -8,65 +8,28 @@
         <p class="text-medium-emphasis small">
           Veillez fournir les informations du clients.
         </p>
-        <!-- <app-docs-example href="components/accordion">
-
-          <c-accordion [alwaysOpen]="false" [flush]="false" class="shadow">
-            <c-accordion-item #item0="cAccordionItem" [visible]="false">
-              <ng-template cTemplateId="accordionHeaderTemplate">
-                <button (click)="item0.toggleItem()" [collapsed]="!item0.visible" cAccordionButton cBgColor="info">
-                  Accordion item #0
-                </button>
-              </ng-template>
-              <ng-template cTemplateId="accordionBodyTemplate">
-                <div [innerHTML]="getAccordionBodyText('first')" cBgColor="info" class="accordion-body"></div>
-              </ng-template>
-            </c-accordion-item>
-            <c-accordion-item #item1="cAccordionItem" [visible]="false">
-              <ng-template cTemplateId="accordionHeaderTemplate">
-                <button (click)="item1.toggleItem()" [collapsed]="!item1.visible" cAccordionButton>
-                  Accordion item #1
-                </button>
-              </ng-template>
-              <ng-template cTemplateId="accordionBodyTemplate">
-                <div class="accordion-body">
-                  <strong>This is the
-                    <mark>#second</mark>
-                    item accordion body.</strong> It is hidden by
-                  default, until the collapse plugin adds the appropriate classes that we use to
-                  style each element. These classes control the overall appearance, as well as
-                  the showing and hiding via CSS transitions. You can modify any of this with
-                  custom CSS or overriding our default variables. It&#39;s also worth noting
-                  that just about any HTML can go within the <code>.accordion-body</code>,
-                  though the transition does limit overflow.
-                </div>
-              </ng-template>
-            </c-accordion-item>
-            <c-accordion-item #item2="cAccordionItem" [visible]="false">
-              <ng-template cTemplateId="accordionHeaderTemplate">
-                <button (click)="item2.toggleItem()" [collapsed]="!item2.visible" cAccordionButton>
-                  Accordion item #2
-                </button>
-              </ng-template>
-              <ng-template cTemplateId="accordionBodyTemplate">
-                <div class="accordion-body">
-                  <span [innerHTML]="getAccordionBodyText('third')"></span>
-                </div>
-              </ng-template>
-            </c-accordion-item>
-          </c-accordion>
-        </app-docs-example> -->
-
-
         <form cForm class="row g-3" [formGroup]="profileForm" (ngSubmit)="ajouter()">
           <c-col [md]="6">
           <label cLabel for="inputEmail4">Nom:</label>
-          <input cFormControl id="inputEmail4" name="firstname" formControlName="firstname" type="text" ngModel/>
-          
-  
+          <input cFormControl id="inputEmail4" name="firstname" formControlName="firstname" type="text" />
+          <!-- <span class="text-danger"
+          *ngIf="(profileForm.controls['firstname'].invalid || submitted) && profileForm
+          .controls['firstname'].errors?.['required']">
+          Name is required
+          </span> -->
+          <div *ngIf="profileForm.controls['firstname'].invalid && (profileForm.controls['firstname'].dirty || profileForm.controls['firstname'].touched || submitted)" class="alert alert-danger">
+            <div *ngIf="profileForm.controls['firstname'].errors?.['required']">
+            Le nom du client est requis.</div>
+          </div>
+
           </c-col>
           <c-col [md]="6">
           <label cLabel for="inputPassword4">Prenom:</label>
-          <input cFormControl id="inputPassword4" formControlName="lastname" name="lastname" type="text" ngModel/>
+          <input cFormControl id="inputPassword4" formControlName="lastname" name="lastname" type="text" />
+          <div *ngIf="profileForm.controls['lastname'].invalid && (profileForm.controls['lastname'].dirty || profileForm.controls['lastname'].touched || submitted)" class="alert alert-danger">
+            <div *ngIf="profileForm.controls['lastname'].errors?.['required']">
+            Le prenom est requis.</div>
+          </div>
           </c-col>
 
           <c-row [gutter]="{g: 2}">
@@ -77,30 +40,38 @@
                   id="floatingInputGrid"
                   type="email"
                   value="email@example.com"
-                 formControlName="email" ngModel/>
+                 formControlName="email" />
                 <label cLabel for="floatingInputGrid">Email address</label>
               </div>
             </c-col>
             <c-col [md]>
               <div cFormFloating>
-                <select cSelect id="floatingSelectGrid" formControlName="typeClient" ngModel>
-                  <option>Type de Client</option>
+                <select cSelect id="floatingSelectGrid" formControlName="typeClient" >
                   <option value="1">Induvidual</option>
                   <option value="2">Groupe</option>
                 </select>
-                <!-- <label cLabel for="floatingSelectGrid">Works with selects</label> -->
+                <label cLabel for="floatingSelectGrid">Type de Client</label>
+              </div>
+              <div *ngIf="profileForm.controls['typeClient'].invalid && (profileForm.controls['typeClient'].dirty || profileForm.controls['typeClient'].touched || submitted)" class="alert alert-danger">
+                <div *ngIf="profileForm.controls['typeClient'].errors?.['required']">
+                Le type de client est requis.</div>
               </div>
             </c-col>
           </c-row>
 
           <c-col [xs]="12">
           <label cLabel for="inputAddress">Address</label>
-          <input cFormControl id="inputAddress" name="adresse" formControlName="adresse" placeholder="1234 Bamako coura" ngModel/>
+          <input cFormControl id="inputAddress" name="adresse" formControlName="adresse" placeholder="1234 Bamako coura" />
           </c-col>
 
           <c-col [md]="6">
           <label cLabel for="inputCity">Contact: </label>
-          <input cFormControl id="inputCity" type="tel"  name="contact" formControlName="contact" placeholder="numero de télephone" ngModel />
+          <input cFormControl id="inputCity" type="tel"  name="contact" formControlName="contact" placeholder="numero de télephone"  />
+          
+          <div *ngIf="profileForm.controls['contact'].invalid && (profileForm.controls['contact'].dirty || profileForm.controls['contact'].touched || submitted)" class="alert alert-danger">
+            <div *ngIf="profileForm.controls['contact'].errors?.['required']">
+            Le numero du client est requis.</div>
+          </div>
           </c-col>
 
           <!-- <c-col [md]="4">
@@ -121,7 +92,7 @@
           </c-form-check>
           </c-col> -->
           <c-col [xs]="12">
-          <button [disabled]="!profileForm.valid" cButton type="submit">Ajouter</button>
+          <button  cButton type="submit">Ajouter</button>
           </c-col>
           </form>
       </c-card-body>

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 
 @Component({
   templateUrl: './suppliers.component.html',
@@ -7,54 +7,30 @@ import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 })
 export class SuppliersComponent implements OnInit {
   
+  profileForm!: FormGroup;
+
+  submitted = false;
+
+  constructor(private fb: FormBuilder) {}
+
   ngOnInit(): void {
-  
-  }
-  constructor() {}
-
-
-  customerForm?: FormGroup;
-
-  profileForm = new FormGroup({
-    firstname: new FormControl([
-      Validators.required,
-      Validators.minLength(4),
-    ]),
-    lastname: new FormControl([
-      Validators.required,
-      Validators.minLength(4),
-    ]),
-    adresse: new FormControl([
-      Validators.required,
-      Validators.minLength(4),
-    ]),
-
-    contact: new FormControl([
-      Validators.required,
-      Validators.minLength(4),
-    ]),
-
-    email: new FormControl([
-      Validators.required,
-      Validators.minLength(4),
-    ]),
-
-    typeFournisseur: new FormControl([
-      Validators.required,
-      Validators.minLength(4),
-    ]),
-
-  });
-
-
-
-  ajouter(){
-
-    console.log(this.profileForm.value);
-    
-
+    this.profileForm = this.fb.group({
+      firstname: ['', [Validators.required]],
+      lastname: ['', [Validators.required]],
+      adresse: ['', [Validators.nullValidator]],
+      contact: ['', [Validators.required, Validators.minLength(4)]],
+      email: ['', [Validators.nullValidator]],
+      typeFournisseur:['', [Validators.required]]
+    });
   }
 
+  ajouter() {
+    this.submitted = true;
+    if(this.profileForm.valid){
 
+      console.log("Forme valide succes");
+      
+    }
+  }
 
 }

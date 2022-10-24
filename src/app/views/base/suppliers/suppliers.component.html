@@ -11,13 +11,20 @@
         <form cForm class="row g-3" [formGroup]="profileForm" (ngSubmit)="ajouter()">
           <c-col [md]="6">
           <label cLabel for="inputEmail4">Nom du Fournisseur:</label>
-          <input cFormControl id="inputEmail4" name="firstname" formControlName="firstname" type="text" ngModel/>
-          
-  
+          <input cFormControl id="inputEmail4" name="firstname" formControlName="firstname" type="text" />
+          <div *ngIf="profileForm.controls['firstname'].invalid && (profileForm.controls['firstname'].dirty || profileForm.controls['firstname'].touched || submitted)" class="alert alert-danger">
+            <div *ngIf="profileForm.controls['firstname'].errors?.['required']">
+            Le nom du Fournisseur est requis.</div>
+          </div>
+
           </c-col>
           <c-col [md]="6">
           <label cLabel for="inputPassword4">Prenom du Fournisseur:</label>
-          <input cFormControl id="inputPassword4" formControlName="lastname" name="lastname" type="text" ngModel/>
+          <input cFormControl id="inputPassword4" formControlName="lastname" name="lastname" type="text" />
+          <div *ngIf="profileForm.controls['lastname'].invalid && (profileForm.controls['lastname'].dirty || profileForm.controls['lastname'].touched || submitted)" class="alert alert-danger">
+            <div *ngIf="profileForm.controls['lastname'].errors?.['required']">
+            Le prenom est requis.</div>
+          </div>
           </c-col>
 
           <c-row [gutter]="{g: 2}">
@@ -28,18 +35,23 @@
                   id="floatingInputGrid"
                   type="email"
                   value="email@example.com"
-                 formControlName="email" ngModel/>
+                 formControlName="email" />
                 <label cLabel for="floatingInputGrid">Email address</label>
               </div>
             </c-col>
             <c-col [md]>
               <div cFormFloating>
-                <select cSelect id="floatingSelectGrid" aria-label="Type de Fournisseur" formControlName="typeFournisseur" ngModel>
+                <select cSelect id="floatingSelectGrid" aria-label="Type de Fournisseur" formControlName="typeFournisseur" >
                   <!-- <option>Type de Fournisseur</option> -->
                   <option value="1">Induvidual</option>
                   <option value="2">Groupe</option>
                 </select>
                 <label cLabel for="floatingSelectGrid">Selectionner le type de Fournisseur</label>
+              </div>
+
+              <div *ngIf="profileForm.controls['typeFournisseur'].invalid && (profileForm.controls['typeFournisseur'].dirty || profileForm.controls['typeFournisseur'].touched || submitted)" class="alert alert-danger">
+                <div *ngIf="profileForm.controls['typeFournisseur'].errors?.['required']">
+                Le type de Fournisseur est requis.</div>
               </div>
             </c-col>
           </c-row>
@@ -47,16 +59,20 @@
 
           <c-col [xs]="12">
           <label cLabel for="inputAddress">Address du Fournisseur</label>
-          <input cFormControl id="inputAddress" name="adresse" formControlName="adresse" placeholder="1234 Bamako coura" ngModel/>
+          <input cFormControl id="inputAddress" name="adresse" formControlName="adresse" placeholder="1234 Bamako coura" />
           </c-col>
 
           <c-col [md]="6">
           <label cLabel for="inputCity">Contact du Fournisseur: </label>
-          <input cFormControl id="inputCity" type="tel"  name="contact" formControlName="contact" placeholder="numero de télephone" ngModel />
+          <input cFormControl id="inputCity" type="tel"  name="contact" formControlName="contact" placeholder="numero de télephone"  />
+          <div *ngIf="profileForm.controls['contact'].invalid && (profileForm.controls['contact'].dirty || profileForm.controls['contact'].touched || submitted)" class="alert alert-danger">
+            <div *ngIf="profileForm.controls['contact'].errors?.['required']">
+            Le numero du Fournisseur est requis.</div>
+          </div>
           </c-col>
 
           <c-col [xs]="12">
-          <button [disabled]="!profileForm.valid" cButton type="submit">Ajouter</button>
+          <button  cButton type="submit">Ajouter</button>
           </c-col>
           </form>
       </c-card-body>
