@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {ClientService} from '../../../services/client.service';
 
 @Component({
   selector: 'app-navs',
@@ -7,6 +8,19 @@ import { Component } from '@angular/core';
 })
 export class PrintcustomersComponent {
 
-  constructor() { }
+  constructor(private clientService: ClientService) { 
+
+  this.getAllClient();
+  }
+
+  getAllClient(){
+    console.log("okay");
+    
+    this.clientService.getAllClient().subscribe((data)=>{
+
+      console.log("all clients data"+data);
+      
+    })
+  }
 }
 

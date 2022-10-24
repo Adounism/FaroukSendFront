@@ -21,11 +21,11 @@ export class CustomersComponent implements OnInit {
 
   ngOnInit(): void {
     this.profileForm = this.fb.group({
-      firstname: ['', [Validators.required]],
-      lastname: ['', [Validators.required]],
+      firstName: ['', [Validators.required]],
+      lastName: ['', [Validators.required]],
       adresse: ['', [Validators.nullValidator]],
 
-      contact: ['', [Validators.required, Validators.minLength(4)]],
+      phone: ['', [Validators.required, Validators.minLength(4)]],
 
       email: ['', [Validators.nullValidator]],
 

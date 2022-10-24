@@ -11,18 +11,18 @@
         <form cForm class="row g-3" [formGroup]="profileForm" (ngSubmit)="ajouter()">
           <c-col [md]="6">
           <label cLabel for="inputEmail4">Nom du Fournisseur:</label>
-          <input cFormControl id="inputEmail4" name="firstname" formControlName="firstname" type="text" />
-          <div *ngIf="profileForm.controls['firstname'].invalid && (profileForm.controls['firstname'].dirty || profileForm.controls['firstname'].touched || submitted)" class="alert alert-danger">
-            <div *ngIf="profileForm.controls['firstname'].errors?.['required']">
+          <input cFormControl id="inputEmail4" name="firstName" formControlName="firstName" type="text" />
+          <div *ngIf="profileForm.controls['firstName'].invalid && (profileForm.controls['firstName'].dirty || profileForm.controls['firstName'].touched || submitted)" class="alert alert-danger">
+            <div *ngIf="profileForm.controls['firstName'].errors?.['required']">
             Le nom du Fournisseur est requis.</div>
           </div>
 
           </c-col>
           <c-col [md]="6">
           <label cLabel for="inputPassword4">Prenom du Fournisseur:</label>
-          <input cFormControl id="inputPassword4" formControlName="lastname" name="lastname" type="text" />
-          <div *ngIf="profileForm.controls['lastname'].invalid && (profileForm.controls['lastname'].dirty || profileForm.controls['lastname'].touched || submitted)" class="alert alert-danger">
-            <div *ngIf="profileForm.controls['lastname'].errors?.['required']">
+          <input cFormControl id="inputPassword4" formControlName="lastName" name="lastName" type="text" />
+          <div *ngIf="profileForm.controls['lastName'].invalid && (profileForm.controls['lastName'].dirty || profileForm.controls['lastName'].touched || submitted)" class="alert alert-danger">
+            <div *ngIf="profileForm.controls['lastName'].errors?.['required']">
             Le prenom est requis.</div>
           </div>
           </c-col>
@@ -64,9 +64,9 @@
 
           <c-col [md]="6">
           <label cLabel for="inputCity">Contact du Fournisseur: </label>
-          <input cFormControl id="inputCity" type="tel"  name="contact" formControlName="contact" placeholder="numero de télephone"  />
-          <div *ngIf="profileForm.controls['contact'].invalid && (profileForm.controls['contact'].dirty || profileForm.controls['contact'].touched || submitted)" class="alert alert-danger">
-            <div *ngIf="profileForm.controls['contact'].errors?.['required']">
+          <input cFormControl id="inputCity" type="tel"  name="contact" formControlName="phone" placeholder="numero de télephone"  />
+          <div *ngIf="profileForm.controls['phone'].invalid && (profileForm.controls['phone'].dirty || profileForm.controls['phone'].touched || submitted)" class="alert alert-danger">
+            <div *ngIf="profileForm.controls['phone'].errors?.['required']">
             Le numero du Fournisseur est requis.</div>
           </div>
           </c-col>
