@@ -20,7 +20,7 @@
         decide if they want to read it.
       </p> -->
 
-        <table cTable>
+        <table cTable class="center-align">
           <caption>Listes des Clients</caption>
           <thead>
           <tr>
@@ -31,34 +31,22 @@
           </tr>
           </thead>
           <tbody>
-          <tr>
+          <tr *ngFor="let customer of customers ">
             <!-- <th scope="row">1</th> -->
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
+            <td>{{customer.firstName}}</td>
+            <td>{{customer.lastName}}</td>
+            <td>{{customer.phone}}</td>
             <td>
-              <button type="button" rel="tooltip" class="btn btn-danger btn-just-icon btn-sm">
-                <svg cIcon class="me-2" name="cil-trash"></svg>
+              <button type="button" rel="tooltip" (click)="deleteCustomer(customer.id)" class="btn btn-danger btn-just-icon btn-sm">
+                <svg cIcon class="me-2" class="center-align" name="cil-trash"></svg>
             </button>
-            <button type="button" rel="tooltip" class="btn btn-info btn-just-icon btn-sm" data-original-title="" title="">
-              <svg cIcon class="me-2" name="cil-pencil"></svg>
+            <button type="button" rel="tooltip" class="btn btn-info btn-just-icon btn-sm" [routerLink]="['/base/editcustomer/',customer.id]" data-original-title="" title="">
+              <svg cIcon class="me-2" class="center-align" name="cil-pencil"></svg>
             </button>
             </td>
           </tr>
-          <tr>
-            <!-- <th scope="row">2</th> -->
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>@fat</td>
-            <td>del or edit</td>
-
-          </tr>
-          <tr>
-            <!-- <th scope="row">3</th> -->
-            <td>Larry</td>
-            <td>the Bird</td>
-            <td>@twitter</td>
-            <td>del or edit</td>
+          <tr class="center-align">
+            <td *ngIf="customers.length == 0"  class="center-align" colspan="4">No Customers Found</td>
           </tr>
           </tbody>
         </table>

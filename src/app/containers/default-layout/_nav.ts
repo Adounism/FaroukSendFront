@@ -44,6 +44,10 @@ export const navItems: INavData[] = [
       //  url: '/base/orangemoney'
       },
       {
+        name: 'Edit customer',
+        url: '/base/editcustomer/:id'
+      },
+      {
         name: 'Liste des transactions',
         url: '/base/breadcrumbs'
       },
@@ -52,14 +56,6 @@ export const navItems: INavData[] = [
         url: '/base/cards'
       },
 
-      // {
-      //   name: 'Navs & Tabs',
-      //   url: '/base/navs'
-      // },
-      // {
-      //   name: 'Carousel',
-      //   url: '/base/carousel'
-      // },
       // {
       //   name: 'Collapse',
       //   url: '/base/collapse'
@@ -80,10 +76,7 @@ export const navItems: INavData[] = [
       //   name: 'Popovers',
       //   url: '/base/listeachats'
       // },
-      // {
-      //   name: 'Progress',
-      //   url: '/base/progress'
-      // },
+
       // {
       //   name: 'Spinners',
       //   url: '/base/spinners'

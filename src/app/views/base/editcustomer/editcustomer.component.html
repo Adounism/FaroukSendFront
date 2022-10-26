@@ -8,30 +8,25 @@
         <p class="text-medium-emphasis small">
           Veillez fournir les informations du clients.
         </p>
-        <form cForm class="row g-3" [formGroup]="profileForm" (ngSubmit)="ajouter()">
+        <form cForm class="row g-3" *ngIf="currentCustomer" [formGroup]="customerForm" >
           <c-col [md]="6">
             <label cLabel for="inputEmail4">Nom:</label>
-            <input cFormControl id="inputEmail4" name="firstName" formControlName="firstName" type="text" />
-            <!-- <span class="text-danger"
-          *ngIf="(profileForm.controls['firstname'].invalid || submitted) && profileForm
-          .controls['firstname'].errors?.['required']">
-          Name is required
-          </span> -->
+            <input cFormControl id="inputEmail4" name="firstName"  [(ngModel)]="currentCustomer.firstName" formControlName="firstName" type="text" />
             <div
-              *ngIf="profileForm.controls['firstName'].invalid && (profileForm.controls['firstName'].dirty || profileForm.controls['firstName'].touched || submitted)"
+              *ngIf="customerForm.controls['firstName'].invalid && (customerForm.controls['firstName'].dirty || customerForm.controls['firstName'].touched || submitted)"
               class="alert alert-danger">
-              <div *ngIf="profileForm.controls['firstName'].errors?.['required']">
+              <div *ngIf="customerForm.controls['firstName'].errors?.['required']">
                 Le nom du client est requis.</div>
             </div>
 
           </c-col>
           <c-col [md]="6">
             <label cLabel for="inputPassword4">Prenom:</label>
-            <input cFormControl id="inputPassword4" formControlName="lastName" name="lastName" type="text" />
+            <input cFormControl id="inputPassword4" [(ngModel)]="currentCustomer.lastName" formControlName="lastName" name="lastName" type="text" />
             <div
-              *ngIf="profileForm.controls['lastName'].invalid && (profileForm.controls['lastName'].dirty || profileForm.controls['lastName'].touched || submitted)"
+              *ngIf="customerForm.controls['lastName'].invalid && (customerForm.controls['lastName'].dirty || customerForm.controls['lastName'].touched || submitted)"
               class="alert alert-danger">
-              <div *ngIf="profileForm.controls['lastName'].errors?.['required']">
+              <div *ngIf="customerForm.controls['lastName'].errors?.['required']">
                 Le prenom est requis.</div>
             </div>
           </c-col>
@@ -39,41 +34,29 @@
           <c-row [gutter]="{g: 2}">
             <c-col [md]>
               <div cFormFloating>
-                <input cFormControl id="floatingInputGrid" type="email" value="email@example.com"
-                  formControlName="email" />
+                <input cFormControl id="floatingInputGrid" type="email" formControlName="email" value="email@example.com"
+                [(ngModel)]="currentCustomer.email" />
                 <label cLabel for="floatingInputGrid">Email address</label>
               </div>
             </c-col>
-            <!-- <c-col [md]>
-              <div cFormFloating>
-                <select cSelect id="floatingSelectGrid" formControlName="typeClient" >
-                  <option value="1">Induvidual</option>
-                  <option value="2">Groupe</option>
-                </select>
-                <label cLabel for="floatingSelectGrid">Type de Client</label>
-              </div>
-              <div *ngIf="profileForm.controls['typeClient'].invalid && (profileForm.controls['typeClient'].dirty || profileForm.controls['typeClient'].touched || submitted)" class="alert alert-danger">
-                <div *ngIf="profileForm.controls['typeClient'].errors?.['required']">
-                Le type de client est requis.</div>
-              </div>
-            </c-col> -->
+
           </c-row>
 
           <c-col [xs]="12">
             <label cLabel for="inputAddress">Address</label>
-            <input cFormControl id="inputAddress" name="address" formControlName="address"
+            <input cFormControl id="inputAddress" name="address" formControlName="address" [(ngModel)]="currentCustomer.address"
               placeholder="1234 Bamako coura" />
           </c-col>
 
           <c-col [md]="6">
             <label cLabel for="inputCity">Contact: </label>
-            <input cFormControl id="inputCity" type="tel" name="contact" formControlName="phone"
+            <input cFormControl id="inputCity" type="tel" name="phone" formControlName="phone"  [(ngModel)]="currentCustomer.phone"
               placeholder="numero de télephone" />
 
             <div
-              *ngIf="profileForm.controls['phone'].invalid && (profileForm.controls['phone'].dirty || profileForm.controls['phone'].touched || submitted)"
+              *ngIf="customerForm.controls['phone'].invalid && (customerForm.controls['phone'].dirty || customerForm.controls['phone'].touched || submitted)"
               class="alert alert-danger">
-              <div *ngIf="profileForm.controls['phone'].errors?.['required']">
+              <div *ngIf="customerForm.controls['phone'].errors?.['required']">
                 Le numero du client est requis.</div>
             </div>
 
@@ -81,15 +64,15 @@
 
 
           <c-col [md]="6">
-            <label cLabel for="inputCity">Contact: </label>
-            <input cFormControl id="inputCity" type="text" name="occupation" formControlName="occupation"
+            <label cLabel for="inputCity">occupation: </label>
+            <input cFormControl id="inputCity" type="text" name="occupation"  formControlName="occupation" [(ngModel)]="currentCustomer.occupation"
               placeholder="occupation" />
           </c-col>
 
 
           <c-col [md]="6">
-            <label cLabel for="inputCity">Contact: </label>
-            <input cFormControl id="inputCity" type="text" name="pdvNumber" formControlName="pdvNumber"
+            <label cLabel for="inputCity">pdvNumber: </label>
+            <input cFormControl id="inputCity" type="text" name="pdvNumber"  formControlName="pdvNumber" [(ngModel)]="currentCustomer.pdvNumber"
               placeholder="pdvNumber " />
           </c-col>
 
@@ -112,7 +95,7 @@
           </c-form-check>
           </c-col> -->
           <c-col [xs]="12">
-            <button cButton type="submit">Ajouter</button>
+            <button cButton type="submit" (click)="updateCustomer()">Ajouter</button>
           </c-col>
         </form>
       </c-card-body>

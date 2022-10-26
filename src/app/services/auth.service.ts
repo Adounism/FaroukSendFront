@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 
@@ -11,7 +11,8 @@ export class AuthService {
   
   clientEndPoint= {
    login: this.BaseUrl + '/login',
-   addNewClient: this.BaseUrl +'/clients', 
+
+  
 
  }
 
@@ -22,6 +23,15 @@ export class AuthService {
   }
 
   userlogin(data: any): Observable<any>{
-    return this.http.post(this.clientEndPoint.login, data);
+
+    const httpOptions = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+         
+      withCredentials: true, 
+      observe: 'response' as 'response'
+    };
+    console.log(data);
+    
+    return this.http.post(this.clientEndPoint.login, data,  httpOptions);
   }
 }

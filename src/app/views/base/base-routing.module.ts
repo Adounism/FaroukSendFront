@@ -11,7 +11,7 @@ import { PrintcustomersComponent } from './printcustomers/printcustomers.compone
 import {PrintsupplierComponent } from './printsuppliers/printsuppliers.component';
 import { PaginationsComponent } from './paginations/paginations.component';
 import { PrintAchatComponent } from './listeachat/printachat.component';
-import { ProgressComponent } from './progress/progress.component';
+import { EditCustomerComponent } from './editcustomer/editcustomer.component';
 import { SpinnersComponent } from './spinners/spinners.component';
 import { TablesComponent } from './tables/tables.component';
 import { TooltipsComponent } from './tooltips/tooltips.component';
@@ -118,15 +118,15 @@ const routes: Routes = [
         component: PrintAchatComponent,
         // canActivate:[AuthGuard],
         data: {
-          title: 'Liste des Achats effectuers',
+          title: 'Liste des Achats effectués',
         },
       },
       {
-        path: 'progress',
-        component: ProgressComponent,
+        path: 'editcustomer/:id',
+        component: EditCustomerComponent,
         // canActivate:[AuthGuard],
         data: {
-          title: 'Progress',
+          title: 'Edit Customer',
         },
       },
       {

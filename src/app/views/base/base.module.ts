@@ -45,7 +45,7 @@ import {PrintsupplierComponent } from './printsuppliers/printsuppliers.component
 import { PaginationsComponent } from './paginations/paginations.component';
 import { PlaceholdersComponent } from './placeholders/placeholders.component';
 import { PrintAchatComponent } from './listeachat/printachat.component';
-import { ProgressComponent } from './progress/progress.component';
+import { EditCustomerComponent } from './editcustomer/editcustomer.component';
 import { SpinnersComponent } from './spinners/spinners.component';
 import { TablesComponent } from './tables/tables.component';
 import { TooltipsComponent } from './tooltips/tooltips.component';
@@ -97,7 +97,7 @@ import { BaseRoutingModule } from './base-routing.module';
     PrintsupplierComponent,
     PaginationsComponent,
     PrintAchatComponent,
-    ProgressComponent,
+    EditCustomerComponent,
     SpinnersComponent,
     TablesComponent,
     TooltipsComponent,
