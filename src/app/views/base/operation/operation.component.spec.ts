@@ -1,32 +1,31 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
 
-import { ButtonModule, CardModule, CollapseModule, GridModule } from '@coreui/angular';
+import { ButtonModule, CardModule, GridModule, TooltipModule } from '@coreui/angular';
 import { IconSetService } from '@coreui/icons-angular';
 import { iconSubset } from '../../../icons/icon-subset';
 import { DocsComponentsModule } from '../../../../components';
-import { OrangemoneyComponent } from './orangemoney.component';
+import { OperationComponent } from './operation.component';
 
-describe('CollapsesComponent', () => {
-  let component: OrangemoneyComponent;
-  let fixture: ComponentFixture<OrangemoneyComponent>;
+describe('OperationComponent', () => {
+  let component: OperationComponent;
+  let fixture: ComponentFixture<OperationComponent>;
   let iconSetService: IconSetService;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [OrangemoneyComponent],
-      imports: [CardModule, CollapseModule, NoopAnimationsModule, GridModule, ButtonModule, DocsComponentsModule, RouterTestingModule],
+      declarations: [ OperationComponent ],
+      imports: [CardModule, GridModule, TooltipModule, ButtonModule, DocsComponentsModule, RouterTestingModule],
       providers: [IconSetService]
     })
-      .compileComponents();
+    .compileComponents();
   });
 
   beforeEach(() => {
     iconSetService = TestBed.inject(IconSetService);
     iconSetService.icons = { ...iconSubset };
 
-    fixture = TestBed.createComponent(OrangemoneyComponent);
+    fixture = TestBed.createComponent(OperationComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -49,7 +49,6 @@ export class EditCustomerComponent implements OnInit{
 
     this.clientService.find(id).subscribe( data=>{
       this.currentCustomer = data;
-      console.log(this.currentCustomer);
       
     }, 
     error=>{

@@ -4,9 +4,9 @@ import { RouterModule, Routes } from '@angular/router';
 import { CustomersComponent } from './customers/customers.component';
 import { SuppliersComponent } from './suppliers/suppliers.component';
 import { CardsComponent } from './cards/cards.component';
-import { SendcreditComponent } from './sendcredits/sendcredit.component';
-import { OrangemoneyComponent } from './orangemoney/orangemoney.component';
-import { PrintOrangeMoneyComponent } from './printorangemoney/printorangemoney.component';
+import { AddOperationComponent } from './addoperation/addoperation.component';
+import { TransactionComponent } from './transactions/transaction.component';
+import { EditOperationComponent } from './editoperation/editoperation.component';
 import { PrintcustomersComponent } from './printcustomers/printcustomers.component';
 import {PrintsupplierComponent } from './printsuppliers/printsuppliers.component';
 import { PaginationsComponent } from './paginations/paginations.component';
@@ -14,9 +14,9 @@ import { PrintAchatComponent } from './listeachat/printachat.component';
 import { EditCustomerComponent } from './editcustomer/editcustomer.component';
 import { SpinnersComponent } from './spinners/spinners.component';
 import { TablesComponent } from './tables/tables.component';
-import { TooltipsComponent } from './tooltips/tooltips.component';
-import { TabsComponent } from './tabs/tabs.component';
-import { PlaceholdersComponent } from './placeholders/placeholders.component';
+import { OperationComponent } from './operation/operation.component';
+import { EditTransactionComponent } from './editTransaction/edittransaction.component';
+import { AddTransactionComponent } from './addTransaction/addtransaction.component';
 import { AuthGuard } from 'src/app/guard/auth.guard';
 
 const routes: Routes = [
@@ -56,27 +56,27 @@ const routes: Routes = [
         },
       },
       {
-        path: 'sendcredit',
-        component: SendcreditComponent,
+        path: 'addoperation',
+        component: AddOperationComponent,
         // canActivate:[AuthGuard],
         data: {
-          title: 'Send Credit',
+          title: 'Ajouter une Operation',
         },
       },
       {
-        path: 'orangemoney',
-        component: OrangemoneyComponent,
+        path: 'transaction',
+        component: TransactionComponent,
         // canActivate:[AuthGuard],
         data: {
-          title: 'Orange Money opérations',
+          title: 'Transaction',
         },
       },
       {
-        path: 'orangemoneyop',
-        component: PrintOrangeMoneyComponent,
+        path: 'editoperation/:id',
+        component: EditOperationComponent,
         // canActivate:[AuthGuard],
         data: {
-          title: 'Liste des opérations orange Money',
+          title: 'Edit operation',
         },
       },
       {
@@ -106,11 +106,11 @@ const routes: Routes = [
         },
       },
       {
-        path: 'placeholder',
-        component: PlaceholdersComponent,
+        path: 'addtransaction',
+        component: AddTransactionComponent,
         // canActivate:[AuthGuard],
         data: {
-          title: 'Placeholder',
+          title: 'add transaction',
         },
       },
       {
@@ -146,19 +146,19 @@ const routes: Routes = [
         },
       },
       {
-        path: 'tabs',
-        component: TabsComponent,
+        path: 'edittransaction/:id',
+        component: EditTransactionComponent,
         // canActivate:[AuthGuard],
         data: {
-          title: 'Tabs',
+          title: 'Edit Transaction',
         },
       },
       {
-        path: 'tooltips',
-        component: TooltipsComponent,
+        path: 'operation',
+        component: OperationComponent,
         // canActivate:[AuthGuard],
         data: {
-          title: 'Tooltips',
+          title: 'operation',
         },
       },
     ],

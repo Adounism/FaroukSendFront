@@ -3,6 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {  Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { Users } from '../models/Users';
+import { HttpService } from '../service/http.service';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,7 @@ export class ClientService  {
 
   }
 
-  constructor(private http: HttpClient) { 
+  constructor(private http: HttpClient,private httpService: HttpService) { 
 
   }
 
@@ -25,14 +26,18 @@ export class ClientService  {
     return this.http.get<any[]>(this.clientEndPoint.listClients);
   }
 
-  create(user: any): Observable<any>{
-    return this.http.post(this.clientEndPoint.addNewClient, user,  {observe: 'response'})
-    .pipe(map((res:any)=>{
-      console.log(res);
-      return res;
-      
-    }));
+  create(user: any): Promise<any>{
+    return this.httpService.post(this.clientEndPoint.addNewClient, user)
   }
+
+  // create(user: any): Observable<any>{
+  //   return this.http.post(this.clientEndPoint.addNewClient, user,  {observe: 'response'})
+  //   .pipe(map((res:any)=>{
+  //     console.log(res);
+  //     return res;
+      
+  //   }));
+  // }
 
   find(id:number): Observable<any>{
     return this.http.get<any>(this.clientEndPoint.findById+ id);

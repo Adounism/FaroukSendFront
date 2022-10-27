@@ -1,0 +1,49 @@
+
+<c-col xs="12">
+  <c-card class="mb-4">
+    <c-card-header>
+
+        <strong>Liste des Transactions</strong>
+
+          <button style="float: right;" class="btn float-right" color="primary"  [routerLink]="['/base/addtransaction']" cButton> ajouter
+    
+          </button>
+
+    </c-card-header>
+    <c-card-body>
+
+        <table cTable class="center-align">
+          <caption>Listes des Transactions</caption>
+          <thead>
+          <tr>
+            <th scope="col">Nom </th>
+            <th scope="col">Prenom </th>
+            <th scope="col">operation name</th>
+            <th scope="col">montant</th>
+            <th scope="col">actions</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let transaction of listeTransactions">
+            <!-- <th scope="row">1</th> -->
+            <td>ada</td>
+            <td>saaaada</td>
+            <td>transfert credit</td>
+            <td>2345677</td>
+            <td>
+              <button type="button" rel="tooltip"  class="btn btn-danger btn-just-icon btn-sm">
+                <svg cIcon class="me-2" class="center-align" name="cil-trash"></svg>
+            </button>
+            <button type="button" rel="tooltip" class="btn btn-info btn-just-icon btn-sm" [routerLink]="['/base/editcustomer/']" data-original-title="" title="">
+              <svg cIcon class="me-2" class="center-align" name="cil-pencil"></svg>
+            </button>
+            </td>
+          </tr>
+          <tr class="center-align">
+            <td   class="center-align" colspan="4">No Customers Found</td>
+          </tr>
+          </tbody>
+        </table>
+    </c-card-body>
+  </c-card>
+</c-col>

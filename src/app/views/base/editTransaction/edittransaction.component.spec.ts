@@ -1,21 +1,21 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 
-import { ButtonModule, CardModule, GridModule, UtilitiesModule } from '@coreui/angular';
-import { IconSetService } from '@coreui/icons-angular';
+import { CardModule, GridModule, NavModule, TabsModule } from '@coreui/angular';
+import { IconModule, IconSetService } from '@coreui/icons-angular';
 import { iconSubset } from '../../../icons/icon-subset';
 import { DocsComponentsModule } from '../../../../components';
-import { PlaceholdersComponent } from './placeholders.component';
+import { EditTransactionComponent } from './edittransaction.component';
 
-describe('PlaceholdersComponent', () => {
-  let component: PlaceholdersComponent;
-  let fixture: ComponentFixture<PlaceholdersComponent>;
+describe('TabsComponent', () => {
+  let component: EditTransactionComponent;
+  let fixture: ComponentFixture<EditTransactionComponent>;
   let iconSetService: IconSetService;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [PlaceholdersComponent],
-      imports: [CardModule, GridModule, UtilitiesModule, ButtonModule, DocsComponentsModule, RouterTestingModule],
+      declarations: [EditTransactionComponent],
+      imports: [TabsModule, GridModule, CardModule, IconModule, RouterTestingModule, NavModule, DocsComponentsModule],
       providers: [IconSetService]
     })
       .compileComponents();
@@ -25,7 +25,7 @@ describe('PlaceholdersComponent', () => {
     iconSetService = TestBed.inject(IconSetService);
     iconSetService.icons = { ...iconSubset };
 
-    fixture = TestBed.createComponent(PlaceholdersComponent);
+    fixture = TestBed.createComponent(EditTransactionComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

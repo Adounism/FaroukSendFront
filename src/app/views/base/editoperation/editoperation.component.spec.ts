@@ -1,21 +1,22 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ReactiveFormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
 
-import { CardModule, GridModule, NavModule, TabsModule } from '@coreui/angular';
-import { IconModule, IconSetService } from '@coreui/icons-angular';
+import { BadgeModule, ButtonModule, CardModule, FormModule, GridModule, ListGroupModule } from '@coreui/angular';
+import { IconSetService } from '@coreui/icons-angular';
 import { iconSubset } from '../../../icons/icon-subset';
 import { DocsComponentsModule } from '../../../../components';
-import { TabsComponent } from './tabs.component';
+import { EditOperationComponent } from './editoperation.component';
 
-describe('TabsComponent', () => {
-  let component: TabsComponent;
-  let fixture: ComponentFixture<TabsComponent>;
+describe('EditOperationComponent', () => {
+  let component: EditOperationComponent;
+  let fixture: ComponentFixture<EditOperationComponent>;
   let iconSetService: IconSetService;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [TabsComponent],
-      imports: [TabsModule, GridModule, CardModule, IconModule, RouterTestingModule, NavModule, DocsComponentsModule],
+      declarations: [EditOperationComponent],
+      imports: [ListGroupModule, ButtonModule, ReactiveFormsModule, BadgeModule, FormModule, GridModule, CardModule, DocsComponentsModule, RouterTestingModule],
       providers: [IconSetService]
     })
       .compileComponents();
@@ -25,7 +26,7 @@ describe('TabsComponent', () => {
     iconSetService = TestBed.inject(IconSetService);
     iconSetService.icons = { ...iconSubset };
 
-    fixture = TestBed.createComponent(TabsComponent);
+    fixture = TestBed.createComponent(EditOperationComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

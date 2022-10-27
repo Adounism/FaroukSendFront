@@ -37,19 +37,19 @@ import { DocsComponentsModule } from '@docs-components/docs-components.module';
 import { CustomersComponent } from './customers/customers.component';
 import {  SuppliersComponent } from './suppliers/suppliers.component';
 import { CardsComponent } from './cards/cards.component';
-import { SendcreditComponent } from './sendcredits/sendcredit.component';
-import { OrangemoneyComponent } from './orangemoney/orangemoney.component';
-import {  PrintOrangeMoneyComponent } from './printorangemoney/printorangemoney.component';
+import { AddOperationComponent } from './addoperation/addoperation.component';
+import {  TransactionComponent } from './transactions/transaction.component';
+import {  EditOperationComponent } from './editoperation/editoperation.component';
 import { PrintcustomersComponent } from './printcustomers/printcustomers.component';
 import {PrintsupplierComponent } from './printsuppliers/printsuppliers.component';
 import { PaginationsComponent } from './paginations/paginations.component';
-import { PlaceholdersComponent } from './placeholders/placeholders.component';
+import { AddTransactionComponent } from './addTransaction/addtransaction.component';
 import { PrintAchatComponent } from './listeachat/printachat.component';
 import { EditCustomerComponent } from './editcustomer/editcustomer.component';
 import { SpinnersComponent } from './spinners/spinners.component';
 import { TablesComponent } from './tables/tables.component';
-import { TooltipsComponent } from './tooltips/tooltips.component';
-import { TabsComponent } from './tabs/tabs.component';
+import { OperationComponent } from './operation/operation.component';
+import { EditTransactionComponent } from './editTransaction/edittransaction.component';
 
 // Components Routing
 import { BaseRoutingModule } from './base-routing.module';
@@ -90,9 +90,9 @@ import { BaseRoutingModule } from './base-routing.module';
     CustomersComponent,
     SuppliersComponent,
     CardsComponent,
-    SendcreditComponent,
-    OrangemoneyComponent,
-    PrintOrangeMoneyComponent,
+    AddOperationComponent,
+    TransactionComponent,
+    EditOperationComponent,
     PrintcustomersComponent,
     PrintsupplierComponent,
     PaginationsComponent,
@@ -100,9 +100,9 @@ import { BaseRoutingModule } from './base-routing.module';
     EditCustomerComponent,
     SpinnersComponent,
     TablesComponent,
-    TooltipsComponent,
-    TabsComponent,
-    PlaceholdersComponent,
+    OperationComponent,
+    EditTransactionComponent,
+    AddTransactionComponent,
   ],
 })
 export class BaseModule {}

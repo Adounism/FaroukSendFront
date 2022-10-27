@@ -1,0 +1,72 @@
+<c-row ngPreserveWhitespaces>
+  <c-col xs="12">
+    <c-card class="mb-4">
+      <c-card-header>
+        <strong>Ajouter une operation</strong>
+      </c-card-header>
+      <c-card-body>
+        <p class="text-medium-emphasis small">
+          Veillez fournir les informations de l'operation.
+        </p>
+
+
+
+        <form cForm class="row g-3" [formGroup]="creditForm" (ngSubmit)="ajouter()">
+
+
+          <!-- <c-col [md]="4">
+                <div cFormFloating>
+                  <select cSelect id="floatingSelectGrid" formControlName="client" ngModel>
+               
+                    <option value="1">client A</option>
+                    <option value="2">client B</option>
+                  </select>
+                  <label cLabel for="floatingSelectGrid">sélectionner le contact</label>
+                </div>
+              </c-col> -->
+
+          <c-row [gutter]="{g: 2}">
+            <c-col [md]="6">
+              <label cLabel for="inputCity">Operation Name: </label>
+              <input cFormControl id="inputCity" type="text" name="name" formControlName="name"
+                placeholder="Nom de l'operation" />
+            </c-col>
+  
+  
+            <c-col [md]="6">
+              <label cLabel for="inputCity">Description: </label>
+              <input cFormControl id="inputCity" type="text" name="description" formControlName="description"
+                placeholder="description " />
+            </c-col>
+          </c-row>
+
+
+          <c-col [xs]="12">
+            <button  cButton type="submit">Ajouter</button>
+          </c-col>
+        </form>
+      </c-card-body>
+    </c-card>
+
+    <!-- <c-card class="mb-4">
+        <c-card-header>
+          <strong>Angular Accordion</strong> alwaysOpen
+        </c-card-header>
+        <c-card-body>
+          <app-docs-example href="components/accordion#always-open">
+            <c-accordion [alwaysOpen]="true" class="shadow accordion-custom">
+              <c-accordion-item *ngFor="let item of items; let i = index;" [visible]="i===1">
+                <ng-template cTemplateId="accordionHeader">
+                  Custom Accordion item #{{i}}
+                </ng-template>
+                <ng-template cTemplateId="accordionBody">
+                  <small><i>{{i}}.</i></small>
+                  <span [innerHTML]="getAccordionBodyText(i.toString())"></span>
+                </ng-template>
+              </c-accordion-item>
+            </c-accordion>
+          </app-docs-example>
+        </c-card-body>
+      </c-card> -->
+  </c-col>
+</c-row>

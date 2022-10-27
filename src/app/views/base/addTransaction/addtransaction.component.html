@@ -1,0 +1,64 @@
+<c-row ngPreserveWhitespaces>
+  <c-col xs="12">
+    <c-card class="mb-4">
+      <c-card-header>
+        <strong>Ajouter une Transaction</strong>
+      </c-card-header>
+      <c-card-body>
+        <p class="text-medium-emphasis small">
+          Veillez fournir les informations du clients et le Montant.
+        </p>
+
+
+
+        <form cForm class="row g-3" [formGroup]="transactionForm" (ngSubmit)="ajouter()">
+
+          <c-row [gutter]="{g: 2}">
+          <c-col [md]="6">
+                <div cFormFloating>
+                  <select cSelect id="floatingSelectGrid" formControlName="client" ngModel>
+              
+                    <option [ngValue]="null" disabled>Choose client</option>
+                    <option *ngFor="let client of clientListe" [ngValue]="client"> 
+                      {{client.firstName}}
+                    </option>
+               
+                  </select>
+                  <label cLabel for="floatingSelectGrid">sélectionner le contact</label>
+                </div>
+           </c-col>
+
+           <c-col [md]="6">
+            <div cFormFloating>
+              <select cSelect id="floatingSelectGrid"  formControlName="operation" ngModel>
+           
+                <option [ngValue]="null" disabled>Choose operation</option>
+                <option *ngFor="let operation of listeOperations" [ngValue]="operation">
+                  {{operation.name}}
+                </option>
+              </select>
+              <label cLabel for="floatingSelectGrid">sélectionner l'operation</label>
+            </div>
+       </c-col>
+      </c-row>
+
+          <c-row [gutter]="{g: 2}">
+            <c-col [md]="6">
+              <label cLabel for="inputCity">transaction Montant: </label>
+              <input cFormControl id="inputCity" type="number" name="montant" formControlName="montant"
+                placeholder="Montant de la transaction" />
+            </c-col>
+          </c-row>
+
+
+          <c-col [xs]="12">
+            <button  cButton type="submit">Ajouter</button>
+          </c-col>
+        </form>
+      </c-card-body>
+    </c-card>
+
+
+  </c-col>
+</c-row>
+

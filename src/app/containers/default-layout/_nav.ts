@@ -35,18 +35,18 @@ export const navItems: INavData[] = [
     iconComponent: { name: 'cil-share' },
     children: [
       {
-        name: 'Envoyer crédit',
-        url: '/base/sendcredit'
+        name: 'Liste Operation',
+        url: '/base/operation'
       },
       {
-       name: 'Operations Orange Money',
-       url: '/base/orangemoneyop'
+       name: 'Liste transaction',
+       url: '/base/transaction'
       //  url: '/base/orangemoney'
       },
-      {
-        name: 'Edit customer',
-        url: '/base/editcustomer/:id'
-      },
+      // {
+      //   name: 'Edit customer',
+      //   url: '/base/editcustomer/:id'
+      // },
       {
         name: 'Liste des transactions',
         url: '/base/breadcrumbs'
@@ -69,8 +69,8 @@ export const navItems: INavData[] = [
       //   url: '/base/pagination'
       // },
       // {
-      //   name: 'Placeholder',
-      //   url: '/base/placeholder'
+      //   name: 'Add Transaction',
+      //   url: '/base/addTransaction'
       // },
       // {
       //   name: 'Popovers',

@@ -42,7 +42,7 @@ export class CustomersComponent implements OnInit {
       occupation: ['', [Validators.nullValidator]],
       pdvNumber: ['', [Validators.nullValidator]],
 
-      // typeClient:['', [Validators.required]]
+      //typeClient:['', [Validators.required]]
     });
 
   }
@@ -57,27 +57,9 @@ export class CustomersComponent implements OnInit {
     if(this.profileForm.valid){
 
 
-      this.clientService.create(this.profileForm.value).subscribe(res=>{
-
-        
-        this.toast.success({
-          detail:"Customer add",
-          summary:"Customer add success",
-          duration: 3000
-         });
+      this.clientService.create(this.profileForm.value).then((res)=>{
 
          this.router.navigate(['/base/listcustomers']);
-          
-      }, error=>{ 
-        console.log(error.error['hydra:description']);
-        this.message = error.error['hydra:description'];
-        //console.log(error['hydra:description']);
-          this.toast.warning({
-          detail:"Customer error",
-          summary:this.message,
-          duration: 3000
-         });
-         
       });
     }
   }
