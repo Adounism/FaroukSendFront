@@ -1,21 +1,21 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 
-import { ButtonModule, CardModule, GridModule, SpinnerModule } from '@coreui/angular';
+import { ButtonModule, CardModule, GridModule, ListGroupModule, NavModule, UtilitiesModule } from '@coreui/angular';
 import { IconSetService } from '@coreui/icons-angular';
 import { iconSubset } from '../../../icons/icon-subset';
 import { DocsComponentsModule } from '../../../../components';
-import { SpinnersComponent } from './spinners.component';
+import { HistoryComponent } from './historique.component';
 
-describe('SpinnersComponent', () => {
-  let component: SpinnersComponent;
-  let fixture: ComponentFixture<SpinnersComponent>;
+describe('HistoryComponent', () => {
+  let component: HistoryComponent;
+  let fixture: ComponentFixture<HistoryComponent>;
   let iconSetService: IconSetService;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [SpinnersComponent],
-      imports: [SpinnerModule, CardModule, GridModule, ButtonModule, DocsComponentsModule, RouterTestingModule],
+      declarations: [HistoryComponent],
+      imports: [CardModule, NavModule, GridModule, ListGroupModule, UtilitiesModule, ButtonModule, DocsComponentsModule, RouterTestingModule],
       providers: [IconSetService]
     })
       .compileComponents();
@@ -25,7 +25,7 @@ describe('SpinnersComponent', () => {
     iconSetService = TestBed.inject(IconSetService);
     iconSetService.icons = { ...iconSubset };
 
-    fixture = TestBed.createComponent(SpinnersComponent);
+    fixture = TestBed.createComponent(HistoryComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

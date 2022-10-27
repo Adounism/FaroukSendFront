@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { CustomersComponent } from './customers/customers.component';
 import { SuppliersComponent } from './suppliers/suppliers.component';
-import { CardsComponent } from './cards/cards.component';
+import { HistoryComponent } from './historiques/historique.component';
 import { AddOperationComponent } from './addoperation/addoperation.component';
 import { TransactionComponent } from './transactions/transaction.component';
 import { EditOperationComponent } from './editoperation/editoperation.component';
@@ -12,7 +12,7 @@ import {PrintsupplierComponent } from './printsuppliers/printsuppliers.component
 import { PaginationsComponent } from './paginations/paginations.component';
 import { PrintAchatComponent } from './listeachat/printachat.component';
 import { EditCustomerComponent } from './editcustomer/editcustomer.component';
-import { SpinnersComponent } from './spinners/spinners.component';
+import { AddPurchaseComponent } from './addpurchase/addpurchase.component';
 import { TablesComponent } from './tables/tables.component';
 import { OperationComponent } from './operation/operation.component';
 import { EditTransactionComponent } from './editTransaction/edittransaction.component';
@@ -48,11 +48,11 @@ const routes: Routes = [
         },
       },
       {
-        path: 'cards',
-        component: CardsComponent,
+        path: 'historique',
+        component: HistoryComponent,
         // canActivate:[AuthGuard],
         data: {
-          title: 'Cards',
+          title: 'Client Historique',
         },
       },
       {
@@ -130,11 +130,11 @@ const routes: Routes = [
         },
       },
       {
-        path: 'spinners',
-        component: SpinnersComponent,
+        path: 'addpurchase',
+        component: AddPurchaseComponent,
         // canActivate:[AuthGuard],
         data: {
-          title: 'Spinners',
+          title: 'Ajouter un Achat',
         },
       },
       {

@@ -36,7 +36,7 @@ import { DocsComponentsModule } from '@docs-components/docs-components.module';
 // views
 import { CustomersComponent } from './customers/customers.component';
 import {  SuppliersComponent } from './suppliers/suppliers.component';
-import { CardsComponent } from './cards/cards.component';
+import { HistoryComponent } from './historiques/historique.component';
 import { AddOperationComponent } from './addoperation/addoperation.component';
 import {  TransactionComponent } from './transactions/transaction.component';
 import {  EditOperationComponent } from './editoperation/editoperation.component';
@@ -46,7 +46,7 @@ import { PaginationsComponent } from './paginations/paginations.component';
 import { AddTransactionComponent } from './addTransaction/addtransaction.component';
 import { PrintAchatComponent } from './listeachat/printachat.component';
 import { EditCustomerComponent } from './editcustomer/editcustomer.component';
-import { SpinnersComponent } from './spinners/spinners.component';
+import { AddPurchaseComponent } from './addpurchase/addpurchase.component';
 import { TablesComponent } from './tables/tables.component';
 import { OperationComponent } from './operation/operation.component';
 import { EditTransactionComponent } from './editTransaction/edittransaction.component';
@@ -89,7 +89,7 @@ import { BaseRoutingModule } from './base-routing.module';
   declarations: [
     CustomersComponent,
     SuppliersComponent,
-    CardsComponent,
+    HistoryComponent,
     AddOperationComponent,
     TransactionComponent,
     EditOperationComponent,
@@ -98,7 +98,7 @@ import { BaseRoutingModule } from './base-routing.module';
     PaginationsComponent,
     PrintAchatComponent,
     EditCustomerComponent,
-    SpinnersComponent,
+    AddPurchaseComponent,
     TablesComponent,
     OperationComponent,
     EditTransactionComponent,

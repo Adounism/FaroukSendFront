@@ -51,10 +51,10 @@ export const navItems: INavData[] = [
         name: 'Liste des transactions',
         url: '/base/breadcrumbs'
       },
-      {
-        name: 'Historique clients',
-        url: '/base/cards'
-      },
+      // {
+      //   name: 'Historique clients',
+      //   url: '/base/historique'
+      // },
 
       // {
       //   name: 'Collapse',

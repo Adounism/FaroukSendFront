@@ -40,9 +40,7 @@ export class TransactionsService {
     return this.http.delete(this.transactionEndPoint.findById + id, {observe: 'response'});
   }
 
-  editClient(id:number, data:any): Observable<any>{ 
-    return this.http.put(`${this.transactionEndPoint.findById} ${id}`, data).pipe(map((res:any)=>{
-      return res;
-    }));
+  editTransaction(id:number, data:any): Observable<any>{ 
+    return this.http.put(`${this.transactionEndPoint.findById} ${id}`, data, {observe: 'response'});
   }
 }

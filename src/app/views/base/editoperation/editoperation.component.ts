@@ -14,6 +14,7 @@ export class EditOperationComponent implements OnInit{
   operationForm!: FormGroup;
   currentOperation: any;
   operationId!: number;
+  submitted = false;
   constructor(private fb: FormBuilder,private route: ActivatedRoute,
     private toast: NgToastService,private router: Router,
     private operationService: OperationsService ) { 
@@ -45,20 +46,24 @@ export class EditOperationComponent implements OnInit{
   }
 
   updateOperation(){
-    this.operationService.update(this.operationId, this.currentOperation).subscribe(
-      response=>{
-        console.log(response);
+    if(this.operationForm.valid){
+      this.submitted = true;
+
+      this.operationService.update(this.operationId, this.currentOperation).subscribe(
+        response=>{
+          console.log(response);
+          
+         this.toast.success({
+          detail:"Operation update success",
+          summary:"",
+          duration: 3000
+         });
+         this.router.navigate(['/base/operation']);
+      }, error =>{
+        console.log(error);
         
-       this.toast.success({
-        detail:"Operation update success",
-        summary:"",
-        duration: 3000
-       });
-        
-    }, error =>{
-      console.log(error);
-      
-    })
+      })
+    }
 
   }
 

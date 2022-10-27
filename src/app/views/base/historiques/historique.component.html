@@ -24,20 +24,13 @@
           </tr>
           </thead>
           <tbody>
-          <tr *ngFor="let transaction of listeTransactions">
+          <tr>
             <!-- <th scope="row">1</th> -->
-            <td>{{transaction.client?.firstName}}</td>
-            <td>{{transaction.client?.lastName}}</td>
-            <td>{{transaction.operation?.name}}</td>
-            <td>{{transaction.amount}}</td>
-            <td>
-              <button type="button" rel="tooltip" (click)="deleteTransaction(transaction.id)"  class="btn btn-danger btn-just-icon btn-sm">
-                <svg cIcon class="me-2" class="center-align" name="cil-trash"></svg>
-            </button>
-            <button type="button" rel="tooltip" class="btn btn-info btn-just-icon btn-sm" [routerLink]="['/base/edittransaction/',transaction.id]" data-original-title="" title="">
-              <svg cIcon class="me-2" class="center-align" name="cil-pencil"></svg>
-            </button>
-            </td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+
           </tr>
           <tr class="center-align">
             <td   class="center-align" colspan="4">No Customers Found</td>

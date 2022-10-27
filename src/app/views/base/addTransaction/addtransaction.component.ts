@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { NgToastService } from 'ng-angular-popup';
 import { ClientService } from 'src/app/services/client.service';
 import { OperationsService } from 'src/app/services/operations.service';
 import { TransactionsService } from 'src/app/services/transactions.service';
@@ -15,11 +17,14 @@ export class AddTransactionComponent implements OnInit {
   listeOperations: any[]=[];
   listeTransactions: any[]=[];
   transactionData:any;
-
+  onLoading = false;
 
   constructor(private clientService: ClientService,
     private transService: TransactionsService,
-     private operationService: OperationsService) {
+     private operationService: OperationsService,
+     private toast: NgToastService,
+     private router:Router,
+     private fb: FormBuilder) {
    
 
    this.getClientList();
@@ -28,20 +33,11 @@ export class AddTransactionComponent implements OnInit {
 
   ngOnInit(): void {
    
-    this.transactionForm = new FormGroup({
-  
-      montant: new FormControl([
-        Validators.required,
-        Validators.minLength(2),
-      ]),
-  
-      client: new FormControl([
-        Validators.required,
-      ]),
-      operation: new FormControl([
-        Validators.required,
-      ]),
-  
+    this.transactionForm =  this.fb.group({
+      client: ['', [Validators.required]],
+      operation: ['', [Validators.required]],
+      montant:['', [Validators.required]],
+
     });
   }
 
@@ -64,29 +60,43 @@ export class AddTransactionComponent implements OnInit {
   ajouter(){
 
     if(this.transactionForm.valid){
+      this.onLoading = true;
 
       this.transactionData = this.transactionForm.value;
-
       let transaction= {
         "amount": this.transactionData.montant,
-        "client":{
-          "firstName": this.transactionData.client.firstName,
-          "lastName": this.transactionData.client.lastName,
-          "email": this.transactionData.client.email,
-          "phone": this.transactionData.client.phone,
-          "address": this.transactionData.client.address,
-          "occupation": this.transactionData.client.occupation,
-          "pdvNumber": this.transactionData.client.pdvNumber
-        },
-        "operation": {
-          "name": this.transactionData.operation.name,
-          "description": this.transactionData.operation.description
-        }
+        "client": this.transactionData.client["@id"] ,
+        "operation": this.transactionData.operation["@id"]
       }
-      this.transService.createTransaction(transaction).then(resp=>{
-        console.log(resp);
-          
-      });
+      if(this.transactionData.montant != "" && this.transactionData.montant > 0){
+
+        this.transService.createTransaction(transaction).then(resp=>{
+
+          this.toast.success({
+            detail:"Transaction Réçu avec success",
+            summary:"transaction effectuée avec success",
+            duration: 3000
+            });
+            this.router.navigate(['/base/transaction']);
+            
+        });
+      }else{
+        this.onLoading = false;
+
+        this.toast.warning({
+          detail:"Transaction Montant error",
+          summary:"transaction impossible montant invalid",
+          duration: 3000
+          });
+      }
+      
+    }else{
+      this.onLoading = false;
+      this.toast.warning({
+        detail:"Field invalid !!!",
+        summary:"",
+        duration: 3000
+        });
     }
   }
 

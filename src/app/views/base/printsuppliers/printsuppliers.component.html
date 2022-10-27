@@ -36,7 +36,7 @@
             <td>{{provider?.secondPhone}}</td>
             <td>{{provider.businessCollection[0]?.name}}</td>
             <td>
-              <button type="button" rel="tooltip" class="btn btn-danger btn-just-icon btn-sm">
+              <button type="button" rel="tooltip" (click)="deletesupplier(provider.id)" class="btn btn-danger btn-just-icon btn-sm">
                 <svg cIcon class="me-2" class="center-align" name="cil-trash"></svg>
             </button>
             <button type="button" rel="tooltip" class="btn btn-info btn-just-icon btn-sm" data-original-title="" title="">

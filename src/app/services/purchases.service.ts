@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Users } from '../models/Users';
+import { HttpService } from '../service/http.service';
 
 @Injectable({
   providedIn: 'root'
@@ -16,14 +17,14 @@ export class PurchasesService {
 
  }
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private httpService: HttpService) { }
 
   getAllPurchase(): Observable<any>{
     return this.http.get<any[]>(this.purchaseEnpoint.listAchat);
   }
 
-  create(user: any): Observable<any>{
-    return this.http.post(this.purchaseEnpoint.makeAchat, user, {responseType:"text"});
+  create(user: any): Promise<any>{
+    return this.httpService.post(this.purchaseEnpoint.makeAchat, user);
   }
 
   find(id:number): Observable<any>{
@@ -31,7 +32,7 @@ export class PurchasesService {
   }
 
   delete(id:number): Observable<any>{
-    return this.http.delete(this.purchaseEnpoint.findById+ id, {responseType:"text"});
+    return this.http.delete(this.purchaseEnpoint.findById+ id, {observe: 'response'});
   }
 
   editPurchase(id:number, user: Users): Observable<any>{ 

@@ -52,7 +52,11 @@
 
 
           <c-col [xs]="12">
-            <button  cButton type="submit">Ajouter</button>
+            <button  *ngIf="!onLoading" cButton type="submit">Ajouter</button>
+            <button *ngIf="onLoading" cButton class="m-1" disabled>
+              <c-spinner aria-hidden="true" size="sm"></c-spinner>
+              Loading...
+            </button>
           </c-col>
         </form>
       </c-card-body>

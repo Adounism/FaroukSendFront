@@ -70,7 +70,7 @@ export class EditCustomerComponent implements OnInit{
         summary:"",
         duration: 3000
        });
-        
+       this.router.navigate(['/base/listcustomers']);
     }, error =>{
       console.log(error);
       

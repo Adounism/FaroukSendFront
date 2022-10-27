@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { NgToastService } from 'ng-angular-popup';
 import {OperationsService} from '../../../services/operations.service';
 @Component({
   selector: 'app-carousels',
@@ -10,7 +12,8 @@ export class AddOperationComponent implements OnInit{
 
   creditForm!: FormGroup;
 
-  constructor(private fb: FormBuilder, private operationService: OperationsService) {
+  constructor(private fb: FormBuilder, private operationService: OperationsService, 
+    private toast: NgToastService, private router: Router) {
     
   }
   ngOnInit(): void {
@@ -27,7 +30,12 @@ export class AddOperationComponent implements OnInit{
     if(this.creditForm.valid){
       this.operationService.createOperation(this.creditForm.value).then((res)=>{
         console.log(res);
-        
+        this.toast.success({
+          detail:"Operation add success",
+          summary:"",
+          duration: 3000
+         });
+         this.router.navigate(['/base/operation']);
       }
       )
     }

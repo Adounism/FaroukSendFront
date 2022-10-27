@@ -36,7 +36,7 @@ export class SupplierService {
   }
 
   delete(id:number): Observable<any>{
-    return this.http.delete(this.providerEndPoint.findById+ id, {responseType:"text"});
+    return this.http.delete(this.providerEndPoint.findById+ id, {observe: 'response'});
   }
 
   editProvider(id:number, user: Users): Observable<any>{ 

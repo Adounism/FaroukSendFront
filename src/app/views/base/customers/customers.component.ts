@@ -53,9 +53,9 @@ export class CustomersComponent implements OnInit {
 
   ajouter() {
 
-    this.submitted = true;
-    if(this.profileForm.valid){
 
+    if(this.profileForm.valid){
+      this.submitted = true;
 
       this.clientService.create(this.profileForm.value).then((res)=>{
 

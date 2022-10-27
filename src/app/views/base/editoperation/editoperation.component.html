@@ -11,13 +11,20 @@
 
 
 
-        <form cForm class="row g-3" [formGroup]="operationForm" >
+        <form cForm class="row g-3" *ngIf="currentOperation" [formGroup]="operationForm" >
 
           <c-row [gutter]="{g: 2}">
             <c-col [md]="6">
               <label cLabel for="inputCity">Operation Name: </label>
               <input cFormControl id="inputCity" type="text" name="name"  formControlName="name"  [(ngModel)]="currentOperation.name" 
                 placeholder="Nom de l'operation" />
+          
+                <div
+                *ngIf="operationForm.controls['name'].invalid && (operationForm.controls['name'].dirty || operationForm.controls['name'].touched || submitted)"
+                class="alert alert-danger">
+                <div *ngIf="operationForm.controls['name'].errors?.['required']">
+                  Le nom de l'operation est requis.</div>
+              </div>
             </c-col>
   
   

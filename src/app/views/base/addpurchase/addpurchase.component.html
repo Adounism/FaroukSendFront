@@ -1,4 +1,75 @@
+
 <c-row ngPreserveWhitespaces>
+  <c-col xs="12">
+    <c-card class="mb-4">
+      <c-card-header>
+        <strong>Ajouter un Achat</strong>
+      </c-card-header>
+      <c-card-body>
+        <p class="text-medium-emphasis small">
+          Veillez fournir les informations du Fournisseur et le Montant.
+        </p>
+
+
+
+        <form cForm class="row g-3" [formGroup]="purchaseForm">
+
+          <c-row [gutter]="{g: 2}">
+          <c-col [md]="6">
+                <div cFormFloating>
+                  <select cSelect id="floatingSelectGrid" formControlName="iprovider" ngModel>
+              
+                    <option ></option>
+                    <option *ngFor="let supplierind of individualListe" [ngValue]="supplierind"> 
+                      {{supplierind.individual?.firstName}}
+                    </option>
+               
+                  </select>
+                  <label cLabel for="floatingSelectGrid">contact individual</label>
+                </div>
+           </c-col>
+
+           <c-col [md]="6">
+            <div cFormFloating>
+              <select cSelect id="floatingSelectGrid"  formControlName="bprovider" ngModel>
+           
+                <option></option>
+                <option *ngFor="let bsupplier of businessListe" [ngValue]="bsupplier">
+                  {{bsupplier.businessCollection[0].name}}
+                </option>
+              </select>
+              <label cLabel for="floatingSelectGrid">Business contact</label>
+            </div>
+       </c-col>
+      </c-row>
+
+          <c-row [gutter]="{g: 2}">
+            <c-col [md]="6">
+              <label cLabel for="inputCity">transaction Montant: </label>
+              <input cFormControl id="inputCity" type="number" name="montant" formControlName="montant"
+                placeholder="Montant de la transaction" />
+
+            </c-col>
+          </c-row>
+
+
+          <c-col [xs]="12">
+            <button  cButton (click)="ajouter()" type="submit">Ajouter</button>
+          </c-col>
+        </form>
+      </c-card-body>
+    </c-card>
+
+
+  </c-col>
+</c-row>
+
+
+
+
+
+
+<!-- <c-row ngPreserveWhitespaces>
   <c-col xs="12">
     <app-docs-callout href="components/spinner" name="Spinner"></app-docs-callout>
   </c-col>
@@ -111,4 +182,4 @@
       </c-card-body>
     </c-card>
   </c-col>
-</c-row>
+</c-row> -->
