@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { Users } from '../models/Users';
 import { HttpService } from '../service/http.service';
 
@@ -8,7 +9,7 @@ import { HttpService } from '../service/http.service';
   providedIn: 'root'
 })
 export class PurchasesService {
-  private BaseUrl = 'http://127.0.0.1:8000/api';
+  private BaseUrl = environment.BaseUrl;
   
   purchaseEnpoint= {
    listAchat: this.BaseUrl + '/purchases',

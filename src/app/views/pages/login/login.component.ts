@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {AuthService } from '../../../services/auth.service';
 import {AuthInterceptor} from '../../../interceptors/auth.interceptor';
 import { HttpResponse } from '@angular/common/http';
+import { map } from 'rxjs';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -29,10 +30,11 @@ export class LoginComponent implements OnInit{
       "password":this.cForm.value.password,
     }
 
-    this.service.userlogin(data).subscribe((res: HttpResponse<any>)=>{
-      console.log('response from server:', res)
-      console.log('response headers', res.headers.keys())
-      
+
+
+    this.service.userlogin(data).subscribe((res)=>{
+      console.log('response from server:', res);
+
     }, async error=> {
       console.log(error.error);
       

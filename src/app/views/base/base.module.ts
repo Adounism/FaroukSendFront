@@ -53,6 +53,7 @@ import { EditTransactionComponent } from './editTransaction/edittransaction.comp
 
 // Components Routing
 import { BaseRoutingModule } from './base-routing.module';
+import { SearchPipe } from 'src/app/pipes/search.pipe';
 
 @NgModule({
   imports: [
@@ -85,6 +86,7 @@ import { BaseRoutingModule } from './base-routing.module';
     PopoverModule,
     TableModule,
     DocsComponentsModule,
+
   ],
   declarations: [
     CustomersComponent,
@@ -103,6 +105,7 @@ import { BaseRoutingModule } from './base-routing.module';
     OperationComponent,
     EditTransactionComponent,
     AddTransactionComponent,
+    SearchPipe
   ],
 })
 export class BaseModule {}

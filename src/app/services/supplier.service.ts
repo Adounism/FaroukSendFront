@@ -1,13 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { Users } from '../models/Users';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SupplierService {
-  private BaseUrl = 'http://127.0.0.1:8000/api';
+  private BaseUrl = environment.BaseUrl;
   
   providerEndPoint= {
    supliersList: this.BaseUrl + '/providers',

@@ -1,39 +1,37 @@
-
 <c-col xs="12">
   <c-card class="mb-4">
     <c-card-header>
 
-        <strong>Liste des Transactions</strong>
+        <strong>Liste des Historique</strong>
 
-          <button style="float: right;" class="btn float-right" color="primary"  [routerLink]="['/base/addtransaction']" cButton> ajouter
+          <!-- <button style="float: right;" class="btn float-right" color="primary"   cButton> ajouter
     
-          </button>
+          </button> -->
+          <div class="col-sm-7">
+            <input type="text" class="form-control" placeholder="Search user historique" [(ngModel)]="searchText" ng aria-label="Search">
+          </div>
 
     </c-card-header>
     <c-card-body>
 
         <table cTable class="center-align">
-          <caption>Listes des Transactions</caption>
+          <caption>Historique  du Client</caption>
           <thead>
           <tr>
-            <th scope="col">Nom </th>
-            <th scope="col">Prenom </th>
-            <th scope="col">operation name</th>
-            <th scope="col">montant</th>
-            <th scope="col">actions</th>
+            <th scope="col"><i class="fa fa-sort">Operation </i></th>
+            <th scope="col">Montant</th>
+            <th scope="col">Times</th>
           </tr>
           </thead>
           <tbody>
-          <tr>
+          <tr *ngFor="let historique of historiqueData | search: searchText">
             <!-- <th scope="row">1</th> -->
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-
+            <td>{{historique.operation.name}}</td>
+            <td>{{historique.amount}}</td>
+            <td>{{historique.createdAt | date :'shrt'}}</td>
           </tr>
           <tr class="center-align">
-            <td   class="center-align" colspan="4">No Customers Found</td>
+            <td *ngIf="historiqueData.length == 0"  class="center-align" colspan="4">No Historique Found</td>
           </tr>
           </tbody>
         </table>

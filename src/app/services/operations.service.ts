@@ -2,12 +2,13 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { HttpService } from '../service/http.service';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class OperationsService {
-  private BaseUrl = 'http://127.0.0.1:8000/api';
+  private BaseUrl = environment.BaseUrl;
   
   operationEndPoint= {
    listeoperations: this.BaseUrl + '/operations',

@@ -1,15 +1,16 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {  Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { Users } from '../models/Users';
 import { HttpService } from '../service/http.service';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ClientService  {
-  private BaseUrl = 'http://127.0.0.1:8000/api';
+  private BaseUrl = environment.BaseUrl;
   
    clientEndPoint= {
     listClients: this.BaseUrl + '/clients',
@@ -23,7 +24,13 @@ export class ClientService  {
   }
 
   getAllClient(): Observable<any>{
-    return this.http.get<any[]>(this.clientEndPoint.listClients);
+    const httpOptions = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+         
+      withCredentials: true, 
+      observe: 'response' as 'response'
+    };
+    return this.http.get<any[]>(this.clientEndPoint.listClients,httpOptions);
   }
 
   create(user: any): Promise<any>{

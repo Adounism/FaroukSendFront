@@ -5,6 +5,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http'
 import { NgxBootstrapConfirmModule } from 'ngx-bootstrap-confirm';
+import { registerLocaleData } from '@angular/common';
+import localeFr from '@angular/common/locales/fr';
+import {LOCALE_ID} from '@angular/core';
+registerLocaleData(localeFr, 'fr');
 import {
   PERFECT_SCROLLBAR_CONFIG,
   PerfectScrollbarConfigInterface,
@@ -51,6 +55,11 @@ import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { ToastrModule } from 'ngx-toastr';
 import { timeout } from 'rxjs';
 import { NgToastModule } from 'ng-angular-popup';
+import { Ng2OrderModule } from 'ng2-order-pipe';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { SearchPipe } from './pipes/search.pipe';
+
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -63,7 +72,7 @@ const APP_CONTAINERS = [
 ];
 
 @NgModule({
-  declarations: [AppComponent, ...APP_CONTAINERS, CustomerComponent],
+  declarations: [AppComponent, ...APP_CONTAINERS, CustomerComponent, SearchPipe],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -94,7 +103,11 @@ const APP_CONTAINERS = [
     CardModule,
     HttpClientModule,
     NgToastModule,
-    NgxBootstrapConfirmModule
+    NgxBootstrapConfirmModule,
+    Ng2OrderModule,
+    Ng2SearchPipeModule,
+    NgxPaginationModule
+    
   ],
   providers: [
     {
@@ -103,12 +116,15 @@ const APP_CONTAINERS = [
 
     },
     {
+      provide: LOCALE_ID, useValue:'fr'
+    },
+    {
       provide: PERFECT_SCROLLBAR_CONFIG,
       useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG,
     },
     {
       provide: HTTP_INTERCEPTORS,
-      useClass:AuthInterceptor,
+      useClass: AuthInterceptor,
       multi:true
 
     },
