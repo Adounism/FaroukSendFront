@@ -24,7 +24,7 @@
           </tr>
           </thead>
           <tbody>
-          <tr *ngFor="let historique of historiqueData | search: searchText">
+          <tr *ngFor="let historique of historiqueData | search:searchText">
             <!-- <th scope="row">1</th> -->
             <td>{{historique.operation.name}}</td>
             <td>{{historique.amount}}</td>

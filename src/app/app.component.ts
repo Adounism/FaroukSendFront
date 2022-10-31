@@ -4,6 +4,10 @@ import { Router, NavigationEnd } from '@angular/router';
 import { IconSetService } from '@coreui/icons-angular';
 import { iconSubset } from './icons/icon-subset';
 import { Title } from '@angular/platform-browser';
+import { AuthService } from './services/auth.service';
+import { map} from 'rxjs/operators';
+import { CookieService } from 'ngx-cookie-service';
+import { OperationsService } from './services/operations.service';
 
 @Component({
   // tslint:disable-next-line:component-selector
@@ -16,7 +20,10 @@ export class AppComponent implements OnInit {
   constructor(
     private router: Router,
     private titleService: Title,
-    private iconSetService: IconSetService
+    private iconSetService: IconSetService,
+    private authService: AuthService,
+    private coockieService: CookieService,
+    private operation: OperationsService
   ) {
     titleService.setTitle(this.title);
     // iconSet singleton
@@ -24,6 +31,11 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+    this.operation.getAllOperations().subscribe(data=>{
+      console.log('Hello');
+      
+    })
     this.router.events.subscribe((evt) => {
       if (!(evt instanceof NavigationEnd)) {
         return;

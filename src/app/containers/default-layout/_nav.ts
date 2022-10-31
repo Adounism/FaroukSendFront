@@ -47,10 +47,10 @@ export const navItems: INavData[] = [
       //   name: 'Edit customer',
       //   url: '/base/editcustomer/:id'
       // },
-      {
-        name: 'Liste des transactions',
-        url: '/base/breadcrumbs'
-      },
+      // {
+      //   name: 'Liste des transactions',
+      //   url: '/base/breadcrumbs'
+      // },
       // {
       //   name: 'Historique clients',
       //   url: '/base/historique'

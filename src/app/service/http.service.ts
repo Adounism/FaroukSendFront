@@ -9,17 +9,21 @@ import { catchError, map } from 'rxjs/operators';
 })
 export class HttpService {
   private baseUrl = 'http://127.0.0.1:8000/api';
+  static isLoading = false;
 
   headers = [];
   constructor(private http: HttpClient,private toast: NgToastService) { }
 
   post(url :string,data :any,headers ?:any) :Promise<any> {
+    HttpService.isLoading = true;
     return new Promise((resolve:any,reject:any)=>{
+      
       this.http.post(url, data)
     .subscribe(res=>{
       resolve(res)        
     }, error=>{ 
       reject(error)
+      HttpService.isLoading = false;
       let violations = "";
       if (error.error.violations && error.error.violations.length > 0) {
         error.error.violations.forEach((element:any) => {

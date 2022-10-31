@@ -23,18 +23,16 @@ export class ClientService  {
 
   }
 
+  getAllClientPage(page :number): Observable<any>{
+    return this.http.get<any[]>(this.clientEndPoint.listClients + '?page=' +page);
+  }
+
   getAllClient(): Observable<any>{
-    const httpOptions = {
-      headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
-         
-      withCredentials: true, 
-      observe: 'response' as 'response'
-    };
-    return this.http.get<any[]>(this.clientEndPoint.listClients,httpOptions);
+    return this.http.get<any[]>(this.clientEndPoint.listClients);
   }
 
   create(user: any): Promise<any>{
-    return this.httpService.post(this.clientEndPoint.addNewClient, user)
+    return this.httpService.post(this.clientEndPoint.addNewClient, user);
   }
 
   // create(user: any): Observable<any>{

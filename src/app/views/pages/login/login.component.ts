@@ -4,6 +4,7 @@ import {AuthService } from '../../../services/auth.service';
 import {AuthInterceptor} from '../../../interceptors/auth.interceptor';
 import { HttpResponse } from '@angular/common/http';
 import { map } from 'rxjs';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -15,7 +16,7 @@ export class LoginComponent implements OnInit{
 
   submitted = false;
 
-  constructor(private service: AuthService, private fb: FormBuilder) { }
+  constructor(private service: AuthService, private fb: FormBuilder, private route: Router) { }
 
   ngOnInit(): void {
     this.cForm = this.fb.group({
@@ -34,6 +35,9 @@ export class LoginComponent implements OnInit{
 
     this.service.userlogin(data).subscribe((res)=>{
       console.log('response from server:', res);
+      if(res.status === 200){
+        this.route.navigate(['/base/listcustomers']);
+      }
 
     }, async error=> {
       console.log(error.error);

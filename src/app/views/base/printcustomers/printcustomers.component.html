@@ -22,7 +22,7 @@
           </tr>
           </thead>
           <tbody>
-          <tr *ngFor="let customer of customers ">
+          <tr *ngFor="let customer of customers | paginate: { itemsPerPage: 20, currentPage: page, totalItems: total } ">
             <!-- <th scope="row">1</th> -->
             <td>{{customer.firstName}}</td>
             <td>{{customer.lastName}}</td>
@@ -44,6 +44,8 @@
           </tr>
           </tbody>
         </table>
+        
+  <pagination-controls (pageChange)="pageChangeEvent($event)"></pagination-controls>
     </c-card-body>
   </c-card>
 </c-col>

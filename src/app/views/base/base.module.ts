@@ -47,13 +47,15 @@ import { AddTransactionComponent } from './addTransaction/addtransaction.compone
 import { PrintAchatComponent } from './listeachat/printachat.component';
 import { EditCustomerComponent } from './editcustomer/editcustomer.component';
 import { AddPurchaseComponent } from './addpurchase/addpurchase.component';
-import { TablesComponent } from './tables/tables.component';
+import { EditSupplierComponent } from './editsupplier/editsupplier.component';
 import { OperationComponent } from './operation/operation.component';
 import { EditTransactionComponent } from './editTransaction/edittransaction.component';
 
 // Components Routing
 import { BaseRoutingModule } from './base-routing.module';
+import { NgxPaginationModule } from 'ngx-pagination';
 import { SearchPipe } from 'src/app/pipes/search.pipe';
+// import { SearchPipe } from 'src/app/pipes/search.pipe';
 
 @NgModule({
   imports: [
@@ -86,6 +88,8 @@ import { SearchPipe } from 'src/app/pipes/search.pipe';
     PopoverModule,
     TableModule,
     DocsComponentsModule,
+    NgxPaginationModule,
+
 
   ],
   declarations: [
@@ -101,7 +105,7 @@ import { SearchPipe } from 'src/app/pipes/search.pipe';
     PrintAchatComponent,
     EditCustomerComponent,
     AddPurchaseComponent,
-    TablesComponent,
+    EditSupplierComponent,
     OperationComponent,
     EditTransactionComponent,
     AddTransactionComponent,

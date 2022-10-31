@@ -4,33 +4,53 @@ import {
   HttpHandler,
   HttpEvent,
   HttpInterceptor,
-  HttpErrorResponse
+  HttpErrorResponse,
+  HttpResponse
 } from '@angular/common/http';
-import { catchError, Observable, throwError } from 'rxjs';
+import { catchError, delay, dematerialize, materialize, mergeMap, Observable, of, throwError } from 'rxjs';
 import { AuthService } from '../services/auth.service';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
    accessToken :any;
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private route: Router) {}
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    let loggedInUser = this.authService.getLoggedUser;
-    this.accessToken = localStorage.getItem('loggedInUser')
-    let token = JSON.parse(this.accessToken);
-    console.log(token);
+    const { url, method, headers, body } = request;
+
     
-    // if (token) {
-    //     request = request.clone({
-    //         setHeaders: {
-    //             Authorization: `Bearer ${token}`
-    //         }
-    //     });
-    // }
+    console.log("outgoing request",request);
+    request = request.clone({ withCredentials: true });
+    
+    console.log("new outgoing request",request);
+    
     return next.handle(request).pipe(catchError((err: HttpErrorResponse)=>{
+      console.log(err);
+      if(err.status === 401){
+        this.route.navigate(['/login']);
+      }
+
       return throwError(()=>err)
     }
     ))
+
+
+  function ok(body?: any) {
+      return of(new HttpResponse({ status: 200, body }));
+      
   }
+
+  function error(message: any) {
+      return throwError({ error: { message } });
+  }
+
+  function unauthorized() {
+      return throwError({ status: 401, error: { message: 'Unauthorised' } });
+  }
+
+  }
+
+  
 }

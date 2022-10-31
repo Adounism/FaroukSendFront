@@ -9,12 +9,14 @@ import {
 import { Router } from '@angular/router';
 import { NgToastService } from 'ng-angular-popup';
 import { Users } from 'src/app/models/Users';
+import { HttpService } from 'src/app/service/http.service';
 import { ClientService } from 'src/app/services/client.service';
 
 @Component({
   selector: 'app-customers',
   templateUrl: './customers.component.html',
   styleUrls: ['./customers.component.scss'],
+  providers: [ClientService]
 })
 export class CustomersComponent implements OnInit {
   profileForm!: FormGroup;
@@ -56,12 +58,18 @@ export class CustomersComponent implements OnInit {
 
     if(this.profileForm.valid){
       this.submitted = true;
-
       this.clientService.create(this.profileForm.value).then((res)=>{
 
          this.router.navigate(['/base/listcustomers']);
+      }).catch(error=>{
+        console.log(error);
+        
+        this.submitted = false;
+
       });
     }
+
+
   }
 
   // createCustomer(customer: Users){

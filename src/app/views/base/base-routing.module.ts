@@ -13,7 +13,7 @@ import { PaginationsComponent } from './paginations/paginations.component';
 import { PrintAchatComponent } from './listeachat/printachat.component';
 import { EditCustomerComponent } from './editcustomer/editcustomer.component';
 import { AddPurchaseComponent } from './addpurchase/addpurchase.component';
-import { TablesComponent } from './tables/tables.component';
+import { EditSupplierComponent } from './editsupplier/editsupplier.component';
 import { OperationComponent } from './operation/operation.component';
 import { EditTransactionComponent } from './editTransaction/edittransaction.component';
 import { AddTransactionComponent } from './addTransaction/addtransaction.component';
@@ -138,11 +138,11 @@ const routes: Routes = [
         },
       },
       {
-        path: 'tables',
-        component: TablesComponent,
+        path: 'editsupplier/:id',
+        component: EditSupplierComponent,
         // canActivate:[AuthGuard],
         data: {
-          title: 'Tables',
+          title: 'Edit Supplier',
         },
       },
       {

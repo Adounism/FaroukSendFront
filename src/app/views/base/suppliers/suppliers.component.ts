@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { NgToastService } from 'ng-angular-popup';
 import { SupplierService } from 'src/app/services/supplier.service';
 
@@ -26,7 +27,9 @@ export class SuppliersComponent implements OnInit {
   chekisValid!:boolean;
   supplierData:any;
 
-  constructor(private fb: FormBuilder, private toast: NgToastService, private service: SupplierService) {
+  constructor(private fb: FormBuilder,
+    private router : Router,
+     private toast: NgToastService, private service: SupplierService) {
   }
 
   ngOnInit(): void {
@@ -38,8 +41,8 @@ export class SuppliersComponent implements OnInit {
       secondPhone: ['', [Validators.nullValidator]],
       email: ['', [Validators.nullValidator]],
       businessName: ['', [Validators.nullValidator]],
-      business:['', [Validators.required]],
-      induvidual:['', [Validators.required]]
+      business:['', [Validators.nullValidator]],
+      induvidual:['', [Validators.nullValidator]]
     });
 
 
@@ -67,8 +70,6 @@ export class SuppliersComponent implements OnInit {
         phone: ['', [Validators.required, Validators.minLength(4)]],
   
         email: ['', [Validators.nullValidator]],
-  
-        typeFournisseur:['', [Validators.required]],
         business:['', [Validators.nullValidator]]
         
       });
@@ -95,6 +96,17 @@ export class SuppliersComponent implements OnInit {
   ajouter() {
     this.submitted = true;
     this.supplierData = this.profileForm.value;
+    
+    if(this.default == undefined || this.second == undefined){
+      console.log("checked value no checked");
+      this.toast.warning({
+        detail:"Field Error",
+        summary:"Le typde de Fournisseur est réquis",
+        duration: 3000
+        });
+      
+    }
+    
     if(this.supplierData.induvidual != ""){
       if(!this.supplierData.firstName || !this.supplierData.lastName){
       this.toast.warning({
@@ -116,10 +128,9 @@ export class SuppliersComponent implements OnInit {
 
         }
 
-        console.log(provider);
-
-        this.service.create(provider).subscribe(response=>{
+        this.service.create(provider).then(response=>{
           console.log(response);
+          this.router.navigate(['/base/listsuppliers']);
           
         }, error=>{
           console.log(error);
@@ -152,8 +163,9 @@ export class SuppliersComponent implements OnInit {
           },]
         }
 
-        this.service.create(provider).subscribe(response=>{
-          console.log(response);
+        this.service.create(provider).then
+        (response=>{
+          this.router.navigate(['/base/listsuppliers']);
           
         })
       }

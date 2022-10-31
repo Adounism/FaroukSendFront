@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Users } from '../models/Users';
+import { HttpService } from '../service/http.service';
 
 @Injectable({
   providedIn: 'root'
@@ -17,19 +18,15 @@ export class SupplierService {
 
  }
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private customHttp: HttpService) { }
 
   
   getAllProviders(): Observable<any>{
     return this.http.get<any[]>(this.providerEndPoint.supliersList);
   }
 
-  create(user: any): Observable<any>{
-    return this.http.post(this.providerEndPoint.creatProvider, user, {observe: 'response'})
-    .pipe(map((res:any)=>{
-      return res;
-      
-    }));
+  create(user: any): Promise<any>{
+    return this.customHttp.post(this.providerEndPoint.creatProvider, user);
   }
 
   find(id:number): Observable<any>{
@@ -40,7 +37,7 @@ export class SupplierService {
     return this.http.delete(this.providerEndPoint.findById+ id, {observe: 'response'});
   }
 
-  editProvider(id:number, user: Users): Observable<any>{ 
+  editProvider(id:number, user: any): Observable<any>{ 
     return this.http.put(this.providerEndPoint.findById+ id, user);
   }
 }

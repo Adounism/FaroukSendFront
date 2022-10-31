@@ -11,6 +11,8 @@ import { NgxBootstrapConfirmService } from 'ngx-bootstrap-confirm';
 })
 export class PrintcustomersComponent {
   customers: any[]=[];
+  page: number = 1;
+  total: number = 0;
 
   constructor(private clientService: ClientService, private toast: NgToastService,
     private ngxComfirmService: NgxBootstrapConfirmService) { 
@@ -20,10 +22,11 @@ export class PrintcustomersComponent {
 
   getAllClient(){
     
-    this.clientService.getAllClient().subscribe(async data=>{
+    this.clientService.getAllClientPage(this.page).subscribe(async data=>{
       this.customers = data['hydra:member'];
-      JSON.stringify(this.customers); 
-      console.log(data['hydra:member']);
+      this.total = data['hydra:totalItems'];
+      this.customers.reverse();
+      console.log(data);
       
     },
     async error => {
@@ -70,6 +73,25 @@ export class PrintcustomersComponent {
     });
   }
 
+    /**
+   * Write code on Method
+   *
+   * @return response()
+   */
+     pageChangeEvent(event: number){
+      this.page = event;
+      this.getAllClient();
+  }
+
+  onTableDataChange(event: any) {
+    this.page = event;
+    this.getAllClient();
+  }
+  onTableSizeChange(event: any): void {
+    // this.tableSize = event.target.value;
+    // this.page = 1;
+    // this.fetchPosts();
+  }
 
 }
 
