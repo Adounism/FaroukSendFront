@@ -18,7 +18,6 @@ export class AuthInterceptor implements HttpInterceptor {
   constructor(private authService: AuthService, private route: Router) {}
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    const { url, method, headers, body } = request;
 
     
     console.log("outgoing request",request);
@@ -34,21 +33,7 @@ export class AuthInterceptor implements HttpInterceptor {
 
       return throwError(()=>err)
     }
-    ))
-
-
-  function ok(body?: any) {
-      return of(new HttpResponse({ status: 200, body }));
-      
-  }
-
-  function error(message: any) {
-      return throwError({ error: { message } });
-  }
-
-  function unauthorized() {
-      return throwError({ status: 401, error: { message: 'Unauthorised' } });
-  }
+    ));
 
   }
 

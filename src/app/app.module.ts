@@ -8,7 +8,7 @@ import { NgxBootstrapConfirmModule } from 'ngx-bootstrap-confirm';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { registerLocaleData } from '@angular/common';
 import { CookieService } from 'ngx-cookie-service';
-import {SearchPipe} from './pipes/search.pipe';
+
 import localeFr from '@angular/common/locales/fr';
 import {LOCALE_ID} from '@angular/core';
 registerLocaleData(localeFr, 'fr');
@@ -75,7 +75,7 @@ const APP_CONTAINERS = [
 ];
 
 @NgModule({
-  declarations: [AppComponent, ...APP_CONTAINERS, CustomerComponent,SearchPipe],
+  declarations: [AppComponent, ...APP_CONTAINERS, CustomerComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,

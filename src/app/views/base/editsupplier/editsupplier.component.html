@@ -8,7 +8,7 @@
         <p class="text-medium-emphasis small">
           Veillez fournir les informations du Fournisseur.
         </p>
-        <form cForm class="row g-3" [formGroup]="profileForm" (ngSubmit)="ajouter()">
+        <form cForm class="row g-3" *ngIf="currentSupplier" [formGroup]="profileForm" (ngSubmit)="ajouter()">
 
 
           <c-row [gutter]="{g: 2}">
@@ -83,14 +83,6 @@
             </div>
           </c-col>
 
-
-
-
-          <c-col [xs]="12">
-            <label cLabel for="inputAddress">Address du Fournisseur</label>
-            <input cFormControl id="inputAddress" name="adresse" formControlName="adresse" 
-              placeholder="1234 Bamako coura" [(ngModel)]="currentSupplier.addresse" />
-          </c-col>
 
           <c-col [md]="6" *ngIf="second">
             <label cLabel for="businessName">Nom du Business: </label>

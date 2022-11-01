@@ -26,6 +26,9 @@ export class EditSupplierComponent implements OnInit{
   lastName="";
   name="";
 
+  indiviField:any;
+  businField:any;
+
 
   constructor(private fb: FormBuilder,
     private route: ActivatedRoute,
@@ -41,7 +44,6 @@ export class EditSupplierComponent implements OnInit{
     this.profileForm = this.fb.group({
       firstName: ['', [Validators.nullValidator]],
       lastName: ['', [Validators.nullValidator]],
-      adresse: ['', [Validators.nullValidator]],
       firstPhone: ['', [Validators.required, Validators.minLength(4)]],
       secondPhone: ['', [Validators.nullValidator]],
       email: ['', [Validators.nullValidator]],
@@ -57,6 +59,8 @@ export class EditSupplierComponent implements OnInit{
     this.profileForm.get('induvidual')?.valueChanges.subscribe(async data=>{
       this.default = true;
       this.second = false;
+      this.indiviField = data;
+      this.businField = "";
       console.log(data);
       
     });
@@ -64,6 +68,8 @@ export class EditSupplierComponent implements OnInit{
     this.profileForm.get('business')?.valueChanges.subscribe(data=>{
       this.default = false;
       this.second = true;
+      this.businField = data;
+      this.indiviField = "";
       console.log(data);
       
     });
@@ -101,31 +107,31 @@ export class EditSupplierComponent implements OnInit{
     }
     
     if(this.currentSupplier.induvidual != ""){
-      if(!this.currentSupplier.firstName || !this.currentSupplier.lastName){
-      this.toast.warning({
-        detail:"Field Error",
-        summary:"Nom et prenom sont requis",
-        duration: 3000
-        });
-      }else{
-        let fname = this.currentSupplier.firstName;
-        let lname = this.currentSupplier.lastName;
-        this.currentSupplier.businessCollection[0].name = "";
-        let provider = {
-          "firstPhone" : this.currentSupplier.firstPhone,
-          "secondPhone": this.currentSupplier.secondPhone,
-          "email": this.currentSupplier.email,
-          "individual": {
-            "firstName": fname,
-            "lastName":lname,
-          },
+      if(this.indiviField){
 
-          "businessCollection": [{
-        
-          },]
+        if(!this.currentSupplier.firstName || !this.currentSupplier.lastName){
+
+        this.toast.warning({
+          detail:"Field Error",
+          summary:"Nom et prenom sont requis",
+          duration: 3000
+          });
+        }else{
+          let fname = this.currentSupplier.firstName;
+          let lname = this.currentSupplier.lastName;
+          this.currentSupplier.businessCollection =[];
+          let provider = {
+            "firstPhone" : this.currentSupplier.firstPhone,
+            "secondPhone": this.currentSupplier.secondPhone,
+            "email": this.currentSupplier.email,
+            "individual": {
+              "firstName": fname,
+              "lastName":lname,
+            },
+
+            "businessCollection": []
 
         }
-
         this.service.editProvider(this.supplierId, provider).subscribe(response=>{
           console.log(response);
           this.router.navigate(['/base/listsuppliers']);
@@ -134,40 +140,47 @@ export class EditSupplierComponent implements OnInit{
           console.log(error);
           
         })
+      }
+
         
         // console.log("Send Data to Back");
         
       }  
     }
 
+
+
     if(this.currentSupplier.business != ""){
-      if(!this.currentSupplier.businessName){
+      if(this.businField){
 
-        this.toast.warning({
-          detail:"Field Error",
-          summary:"Le nom du Business est requis!!",
-          duration: 3000
-          });
-      }else{
-        console.log("send data to Back!!");
-        this.currentSupplier.firstName = "";
-        this.currentSupplier.lastName = "";
-                
-        let provider = {
-          "firstPhone" : this.currentSupplier.firstPhone,
-          "secondPhone": this.currentSupplier.secondPhone,
-          "email": this.currentSupplier.email,
-          "businessCollection": [{
-            "name": this.currentSupplier.businessName,
-        
-          },]
-        }
-
-        this.service.editProvider(this.supplierId ,provider).subscribe
-        (response=>{
-          this.router.navigate(['/base/listsuppliers']);
+        if(!this.currentSupplier.businessName){
+  
+          this.toast.warning({
+            detail:"Field Error",
+            summary:"Le nom du Business est requis!!",
+            duration: 3000
+            });
+        }else{
+          console.log("send data to Back!!");
+          this.currentSupplier.firstName = "";
+          this.currentSupplier.lastName = "";
+                  
+          let provider = {
+            "firstPhone" : this.currentSupplier.firstPhone,
+            "secondPhone": this.currentSupplier.secondPhone,
+            "email": this.currentSupplier.email,
+            "businessCollection": [{
+              "name": this.currentSupplier.businessName,
           
-        })
+            },]
+          }
+          
+          this.service.editProvider(this.supplierId ,provider).subscribe
+          (response=>{
+            this.router.navigate(['/base/listsuppliers']);
+            
+          })
+        }
       }
 
     }
