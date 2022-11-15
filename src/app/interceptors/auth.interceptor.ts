@@ -5,7 +5,8 @@ import {
   HttpEvent,
   HttpInterceptor,
   HttpErrorResponse,
-  HttpResponse
+  HttpResponse,
+  HttpHeaders
 } from '@angular/common/http';
 import { catchError, delay, dematerialize, materialize, mergeMap, Observable, of, throwError } from 'rxjs';
 import { AuthService } from '../services/auth.service';
@@ -18,18 +19,23 @@ export class AuthInterceptor implements HttpInterceptor {
   constructor(private authService: AuthService, private route: Router) {}
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
+    const token = this.authService.getToken();
 
-    
-    console.log("outgoing request",request);
-    request = request.clone({ withCredentials: true });
-    
-    console.log("new outgoing request",request);
-    
+       if (token != null) {
+        request = request.clone({ 
+          setHeaders:{
+            'Content-Type': 'application/ld+json',
+            'Authorization': `Bearer ${token}`,
+
+          }
+
+        });
+    }    
     return next.handle(request).pipe(catchError((err: HttpErrorResponse)=>{
-      console.log(err);
-      if(err.status === 401){
-        this.route.navigate(['/login']);
-      }
+      // console.log(err);
+      // if(err.status === 401){
+      //   this.route.navigate(['/login']);
+      // }
 
       return throwError(()=>err)
     }
@@ -39,3 +45,5 @@ export class AuthInterceptor implements HttpInterceptor {
 
   
 }
+
+

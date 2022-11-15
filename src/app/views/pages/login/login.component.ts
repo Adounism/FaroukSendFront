@@ -15,10 +15,16 @@ export class LoginComponent implements OnInit{
   cForm!: FormGroup;
 
   submitted = false;
+  isLoggedIn!:boolean;
 
   constructor(private service: AuthService, private fb: FormBuilder, private route: Router) { }
 
   ngOnInit(): void {
+
+    if (this.service.getToken()) {
+      this.isLoggedIn = true;
+
+    }
     this.cForm = this.fb.group({
       username: ['', [Validators.required]],
       password: ['', [Validators.required]],
@@ -36,6 +42,10 @@ export class LoginComponent implements OnInit{
     this.service.userlogin(data).subscribe((res)=>{
       console.log('response from server:', res);
       if(res.status === 200){
+        console.log(res.body.token);
+        
+        this.service.saveToken(res.body.token);
+
         this.route.navigate(['/base/listcustomers']);
       }
 
@@ -44,4 +54,9 @@ export class LoginComponent implements OnInit{
       
     });
    }
+
+   logout(): void {
+    this.service.signOut();
+    window.location.reload();
+  }
 }

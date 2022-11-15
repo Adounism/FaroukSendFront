@@ -58,7 +58,7 @@ export class EditTransactionComponent implements OnInit{
 
   getClientList(){
     this.clientService.getAllClient().subscribe(data=>{
-      this.clientListe = data['hydra:member'];
+      this.clientListe = data;
 
       
     })
@@ -66,7 +66,7 @@ export class EditTransactionComponent implements OnInit{
 
   getOperationList(){
     this.operationService.getAllOperations().subscribe(response=>{
-      this.listeOperations = response['hydra:member'];
+      this.listeOperations = response;
     })
   }
 

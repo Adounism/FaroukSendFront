@@ -17,7 +17,7 @@ export class OperationComponent {
 
   getAllOperation(){
     this.operationService.getAllOperations().subscribe(response=>{
-      this.listOperation = response['hydra:member'];
+      this.listOperation = response;
     })
   }
 

@@ -22,9 +22,8 @@ export class PrintsupplierComponent implements OnInit{
   getAllProviders(){
     
     this.supplierService.getAllProviders().subscribe(async data=>{
-      this.providers = data['hydra:member'];
+      this.providers = data;
       JSON.stringify(this.providers); 
-      console.log(data['hydra:member']);
       
     },
     async error => {

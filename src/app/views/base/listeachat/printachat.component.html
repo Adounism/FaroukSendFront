@@ -106,7 +106,7 @@
           <tr *ngFor="let purchase of listePurchases">
             <td>{{purchase.provider.individual?.firstName}}</td>
             <td>{{purchase.provider.individual?.lastName}}</td>
-            <td>{{purchase.provider.businessCollection[0]?.name}}</td>
+            <td>{{purchase.provider.business?.name}}</td>
             <td>{{purchase.amount}}</td>
             <td>
               <button type="button" rel="tooltip" (click)="deletePurchase(purchase.id)" class="btn btn-danger btn-just-icon btn-sm">

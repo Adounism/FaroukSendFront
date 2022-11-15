@@ -31,9 +31,16 @@ export class ClientService  {
     return this.http.get<any[]>(this.clientEndPoint.listClients);
   }
 
+  searchCustomers(searchValue:any): Observable<any>{
+    
+    return this.http.get<any[]>(this.clientEndPoint.listClients+`?firstName=${searchValue}`);
+  }
+
   create(user: any): Promise<any>{
     return this.httpService.post(this.clientEndPoint.addNewClient, user);
   }
+
+  
 
   // create(user: any): Observable<any>{
   //   return this.http.post(this.clientEndPoint.addNewClient, user,  {observe: 'response'})

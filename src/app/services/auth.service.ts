@@ -18,13 +18,16 @@ export class AuthService {
 
  }
 
+  TOKEN_KEY = 'token';
+  USER_KEY = 'auth-user';
+
   constructor(private http: HttpClient, private cookieService: CookieService, private route: Router) { 
   this.coockieValue = this.cookieService.get('PHPSESSID');
 
   }
 
   isconnected(){
-    return localStorage.getItem('PHPSESSID') != null;
+    return sessionStorage.getItem(this.TOKEN_KEY) !=null;
   }
 
   userlogin(data: any): Observable<any>{
@@ -46,12 +49,18 @@ export class AuthService {
     // return this.http.post<any[]>(this.clientEndPoint.login, data,  {observe: 'response'});
   }
 
-  logoutUser() {
-    this.cookieService.delete('PHPSESSID');
+  signOut(): void {
+    window.sessionStorage.clear();
     this.route.navigate(['/login']);
-  
   }
-// public get loggedInUserValue(){
-//     return this.loggedUserSubject.value;
-// }
+
+  
+  public saveToken(token: string): void {
+    window.sessionStorage.removeItem(this.TOKEN_KEY);
+    window.sessionStorage.setItem(this.TOKEN_KEY, token);
+  }
+
+  public getToken() {
+    return sessionStorage.getItem(this.TOKEN_KEY);
+  }
 }

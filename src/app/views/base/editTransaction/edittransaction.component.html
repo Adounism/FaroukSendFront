@@ -1,69 +1,68 @@
 <c-row ngPreserveWhitespaces>
-    <c-col xs="12">
-      <c-card class="mb-4">
-        <c-card-header>
-          <strong>Modifier Transaction</strong>
-        </c-card-header>
-        <c-card-body>
-          <p class="text-medium-emphasis small">
-            Veillez fournir les informations du clients et le Montant.
-          </p>
-  
-  
-  
-          <form cForm class="row g-3" *ngIf="currentTransaction" #form="ngForm" (ngSubmit)="ajouter(form)" >
-  
-            <c-row [gutter]="{g: 2}">
+  <c-col xs="12">
+    <c-card class="mb-4">
+      <c-card-header>
+        <strong>Modifier Transaction</strong>
+      </c-card-header>
+      <c-card-body>
+        <p class="text-medium-emphasis small">
+          Veillez fournir les informations du clients et le Montant.
+        </p>
+
+
+
+        <form cForm class="row g-3" *ngIf="currentTransaction" #form="ngForm" (ngSubmit)="ajouter(form)" >
+
+          <c-row [gutter]="{g: 2}">
+          <c-col [md]="6">
+                <div cFormFloating>
+                  <select cSelect id="floatingSelectGrid" name="client" [(ngModel)]="currentTransaction.client.firstName"  >
+              
+                    <option [ngValue]="currentTransaction.client">{{currentTransaction.client?.firstName}}</option>
+                    <option *ngFor="let client of clientListe" [ngValue]="client"> 
+                      {{client.firstName}}
+                    </option>
+               
+                  </select>
+                  <label cLabel for="floatingSelectGrid">sélectionner le contact</label>
+                </div>
+           </c-col>
+
+           <c-col [md]="6">
+            <div cFormFloating>
+              <select cSelect id="floatingSelectGrid" name="operation"  [(ngModel)]="currentTransaction.operation.name"  >
+           
+                <option [ngValue]="currentTransaction.operation" >{{currentTransaction.operation?.name}}</option>
+                <option *ngFor="let operation of listeOperations" [ngValue]="operation">
+                  {{operation.name}}
+                </option>
+              </select>
+              <label cLabel for="floatingSelectGrid">sélectionner l'operation</label>
+            </div>
+       </c-col>
+      </c-row>
+
+          <c-row [gutter]="{g: 2}">
             <c-col [md]="6">
-                  <div cFormFloating>
-                    <select cSelect id="floatingSelectGrid" name="client" [(ngModel)]="currentTransaction.client.firstName"  >
-                
-                      <option [ngValue]="currentTransaction.client">{{currentTransaction.client?.firstName}}</option>
-                      <option *ngFor="let client of clientListe" [ngValue]="client"> 
-                        {{client.firstName}}
-                      </option>
-                 
-                    </select>
-                    <label cLabel for="floatingSelectGrid">sélectionner le contact</label>
-                  </div>
-             </c-col>
-  
-             <c-col [md]="6">
-              <div cFormFloating>
-                <select cSelect id="floatingSelectGrid" name="operation"  [(ngModel)]="currentTransaction.operation.name"  >
-             
-                  <option [ngValue]="currentTransaction.operation" >{{currentTransaction.operation?.name}}</option>
-                  <option *ngFor="let operation of listeOperations" [ngValue]="operation">
-                    {{operation.name}}
-                  </option>
-                </select>
-                <label cLabel for="floatingSelectGrid">sélectionner l'operation</label>
-              </div>
-         </c-col>
-        </c-row>
-  
-            <c-row [gutter]="{g: 2}">
-              <c-col [md]="6">
-                <label cLabel for="inputCity">transaction Montant: </label>
-                <input cFormControl id="inputCity" type="number" name="amount" [(ngModel)]="currentTransaction.amount" 
-                  placeholder="Montant de la transaction" />
-              </c-col>
-            </c-row>
-  
-  
-            <c-col [xs]="12">
-              <button *ngIf="!onLoading" cButton type="submit" >Ajouter</button>
-              <button *ngIf="onLoading" cButton class="m-1" disabled>
-                <c-spinner aria-hidden="true" size="sm"></c-spinner>
-                Loading...
-              </button>
+              <label cLabel for="inputCity">transaction Montant: </label>
+              <input cFormControl id="inputCity" type="number" name="amount" [(ngModel)]="currentTransaction.amount" 
+                placeholder="Montant de la transaction" />
             </c-col>
-          </form>
-        </c-card-body>
-      </c-card>
-  
-  
-    </c-col>
-  </c-row>
-  
-  
+          </c-row>
+
+
+          <c-col [xs]="12">
+            <button *ngIf="!onLoading" cButton type="submit" >Ajouter</button>
+            <button *ngIf="onLoading" cButton class="m-1" disabled>
+              <c-spinner aria-hidden="true" size="sm"></c-spinner>
+              Loading...
+            </button>
+          </c-col>
+        </form>
+      </c-card-body>
+    </c-card>
+
+
+  </c-col>
+</c-row>
+

@@ -3,6 +3,8 @@ import {ClientService} from '../../../services/client.service';
 import {Users} from '../../../models/Users';
 import { NgToastService } from 'ng-angular-popup';
 import { NgxBootstrapConfirmService } from 'ngx-bootstrap-confirm';
+import { ActivatedRoute } from '@angular/router';
+import { HttpParams } from '@angular/common/http';
 
 @Component({
   selector: 'app-navs',
@@ -13,9 +15,10 @@ export class PrintcustomersComponent {
   customers: any[]=[];
   page: number = 1;
   total: number = 0;
+  searchText= "";
 
   constructor(private clientService: ClientService, private toast: NgToastService,
-    private ngxComfirmService: NgxBootstrapConfirmService) { 
+    private ngxComfirmService: NgxBootstrapConfirmService, private router: ActivatedRoute) { 
 
   this.getAllClient();
   }
@@ -23,8 +26,10 @@ export class PrintcustomersComponent {
   getAllClient(){
     
     this.clientService.getAllClientPage(this.page).subscribe(async data=>{
-      this.customers = data['hydra:member'];
-      this.total = data['hydra:totalItems'];
+      this.customers = data;
+      this.total = data.length;
+      console.log(this.total);
+      
       this.customers.reverse();
       console.log(data);
       
@@ -92,6 +97,22 @@ export class PrintcustomersComponent {
     // this.page = 1;
     // this.fetchPosts();
   }
+
+  onSearchChange(searchValue: string){  
+
+    this.customers=[];
+    let term = searchValue.trim();
+
+    this.clientService.searchCustomers(searchValue).subscribe(data=>{
+      console.log(data);
+      this.customers = data;
+      
+    })
+
+
+
+  }
+
 
 }
 

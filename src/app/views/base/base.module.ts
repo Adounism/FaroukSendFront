@@ -56,6 +56,7 @@ import { BaseRoutingModule } from './base-routing.module';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { SearchPipe } from 'src/app/pipes/search.pipe';
 // import { SearchPipe } from 'src/app/pipes/search.pipe';
+import { MdbModalModule } from 'mdb-angular-ui-kit/modal';
 
 @NgModule({
   imports: [
@@ -89,6 +90,7 @@ import { SearchPipe } from 'src/app/pipes/search.pipe';
     TableModule,
     DocsComponentsModule,
     NgxPaginationModule,
+    MdbModalModule,
 
 
   ],

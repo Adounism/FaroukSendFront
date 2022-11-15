@@ -8,6 +8,12 @@
     
           </button>
 
+          <div class="col-sm-7">
+            <input type="text" class="form-control" placeholder="Search user historique" (ngModelChange)="onSearchChange($event)" [(ngModel)]="searchText" ng aria-label="Search">
+          </div>
+          
+
+
     </c-card-header>
     <c-card-body>
 
@@ -22,7 +28,7 @@
           </tr>
           </thead>
           <tbody>
-          <tr *ngFor="let customer of customers | paginate: { itemsPerPage: 20, currentPage: page, totalItems: total } ">
+          <tr *ngFor="let customer of customers | paginate: { itemsPerPage: 25, currentPage: page, totalItems: total } ">
             <!-- <th scope="row">1</th> -->
             <td>{{customer.firstName}}</td>
             <td>{{customer.lastName}}</td>
@@ -39,9 +45,9 @@
             </button>
             </td>
           </tr>
-          <tr class="center-align">
+          <!-- <tr class="center-align">
             <td *ngIf="customers.length == 0"  class="center-align" colspan="4">No Customers Found</td>
-          </tr>
+          </tr> -->
           </tbody>
         </table>
         

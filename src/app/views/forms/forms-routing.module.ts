@@ -58,7 +58,7 @@ const routes: Routes = [
       {
         path: 'input-group',
         component: InputGroupsComponent,
-        canActivate:[AuthGuard],
+        // canActivate:[AuthGuard],
         data: {
           title: 'Input Group'
         }
@@ -66,7 +66,7 @@ const routes: Routes = [
       {
         path: 'floating-labels',
         component: FloatingLabelsComponent,
-        canActivate:[AuthGuard],
+        // canActivate:[AuthGuard],
         data: {
           title: 'Floating Labels'
         }
@@ -74,7 +74,7 @@ const routes: Routes = [
       {
         path: 'layout',
         component: LayoutComponent,
-        canActivate:[AuthGuard],
+        // canActivate:[AuthGuard],
         data: {
           title: 'Layout'
         }

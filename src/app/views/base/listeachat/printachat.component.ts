@@ -21,7 +21,7 @@ export class PrintAchatComponent implements OnInit {
 
   getAllPurchase(){
     this.purchaseService.getAllPurchase().subscribe(data=>{
-      this.listePurchases = data['hydra:member'];
+      this.listePurchases = data;
       console.log(this.listePurchases);
       
     })

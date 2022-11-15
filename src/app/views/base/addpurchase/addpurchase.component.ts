@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { MdbModalService } from 'mdb-angular-ui-kit/modal';
 import { NgToastService } from 'ng-angular-popup';
 import { PurchasesService } from 'src/app/services/purchases.service';
 import { SupplierService } from 'src/app/services/supplier.service';
@@ -12,17 +13,40 @@ import { SupplierService } from 'src/app/services/supplier.service';
 })
 export class AddPurchaseComponent implements OnInit{
 
+
+
+  profileForm!: FormGroup;
+
+  submitted = false;
+  selected!:number;
+
+  // firstName:string;
+  // lastName:string;
+  // address:string;
+  // phone:string;
+  // email:string;
+  // typeFournisseur:string;
+  // business:string;
+  default!:boolean;
+  second!:boolean;
+  chekisValid!:boolean;
+  supplierData:any;
+
+
   purchaseForm!: FormGroup;
   supplierListe: any[]=[];
   individualListe:any[]=[];
   businessListe:any[]=[];
   purchaseData:any;
-  submitted = false;
+  contactListeName: any[]=[];
+
   constructor(private supplierService: SupplierService, 
     private purchaseService: PurchasesService,
     private toast: NgToastService,
     private router:Router,
-    private fb: FormBuilder,) { }
+    private fb: FormBuilder,
+    private service: SupplierService,
+    private modalService: MdbModalService,) { }
   ngOnInit(): void {
 
     this.getAllSuppliers();
@@ -33,14 +57,27 @@ export class AddPurchaseComponent implements OnInit{
   
     });
 
+    this.profileForm = this.fb.group({
+      firstName: ['', [Validators.nullValidator]],
+      lastName: ['', [Validators.nullValidator]],
+      adresse: ['', [Validators.nullValidator]],
+      firstPhone: ['', [Validators.required, Validators.minLength(4)]],
+      secondPhone: ['', [Validators.nullValidator]],
+      email: ['', [Validators.nullValidator]],
+      businessName: ['', [Validators.nullValidator]],
+      business:['', [Validators.nullValidator]],
+      induvidual:['', [Validators.nullValidator]]
+    });
+
   }
 
   getAllSuppliers(){
     this.supplierService.getAllProviders().subscribe(data=>{
-      if(data['hydra:member']){
+      if(data){
 
-        this.supplierListe = data['hydra:member'];
-
+        this.supplierListe = data;
+        console.log(this.supplierListe);
+        
         this.getIndividualListe();
         this.getBusinessListe();
         // console.log(this.supplierListe);
@@ -63,7 +100,7 @@ export class AddPurchaseComponent implements OnInit{
 
   getBusinessListe(){
     for(const supplier of this.supplierListe){
-      if(supplier.businessCollection.length > 0){
+      if(supplier.business){
 
         this.businessListe.push(supplier);
         console.log(this.businessListe);
@@ -73,6 +110,9 @@ export class AddPurchaseComponent implements OnInit{
 
   }
 
+  openModal(content:any){
+    this.modalService.open(content);
+  }
 
   ajouter(){
 
@@ -100,7 +140,7 @@ export class AddPurchaseComponent implements OnInit{
 
           let data = {
             "amount":this.purchaseData.montant,
-            "provider": this.purchaseData.iprovider["@id"]
+            "provider": '/api/providers/'+this.purchaseData.iprovider["id"]
           }
           this.purchaseService.create(data).then(response=>{
             
@@ -114,7 +154,7 @@ export class AddPurchaseComponent implements OnInit{
         }else if(this.purchaseData.bprovider != ""){
           let data = {
             "amount":this.purchaseData.montant,
-            "provider": this.purchaseData.bprovider["@id"],
+            "provider": '/api/providers/'+this.purchaseData.bprovider["id"],
           }
           this.purchaseService.create(data).then(response=>{
             this.toast.success({
@@ -137,6 +177,149 @@ export class AddPurchaseComponent implements OnInit{
 
 
     }
+  }
+
+
+  
+  typeChanged(e:any){
+    console.log(e.value);
+
+    // this.profileForm.get('typeFournisseur')!.valueChanges.subscribe(data=>{
+    //   console.log(data);
+      
+    // }
+    //   )
+    
+    if(e.value == 1){
+
+      this.selected = 1;
+      
+      this.profileForm = this.fb.group({
+        firstName: ['', [Validators.required]],
+        lastName: ['', [Validators.required]],
+        adresse: ['', [Validators.nullValidator]],
+  
+        phone: ['', [Validators.required, Validators.minLength(4)]],
+  
+        email: ['', [Validators.nullValidator]],
+        business:['', [Validators.nullValidator]]
+        
+      });
+  
+    }else if(e.value== 2){
+      this.selected = 2;
+
+      this.profileForm = this.fb.group({
+        // adresse: ['', [Validators.nullValidator]],
+  
+        // phone: ['', [Validators.required, Validators.minLength(4)]],
+  
+        // email: ['', [Validators.nullValidator]],
+        business:['', [Validators.nullValidator]],
+  
+        // typeFournisseur:['', [Validators.required]]
+      });
+
+    }
+    
+  }
+
+
+  ajouterFounisseur() {
+    this.submitted = true;
+    this.supplierData = this.profileForm.value;
+    
+    if(this.default == undefined || this.second == undefined){
+      console.log("checked value no checked");
+      this.toast.warning({
+        detail:"Field Error",
+        summary:"Le typde de Fournisseur est réquis",
+        duration: 3000
+        });
+      
+    }
+    
+    if(this.supplierData.induvidual != ""){
+      if(!this.supplierData.firstName || !this.supplierData.lastName){
+      this.toast.warning({
+        detail:"Field Error",
+        summary:"Nom et prenom sont requis",
+        duration: 3000
+        });
+      }else{
+        let fname = this.supplierData.firstName;
+        let lname = this.supplierData.lastName;
+        let provider = {
+          "firstPhone" : this.supplierData.firstPhone,
+          "secondPhone": this.supplierData.secondPhone,
+          "email": this.supplierData.email,
+          "individual": {
+            "firstName": fname,
+            "lastName":lname,
+          },
+
+        }
+
+        this.service.create(provider).then(response=>{
+          console.log(response);
+          this.router.navigate(['/base/listsuppliers']);
+          
+        }, error=>{
+          console.log(error);
+          
+        })
+        
+        // console.log("Send Data to Back");
+        
+      }  
+    }
+
+    if(this.supplierData.business != ""){
+      if(!this.supplierData.businessName){
+
+        this.toast.warning({
+          detail:"Field Error",
+          summary:"Le nom du Business est requis!!",
+          duration: 3000
+          });
+      }else{
+        console.log("send data to Back!!");
+                
+        let provider = {
+          "firstPhone" : this.supplierData.firstPhone,
+          "secondPhone": this.supplierData.secondPhone,
+          "email": this.supplierData.email,
+          "businessCollection": [{
+            "name": this.supplierData.businessName,
+        
+          },]
+        }
+
+        this.service.create(provider).then
+        (response=>{
+          this.router.navigate(['/base/listsuppliers']);
+          
+        })
+      }
+
+    }
+  }
+
+  verifieCheck(){
+
+    this.profileForm.get('induvidual')?.valueChanges.subscribe(async data=>{
+      this.default = true;
+      this.second = false;
+      console.log(data);
+      
+    });
+
+    this.profileForm.get('business')?.valueChanges.subscribe(data=>{
+      this.default = false;
+      this.second = true;
+      console.log(data);
+      
+    });
   }
 
 }

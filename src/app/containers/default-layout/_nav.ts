@@ -30,18 +30,23 @@ export const navItems: INavData[] = [
     title: true
   },
   {
-    name: 'Tranfert',
+    name: 'Tranfert Crédit',
     url: '/base',
     iconComponent: { name: 'cil-share' },
     children: [
       {
+        name: 'Ajouter Transaction',
+        url: '/base/addtransaction'
+      },
+
+      {
+        name: 'Liste transaction',
+       url: '/base/transaction'
+      },
+
+      {
         name: 'Liste Operation',
         url: '/base/operation'
-      },
-      {
-       name: 'Liste transaction',
-       url: '/base/transaction'
-      //  url: '/base/orangemoney'
       },
       // {
       //   name: 'Edit customer',
@@ -101,12 +106,13 @@ export const navItems: INavData[] = [
     iconComponent: { name: 'cil-dollar' },
     children: [
       {
-        name: 'Ajouter un achat',
-        url: '/buttons/achats'
-      },
-      {
         name: 'Liste des Achats',
         url: '/base/listeachats'
+      },
+
+       {
+        name: 'Ajouter un achat',
+        url: '/base/addpurchase'
       },
       // {
       //   name: 'Dropdowns',
@@ -114,27 +120,27 @@ export const navItems: INavData[] = [
       // },
     ]
   },
-  // {
-  //   name: 'Forms',
-  //   url: '/forms',
-  //   iconComponent: { name: 'cil-notes' },
-  //   children: [
-  //     {
-  //       name: 'Form Control',
-  //       url: '/forms/form-control'
-  //     },
-  //     {
-  //       name: 'Select',
-  //       url: '/forms/select'
-  //     },
-  //     {
-  //       name: 'Checks & Radios',
-  //       url: '/forms/checks-radios'
-  //     },
-  //     {
-  //       name: 'Range',
-  //       url: '/forms/range'
-  //     },
+  {
+    name: 'Rapports',
+    url: '/forms',
+    iconComponent: { name: 'cil-notes' },
+    children: [
+      {
+        name: 'Rapport des clients',
+        url: '/forms/form-control'
+      },
+      {
+        name: 'Rapport des fournisseurs',
+        url: '/forms/select'
+      },
+      {
+        name: 'Rapport des transactions',
+        url: '/forms/checks-radios'
+      },
+      {
+        name: "Rapport d'Achat",
+        url: '/forms/range'
+      },
   //     {
   //       name: 'Input Group',
   //       url: '/forms/input-group'
@@ -151,8 +157,8 @@ export const navItems: INavData[] = [
   //       name: 'Validation',
   //       url: '/forms/validation'
   //     }
-  //   ]
-  // },
+    ]
+  },
   // {
   //   name: 'Charts',
   //   url: '/charts',
@@ -217,27 +223,27 @@ export const navItems: INavData[] = [
   //   title: true,
   //   name: 'Extras'
   // },
-  {
-    name: 'Pages',
-    url: '/login',
-    iconComponent: { name: 'cil-star' },
-    children: [
-      {
-        name: 'Login',
-        url: '/login'
-      },
-      {
-        name: 'Register',
-        url: '/register'
-      },
-      {
-        name: 'Error 404',
-        url: '/404'
-      },
-      {
-        name: 'Error 500',
-        url: '/500'
-      }
-    ]
-  },
+  // {
+  //   name: 'Pages',
+  //   url: '/login',
+  //   iconComponent: { name: 'cil-star' },
+  //   children: [
+  //     {
+  //       name: 'Login',
+  //       url: '/login'
+  //     },
+  //     {
+  //       name: 'Register',
+  //       url: '/register'
+  //     },
+  //     {
+  //       name: 'Error 404',
+  //       url: '/404'
+  //     },
+  //     {
+  //       name: 'Error 500',
+  //       url: '/500'
+  //     }
+  //   ]
+  // },
 ];

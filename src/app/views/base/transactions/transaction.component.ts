@@ -49,7 +49,7 @@ export class TransactionComponent implements OnInit{
 
   getTransactionList(){
     this.transService.getAllTransaction().subscribe(data=>{
-      this.listeTransactions = data['hydra:member'];
+      this.listeTransactions = data;
       console.log(this.listeTransactions);
       
     })
