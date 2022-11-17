@@ -16,6 +16,8 @@ $enable-rtl: true;
 
 @import "layout";
 
+@import "~bootstrap/scss/bootstrap";
+
 // Some temp fixes
 @import "fixes";
 
@@ -51,3 +53,5 @@ $enable-rtl: true;
       }
     }
   }
+/* Importing Bootstrap SCSS file. */
+@import '~bootstrap/scss/bootstrap';

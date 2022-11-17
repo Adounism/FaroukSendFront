@@ -36,6 +36,10 @@ export class TransactionsService {
   find(id:number): Observable<any>{
     return this.http.get<any>(this.transactionEndPoint.findById+ id);
   }
+  findByRangeDate(from: any, to: any ): Observable<any>{
+    
+    return this.http.get<any>(this.transactionEndPoint.findById+ `?operation=1&createdAt[after]=${from}&createdAt[before]=${to}`);
+  }
 
   delete(id:number): Observable<any>{
     return this.http.delete(this.transactionEndPoint.findById + id, {observe: 'response'});

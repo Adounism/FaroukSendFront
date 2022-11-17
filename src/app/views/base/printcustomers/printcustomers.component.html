@@ -23,6 +23,7 @@
           <tr>
             <th scope="col">Nom </th>
             <th scope="col">Prenom </th>
+            <th scope="col">Pdv Number </th>
             <th scope="col">contact</th>
             <th scope="col">actions</th>
           </tr>
@@ -32,6 +33,7 @@
             <!-- <th scope="row">1</th> -->
             <td>{{customer.firstName}}</td>
             <td>{{customer.lastName}}</td>
+            <td>{{customer.pdvNumber}}</td>
             <td>{{customer.phone}}</td>
             <td>
               <button type="button" rel="tooltip" (click)="deleteCustomer(customer.id)" class="btn btn-danger btn-just-icon btn-sm">

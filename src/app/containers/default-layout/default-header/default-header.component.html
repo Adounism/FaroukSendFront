@@ -34,10 +34,11 @@
             <svg cIcon name="cilBell" size="lg"></svg>
           </a>
         </c-nav-item>
-        <c-nav-item>
-          <a routerLink="./" cNavLink>
+        <c-nav-item >
+          <a  cNavLink>
             <svg cIcon name="cilList" size="lg"></svg>
           </a>
+
         </c-nav-item>
         <c-nav-item>
           <a routerLink="./" cNavLink>
@@ -125,11 +126,13 @@
             Profile
           </a>
         </li>
-        <li>
-          <a routerLink="./" cDropdownItem>
+        <li class="nav-item dropdown" >
+          <a data-toggle="dropdown"   cDropdownItem>
             <svg cIcon class="me-2" name="cilSettings"></svg>
             Settings
           </a>
+
+
         </li>
         <li>
           <a routerLink="./" cDropdownItem>
@@ -162,5 +165,23 @@
       </ul>
     </c-dropdown>
   </ng-template>
+
+  <!-- <ng-template>
+    <form>
+      <div class="form-group row">
+        <label for="staticEmail" class="col-sm-2 col-form-label">Email</label>
+        <div class="col-sm-10">
+          <input type="text"  class="form-control-plaintext" id="staticEmail" value="email@example.com">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
+        <div class="col-sm-10">
+          <input type="password" class="form-control" id="inputPassword" placeholder="Password">
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary mb-2">Confirm</button>
+    </form>
+  </ng-template> -->
   
   

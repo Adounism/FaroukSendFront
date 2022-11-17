@@ -36,7 +36,8 @@
             ],
             "styles": [
               "node_modules/ngx-toastr/toastr.css",
-              "src/scss/styles.scss"
+              "src/scss/styles.scss",
+              "node_modules/bootstrap/dist/css/bootstrap.min.css"
             ],
             "scripts": [],
             "allowedCommonJsDependencies": [

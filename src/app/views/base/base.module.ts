@@ -42,7 +42,7 @@ import {  TransactionComponent } from './transactions/transaction.component';
 import {  EditOperationComponent } from './editoperation/editoperation.component';
 import { PrintcustomersComponent } from './printcustomers/printcustomers.component';
 import {PrintsupplierComponent } from './printsuppliers/printsuppliers.component';
-import { PaginationsComponent } from './paginations/paginations.component';
+import { PaginationsComponent } from './encaissements/encaissement.component';
 import { AddTransactionComponent } from './addTransaction/addtransaction.component';
 import { PrintAchatComponent } from './listeachat/printachat.component';
 import { EditCustomerComponent } from './editcustomer/editcustomer.component';
@@ -57,7 +57,15 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { SearchPipe } from 'src/app/pipes/search.pipe';
 // import { SearchPipe } from 'src/app/pipes/search.pipe';
 import { MdbModalModule } from 'mdb-angular-ui-kit/modal';
-
+import { NgbDate, NgbCalendar } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { DecaissementComponent } from './decaissement/decaissement.component';
+import { AddcardsaleComponent } from './addcardsale/addcardsale.component';
+import { PrintcardsaleComponent } from './printcardsale/printcardsale.component';
+import { EditcardsaleComponent } from './editcardsale/editcardsale.component';
+import { AddmobiletransactionComponent } from './addmobiletransaction/addmobiletransaction.component';
+import { PrintmobiletransactionComponent } from './printmobiletransaction/printmobiletransaction.component';
+import { EditmobiletransactionComponent } from './editmobiletransaction/editmobiletransaction.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -91,8 +99,9 @@ import { MdbModalModule } from 'mdb-angular-ui-kit/modal';
     DocsComponentsModule,
     NgxPaginationModule,
     MdbModalModule,
+    NgbModule
 
-
+    
   ],
   declarations: [
     CustomersComponent,
@@ -111,7 +120,14 @@ import { MdbModalModule } from 'mdb-angular-ui-kit/modal';
     OperationComponent,
     EditTransactionComponent,
     AddTransactionComponent,
-    SearchPipe
+    SearchPipe,
+    DecaissementComponent,
+    AddcardsaleComponent,
+    PrintcardsaleComponent,
+    EditcardsaleComponent,
+    AddmobiletransactionComponent,
+    PrintmobiletransactionComponent,
+    EditmobiletransactionComponent
   ],
 })
 export class BaseModule {}

@@ -2,7 +2,7 @@
   <c-col xs="12">
     <c-card class="mb-4">
       <c-card-header>
-        <strong>Ajouter une operation</strong>
+        <strong>Ajouter une Carte de Crédit</strong>
       </c-card-header>
       <c-card-body>
         <p class="text-medium-emphasis small">
@@ -27,16 +27,16 @@
 
           <c-row [gutter]="{g: 2}">
             <c-col [md]="6">
-              <label cLabel for="inputCity">Operation Name: </label>
+              <label cLabel for="inputCity">Type de Carte: </label>
               <input cFormControl id="inputCity" type="text" name="name" formControlName="name"
                 placeholder="Nom de l'operation" />
             </c-col>
   
   
             <c-col [md]="6">
-              <label cLabel for="inputCity">Description: </label>
-              <input cFormControl id="inputCity" type="text" name="description" formControlName="description"
-                placeholder="description " />
+              <label cLabel for="inputCity">montant: </label>
+              <input cFormControl id="inputCity" type="number" name="description" formControlName="montant"
+                placeholder="Prix de la carte" />
             </c-col>
           </c-row>
 

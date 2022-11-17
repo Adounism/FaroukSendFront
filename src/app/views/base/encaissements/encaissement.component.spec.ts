@@ -5,7 +5,7 @@ import { CardModule, GridModule, PaginationModule } from '@coreui/angular';
 import { IconSetService } from '@coreui/icons-angular';
 import { iconSubset } from '../../../icons/icon-subset';
 import { DocsComponentsModule } from '../../../../components';
-import { PaginationsComponent } from './paginations.component';
+import { PaginationsComponent } from './encaissement.component';
 
 describe('PaginationsComponent', () => {
   let component: PaginationsComponent;

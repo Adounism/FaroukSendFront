@@ -25,28 +25,41 @@ export const navItems: INavData[] = [
     url: '/base/listsuppliers',
     iconComponent: { name: 'cil-bookmark' }
   },
+  // {
+  //   name: 'Opérations',
+  //   title: true
+  // },
+
+  // {
+  //   name: 'Opération',
+  //   url: '/base',
+  //   iconComponent: { name: 'cil-share' },
+  //   children: [
+  //     {
+  //       name: 'Ajouter Opération',
+  //       url: '/base/addoperation'
+  //     },
+
+  //     {
+  //       name: 'Liste Opération',
+  //      url: '/base/operation'
+  //     },
+  //   ]
+      
+  // },
   {
-    name: 'Opérations',
-    title: true
-  },
-  {
-    name: 'Tranfert Crédit',
+    name: 'Vente Crédit',
     url: '/base',
-    iconComponent: { name: 'cil-share' },
+    iconComponent: { name: 'cil-send' },
     children: [
       {
-        name: 'Ajouter Transaction',
+        name: 'Ajouter un Envoi de crédit',
         url: '/base/addtransaction'
       },
 
       {
-        name: 'Liste transaction',
+        name: 'Liste des Envois',
        url: '/base/transaction'
-      },
-
-      {
-        name: 'Liste Operation',
-        url: '/base/operation'
       },
       // {
       //   name: 'Edit customer',
@@ -100,6 +113,58 @@ export const navItems: INavData[] = [
       // }
     ]
   },
+
+  {
+    name: 'Ventes des cartes',
+    url: '/base',
+    iconComponent: { name: 'cil-credit-card' },
+    children: [
+      {
+        name: 'ajouter un vente de carte',
+        url: '/base/addcardsale'
+      },
+
+      {
+        name: 'Liste des ventes',
+       url: '/base/printcardsale'
+      },
+    ]
+  },
+
+  {
+    name: 'Transfert Mobile',
+    url: '/base',
+    iconComponent: { name: 'cil-Phone' },
+    children: [
+      {
+        name: 'Ajouter un Envoi',
+        url: '/base/addmobiletransaction'
+      },
+
+      {
+        name: 'Liste des Envois',
+       url: '/base/printmobiletransaction'
+      },
+      
+      {
+        name: "Ajouter retour d'envoi",
+       url: '/base/transaction'
+      },
+      
+      {
+        name: "Liste des retours d'envoi",
+       url: '/base/transaction'
+      },
+      {
+        name: "Encaissement",
+       url: '/base/encaissement'
+      },
+      {
+        name: "Décaissement",
+       url: '/base/transaction'
+      },
+    ]
+  },
   {
     name: 'Achat',
     url: '/buttons',
@@ -119,6 +184,10 @@ export const navItems: INavData[] = [
       //   url: '/buttons/dropdowns'
       // },
     ]
+  },
+  {
+    name: 'Rapports',
+    title: true
   },
   {
     name: 'Rapports',
@@ -145,14 +214,14 @@ export const navItems: INavData[] = [
   //       name: 'Input Group',
   //       url: '/forms/input-group'
   //     },
-  //     {
-  //       name: 'Floating Labels',
-  //       url: '/forms/floating-labels'
-  //     },
-  //     {
-  //       name: 'Layout',
-  //       url: '/forms/layout'
-  //     },
+      // {
+      //   name: 'Floating Labels',
+      //   url: '/forms/floating-labels'
+      // },
+      // {
+      //   name: 'Layout',
+      //   url: '/forms/layout'
+      // },
   //     {
   //       name: 'Validation',
   //       url: '/forms/validation'

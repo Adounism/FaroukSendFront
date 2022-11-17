@@ -60,6 +60,7 @@ import { timeout } from 'rxjs';
 import { NgToastModule } from 'ng-angular-popup';
 import { Ng2OrderModule } from 'ng2-order-pipe';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 
@@ -110,6 +111,7 @@ const APP_CONTAINERS = [
     NgxBootstrapConfirmModule,
     Ng2OrderModule,
     Ng2SearchPipeModule,
+    NgbModule,
 
     
   ],

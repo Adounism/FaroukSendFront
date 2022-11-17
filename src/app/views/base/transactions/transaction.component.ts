@@ -5,6 +5,8 @@ import { ClientService } from 'src/app/services/client.service';
 import { OperationsService } from 'src/app/services/operations.service';
 import {TransactionsService} from '../../../services/transactions.service';
 import { NgxBootstrapConfirmService } from 'ngx-bootstrap-confirm';
+import { NgbDate, NgbCalendar, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
+import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-collapses',
   templateUrl: './transaction.component.html',
@@ -12,23 +14,41 @@ import { NgxBootstrapConfirmService } from 'ngx-bootstrap-confirm';
 })
 export class TransactionComponent implements OnInit{
 
+	hoveredDate: NgbDate | null = null;
+
+	fromDate!: NgbDate | null;
+	toDate!: NgbDate | null;
+
+
   transactionForm!: FormGroup;
   clientListe: any[]=[];
   listeOperations: any[]=[];
   listeTransactions: any[]=[];
   transactionData:any;
 
+  
+  searchText= "";
+  fileName = '';
+  uploadProgress!: number;
+  uploadSub!: Subscription;
+
 
   constructor(private clientService: ClientService,
      private transService: TransactionsService,
       private operationService: OperationsService,
       private ngxComfirmService: NgxBootstrapConfirmService,
-      private toast: NgToastService) {
+      private toast: NgToastService,
+      private calendar: NgbCalendar,
+     public formatter: NgbDateParserFormatter) {
+
+      // this.fromDate = calendar.getToday();
+      // this.toDate = calendar.getNext(calendar.getToday(), 'd', 10);
     
     this.getTransactionList();
 
   }
   ngOnInit(): void {
+    this.isEmpty(this.fromDate, this.toDate);
    
     this.transactionForm = new FormGroup({
   
@@ -54,6 +74,26 @@ export class TransactionComponent implements OnInit{
       
     })
   }
+
+  onFileSelected(event:any) {
+
+    const file:File = event.target.files[0];
+
+    if (file) {
+
+        this.fileName = file.name;
+
+        const formData = new FormData();
+
+        formData.append("thumbnail", file);
+        console.log(formData);
+        
+
+      //  const upload$ = this.transService.post("/api/thumbnail-upload", formData);
+
+      //   upload$.subscribe();
+    }
+}
 
   deleteTransaction(id:number){
 
@@ -96,8 +136,70 @@ export class TransactionComponent implements OnInit{
   }
  
 
-  // onItemChange($event: any): void {
-  //   console.log('Carousel onItemChange', $event);
-  // }
+  onDateSelection(date: NgbDate) {
+		if (!this.fromDate && !this.toDate) {
+			this.fromDate = date;
+      this.listeTransactions = [];
+      let fromdateFormate = this.fromDate.year+'-'+this.fromDate.month+'-'+this.fromDate.day;
+      console.log(fromdateFormate);
+      this.transService.findByRangeDate(fromdateFormate, this.toDate = null).subscribe(data=>{
+        this.listeTransactions = data;
+      })
 
+		} else if (this.fromDate && !this.toDate && date && date.after(this.fromDate)) {
+			this.toDate = date;
+      let fromdateFormate = this.fromDate.year+'-'+this.fromDate.month+'-'+this.fromDate.day;
+      let todateFormate = this.toDate.year+'-'+this.toDate.month+'-'+this.toDate.day;
+      this.listeTransactions = [];
+      this.transService.findByRangeDate(fromdateFormate, todateFormate).subscribe(data=>{
+        this.listeTransactions = data;
+      })
+		} 
+    else {
+			this.toDate = null;
+			this.fromDate = date;
+
+      this.listeTransactions = [];
+      let fromdateFormate = this.fromDate.year+'-'+this.fromDate.month+'-'+this.fromDate.day;
+      console.log(fromdateFormate);
+      this.transService.findByRangeDate(fromdateFormate, this.toDate = null).subscribe(data=>{
+        this.listeTransactions = data;
+      })
+
+		}
+	}
+
+  isEmpty(fromDate: any, toDate:any){
+    if(!fromDate || !toDate){
+      this.getTransactionList();
+    }
+  }
+
+	isHovered(date: NgbDate) {
+		return (
+			this.fromDate && !this.toDate && this.hoveredDate && date.after(this.fromDate) && date.before(this.hoveredDate)
+		);
+	}
+
+	isInside(date: NgbDate) {
+		return this.toDate && date.after(this.fromDate) && date.before(this.toDate);
+	}
+
+	isRange(date: NgbDate) {
+		return (
+			date.equals(this.fromDate) ||
+			(this.toDate && date.equals(this.toDate)) ||
+			this.isInside(date) ||
+			this.isHovered(date)
+		);
+	}
+
+	validateInput(currentValue: NgbDate | null, input: string): NgbDate | null {
+		const parsed = this.formatter.parse(input);
+		return parsed && this.calendar.isValid(NgbDate.from(parsed)) ? NgbDate.from(parsed) : currentValue;
+	}
+
+  searchTransactionByDateRange(from:any, to: any){
+
+  }
 }
