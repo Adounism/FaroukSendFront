@@ -6,6 +6,7 @@ import { ClientService } from 'src/app/services/client.service';
 import { OperationsService } from 'src/app/services/operations.service';
 import { TransactionsService } from 'src/app/services/transactions.service';
 import { MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
+import { DatePipe } from '@angular/common';
 @Component({
   selector: 'app-placeholders',
   templateUrl: './addtransaction.component.html',
@@ -49,6 +50,8 @@ export class AddTransactionComponent implements OnInit {
       client: ['', [Validators.required]],
       operation: ['', [Validators.required]],
       montant:['', [Validators.required]],
+      date:['', [Validators.required]],
+      
 
     });
 
@@ -95,10 +98,13 @@ export class AddTransactionComponent implements OnInit {
       this.onLoading = true;
 
       this.transactionData = this.transactionForm.value;
+      let pipe = new DatePipe('en-US'); 
+      const myFormattedDate = pipe.transform(this.transactionData.date, "yyyy-MM-dd'T'HH:mm:ss'Z'");
       let transaction= {
         "amount": this.transactionData.montant,
         "client": '/api/clients/'+this.transactionData.client["id"] ,
-        "operation": '/api/operations/'+this.transactionData.operation["id"]
+        "operation": '/api/operations/'+this.transactionData.operation["id"],
+        "date":myFormattedDate
       }
 
       console.log(transaction);

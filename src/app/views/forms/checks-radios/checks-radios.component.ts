@@ -67,7 +67,7 @@ export class ChecksRadiosComponent {
   }
 
   getTransactionList(){
-    this.transService.getAllTransaction().subscribe(data=>{
+    this.transService.getAllTransaction(this.page).subscribe(data=>{
       this.listeTransactions = data;
       console.log(this.listeTransactions.length);
       

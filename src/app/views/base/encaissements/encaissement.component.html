@@ -224,7 +224,12 @@
 <c-row  ngPreserveWhitespaces>
   <c-col xs>
     <c-card class="mb-4">
-      <c-card-header>Users</c-card-header>
+      <c-card-header>
+        Listes des encaissements
+        <button style="float: right;" class="btn float-right" color="primary"  [routerLink]="['/base/addencaissement']" cButton> ajouter
+  
+        </button>
+      </c-card-header>
       <c-card-body>
         <table
           [hover]="true"
@@ -236,64 +241,56 @@
         >
           <thead cTableColor="light">
           <tr>
-            <th class="text-center">
+            <!-- <th class="text-center">
               <svg cIcon name="cilPeople"></svg>
-            </th>
-            <th>User</th>
-            <th class="text-center">Country</th>
-            <th>Usage</th>
-            <th class="text-center">Payment Method</th>
-            <th>Activity</th>
+            </th> -->
+            <th>Numero Pdv</th>
+            <th class="text-center">Numero reçu</th>
+            <th class="text-center">Description</th>
+            <th class="text-center">Montant</th>
+            <th class="text-center">Date</th>
+            <th>Actions</th>
           </tr>
           </thead>
           <tbody>
-          <tr >
-            <!-- *ngFor="let user of users; index as i" -->
+          <tr *ngFor="let encaissment of encaissementListe; index as i">
+          
             <td class="text-center">
-              Username
+              {{encaissment.numeroPdv}}
             </td>
             <td>
-              <!-- <div>{{ user.name }}</div>
+              <div>{{ encaissment.numberReceived }}</div>
               <div class="small text-medium-emphasis">
-                <span>{{ user.state }}</span> | Registered:
-                {{ user.registered }}
-              </div> -->
+                <!-- <span>{{ user.state }}</span> | Registered:
+                {{ user.registered }} -->
+              </div>
             </td>
-            <td class="text-center">
-              <!-- <svg cIcon
-                id="{{ user.country + user.name }}"
-                name="cif{{ user.country }}"
-                size="xl"
-                title="{{ user.country }}"
-              ></svg> -->
+            <td class="text-center small text-medium-emphasis">
+              {{encaissment.description}}
             </td>
             <td>
               <div class="clearfix">
                 <div class="float-start">
-                  <!-- <strong>{{ user.usage }}%</strong> -->
-                </div>
-                <div class="float-end">
-                  <small class="text-medium-emphasis">
-                    <!-- {{ user.period }} -->
-                  </small>
+                  <strong>{{ encaissment.amount}} cfa</strong>
                 </div>
               </div>
-              <!-- <c-progress thin
-              >
-                <c-progress-bar
-                  [value]="user.usage"
-                  color="{{ user.color }}"
-                ></c-progress-bar
-                >
-              </c-progress> -->
-            </td>
-            <td class="text-center">
-              <!-- <svg cIcon name="cibCc{{ user.payment }}" size="xl"></svg> -->
+
             </td>
             <td>
-              <div class="small text-medium-emphasis">Last login</div>
+              <div class="small text-medium-emphasis">
+                {{ encaissment.date | date:'short'}}
+              </div>
               <!-- <strong>{{ user.activity }}</strong> -->
             </td>
+            <td class="text-center">
+              
+              <button type="button" rel="tooltip" (click)="deleteEncaissement(encaissment.id)"  class="btn btn-danger btn-just-icon btn-sm">
+                <svg cIcon class="me-2" class="center-align" name="cil-trash"></svg>
+             </button>
+             <button type="button" rel="tooltip" class="btn btn-info btn-just-icon btn-sm" [routerLink]="['/base/editencaissement/',encaissment.id]" data-original-title="" title="">
+                <svg cIcon class="me-2" class="center-align" name="cil-pencil"></svg>
+             </button>
+           </td>
           </tr>
           </tbody>
         </table>

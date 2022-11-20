@@ -58,6 +58,9 @@ export class CustomersComponent implements OnInit {
 
     if(this.profileForm.valid){
       this.submitted = true;
+      
+      console.log(this.profileForm.value);
+      
       this.clientService.create(this.profileForm.value).then((res)=>{
 
          this.router.navigate(['/base/listcustomers']);

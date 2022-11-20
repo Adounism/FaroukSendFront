@@ -148,12 +148,12 @@ export const navItems: INavData[] = [
       
       {
         name: "Ajouter retour d'envoi",
-       url: '/base/transaction'
+       url: '/base/addreturnshipment'
       },
       
       {
         name: "Liste des retours d'envoi",
-       url: '/base/transaction'
+       url: '/base/printreturnshipment'
       },
       {
         name: "Encaissement",
@@ -161,7 +161,7 @@ export const navItems: INavData[] = [
       },
       {
         name: "Décaissement",
-       url: '/base/transaction'
+       url: '/base/decaissement'
       },
     ]
   },
@@ -171,13 +171,23 @@ export const navItems: INavData[] = [
     iconComponent: { name: 'cil-dollar' },
     children: [
       {
-        name: 'Liste des Achats',
-        url: '/base/listeachats'
+        name: 'Liste des Achat crédit',
+        url: '/base/printcreditpurchase'
+      },
+
+      //  {
+      //   name: 'Ajouter un achat',
+      //   url: '/base/addpurchase'
+      // },
+
+      {
+        name: 'Liste des Achats cartes',
+        url: '/base/printcartepurchase'
       },
 
        {
-        name: 'Ajouter un achat',
-        url: '/base/addpurchase'
+        name: 'Achats de transfert mobile',
+        url: '/base/printmobiletransfertpurchase'
       },
       // {
       //   name: 'Dropdowns',
@@ -210,18 +220,18 @@ export const navItems: INavData[] = [
         name: "Rapport d'Achat",
         url: '/forms/range'
       },
-  //     {
-  //       name: 'Input Group',
-  //       url: '/forms/input-group'
-  //     },
-      // {
-      //   name: 'Floating Labels',
-      //   url: '/forms/floating-labels'
-      // },
-      // {
-      //   name: 'Layout',
-      //   url: '/forms/layout'
-      // },
+      {
+        name: 'Input Group',
+        url: '/forms/input-group'
+      },
+      {
+        name: 'Floating Labels',
+        url: '/forms/floating-labels'
+      },
+      {
+        name: 'Layout',
+        url: '/forms/layout'
+      },
   //     {
   //       name: 'Validation',
   //       url: '/forms/validation'

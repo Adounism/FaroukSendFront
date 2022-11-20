@@ -16,7 +16,9 @@ import { MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
 export class AddcardsaleComponent implements OnInit {
 
   transactionForm!: FormGroup;
+  cardForm!: FormGroup;
   profileForm!: FormGroup;
+  
   clientListe: any[]=[];
   listeOperations: any[]=[];
   listeTransactions: any[]=[];
@@ -28,6 +30,8 @@ export class AddcardsaleComponent implements OnInit {
   submitted = false;
   selected!: number;
   message:any;
+  i = 1;
+
 
 
   constructor(private clientService: ClientService,
@@ -37,6 +41,7 @@ export class AddcardsaleComponent implements OnInit {
      private router:Router,
      private fb: FormBuilder,
      private modalService: MdbModalService,
+     private elementRef:ElementRef
 
      
      ) {
@@ -50,8 +55,12 @@ export class AddcardsaleComponent implements OnInit {
    
     this.transactionForm =  this.fb.group({
       client: ['', [Validators.required]],
-      operation: ['', [Validators.required]],
-      montant:['', [Validators.required]],
+      date: ['', [Validators.nullValidator]],
+      carte: ['', [Validators.nullValidator]],
+      amount:['', [Validators.required]],
+      unitPrice:['', [Validators.required]],
+      quantity:['', [Validators.required]],
+      amountHT:['', [Validators.required]],
 
     });
 
@@ -70,6 +79,12 @@ export class AddcardsaleComponent implements OnInit {
       //typeClient:['', [Validators.required]]
     });
 
+
+    this.cardForm = this.fb.group({
+      name:['', [Validators.required]],
+      description:['', [Validators.nullValidator]],
+      unitPrice:['', [Validators.required]],
+    })
 
 
 
@@ -140,10 +155,17 @@ export class AddcardsaleComponent implements OnInit {
   openModal(content:any){
     this.modalService.open(content);
   }
+  openCardModal(content:any){
+    this.modalService.open(content);
+  }
 
 
   get registerFormControl() {
     return this.profileForm.controls;
+  }
+
+  get registerCardForm() {
+    return this.cardForm.controls;
   }
 
   ajouterclient() {
@@ -173,6 +195,10 @@ export class AddcardsaleComponent implements OnInit {
       });
     }
 
+
+  }
+
+  addcard(){
 
   }
 

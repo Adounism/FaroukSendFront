@@ -40,6 +40,11 @@ export class ClientService  {
     return this.httpService.post(this.clientEndPoint.addNewClient, user);
   }
 
+
+  createcustomer(user: any): Observable<any>{
+    return this.http.post<any[]>(this.clientEndPoint.addNewClient, user);
+  }
+
   
 
   // create(user: any): Observable<any>{

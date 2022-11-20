@@ -1,0 +1,80 @@
+<c-row ngPreserveWhitespaces>
+    <c-col xs="12">
+      <c-card class="mb-4">
+        <c-card-header>
+          <strong>Ajouter un Encaissement</strong>
+          
+        </c-card-header>
+        <c-card-body>
+          <p class="text-medium-emphasis small">
+            Veillez fournir les informations et le Montant.
+          </p>
+  
+  
+  
+          <form cForm class="row g-3" [formGroup]="transactionForm" (ngSubmit)="ajouter()">
+  
+            <c-row [gutter]="{g: 3}">
+            
+                <c-col [md]="6">
+                    <label cLabel for="inputCity">Date: </label>
+                    <input cFormControl name="date" formControlName="date" [owlDateTime]="dt" [owlDateTimeTrigger]="dt">
+                    <owl-date-time #dt></owl-date-time>
+                </c-col>
+
+                <!-- <c-col md="2">
+                    <label cLabel for="inputZip">Numero pdv</label>
+                    <input cFormControl name="numeroPdv" formControlName="numeroPdv" id="inputZip" />
+               </c-col> -->
+
+               <c-col md="2">
+                    <label cLabel for="inputZip">Numero reçu</label>
+                    <input cFormControl id="inputZip" name="numberReceived" formControlName="numberReceived" />
+                    <input hidden type="text" name="collectionType" formControlName="collectionType" value="disbursement">
+                </c-col>
+
+            </c-row>
+  
+            <c-row [gutter]="{g: 2}">
+              <c-col [md]="6">
+                <label cLabel for="inputCity">Montant: </label>
+                <input cFormControl id="inputCity" type="number" name="amount" formControlName="amount"
+                  placeholder="Montant de la transaction" />
+
+   
+              </c-col>
+              <c-col>
+                <div cFormFloating>
+                    <textarea [ngStyle]="{ 'height.px': 100 }"
+                              cFormControl
+                              id="floatingTextarea2"
+                              placeholder="Leave a comment here"
+                              name="description" formControlName="description"
+                    ></textarea>
+                    <label cLabel for="floatingTextarea2">Description</label>
+                  </div>
+              </c-col>
+  
+
+              
+            </c-row>
+  
+  
+            <c-col [xs]="12">
+              <button  *ngIf="!onLoading" cButton data-mdb-dismiss="modal" type="submit">Ajouter</button>
+              <button *ngIf="onLoading" cButton data-mdb-dismiss="modal" class="m-1" disabled>
+                <c-spinner aria-hidden="true" size="sm"></c-spinner>
+                Loading...
+              </button>
+            </c-col>
+          </form>
+        </c-card-body>
+      </c-card>
+  
+  
+    </c-col>
+  </c-row>
+  
+  
+  
+  

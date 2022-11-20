@@ -2,7 +2,12 @@
   <c-row  ngPreserveWhitespaces>
     <c-col xs>
       <c-card class="mb-4">
-        <c-card-header>Users</c-card-header>
+        <c-card-header>
+          Transactions Mobile
+          <button style="float: right;" class="btn float-right" color="primary"  [routerLink]="['/base/addmobiletransaction']" cButton> ajouter
+    
+          </button>
+        </c-card-header>
         <c-card-body>
           <table
             [hover]="true"
@@ -17,60 +22,39 @@
               <th class="text-center">
                 <svg cIcon name="cilPeople"></svg>
               </th>
-              <th>User</th>
-              <th class="text-center">Country</th>
-              <th>Usage</th>
-              <th class="text-center">Payment Method</th>
-              <th>Activity</th>
+              <th>Clients</th>
+              <th class="text-center">Numero pdv</th>
+              <th>Montant</th>
+              <th class="text-center">Date</th>
+              <th>Actions</th>
             </tr>
             </thead>
             <tbody>
-            <tr >
-              <!-- *ngFor="let user of users; index as i" -->
+            <tr *ngFor="let transaction of mobileTransactions; index as i">
+              
               <td class="text-center">
-                Username
+                {{transaction.client.firstName}}
               </td>
               <td>
-                <!-- <div>{{ user.name }}</div>
+                <div>{{ transaction.client.pdvNumber}}</div>
+ 
+              </td>
+              <td class="text-center">
+                {{transaction.amount}}
+              </td>
+              <td>
                 <div class="small text-medium-emphasis">
-                  <span>{{ user.state }}</span> | Registered:
-                  {{ user.registered }}
-                </div> -->
-              </td>
-              <td class="text-center">
-                <!-- <svg cIcon
-                  id="{{ user.country + user.name }}"
-                  name="cif{{ user.country }}"
-                  size="xl"
-                  title="{{ user.country }}"
-                ></svg> -->
-              </td>
-              <td>
-                <div class="clearfix">
-                  <div class="float-start">
-                    <!-- <strong>{{ user.usage }}%</strong> -->
-                  </div>
-                  <div class="float-end">
-                    <small class="text-medium-emphasis">
-                      <!-- {{ user.period }} -->
-                    </small>
-                  </div>
+                  {{ transaction.date  | date: 'short'}}
                 </div>
-                <!-- <c-progress thin
-                >
-                  <c-progress-bar
-                    [value]="user.usage"
-                    color="{{ user.color }}"
-                  ></c-progress-bar
-                  >
-                </c-progress> -->
+           
               </td>
               <td class="text-center">
-                <!-- <svg cIcon name="cibCc{{ user.payment }}" size="xl"></svg> -->
-              </td>
-              <td>
-                <div class="small text-medium-emphasis">Last login</div>
-                <!-- <strong>{{ user.activity }}</strong> -->
+                <button type="button" rel="tooltip" (click)="deletetransaction(transaction.id)"  class="btn btn-danger btn-just-icon btn-sm">
+                  <svg cIcon class="me-2" class="center-align" name="cil-trash"></svg>
+               </button>
+               <button type="button" rel="tooltip" class="btn btn-info btn-just-icon btn-sm" [routerLink]="['/base/editmobiletransaction/',transaction.id]" data-original-title="" title="">
+                  <svg cIcon class="me-2" class="center-align" name="cil-pencil"></svg>
+               </button>
               </td>
             </tr>
             </tbody>

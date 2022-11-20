@@ -18,6 +18,9 @@ $enable-rtl: true;
 
 @import "~bootstrap/scss/bootstrap";
 
+//Date time picker 
+@import "~ng-pick-datetime/assets/style/picker.min.css";
+
 // Some temp fixes
 @import "fixes";
 

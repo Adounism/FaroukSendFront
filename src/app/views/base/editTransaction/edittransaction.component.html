@@ -20,7 +20,7 @@
               
                     <option [ngValue]="currentTransaction.client">{{currentTransaction.client?.firstName}}</option>
                     <option *ngFor="let client of clientListe" [ngValue]="client"> 
-                      {{client.firstName}}
+                      {{client.firstName + "  " + client.phone}} 
                     </option>
                
                   </select>
@@ -48,6 +48,12 @@
               <input cFormControl id="inputCity" type="number" name="amount" [(ngModel)]="currentTransaction.amount" 
                 placeholder="Montant de la transaction" />
             </c-col>
+
+            <c-col [md]="6">
+              <label cLabel for="inputCity">Date: </label>
+              <input cFormControl name="date" [(ngModel)]="currentTransaction.date"   [owlDateTime]="dt" [owlDateTimeTrigger]="dt">
+              <owl-date-time #dt></owl-date-time>
+          </c-col>
           </c-row>
 
 

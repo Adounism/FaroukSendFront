@@ -23,6 +23,18 @@ import { PrintcardsaleComponent } from './printcardsale/printcardsale.component'
 import { PrintmobiletransactionComponent } from './printmobiletransaction/printmobiletransaction.component';
 import { AddmobiletransactionComponent } from './addmobiletransaction/addmobiletransaction.component';
 import { EditmobiletransactionComponent } from './editmobiletransaction/editmobiletransaction.component';
+import { PrintreturnshipmentComponent } from './printreturnshipment/printreturnshipment.component';
+import { AddreturnshipmentComponent } from './addreturnshipment/addreturnshipment.component';
+import { EditreturnshipmentComponent } from './editreturnshipment/editreturnshipment.component';
+import { PrintcreditPurchaseComponent } from './printcredit-purchase/printcredit-purchase.component';
+import { PrintcartePurchaseComponent } from './printcarte-purchase/printcarte-purchase.component';
+import { AddcartePurchaseComponent } from './addcarte-purchase/addcarte-purchase.component';
+import { EditcartePurchaseComponent } from './editcarte-purchase/editcarte-purchase.component';
+import { AddencaissementComponent } from './addencaissement/addencaissement.component';
+import { EditencaissementComponent } from './editencaissement/editencaissement.component';
+import { DecaissementComponent } from './decaissement/decaissement.component';
+import { AdddecaissementComponent } from './adddecaissement/adddecaissement.component';
+import { PrintmobileTransPurchaseComponent } from './printmobile-trans-purchase/printmobile-trans-purchase.component';
 
 const routes: Routes = [
   {
@@ -102,6 +114,7 @@ const routes: Routes = [
         },
       },
 
+      //ENCAISSEMENT
       {
         path: 'encaissement',
         component: PaginationsComponent,
@@ -110,6 +123,55 @@ const routes: Routes = [
           title: 'Encaissement',
         },
       },
+
+      {
+        path: 'addencaissement',
+        component: AddencaissementComponent,
+        // canActivate:[AuthGuard],
+        data: {
+          title: 'Ajouter un encaissement',
+        },
+      },
+
+      {
+        path: 'editencaissement/:id',
+        component: EditencaissementComponent,
+        // canActivate:[AuthGuard],
+        data: {
+          title: "Modifier L'encaissement",
+        },
+      },
+
+
+      //DECAISSEMENT
+      {
+        path: 'decaissement',
+        component: DecaissementComponent,
+        // canActivate:[AuthGuard],
+        data: {
+          title: 'Liste des décaissements',
+        },
+      },
+
+      {
+        path: 'add-decaissement',
+        component: AdddecaissementComponent,
+        // canActivate:[AuthGuard],
+        data: {
+          title: 'Ajouter un décaissement',
+        },
+      },
+
+      {
+        path: 'decaissement/:id',
+        component: EditencaissementComponent,
+        // canActivate:[AuthGuard],
+        data: {
+          title: "Modifier Le décaissement",
+        },
+      },
+
+
       {
         path: 'addtransaction',
         component: AddTransactionComponent,
@@ -189,11 +251,11 @@ const routes: Routes = [
       },
 
       {
-        path: 'editcardsale',
+        path: 'editcardsale/:id',
         component: AddcardsaleComponent,
         // canActivate:[AuthGuard],
         data: {
-          title: 'Edite la vente carte',
+          title: 'Modifier la vente carte',
         },
       },
 
@@ -216,13 +278,131 @@ const routes: Routes = [
       },
 
       {
-        path: 'aditmobiletransaction',
+        path: 'editmobiletransaction/:id',
         component: EditmobiletransactionComponent,
         // canActivate:[AuthGuard],
         data: {
           title: 'Modifier une transaction mobile',
         },
       },
+
+
+      {
+        path: 'printreturnshipment',
+        component: PrintreturnshipmentComponent,
+        // canActivate:[AuthGuard],
+        data: {
+          title: "Liste des retours d'envoi",
+        },
+      },
+
+      {
+        path: 'addreturnshipment',
+        component: AddreturnshipmentComponent,
+        // canActivate:[AuthGuard],
+        data: {
+          title: "Ajouter une retour d'envoi",
+        },
+      },
+
+      {
+        path: 'editreturnshipment/:id',
+        component: EditreturnshipmentComponent,
+        // canActivate:[AuthGuard],
+        data: {
+          title: "Modifier une retour d'envoi",
+        },
+      },
+
+      //Achat Views Routings
+
+      //Achat Crédit
+      {
+        path: 'printcreditpurchase',
+        component: PrintcreditPurchaseComponent,
+        // canActivate:[AuthGuard],
+        data: {
+          title: "Liste des Achats de crédit",
+        },
+      },
+
+      {
+        path: 'addcreditpurchase',
+        component: AddreturnshipmentComponent,
+        // canActivate:[AuthGuard],
+        data: {
+          title: "Ajouter un achat de crédit",
+        },
+      },
+
+      {
+        path: 'editcreditpurchase/:id',
+        component: EditreturnshipmentComponent,
+        // canActivate:[AuthGuard],
+        data: {
+          title: "Modifier L'achat de crédit",
+        },
+      },
+
+
+      //Achat Carte de Credit
+
+      {
+        path: 'printcartepurchase',
+        component: PrintcartePurchaseComponent,
+        // canActivate:[AuthGuard],
+        data: {
+          title: "Liste des Achats de carte",
+        },
+      },
+
+      {
+        path: 'addcartepurchase',
+        component: AddcartePurchaseComponent,
+        // canActivate:[AuthGuard],
+        data: {
+          title: "Ajouter l'achat de carte de crédit",
+        },
+      },
+
+      {
+        path: 'editcartepurchase/:id',
+        component: EditcartePurchaseComponent,
+        // canActivate:[AuthGuard],
+        data: {
+          title: "Modifier L'achat de carte de crédit",
+        },
+      },
+
+
+            //Achat de Transfert mobile
+
+            {
+              path: 'printmobiletransfertpurchase',
+              component: PrintmobileTransPurchaseComponent,
+              // canActivate:[AuthGuard],
+              data: {
+                title: "Liste des Achats de Transfert mobile",
+              },
+            },
+      
+            {
+              path: 'addmobiletransfertpurchase',
+              component: AddmobiletransactionComponent,
+              // canActivate:[AuthGuard],
+              data: {
+                title: "Ajouter l'achat de transfert mobile",
+              },
+            },
+      
+            {
+              path: 'editmobiletransfertpurchase/:id',
+              component: EditmobiletransactionComponent,
+              // canActivate:[AuthGuard],
+              data: {
+                title: "Modifier L'achat de transfert mobile",
+              },
+            },
 
     ],
   },

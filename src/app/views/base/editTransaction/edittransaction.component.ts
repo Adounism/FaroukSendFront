@@ -61,7 +61,7 @@ export class EditTransactionComponent implements OnInit{
       this.clientListe = data;
 
       
-    })
+    });
   }
 
   getOperationList(){
@@ -76,8 +76,8 @@ export class EditTransactionComponent implements OnInit{
       this.onLoading = true;
       let data = {
         "amount": this.transactionData.amount,
-        "client": this.transactionData.client["@id"],
-        "operation": this.transactionData.operation["@id"]
+        "client": '/api/clients/'+this.transactionData.client["id"] ,
+        "operation": '/api/operations/'+this.transactionData.operation["id"]
       }
       this.transService.editTransaction(this.transactionId, data).subscribe(datat=>{
         console.log(data);

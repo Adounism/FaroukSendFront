@@ -2,7 +2,7 @@
   <c-col xs="12">
     <c-card class="mb-4">
       <c-card-header>
-        <strong>Ajouter une Transaction</strong>
+        <strong>Ajouter une vente de crédit</strong>
       </c-card-header>
       <c-card-body>
         <p class="text-medium-emphasis small">
@@ -21,7 +21,7 @@
 
                       <option [ngValue]="null" disabled>Choose client</option>
                       <option *ngFor="let client of clientListe" [ngValue]="client"> 
-                        {{client.firstName}}
+                        {{client.firstName + "  " + client.phone}} 
                       </option>
                 
                     </select>                
@@ -43,8 +43,11 @@
                 <svg cIcon class="me-2" class="center-align" name="cil-pen"></svg>
             </button>
             </c-col> -->
+     
 
            <c-col [md]="6">
+
+
             <div cFormFloating>
               <select cSelect id="floatingSelectGrid"  formControlName="operation" ngModel>
            
@@ -60,10 +63,17 @@
 
           <c-row [gutter]="{g: 2}">
             <c-col [md]="6">
-              <label cLabel for="inputCity">transaction Montant: </label>
+              <label cLabel for="inputCity">Montant: </label>
               <input cFormControl id="inputCity" type="number" name="montant" formControlName="montant"
                 placeholder="Montant de la transaction" />
             </c-col>
+
+            <c-col [md]="6">
+                <label cLabel for="inputCity">Date: </label>
+                <input cFormControl name="date" formControlName="date" [owlDateTime]="dt" [owlDateTimeTrigger]="dt">
+                <owl-date-time #dt></owl-date-time>
+            </c-col>
+            
           </c-row>
 
 

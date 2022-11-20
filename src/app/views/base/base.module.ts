@@ -30,6 +30,8 @@ import {
 
 import { IconModule } from '@coreui/icons-angular';
 
+import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
+
 // utils
 import { DocsComponentsModule } from '@docs-components/docs-components.module';
 
@@ -66,6 +68,22 @@ import { EditcardsaleComponent } from './editcardsale/editcardsale.component';
 import { AddmobiletransactionComponent } from './addmobiletransaction/addmobiletransaction.component';
 import { PrintmobiletransactionComponent } from './printmobiletransaction/printmobiletransaction.component';
 import { EditmobiletransactionComponent } from './editmobiletransaction/editmobiletransaction.component';
+import { AddreturnshipmentComponent } from './addreturnshipment/addreturnshipment.component';
+import { PrintreturnshipmentComponent } from './printreturnshipment/printreturnshipment.component';
+import { EditreturnshipmentComponent } from './editreturnshipment/editreturnshipment.component';
+import { AddcreditPurchaseComponent } from './addcredit-purchase/addcredit-purchase.component';
+import { EditcreditPurchaseComponent } from './editcredit-purchase/editcredit-purchase.component';
+import { PrintcreditPurchaseComponent } from './printcredit-purchase/printcredit-purchase.component';
+import { AddcartePurchaseComponent } from './addcarte-purchase/addcarte-purchase.component';
+import { EditcartePurchaseComponent } from './editcarte-purchase/editcarte-purchase.component';
+import { PrintcartePurchaseComponent } from './printcarte-purchase/printcarte-purchase.component';
+import { AddmobileTransPurchaseComponent } from './addmobile-trans-purchase/addmobile-trans-purchase.component';
+import { EditmobileTransPurchaseComponent } from './editmobile-trans-purchase/editmobile-trans-purchase.component';
+import { PrintmobileTransPurchaseComponent } from './printmobile-trans-purchase/printmobile-trans-purchase.component';
+import { AddencaissementComponent } from './addencaissement/addencaissement.component';
+import { EditencaissementComponent } from './editencaissement/editencaissement.component';
+import { AdddecaissementComponent } from './adddecaissement/adddecaissement.component';
+import { EditdecaissementComponent } from './editdecaissement/editdecaissement.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -99,7 +117,10 @@ import { EditmobiletransactionComponent } from './editmobiletransaction/editmobi
     DocsComponentsModule,
     NgxPaginationModule,
     MdbModalModule,
-    NgbModule
+    NgbModule,
+    OwlDateTimeModule, 
+    OwlNativeDateTimeModule,
+
 
     
   ],
@@ -127,7 +148,23 @@ import { EditmobiletransactionComponent } from './editmobiletransaction/editmobi
     EditcardsaleComponent,
     AddmobiletransactionComponent,
     PrintmobiletransactionComponent,
-    EditmobiletransactionComponent
+    EditmobiletransactionComponent,
+    AddreturnshipmentComponent,
+    PrintreturnshipmentComponent,
+    EditreturnshipmentComponent,
+    AddcreditPurchaseComponent,
+    EditcreditPurchaseComponent,
+    PrintcreditPurchaseComponent,
+    AddcartePurchaseComponent,
+    EditcartePurchaseComponent,
+    PrintcartePurchaseComponent,
+    AddmobileTransPurchaseComponent,
+    EditmobileTransPurchaseComponent,
+    PrintmobileTransPurchaseComponent,
+    AddencaissementComponent,
+    EditencaissementComponent,
+    AdddecaissementComponent,
+    EditdecaissementComponent
   ],
 })
 export class BaseModule {}

@@ -53,7 +53,7 @@ export class PrintcustomersComponent {
             if(data.status == 200){
     
               this.toast.success({
-                detail:"Customer deleted",
+                detail:"Encaissement supprimer",
                 summary:data.body.message,
                 duration: 3000
                });

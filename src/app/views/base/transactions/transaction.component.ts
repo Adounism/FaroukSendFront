@@ -18,6 +18,8 @@ export class TransactionComponent implements OnInit{
 
 	fromDate!: NgbDate | null;
 	toDate!: NgbDate | null;
+  page: number = 1;
+  total: number = 0;
 
 
   transactionForm!: FormGroup;
@@ -68,8 +70,10 @@ export class TransactionComponent implements OnInit{
   }
 
   getTransactionList(){
-    this.transService.getAllTransaction().subscribe(data=>{
+    this.transService.getAllTransaction(this.page).subscribe(data=>{
       this.listeTransactions = data;
+      this.listeTransactions.reverse();
+      this.total = data.length;
       console.log(this.listeTransactions);
       
     })
@@ -86,7 +90,7 @@ export class TransactionComponent implements OnInit{
         const formData = new FormData();
 
         formData.append("thumbnail", file);
-        console.log(formData);
+        console.log(this.fileName);
         
 
       //  const upload$ = this.transService.post("/api/thumbnail-upload", formData);
@@ -202,4 +206,19 @@ export class TransactionComponent implements OnInit{
   searchTransactionByDateRange(from:any, to: any){
 
   }
+
+      /**
+   * Write code on Method
+   *
+   * @return response()
+   */
+    pageChangeEvent(event: number){
+        this.page = event;
+        this.getTransactionList();
+    }
+  
+    onTableDataChange(event: any) {
+      this.page = event;
+      this.getTransactionList();
+    }
 }

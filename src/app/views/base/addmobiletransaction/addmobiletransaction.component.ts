@@ -6,6 +6,7 @@ import { ClientService } from 'src/app/services/client.service';
 import { OperationsService } from 'src/app/services/operations.service';
 import { TransactionsService } from 'src/app/services/transactions.service';
 import { MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
+import { DatePipe } from '@angular/common';
 @Component({
   selector: 'app-addmobiletransaction',
   templateUrl: './addmobiletransaction.component.html',
@@ -35,8 +36,6 @@ export class AddmobiletransactionComponent implements OnInit {
      private router:Router,
      private fb: FormBuilder,
      private modalService: MdbModalService,
-
-     
      ) {
    
 
@@ -48,8 +47,9 @@ export class AddmobiletransactionComponent implements OnInit {
    
     this.transactionForm =  this.fb.group({
       client: ['', [Validators.required]],
-      operation: ['', [Validators.required]],
-      montant:['', [Validators.required]],
+      date: ['', [Validators.nullValidator]],
+      amount:['', [Validators.required]],
+      sendType:['send', [Validators.nullValidator]],
 
     });
 
@@ -94,26 +94,38 @@ export class AddmobiletransactionComponent implements OnInit {
 
     if(this.transactionForm.valid){
       this.onLoading = true;
-
-      this.transactionData = this.transactionForm.value;
+      this.transactionData = this.transactionForm.value;  
+      let pipe = new DatePipe('en-US'); 
+      const myFormattedDate = pipe.transform(this.transactionData.date, "yyyy-MM-dd'T'HH:mm:ss'Z'");
       let transaction= {
-        "amount": this.transactionData.montant,
-        "client": '/api/clients/'+this.transactionData.client["id"] ,
-        "operation": '/api/operations/'+this.transactionData.operation["id"]
+        "amount": this.transactionData.amount,
+        "client": '/api/clients/'+this.transactionData.client["id"],
+        "date": myFormattedDate,
+        "sendType":this.transactionData.sendType
       }
 
       console.log(transaction);
-      if(this.transactionData.montant != "" && this.transactionData.montant > 0){
+      if(this.transactionData.amount != "" && this.transactionData.amount > 0){
 
-        this.transService.createTransaction(transaction).then(resp=>{
+        this.transService.maketeMobileSend(transaction).then(resp=>{
 
           this.toast.success({
             detail:"Transaction Réçu avec success",
             summary:"transaction effectuée avec success",
             duration: 3000
             });
-            this.router.navigate(['/base/transaction']);
+            this.router.navigate(['/base/printmobiletransaction']);
             
+        }).catch(error=>{
+          this.onLoading = false;
+          console.log(error);
+          
+          this.toast.warning({
+            detail:"Opération error",
+            summary: error.error.detail,
+            duration: 4000
+            });
+        
         });
       }else{
         this.onLoading = false;

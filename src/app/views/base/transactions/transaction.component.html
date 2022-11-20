@@ -8,7 +8,9 @@
         <!-- <input type="file" class="file-input" (change)="onFileSelected($event)" #fileUpload>
           <button style="float: center; align-items: center; margin-left: 15px; background-color: rgb(80, 233, 80);"  class="btn float-center"  cButton> Importer Fichier
           </button> -->
-          <a href="#" class="btn btn-secondary"><i class="material-icons">
+
+          <input type="file" id="upload" name="upload" (change)="onFileSelected($event)"  style="visibility: hidden; width: 1px; height: 1px" />
+          <a type="file" onclick="document.getElementById('upload').click()"  class="btn btn-secondary"><i  class="material-icons">
             <svg cIcon class="me-2" class="center-align" name="cil-notes"></svg>
           </i> <span>Import Excel</span></a>	
 
@@ -96,7 +98,7 @@
           </tr>
           </thead>
           <tbody>
-          <tr *ngFor="let transaction of listeTransactions">
+          <tr *ngFor="let transaction of listeTransactions | paginate: { itemsPerPage: 25, currentPage: page, totalItems: total } ">
             <!-- <th scope="row">1</th> -->
             <td>{{transaction.client?.firstName}}</td>
             <td>{{transaction.client?.lastName}}</td>
@@ -114,10 +116,11 @@
             </td>
           </tr>
           <tr class="center-align">
-            <td   class="center-align" colspan="4">No Customers Found</td>
+            <td   class="center-align" *ngIf="total < 0" colspan="4">No Customers Found</td>
           </tr>
           </tbody>
         </table>
+        <pagination-controls (pageChange)="pageChangeEvent($event)"></pagination-controls>
     </c-card-body>
   </c-card>
 </c-col>
