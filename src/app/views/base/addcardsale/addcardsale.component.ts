@@ -1,12 +1,13 @@
 
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NgToastService } from 'ng-angular-popup';
 import { ClientService } from 'src/app/services/client.service';
 import { OperationsService } from 'src/app/services/operations.service';
 import { TransactionsService } from 'src/app/services/transactions.service';
 import { MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-addcardsale',
@@ -24,8 +25,6 @@ export class AddcardsaleComponent implements OnInit {
   listeTransactions: any[]=[];
   transactionData:any;
   onLoading = false;
-
-
  
   submitted = false;
   selected!: number;
@@ -36,28 +35,26 @@ export class AddcardsaleComponent implements OnInit {
 
   constructor(private clientService: ClientService,
     private transService: TransactionsService,
-     private operationService: OperationsService,
      private toast: NgToastService,
      private router:Router,
      private fb: FormBuilder,
      private modalService: MdbModalService,
-     private elementRef:ElementRef
 
-     
+
      ) {
-   
+
 
    this.getClientList();
-   this.getOperationList();
+
   }
 
   ngOnInit(): void {
-   
+    
     this.transactionForm =  this.fb.group({
       client: ['', [Validators.required]],
       date: ['', [Validators.nullValidator]],
-      carte: ['', [Validators.nullValidator]],
-      amount:['', [Validators.required]],
+      // carte: ['', [Validators.nullValidator]],
+      // amount:['', [Validators.required]],
       unitPrice:['', [Validators.required]],
       quantity:['', [Validators.required]],
       amountHT:['', [Validators.required]],
@@ -84,11 +81,11 @@ export class AddcardsaleComponent implements OnInit {
       name:['', [Validators.required]],
       description:['', [Validators.nullValidator]],
       unitPrice:['', [Validators.required]],
-    })
-
-
+    });
 
   }
+
+
 
   getClientList(){
     this.clientService.getAllClient().subscribe(data=>{
@@ -98,13 +95,6 @@ export class AddcardsaleComponent implements OnInit {
     })
   }
 
-  getOperationList(){
-    this.operationService.getAllOperations().subscribe(response=>{
-      this.listeOperations = response;
-
-      
-    })
-  }
 
   ajouter(){
 
@@ -113,16 +103,22 @@ export class AddcardsaleComponent implements OnInit {
       this.onLoading = true;
 
       this.transactionData = this.transactionForm.value;
+      let pipe = new DatePipe('en-US'); 
+      const myFormattedDate = pipe.transform(this.transactionData.date, "yyyy-MM-dd'T'HH:mm:ss'Z'");
       let transaction= {
-        "amount": this.transactionData.montant,
-        "client": '/api/clients/'+this.transactionData.client["id"] ,
-        "operation": '/api/operations/'+this.transactionData.operation["id"]
+        "client": '/api/clients/'+this.transactionData.client["id"],
+        // "operation": '/api/operations/'+this.transactionData.operation["id"]
+        "date": myFormattedDate,
+        "quantity": this.transactionData.quantity, 
+        "unitPrice":this.transactionData.unitPrice,
+        "amountHT": this.transactionData.amountHT,
       }
 
       console.log(transaction);
+      // debugger
       if(this.transactionData.montant != "" && this.transactionData.montant > 0){
 
-        this.transService.createTransaction(transaction).then(resp=>{
+        this.transService.saleCard(transaction).then(resp=>{
 
           this.toast.success({
             detail:"Transaction Réçu avec success",
@@ -199,6 +195,9 @@ export class AddcardsaleComponent implements OnInit {
   }
 
   addcard(){
+    console.log(this.cardForm.value);
+    
+
 
   }
 

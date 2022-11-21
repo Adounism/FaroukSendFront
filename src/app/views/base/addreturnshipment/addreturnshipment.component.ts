@@ -6,6 +6,7 @@ import { ClientService } from 'src/app/services/client.service';
 import { OperationsService } from 'src/app/services/operations.service';
 import { TransactionsService } from 'src/app/services/transactions.service';
 import { MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
+import { DatePipe } from '@angular/common';
 @Component({
   selector: 'app-addreturnshipment',
   templateUrl: './addreturnshipment.component.html',
@@ -48,8 +49,9 @@ export class AddreturnshipmentComponent implements OnInit {
    
     this.transactionForm =  this.fb.group({
       client: ['', [Validators.required]],
-      operation: ['', [Validators.required]],
-      montant:['', [Validators.required]],
+      amount: ['', [Validators.required]],
+      date: ['', [Validators.nullValidator]],
+      sendType:['sendBack', [Validators.required]],
 
     });
 
@@ -96,23 +98,26 @@ export class AddreturnshipmentComponent implements OnInit {
       this.onLoading = true;
 
       this.transactionData = this.transactionForm.value;
+      let pipe = new DatePipe('en-US'); 
+      const myFormattedDate = pipe.transform(this.transactionData.date, "yyyy-MM-dd'T'HH:mm:ss'Z'");
       let transaction= {
-        "amount": this.transactionData.montant,
+        "amount": this.transactionData.amount,
+        "date": myFormattedDate,
         "client": '/api/clients/'+this.transactionData.client["id"] ,
-        "operation": '/api/operations/'+this.transactionData.operation["id"]
+        "sendType": this.transactionData.sendType
       }
 
       console.log(transaction);
-      if(this.transactionData.montant != "" && this.transactionData.montant > 0){
+      if(this.transactionData.amount != "" && this.transactionData.amount > 0){
 
-        this.transService.createTransaction(transaction).then(resp=>{
+        this.transService.maketeMobileSend(transaction).then(resp=>{
 
           this.toast.success({
-            detail:"Transaction Réçu avec success",
-            summary:"transaction effectuée avec success",
+            detail:"Retour d'achat Réçu avec success",
+            summary:"",
             duration: 3000
             });
-            this.router.navigate(['/base/transaction']);
+            this.router.navigate(['/base/printreturnshipment']);
             
         });
       }else{

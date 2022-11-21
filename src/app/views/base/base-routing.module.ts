@@ -35,6 +35,7 @@ import { EditencaissementComponent } from './editencaissement/editencaissement.c
 import { DecaissementComponent } from './decaissement/decaissement.component';
 import { AdddecaissementComponent } from './adddecaissement/adddecaissement.component';
 import { PrintmobileTransPurchaseComponent } from './printmobile-trans-purchase/printmobile-trans-purchase.component';
+import { EditdecaissementComponent } from './editdecaissement/editdecaissement.component';
 
 const routes: Routes = [
   {
@@ -164,7 +165,7 @@ const routes: Routes = [
 
       {
         path: 'decaissement/:id',
-        component: EditencaissementComponent,
+        component: EditdecaissementComponent,
         // canActivate:[AuthGuard],
         data: {
           title: "Modifier Le décaissement",

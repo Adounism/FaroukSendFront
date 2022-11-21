@@ -92,7 +92,7 @@
                 </select>                
 
                 <label cLabel for="floatingSelectGrid">sélectionner la carte</label>
-                <button type="button" (click)="openModal(content)" rel="tooltip" style="border: none;
+                <button type="button" (click)="openCardModal(cardcontent)" rel="tooltip" style="border: none;
                 background: none;
                 position: absolute;
                 top: 50%;
@@ -214,7 +214,7 @@
               <c-col [md]="6">
                 <label cLabel for="inputCity">Numero du point de Vente: </label>
                 <input cFormControl id="inputCity" type="text" name="pdvNumber" formControlName="pdvNumber"
-                  placeholder="pdvNumber " />
+                  placeholder="numero pdv " />
               </c-col>
     
               <c-col [xs]="12">
@@ -235,6 +235,7 @@
 
   <ng-template #cardcontent>
   <c-row ngPreserveWhitespaces>
+
     <c-col xs="12">
       <c-card class="mb-4">
         <c-card-header>
@@ -242,6 +243,10 @@
         </c-card-header>
         <c-card-body>
           <form cForm class="row g-3" [formGroup]="cardForm" (ngSubmit)="addcard()">
+
+            <c-col [md]="6">
+              <div></div>
+            </c-col>
             <c-row [gutter]="{g: 3}">
 
               <c-col [md]="6">
@@ -256,7 +261,7 @@
                 </div>
               </c-col>
     
-              <c-col [md]="2">
+              <c-col [md]="6">
                   <label cLabel for="inputZip">prix(unit)</label>
                   <input cFormControl id="inputZip"  name="unitPrice" formControlName="unitPrice" />
                     <div

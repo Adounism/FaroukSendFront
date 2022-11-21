@@ -43,7 +43,7 @@ export class PaginationsComponent implements OnInit{
             if(data.status == 200){
     
               this.toast.success({
-                detail:"Décaissement supprimer",
+                detail:"Encaissement supprimer",
                 summary:data.body.message,
                 duration: 3000
                });

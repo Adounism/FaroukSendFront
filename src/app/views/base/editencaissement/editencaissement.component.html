@@ -2,7 +2,7 @@
     <c-col xs="12">
       <c-card class="mb-4">
         <c-card-header>
-          <strong>Ajouter un Encaissement</strong>
+          <strong>Modifier L'Encaissement</strong>
           
         </c-card-header>
         <c-card-body>
@@ -12,13 +12,13 @@
   
   
   
-          <form cForm class="row g-3" *ngIf="currentEncaissement" #form="ngForm" (ngSubmit)="ajouter(form)">
+          <form cForm class="row g-3" *ngIf="currentEncaissement" #form="ngForm" (ngSubmit)="update(form)">
   
             <c-row [gutter]="{g: 3}">
             
                 <c-col [md]="6">
                     <label cLabel for="inputCity">Date: </label>
-                    <input cFormControl name="date" formControlName="date" [owlDateTime]="dt" [owlDateTimeTrigger]="dt">
+                    <input cFormControl name="date" [(ngModel)]="currentEncaissement.date"  [owlDateTime]="dt" [owlDateTimeTrigger]="dt">
                     <owl-date-time #dt></owl-date-time>
                 </c-col>
 
@@ -29,8 +29,8 @@
 
                <c-col md="2">
                     <label cLabel for="inputZip">Numero reçu</label>
-                    <input cFormControl id="inputZip" name="numberReceived" formControlName="numberReceived" />
-                    <input hidden type="text" name="collectionType" formControlName="collectionType" value="disbursement">
+                    <input cFormControl id="inputZip" name="numberReceived" [(ngModel)]="currentEncaissement.numberReceived" />
+                    <input hidden type="text" name="collectionType" [(ngModel)]="currentEncaissement.collectionType" value="{{currentEncaissement.collectionType}}">
                 </c-col>
 
             </c-row>
@@ -38,7 +38,7 @@
             <c-row [gutter]="{g: 2}">
               <c-col [md]="6">
                 <label cLabel for="inputCity">Montant: </label>
-                <input cFormControl id="inputCity" type="number" name="amount" formControlName="amount"
+                <input cFormControl id="inputCity" type="number" name="amount" [(ngModel)]="currentEncaissement.amount"
                   placeholder="Montant de la transaction" />
 
    
@@ -49,7 +49,7 @@
                               cFormControl
                               id="floatingTextarea2"
                               placeholder="Leave a comment here"
-                              name="description" formControlName="description"
+                              name="description" [(ngModel)]="currentEncaissement.description"
                     ></textarea>
                     <label cLabel for="floatingTextarea2">Comments</label>
                   </div>

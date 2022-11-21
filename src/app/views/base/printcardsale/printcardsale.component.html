@@ -14,66 +14,62 @@
           >
             <thead cTableColor="light">
             <tr>
-              <th class="text-center">
+              <!-- <th class="text-center">
                 <svg cIcon name="cilPeople"></svg>
-              </th>
+              </th> -->
               <th>Clients</th>
               <th class="text-center">Numero pdv</th>
               <th>type de carte</th>
               <th class="text-center">Quantité</th>
               <th>Prix (unit)</th>
-              <th>Montant</th>
+              <th>MontantHT</th>
               <th>Date</th>
               <th>Actions</th>
             </tr>
             </thead>
             <tbody>
-            <tr >
-              <!-- *ngFor="let user of users; index as i" -->
+            <tr  *ngFor="let card_sell of cardSellListes; index as i">
+             
               <td class="text-center">
-                Username
+                {{card_sell.client.firstName + " "+ card_sell.client.lastName }}
               </td>
               <td>
-                <!-- <div>{{ user.name }}</div>
-                <div class="small text-medium-emphasis">
-                  <span>{{ user.state }}</span> | Registered:
-                  {{ user.registered }}
-                </div> -->
+                <div>{{ card_sell.client.pdvNumber }}</div>
               </td>
               <td class="text-center">
-                <!-- <svg cIcon
-                  id="{{ user.country + user.name }}"
-                  name="cif{{ user.country }}"
-                  size="xl"
-                  title="{{ user.country }}"
-                ></svg> -->
+                <div>{{ card_sell.cardForSaleTypes[0].name }}</div>
               </td>
               <td>
                 <div class="clearfix">
                   <div class="float-start">
-                    <!-- <strong>{{ user.usage }}%</strong> -->
-                  </div>
-                  <div class="float-end">
-                    <small class="text-medium-emphasis">
-                      <!-- {{ user.period }} -->
-                    </small>
+                    {{card_sell.quantity}}
                   </div>
                 </div>
-                <!-- <c-progress thin
-                >
-                  <c-progress-bar
-                    [value]="user.usage"
-                    color="{{ user.color }}"
-                  ></c-progress-bar
-                  >
-                </c-progress> -->
+
               </td>
               <td class="text-center">
-                <!-- <svg cIcon name="cibCc{{ user.payment }}" size="xl"></svg> -->
+                {{ card_sell.unitPrice }}
+              </td>
+              <td class="text-center">
+                {{ card_sell.amountHT }}
               </td>
               <td>
-                <div class="small text-medium-emphasis">Last login</div>
-                <!-- <strong>{{ user.activity }}</strong> -->
+                <div class="small text-medium-emphasis">
+                  
+                  {{card_sell.date | date: 'short'}}
+                </div>
+             
+              </td>
+              <td>
+                <button type="button" rel="tooltip" (click)="deleteCardSale(card_sell.id)" class="btn btn-danger btn-just-icon btn-sm">
+                  <svg cIcon class="me-2" class="center-align" name="cil-trash"></svg>
+              </button>
+              <button type="button" rel="tooltip" class="btn btn-info btn-just-icon btn-sm" [routerLink]="['/base/editcardsale/',card_sell.id]" data-original-title="" title="">
+                <svg cIcon class="me-2" class="center-align" name="cil-pencil"></svg>
+              </button>
+              <!-- <button type="button" rel="tooltip" class="btn btn-warning btn-just-icon btn-sm" [routerLink]="['/base/historique/',card_sell.id]" data-original-title="" title="">
+                <svg cIcon class="me-2" class="center-align" name="cil-notes"></svg>
+              </button> -->
               </td>
             </tr>
             </tbody>

@@ -43,7 +43,7 @@ export class PrintmobiletransactionComponent implements OnInit {
             if(data.status == 200){
     
               this.toast.success({
-                detail:"Encaissement supprimer",
+                detail:"Transaction supprimer",
                 summary:"",
                 duration: 3000
                });

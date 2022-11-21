@@ -1,1 +1,190 @@
-<p>editreturnshipment works!</p>
+<c-row ngPreserveWhitespaces>
+    <c-col xs="12">
+      <c-card class="mb-4">
+        <c-card-header>
+          <strong>Modifier  un retour d'envoi</strong>
+        </c-card-header>
+        <c-card-body>
+          <p class="text-medium-emphasis small">
+            Veillez fournir les informations du clients et le Montant.
+          </p>
+  
+  
+  
+          <form cForm class="row g-3"*ngIf="currentReturnSipment" #form="ngForm" (ngSubmit)="update(form)">
+  
+            <c-row [gutter]="{g: 3}">
+              <c-col [md]="6">
+                    <div cFormFloating>
+                      <select cSelect id="floatingSelectGrid"  style="padding-right:60px;" ngModel>
+                
+  
+                        <option [ngValue]="null" disabled>Choose client</option>
+                        <option *ngFor="let client of clientListe" [ngValue]="client"> 
+                          {{client.firstName}}
+                        </option>
+                  
+                      </select>                
+  
+                      <label cLabel for="floatingSelectGrid">sélectionner le contact</label>
+                      <button type="button" (click)="openModal(content)" rel="tooltip" style="border: none;
+                      background: none;
+                      position: absolute;
+                      top: 50%;
+                      left: calc(100% - 45px);
+                      transform: translate(-50% , -50%);">
+                        <svg cIcon class="me-2" class="center-align"  name="cil-user-plus"></svg>
+                    </button>
+                    </div>
+              </c-col>
+  
+              <!-- <c-col>
+                <button type="button" rel="tooltip" class="btn btn-info btn-just-icon btn-sm">
+                  <svg cIcon class="me-2" class="center-align" name="cil-pen"></svg>
+              </button>
+              </c-col> -->
+  
+             <c-col [md]="6">
+              <!-- <div cFormFloating>
+                <select cSelect id="floatingSelectGrid"  formControlName="operation" ngModel>
+             
+                  <option [ngValue]="null" disabled>Choose operation</option>
+                  <option *ngFor="let operation of listeOperations" [ngValue]="operation">
+                    {{operation.name}}
+                  </option>
+                </select>
+                <label cLabel for="floatingSelectGrid">sélectionner l'operation</label>
+              </div> -->
+         </c-col>
+        </c-row>
+  
+            <c-row [gutter]="{g: 2}">
+              <c-col [md]="6">
+                <label cLabel for="inputCity">transaction Montant: </label>
+                <input cFormControl id="inputCity" type="number" name="amount" [(ngModel)]="currentReturnSipment.amount"
+                  placeholder="Montant du retour d'achat" />
+                  <input cFormControl id="inputCity" type="text" hidden name="sendType" value="sendBack"  [(ngModel)]="currentReturnSipment.sendType" />
+              </c-col>
+              <c-col [md]="6" style="align-self: flex-end;">
+        
+                  <label cLabel for="inputCity">Date: </label>
+                  <input cFormControl name="date"  [(ngModel)]="currentReturnSipment.date" [owlDateTime]="dt" [owlDateTimeTrigger]="dt">
+                  <owl-date-time #dt></owl-date-time>
+  
+              </c-col>
+            </c-row>
+            
+  
+  
+            <c-col [xs]="12">
+              <button  *ngIf="!onLoading" cButton data-mdb-dismiss="modal" type="submit">Ajouter</button>
+              <button *ngIf="onLoading" cButton data-mdb-dismiss="modal" class="m-1" disabled>
+                <c-spinner aria-hidden="true" size="sm"></c-spinner>
+                Loading...
+              </button>
+            </c-col>
+          </form>
+        </c-card-body>
+      </c-card>
+  
+  
+    </c-col>
+  </c-row>
+  
+  
+  
+  
+  
+  <ng-template #content class="box">
+    <c-row ngPreserveWhitespaces>
+      <c-col xs="12">
+        <c-card class="mb-4">
+          <c-card-header>
+            <strong>Ajouter un Client</strong>
+          </c-card-header>
+          <c-card-body>
+            <p class="text-medium-emphasis small">
+              Veillez fournir les informations du clients.
+            </p>
+            <form cForm class="row g-3" [formGroup]="profileForm" (ngSubmit)="ajouterclient()">
+              <c-col [md]="6">
+                <label cLabel for="inputEmail4">Nom:</label>
+                <input cFormControl id="inputEmail4" name="firstName" formControlName="firstName" type="text" />
+    
+                <div
+                  *ngIf="profileForm.controls['firstName'].invalid && (profileForm.controls['firstName'].dirty || profileForm.controls['firstName'].touched || submitted)"
+                  class="alert alert-danger">
+                  <div *ngIf="profileForm.controls['firstName'].errors?.['required']">
+                    Le nom du client est requis.</div>
+                </div>
+    
+              </c-col>
+              <c-col [md]="6">
+                <label cLabel for="inputPassword4">Prenom:</label>
+                <input cFormControl id="inputPassword4" formControlName="lastName" name="lastName" type="text" />
+                <div
+                  *ngIf="profileForm.controls['lastName'].invalid && (profileForm.controls['lastName'].dirty || profileForm.controls['lastName'].touched || submitted)"
+                  class="alert alert-danger">
+                  <div *ngIf="profileForm.controls['lastName'].errors?.['required']">
+                    Le prenom est requis.</div>
+                </div>
+              </c-col>
+    
+              <c-row [gutter]="{g: 2}">
+                <c-col [md]>
+                  <div cFormFloating>
+                    <input cFormControl id="floatingInputGrid" type="email" value="email@example.com"
+                      formControlName="email" />
+                    <label cLabel for="floatingInputGrid">Email address</label>
+                  </div>
+                </c-col>
+    
+              </c-row>
+    
+              <c-col [xs]="12">
+                <label cLabel for="inputAddress">Address</label>
+                <input cFormControl id="inputAddress" name="address" formControlName="address"
+                  placeholder="1234 Bamako coura" />
+              </c-col>
+    
+              <c-col [md]="6">
+                <label cLabel for="inputCity">Contact: </label>
+                <input cFormControl id="inputCity" type="tel" name="contact" formControlName="phone"
+                  placeholder="numero de télephone" />
+    
+                <div
+                  *ngIf="profileForm.controls['phone'].invalid && (profileForm.controls['phone'].dirty || profileForm.controls['phone'].touched || submitted)"
+                  class="alert alert-danger">
+                  <div *ngIf="profileForm.controls['phone'].errors?.['required']">
+                    Le numero du client est requis.</div>
+                </div>
+    
+              </c-col>
+    
+    
+              <c-col [md]="6">
+                <label cLabel for="inputCity">Contact: </label>
+                <input cFormControl id="inputCity" type="text" name="occupation" formControlName="occupation"
+                  placeholder="occupation" />
+              </c-col>
+    
+    
+              <c-col [md]="6">
+                <label cLabel for="inputCity">Numero du point de Vente: </label>
+                <input cFormControl id="inputCity" type="text" name="pdvNumber" formControlName="pdvNumber"
+                  placeholder="pdvNumber " />
+              </c-col>
+    
+              <c-col [xs]="12">
+                <button *ngIf="!onLoading" cButton type="submit">Ajouter</button>
+                <button *ngIf="onLoading" cButton class="m-1" disabled>
+                  <c-spinner aria-hidden="true" size="sm"></c-spinner>
+                  Loading...
+                </button>
+              </c-col>
+            </form>
+          </c-card-body>
+        </c-card>
+      </c-col>
+    </c-row>
+  </ng-template>
