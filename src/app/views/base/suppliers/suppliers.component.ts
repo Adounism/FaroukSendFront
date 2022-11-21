@@ -11,6 +11,8 @@ import { SupplierService } from 'src/app/services/supplier.service';
 export class SuppliersComponent implements OnInit {
   
   profileForm!: FormGroup;
+  businessForm!: FormGroup;
+  individulForm!: FormGroup;
 
   submitted = false;
   selected!:number;
@@ -34,17 +36,26 @@ export class SuppliersComponent implements OnInit {
 
   ngOnInit(): void {
     this.profileForm = this.fb.group({
-      firstName: ['', [Validators.nullValidator]],
-      lastName: ['', [Validators.nullValidator]],
+
       adresse: ['', [Validators.nullValidator]],
       firstPhone: ['', [Validators.required, Validators.minLength(4)]],
       secondPhone: ['', [Validators.nullValidator]],
       email: ['', [Validators.nullValidator]],
-      businessName: ['', [Validators.nullValidator]],
-      business:['', [Validators.nullValidator]],
-      induvidual:['', [Validators.nullValidator]]
+      firstName: ['', [Validators.nullValidator]],
+      lastName: ['', [Validators.nullValidator]],
+       business: ['', [Validators.nullValidator]],
+       induvidual: ['',[Validators.nullValidator]],
+      businessType:['', [Validators.nullValidator]],
     });
 
+    this.businessForm = this.fb.group({
+      business: ['',[Validators.required]]
+    });
+    
+    this.individulForm = this.fb.group({
+      firstName: ['', [Validators.required]],
+      lastName: ['', [Validators.required]],
+    })
 
   }
 
@@ -70,7 +81,7 @@ export class SuppliersComponent implements OnInit {
         phone: ['', [Validators.required, Validators.minLength(4)]],
   
         email: ['', [Validators.nullValidator]],
-        business:['', [Validators.nullValidator]]
+        businesstype:['', [Validators.nullValidator]]
         
       });
   
@@ -143,7 +154,7 @@ export class SuppliersComponent implements OnInit {
     }
 
     if(this.supplierData.business != ""){
-      if(!this.supplierData.businessName){
+      if(!this.supplierData.business){
 
         this.toast.warning({
           detail:"Field Error",
@@ -157,11 +168,13 @@ export class SuppliersComponent implements OnInit {
           "firstPhone" : this.supplierData.firstPhone,
           "secondPhone": this.supplierData.secondPhone,
           "email": this.supplierData.email,
-          "businessCollection": [{
-            "name": this.supplierData.businessName,
+          "business" : [{
+            "name": this.supplierData.business,
         
           },]
         }
+        console.log(provider);
+        
 
         this.service.create(provider).then
         (response=>{
@@ -182,7 +195,7 @@ export class SuppliersComponent implements OnInit {
       
     });
 
-    this.profileForm.get('business')?.valueChanges.subscribe(data=>{
+    this.profileForm.get('businessType')?.valueChanges.subscribe(data=>{
       this.default = false;
       this.second = true;
       console.log(data);

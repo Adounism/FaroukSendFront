@@ -27,7 +27,7 @@
                 <label cFormCheckLabel>Induvidual</label>
               </c-form-check>
               <c-form-check>
-                <input cFormCheckInput type="radio" value="business" [checked]="second" (click)="verifieCheck()" formControlName="business"  name="business"/>
+                <input cFormCheckInput type="radio" value="business" [checked]="second" (click)="verifieCheck()" formControlName="businessType"  name="businessType"/>
                 <label cFormCheckLabel>Business</label>
 
                 <!-- <div
@@ -94,7 +94,7 @@
 
           <c-col [md]="6" *ngIf="second">
             <label cLabel for="businessName">Nom du Business: </label>
-            <input cFormControl id="inputCity" type="text" name="businessName" formControlName="businessName"
+            <input cFormControl id="inputCity" type="text" name="business" formControlName="business"
               placeholder="nom du business" />
             <!-- <div
               *ngIf="profileForm.controls['business'].invalid && (profileForm.controls['business'].dirty || profileForm.controls['business'].touched || submitted)"

@@ -36,6 +36,7 @@ import { DecaissementComponent } from './decaissement/decaissement.component';
 import { AdddecaissementComponent } from './adddecaissement/adddecaissement.component';
 import { PrintmobileTransPurchaseComponent } from './printmobile-trans-purchase/printmobile-trans-purchase.component';
 import { EditdecaissementComponent } from './editdecaissement/editdecaissement.component';
+import { AddcreditPurchaseComponent } from './addcredit-purchase/addcredit-purchase.component';
 
 const routes: Routes = [
   {
@@ -231,7 +232,7 @@ const routes: Routes = [
       },
 
 
-      //New Routes Add 
+      //New Routes Add  Carte de crédit
 
       {
         path: 'printcardsale',
@@ -317,7 +318,7 @@ const routes: Routes = [
 
       //Achat Views Routings
 
-      //Achat Crédit
+      //Achat Crédit Routes
       {
         path: 'printcreditpurchase',
         component: PrintcreditPurchaseComponent,
@@ -329,7 +330,7 @@ const routes: Routes = [
 
       {
         path: 'addcreditpurchase',
-        component: AddreturnshipmentComponent,
+        component: AddcreditPurchaseComponent,
         // canActivate:[AuthGuard],
         data: {
           title: "Ajouter un achat de crédit",
@@ -362,7 +363,7 @@ const routes: Routes = [
         component: AddcartePurchaseComponent,
         // canActivate:[AuthGuard],
         data: {
-          title: "Ajouter l'achat de carte de crédit",
+          title: "Ajouter un achat de carte crédit",
         },
       },
 
