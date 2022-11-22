@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PurchasesService } from 'src/app/services/purchases.service';
 
 @Component({
   selector: 'app-printmobile-trans-purchase',
@@ -7,9 +8,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PrintmobileTransPurchaseComponent implements OnInit {
 
-  constructor() { }
+  mobileTransfertListe:any[]=[];
+  typePurchase = "mobileTransferPurchase";
+  constructor(private purshaseService: PurchasesService) { }
 
   ngOnInit(): void {
+    this.getAllMobileTransfertPurchase();
+  }
+
+  getAllMobileTransfertPurchase(){
+    this.purshaseService.getAllPurchase(this.typePurchase).subscribe(data=>{
+      this.mobileTransfertListe = data;
+      console.log(this.mobileTransfertListe);
+      
+    });
+
+  }
+
+  delete(id:number){
+
   }
 
 }

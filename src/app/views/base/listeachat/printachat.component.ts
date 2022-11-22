@@ -16,16 +16,16 @@ export class PrintAchatComponent implements OnInit {
     private toast: NgToastService) { }
 
   ngOnInit(): void {
-    this.getAllPurchase();
+    // this.getAllPurchase();
   }
 
-  getAllPurchase(){
-    this.purchaseService.getAllPurchase().subscribe(data=>{
-      this.listePurchases = data;
-      console.log(this.listePurchases);
+  // getAllPurchase(){
+  //   this.purchaseService.getAllPurchase().subscribe(data=>{
+  //     this.listePurchases = data;
+  //     console.log(this.listePurchases);
       
-    })
-  }
+  //   })
+  // }
 
   deletePurchase(id:number){
     this.ngxComfirmService.confirm({
@@ -43,7 +43,7 @@ export class PrintAchatComponent implements OnInit {
                 summary:data.body.message,
                 duration: 3000
                });
-               this.getAllPurchase();
+              //  this.getAllPurchase();
             }
             
           },

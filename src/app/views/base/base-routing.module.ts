@@ -37,6 +37,8 @@ import { AdddecaissementComponent } from './adddecaissement/adddecaissement.comp
 import { PrintmobileTransPurchaseComponent } from './printmobile-trans-purchase/printmobile-trans-purchase.component';
 import { EditdecaissementComponent } from './editdecaissement/editdecaissement.component';
 import { AddcreditPurchaseComponent } from './addcredit-purchase/addcredit-purchase.component';
+import { AddmobileTransPurchaseComponent } from './addmobile-trans-purchase/addmobile-trans-purchase.component';
+import { EditcreditPurchaseComponent } from './editcredit-purchase/editcredit-purchase.component';
 
 const routes: Routes = [
   {
@@ -339,7 +341,7 @@ const routes: Routes = [
 
       {
         path: 'editcreditpurchase/:id',
-        component: EditreturnshipmentComponent,
+        component: EditcreditPurchaseComponent,
         // canActivate:[AuthGuard],
         data: {
           title: "Modifier L'achat de crédit",
@@ -390,7 +392,7 @@ const routes: Routes = [
       
             {
               path: 'addmobiletransfertpurchase',
-              component: AddmobiletransactionComponent,
+              component: AddmobileTransPurchaseComponent,
               // canActivate:[AuthGuard],
               data: {
                 title: "Ajouter l'achat de transfert mobile",

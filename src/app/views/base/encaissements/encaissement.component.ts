@@ -13,6 +13,7 @@ export class PaginationsComponent implements OnInit{
   page: number = 1;
   total: number = 0;
   searchText= "";
+  collectionType="collection";
 
   constructor(private transactionService: TransactionsService,
     private toast: NgToastService,
@@ -24,7 +25,7 @@ export class PaginationsComponent implements OnInit{
   }
 
   getAllencaissements(){
-    this.transactionService.getAllTresorie().subscribe(data=>{
+    this.transactionService.getAllTresorie(this.collectionType).subscribe(data=>{
       this.encaissementListe = data;
       console.log(this.encaissementListe);
       

@@ -2,11 +2,11 @@
     <c-col xs="12">
       <c-card class="mb-4">
         <c-card-header>
-          <strong>Ajouter une vente de crédit</strong>
+          <strong>Ajouter un achat de crédit</strong>
         </c-card-header>
         <c-card-body>
           <p class="text-medium-emphasis small">
-            Veillez fournir les informations du clients et le Montant.
+            Veillez fournir les informations du fournisseur et le Montant.
           </p>
   
   
@@ -16,7 +16,7 @@
             <c-row [gutter]="{g: 3}">
               <c-col [md]="6">
                     <div cFormFloating>
-                      <select cSelect id="floatingSelectGrid" formControlName="client" style="padding-right:60px;" ngModel>
+                      <select cSelect id="floatingSelectGrid" formControlName="provider" style="padding-right:60px;" ngModel>
                 
   
                         <option [ngValue]="null" disabled>Choisir le fournisseur</option>
@@ -43,22 +43,6 @@
                   <svg cIcon class="me-2" class="center-align" name="cil-pen"></svg>
               </button>
               </c-col> -->
-       
-  
-             <c-col [md]="6">
-  
-  
-              <div cFormFloating>
-                <select cSelect id="floatingSelectGrid"  formControlName="operation" ngModel>
-             
-                  <option [ngValue]="null" disabled>Choose operation</option>
-                  <option *ngFor="let operation of listeOperations" [ngValue]="operation">
-                    {{operation.name}}
-                  </option>
-                </select>
-                <label cLabel for="floatingSelectGrid">sélectionner l'operation</label>
-              </div>
-         </c-col>
         </c-row>
   
             <c-row [gutter]="{g: 2}">

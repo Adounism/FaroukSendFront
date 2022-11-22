@@ -13,6 +13,7 @@ import { TransactionsService } from 'src/app/services/transactions.service';
 export class PrintmobiletransactionComponent implements OnInit {
 
   mobileTransactions:any[]=[];
+  sendType = "send";
   constructor(private mobileTransaction: TransactionsService,
     private toast: NgToastService,
     private ngxComfirmService: NgxBootstrapConfirmService, ) { }
@@ -23,7 +24,7 @@ export class PrintmobiletransactionComponent implements OnInit {
 
 
   getAllMobiletransaction(){
-    this.mobileTransaction.getAllMobileSend().subscribe(data=>{
+    this.mobileTransaction.getAllMobileSend(this.sendType).subscribe(data=>{
        this.mobileTransactions = data;
        console.log(this.mobileTransactions);
        

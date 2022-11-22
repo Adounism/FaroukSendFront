@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PurchasesService } from 'src/app/services/purchases.service';
 
 @Component({
   selector: 'app-printcarte-purchase',
@@ -7,9 +8,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PrintcartePurchaseComponent implements OnInit {
 
-  constructor() { }
+  cartePurchaseListe:any[]=[];
+  typePurchase="purchasingCards";
+
+  constructor(private purchaseService:PurchasesService) { }
 
   ngOnInit(): void {
+    this.getAllCartePurchase();
+  }
+
+
+  getAllCartePurchase(){
+    this.purchaseService.getAllPurchase(this.typePurchase).subscribe(data=>{
+      this.cartePurchaseListe = data;
+    })
   }
 
 }

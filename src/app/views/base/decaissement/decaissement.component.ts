@@ -14,6 +14,7 @@ export class DecaissementComponent implements OnInit {
   page: number = 1;
   total: number = 0;
   searchText= "";
+  collectyonType = "disbursement";
 
   constructor(private transactionService: TransactionsService,
     private toast: NgToastService,
@@ -25,7 +26,7 @@ export class DecaissementComponent implements OnInit {
   }
 
   getAllencaissements(){
-    this.transactionService.getAllTresoriedecaissement().subscribe(data=>{
+    this.transactionService.getAllTresorie(this.collectyonType).subscribe(data=>{
       this.decaissementListe = data;
       console.log(this.decaissementListe);
       

@@ -10,6 +10,7 @@ import { TransactionsService } from 'src/app/services/transactions.service';
 })
 export class PrintreturnshipmentComponent implements OnInit {
   returnShipmentListe:any[]=[];
+  sendType= "sendBack";
 
   constructor(private transaction: TransactionsService,
     private toast: NgToastService,
@@ -17,10 +18,11 @@ export class PrintreturnshipmentComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAllReturnShippment();
+
   }
 
   getAllReturnShippment(){
-    this.transaction.getAllMobileSend().subscribe(data=>{
+    this.transaction.getAllMobileSend(this.sendType).subscribe(data=>{
       this.returnShipmentListe = data;
       console.log(this.returnShipmentListe);
       

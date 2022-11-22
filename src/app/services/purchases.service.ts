@@ -20,12 +20,12 @@ export class PurchasesService {
 
   constructor(private http: HttpClient, private httpService: HttpService) { }
 
-  getAllPurchase(): Observable<any>{
-    return this.http.get<any[]>(this.purchaseEnpoint.listAchat);
+  getAllPurchase(typePurchase:string): Observable<any>{
+    return this.http.get<any[]>(this.purchaseEnpoint.listAchat+`?typePurchase=${typePurchase}`);
   }
 
-  create(user: any): Promise<any>{
-    return this.httpService.post(this.purchaseEnpoint.makeAchat, user);
+  create(data: any): Promise<any>{
+    return this.httpService.post(this.purchaseEnpoint.makeAchat, data);
   }
 
   find(id:number): Observable<any>{

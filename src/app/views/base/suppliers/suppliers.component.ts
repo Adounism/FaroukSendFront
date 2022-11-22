@@ -168,10 +168,10 @@ export class SuppliersComponent implements OnInit {
           "firstPhone" : this.supplierData.firstPhone,
           "secondPhone": this.supplierData.secondPhone,
           "email": this.supplierData.email,
-          "business" : [{
+          "business" :{
             "name": this.supplierData.business,
         
-          },]
+          }
         }
         console.log(provider);
         

@@ -82,13 +82,10 @@ sendType = {
   findencaissement(id:number): Observable<any>{
     return this.http.get<any>(this.collection.findById+ id);
   }
-  getAllTresorie():Observable<any>{
-    return this.http.get<any[]>(this.collection.collectionListe+"?collectionType=collection");
+  getAllTresorie(type:string):Observable<any>{
+    return this.http.get<any[]>(this.collection.collectionListe+ `?collectionType=${type}`);
   }
 
-  getAllTresoriedecaissement():Observable<any>{
-    return this.http.get<any[]>(this.collection.collectionListe+"?collectionType=collection");
-  }
   
   deleteTresorieOpe(id:number):Observable<any>{
     return this.http.delete(this.collection.findById + id, {observe: 'response'});
@@ -104,8 +101,8 @@ sendType = {
     return this.httpService.post(this.send.create, data, {observe: 'response'});
   }
 
-  getAllMobileSend(){
-    return this.http.get<any[]>(this.send.sendListe);
+  getAllMobileSend(sendtype:string){
+    return this.http.get<any[]>(this.send.sendListe+ `?sendType=${sendtype}`);
   }
 
   deletemobileTransfert(id:number){

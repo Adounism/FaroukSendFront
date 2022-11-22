@@ -19,10 +19,10 @@
           <tr>
             <th scope="col">Nom </th>
             <th scope="col">Prenom </th>
+            <th scope="col">business name</th>
             <th scope="col">email </th>
             <th scope="col">contact principal</th>
             <th scope="col">contact secondaire</th>
-            <th scope="col">business name</th>
             <th scope="col">actions</th>
           </tr>
           </thead>
@@ -31,10 +31,10 @@
             <!-- <th scope="row">1</th> -->
             <td>{{provider.individual?.firstName}}</td>
             <td>{{provider.individual?.lastName}}</td>
+            <td>{{provider.business?.name}}</td>
             <td>{{provider?.email}}</td>
             <td>{{provider?.firstPhone}}</td>
             <td>{{provider?.secondPhone}}</td>
-            <td>{{provider.business?.name}}</td>
             <td>
               <button type="button" rel="tooltip" (click)="deletesupplier(provider.id)" class="btn btn-danger btn-just-icon btn-sm">
                 <svg cIcon class="me-2" class="center-align" name="cil-trash"></svg>
