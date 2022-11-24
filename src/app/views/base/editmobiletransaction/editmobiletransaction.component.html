@@ -16,7 +16,7 @@
             <c-row [gutter]="{g: 3}">
               <c-col [md]="6">
                     <div cFormFloating>
-                      <select cSelect id="floatingSelectGrid" formControlName="client" style="padding-right:60px;" ngModel>
+                      <select cSelect id="floatingSelectGrid" name="client" style="padding-right:60px;" ngModel>
                 
   
                         <option [ngValue]="currentTransaction.client">{{currentTransaction.client?.firstName}}</option>
@@ -61,14 +61,14 @@
             <c-row [gutter]="{g: 2}">
               <c-col [md]="6">
                 <label cLabel for="inputCity">transaction Montant: </label>
-                <input cFormControl id="inputCity" type="number" name="amount"[(ngModel)]="currentTransaction.amount" 
+                <input cFormControl id="inputCity" type="number" name="amount" [(ngModel)]="currentTransaction.amount" 
                   placeholder="Montant de la transaction" />
-                  <input cFormControl id="sendType" name="sendType" hidden formControlName="sendType" value="send" type="text" />
+                  <input cFormControl id="sendType" name="sendType" hidden  value="send" type="text" />
               </c-col>
               <c-col [md]="6" style="align-self: flex-end;">
         
                   <label cLabel for="inputCity">Date: </label>
-                  <input cFormControl name="date" [(ngModel)]="currentTransaction.amount"  [owlDateTime]="dt" [owlDateTimeTrigger]="dt">
+                  <input cFormControl name="date" [(ngModel)]="currentTransaction.date"  [owlDateTime]="dt" [owlDateTimeTrigger]="dt">
                   <owl-date-time #dt></owl-date-time>
 
               </c-col>

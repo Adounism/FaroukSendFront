@@ -7,6 +7,7 @@ import { OperationsService } from 'src/app/services/operations.service';
 import { TransactionsService } from 'src/app/services/transactions.service';
 import { MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
 import { DatePipe } from '@angular/common';
+import { CardService } from 'src/app/services/card.service';
 @Component({
   selector: 'app-editcardsale',
   templateUrl: './editcardsale.component.html',
@@ -24,6 +25,8 @@ export class EditcardsaleComponent implements OnInit {
   onLoading = false;
   cardId!:number;
   currentCardData:any;
+  cardListe: any[]=[];
+  cardArray:any[]=[];
 
 
  
@@ -42,13 +45,17 @@ export class EditcardsaleComponent implements OnInit {
      private fb: FormBuilder,
      private route:ActivatedRoute,
      private modalService: MdbModalService,
+     private typeCardService: CardService,
   ) { 
     this.cardId = this.route.snapshot.params['id'];
+    console.log(this.cardId);
+    
   }
 
   ngOnInit(): void {
-    this.getCurrentCard(this.cardId);
 
+    this.getCurrentCard(this.cardId);
+    this.getllTypeOfCards();
 
     this.profileForm = this.fb.group({
       firstName: ['', [Validators.required]],
@@ -75,53 +82,102 @@ export class EditcardsaleComponent implements OnInit {
   }
 
   getCurrentCard(id:number){
-    this.transService.findSellingCard(this.cardId).subscribe(data=>{
+    this.transService.findSellingCard(id).subscribe(data=>{
       this.currentCardData = data;
-    })
+      console.log(this.currentCardData);
+      // this.cardArray = data.cardToTypeCardRelation;
+      
+
+      
+    },error=>{
+      if(error.status == 404){
+        this.router.navigate(['/404']);
+      }
+    });
+  }
+
+  update(form:NgForm){
+    console.log(form.value);
+    
+  }
+
+  delete(index: number) {
+    this.cardArray.splice(index, 1);
+    console.log("deleted");
+    
+
   }
 
 
   ajouter(form:NgForm){
 
-
-    if(this.transactionForm.valid){
+    this.transactionData = form.value;
+    console.log(this.transactionData);
+    if(form){
       this.onLoading = true;
-
-      this.transactionData = this.transactionForm.value;
-      let pipe = new DatePipe('en-US'); 
-      const myFormattedDate = pipe.transform(this.transactionData.date, "yyyy-MM-dd'T'HH:mm:ss'Z'");
       let transaction= {
-        "client": '/api/clients/'+this.transactionData.client["id"],
-        // "operation": '/api/operations/'+this.transactionData.operation["id"]
-        "date": myFormattedDate,
+        // "client": '/api/clients/'+this.transactionData.client["id"],
+        // "date": myFormattedDate,
+        "typeCardForSale":'/api/type_card_for_sales/'+this.transactionData.carte['id'],
         "quantity": this.transactionData.quantity, 
         "unitPrice":this.transactionData.unitPrice,
         "amountHT": this.transactionData.amountHT,
       }
 
-      console.log(transaction);
-      // debugger
-      if(this.transactionData.montant != "" && this.transactionData.montant > 0){
-
-        this.transService.saleCard(transaction).then(resp=>{
-
-          this.toast.success({
-            detail:"Transaction Réçu avec success",
-            summary:"transaction effectuée avec success",
-            duration: 3000
-            });
-            this.router.navigate(['/base/transaction']);
-            
-        });
-      }else{
+      if(this.transactionData.carte['id'] == undefined){
         this.onLoading = false;
 
         this.toast.warning({
-          detail:"Transaction Montant error",
-          summary:"transaction impossible montant invalid",
+          detail:"Veillez selectionner un type de carte",
+          summary:"",
           duration: 3000
           });
+
+      }else{
+
+        this.transService.editCardSelling(this.cardId, transaction).subscribe(data=>{
+            this.toast.success({
+              detail:"Transaction Réçu avec success",
+              summary:"transaction effectuée avec success",
+              duration: 3000
+              });
+              this.router.navigate(['/base/printcardsale']);
+              
+          
+        },error=>{
+          this.onLoading = false;
+  
+          this.toast.warning({
+            detail:error.body.message,
+            summary:"Modification échouer veillez ressayer!!",
+            duration: 3000
+            });
+  
+        })
       }
+
+      // debugger
+      // if(""){
+
+      //   this.transService.saleCard(transaction).then(resp=>{
+
+      //     this.toast.success({
+      //       detail:"Transaction Réçu avec success",
+      //       summary:"transaction effectuée avec success",
+      //       duration: 3000
+      //       });
+      //       this.router.navigate(['/base/transaction']);
+            
+      //   });
+      // }else{
+      //   this.onLoading = false;
+
+      //   this.toast.warning({
+      //     detail:"Transaction Montant error",
+      //     summary:"transaction impossible montant invalid",
+      //     duration: 3000
+      //     });
+      // }
       
     }else{
       this.onLoading = false;
@@ -181,4 +237,14 @@ export class EditcardsaleComponent implements OnInit {
     console.log(this.cardForm.value);
 
   }
+
+  getllTypeOfCards(){
+    this.typeCardService.getAllTypeOfCard().subscribe(data=>{
+      this.cardListe = data;
+      console.log(this.cardListe);
+      
+    });
+  }
+  
+
 }

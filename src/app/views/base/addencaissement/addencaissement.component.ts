@@ -35,7 +35,7 @@ export class AddencaissementComponent implements OnInit {
   ngOnInit(): void {
     this.transactionForm =  this.fb.group({
       date: ['', [Validators.nullValidator]],
-      // numeroPdv: ['', [Validators.nullValidator]],
+      numeroPdv: ['', [Validators.nullValidator]],
       description: ['', [Validators.nullValidator]],
       numberReceived: ['', [Validators.nullValidator]],
       collectionType:['collection', [Validators.nullValidator]],
@@ -81,7 +81,8 @@ export class AddencaissementComponent implements OnInit {
         "description": this.transactionData.description ,
         "numberReceived": this.transactionData.numberReceived,
         "collectionType": this.transactionData.collectionType,
-        "amount": this.transactionData.amount
+        "amount": this.transactionData.amount,
+        "pdvNumber": this.transactionData.numeroPdv
       }
 
       if(this.transactionData.amount != "" && this.transactionData.amount > 0){

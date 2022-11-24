@@ -17,15 +17,17 @@
     </c-card-header>
     <c-card-body>
 
-        <table cTable class="center-align">
+        <table align="middle"
+        cTable
+        class="mb-0 border">
           <caption>Listes des Clients</caption>
           <thead>
           <tr>
             <th scope="col">Nom </th>
             <th scope="col">Prenom </th>
-            <th scope="col">Pdv Number </th>
+            <th scope="col">Numero pdv</th>
             <th scope="col">contact</th>
-            <th scope="col">actions</th>
+            <th scope="col" class="text-center">actions</th>
           </tr>
           </thead>
           <tbody>
@@ -35,7 +37,7 @@
             <td>{{customer.lastName}}</td>
             <td>{{customer.pdvNumber}}</td>
             <td>{{customer.phone}}</td>
-            <td>
+            <td class="text-center">
               <button type="button" rel="tooltip" (click)="deleteCustomer(customer.id)" class="btn btn-danger btn-just-icon btn-sm">
                 <svg cIcon class="me-2" class="center-align" name="cil-trash"></svg>
             </button>

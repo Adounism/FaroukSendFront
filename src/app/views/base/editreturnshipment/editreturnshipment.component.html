@@ -16,12 +16,12 @@
             <c-row [gutter]="{g: 3}">
               <c-col [md]="6">
                     <div cFormFloating>
-                      <select cSelect id="floatingSelectGrid"  style="padding-right:60px;" ngModel>
+                      <select cSelect id="floatingSelectGrid" name="client" style="padding-right:60px;" ngModel>
                 
   
-                        <option [ngValue]="null" disabled>Choose client</option>
+                        <option [ngValue]="currentReturnSipment.client">{{currentReturnSipment.client?.firstName +" "+currentReturnSipment.client?.lastName }}</option>
                         <option *ngFor="let client of clientListe" [ngValue]="client"> 
-                          {{client.firstName}}
+                          {{client.firstName + " "+ client?.lastName }}
                         </option>
                   
                       </select>                

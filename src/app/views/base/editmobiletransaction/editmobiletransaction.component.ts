@@ -42,14 +42,14 @@ export class EditmobiletransactionComponent implements OnInit {
     this.getTransactionById(this.transactionId);
     this.getClientList();
 
-    this.transactionForm =  this.fb.group({
-      date: ['', [Validators.nullValidator]],
-      // numeroPdv: ['', [Validators.nullValidator]],
-      sendType:['send', [Validators.nullValidator]],
-      amount:['', [Validators.required]],
+    // this.transactionForm =  this.fb.group({
+    //   date: ['', [Validators.nullValidator]],
+    //   // numeroPdv: ['', [Validators.nullValidator]],
+    //   sendType:['send', [Validators.nullValidator]],
+    //   amount:['', [Validators.required]],
 
 
-    });
+    // });
   }
 
   getTransactionById(id:number){
@@ -75,8 +75,6 @@ export class EditmobiletransactionComponent implements OnInit {
     if(this.transactionData.amount != "" && this.transactionData.amount > 0){
       this.onLoading = true;
       let pipe = new DatePipe('en-US'); 
-      console.log(this.transactionForm.value);
-      this.transactionData = this.transactionForm.value;
       const myFormattedDate = pipe.transform(this.transactionData.date, "yyyy-MM-dd'T'HH:mm:ss'Z'");
       let data = {
         "amount": this.transactionData.amount,

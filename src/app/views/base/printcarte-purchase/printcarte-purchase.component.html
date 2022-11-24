@@ -1,91 +1,103 @@
-
-  <c-row  ngPreserveWhitespaces>
-    <c-col xs>
-      <c-card class="mb-4">
-        <c-card-header>
-          Listes des Achats de cartes
-
-          <button style="float: right;" class="btn float-right" color="primary"  [routerLink]="['/base/addcartepurchase']" cButton> ajouter
+<c-row ngPreserveWhitespaces>
+  <c-col xs>
+    <c-card class="mb-4">
+      <c-card-header>Achat de carte
+        <button style="float: right;" class="btn float-right" color="primary"  [routerLink]="['/base/addcartepurchase']" cButton> ajouter
     
-          </button>
-
-        </c-card-header>
-        <c-card-body>
-          <table
-            [hover]="true"
-            [responsive]="true"
-            [striped]="true"
-            align="middle"
-            cTable
-            class="mb-0 border"
-          >
-            <thead cTableColor="light">
+        </button>
+      </c-card-header>
+      <c-card-body>
+        <table [hover]="true" [responsive]="true" [striped]="true" align="middle" cTable class="mb-0 border">
+          <thead cTableColor="light">
             <tr>
               <!-- <th class="text-center">
                 <svg cIcon name="cilPeople"></svg>
               </th> -->
-              <th>Fournisseur</th>
-              <th class="text-center">contact</th>
+              <th>fournisseur</th>
               <th>type de carte</th>
-              <th class="text-center">quantité</th>
-              <th class="text-center">Montant</th>
-              <th class="text-center">Date</th>
+              <th class="text-center">Quantité</th>
+              <th>Prix (unit)</th>
+              <th>MontantHT</th>
+              <th>Date</th>
               <th>Actions</th>
             </tr>
-            </thead>
-            <tbody>
-            <tr >
-              <!-- *ngFor="let user of users; index as i" -->
+          </thead>
+          <tbody>
+            <tr *ngFor="let card_sell of cardPurchase; index as i">
+
               <td class="text-center">
-                Username
+                {{card_sell.provider }}
               </td>
-              <td>
-                <!-- <div>{{ user.name }}</div>
-                <div class="small text-medium-emphasis">
-                  <span>{{ user.state }}</span> | Registered:
-                  {{ user.registered }}
-                </div> -->
-              </td>
-              <td class="text-center">
-                <!-- <svg cIcon
-                  id="{{ user.country + user.name }}"
-                  name="cif{{ user.country }}"
-                  size="xl"
-                  title="{{ user.country }}"
-                ></svg> -->
+
+              <td class="text-center" >
+                <div>{{ card_sell.typeCardForSale }}</div>
               </td>
               <td>
                 <div class="clearfix">
                   <div class="float-start">
-                    <!-- <strong>{{ user.usage }}%</strong> -->
-                  </div>
-                  <div class="float-end">
-                    <small class="text-medium-emphasis">
-                      <!-- {{ user.period }} -->
-                    </small>
+                    {{card_sell.quantity}}
                   </div>
                 </div>
-                <!-- <c-progress thin
-                >
-                  <c-progress-bar
-                    [value]="user.usage"
-                    color="{{ user.color }}"
-                  ></c-progress-bar
-                  >
-                </c-progress> -->
+
               </td>
               <td class="text-center">
-                <!-- <svg cIcon name="cibCc{{ user.payment }}" size="xl"></svg> -->
+                {{ card_sell.unitPrice }}
+              </td>
+              <td class="text-center">
+                {{ card_sell.amountHT }}
               </td>
               <td>
-                <div class="small text-medium-emphasis">Last login</div>
-                <!-- <strong>{{ user.activity }}</strong> -->
+                <div class="small text-medium-emphasis">
+
+                  {{card_sell.date | date: 'short'}}
+                </div>
+
+              </td>
+
+              <!-- <ng-container *ngFor="let carte_achat of card_sell.cardToTypeCardRelation ">
+                <td class="text-center" >
+                  <div>{{ carte_achat.typeCardForSale.name }}</div>
+                </td>
+                <td>
+                  <div class="clearfix">
+                    <div class="float-start">
+                      {{carte_achat.quantity}}
+                    </div>
+                  </div>
+  
+                </td>
+                <td class="text-center">
+                  {{ carte_achat.unitPrice }}
+                </td>
+                <td class="text-center">
+                  {{ carte_achat.amountHT }}
+                </td>
+                <td>
+                  <div class="small text-medium-emphasis">
+  
+                    {{card_sell.date | date: 'short'}}
+                  </div>
+  
+                </td>
+              </ng-container> -->
+
+              <td>
+                <button type="button" rel="tooltip" (click)="deleteCardPurchase(card_sell.id)"
+                  class="btn btn-danger btn-just-icon btn-sm">
+                  <svg cIcon class="me-2" class="center-align" name="cil-trash"></svg>
+                </button>
+                <button type="button" rel="tooltip" class="btn btn-info btn-just-icon btn-sm"
+                  [routerLink]="['/base/editcartepurchase/',card_sell.id]" data-original-title="" title="">
+                  <svg cIcon class="me-2" class="center-align" name="cil-pencil"></svg>
+                </button>
+                <!-- <button type="button" rel="tooltip" class="btn btn-warning btn-just-icon btn-sm" [routerLink]="['/base/historique/',card_sell.id]" data-original-title="" title="">
+                <svg cIcon class="me-2" class="center-align" name="cil-notes"></svg>
+              </button> -->
               </td>
             </tr>
-            </tbody>
-          </table>
-        </c-card-body>
-      </c-card>
-    </c-col>
-  </c-row>
-  
+          </tbody>
+        </table>
+      </c-card-body>
+    </c-card>
+  </c-col>
+</c-row>

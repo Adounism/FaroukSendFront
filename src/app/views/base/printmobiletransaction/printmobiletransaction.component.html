@@ -19,14 +19,14 @@
           >
             <thead cTableColor="light">
             <tr>
-              <th class="text-center">
+              <!-- <th class="text-center">
                 <svg cIcon name="cilPeople"></svg>
-              </th>
+              </th> -->
               <th>Clients</th>
               <th class="text-center">Numero pdv</th>
-              <th>Montant</th>
+              <th class="text-center">Montant</th>
               <th class="text-center">Date</th>
-              <th>Actions</th>
+              <th class="text-center">Actions</th>
             </tr>
             </thead>
             <tbody>
@@ -35,7 +35,7 @@
               <td class="text-center">
                 {{transaction.client.firstName}}
               </td>
-              <td>
+              <td class="text-center">
                 <div>{{ transaction.client.pdvNumber}}</div>
  
               </td>
@@ -43,7 +43,7 @@
                 {{transaction.amount}}
               </td>
               <td>
-                <div class="small text-medium-emphasis">
+                <div class="small text-medium-emphasis text-center">
                   {{ transaction.date  | date: 'short'}}
                 </div>
            

@@ -1,1 +1,237 @@
-<p>editcarte-purchase works!</p>
+<c-row ngPreserveWhitespaces>
+    <c-col xs="12">
+      <c-card class="mb-4">
+        <c-card-header>
+          <strong>Modifier L'achat de la Carte</strong>
+        </c-card-header>
+        <c-card-body>
+          <p class="text-medium-emphasis small">
+            Veillez fournir les informations du fournisseur et le Montant.
+          </p>
+  
+
+          <form cForm class="row g-3" *ngIf="currentCardData" #form="ngForm" (ngSubmit)="ajouter(form)">
+            <c-row  style="align-items: end;">
+              <c-col [md]="4">
+                <div cFormFloating>
+                  <select cSelect id="floatingSelectGrid" name="carte" [(ngModel)]="currentCardData.typeCardForSale.name" style="padding-right:60px;"  ngModel >
+            
+    
+                    <option [ngValue]="currentCardData.typeCardForSale">{{currentCardData.typeCardForSale?.name}}</option>
+                    <option *ngFor="let carte of cardListe" [ngValue]="carte"> 
+                      {{carte.name}}
+                    </option>
+              
+                  </select>                
+    
+                  <label cLabel for="floatingSelectGrid">sélectionner la carte</label>
+                  <!-- <button type="button" (click)="openCardModal(cardcontent)" rel="tooltip" style="border: none;
+                  background: none;
+                  position: absolute;
+                  top: 50%;
+                  left: calc(100% - 45px);
+                  transform: translate(-50% , -50%);">
+                    <svg cIcon class="me-2" class="center-align"  name="cil-plus"></svg>
+                </button> -->
+                </div>
+               </c-col>
+    
+            <c-col md="2">
+                <label cLabel for="inputZip">prix(unit)</label>
+                <input cFormControl id="inputZip" type="number" name="unitPrice" [(ngModel)]="currentCardData.unitPrice" />
+            </c-col>
+            <c-col md="2">
+                <label cLabel for="inputZip">quantité</label>
+                <input cFormControl id="inputZip" type="number" name="quantity" [(ngModel)]="currentCardData.quantity"    />
+            </c-col>
+            <c-col md="2">
+                <label cLabel for="inputZip">Montant HT</label>
+                <input cFormControl id="inputZip" type="number"   name="amountHT" [(ngModel)]="currentCardData.amountHT"  />
+            </c-col>
+          </c-row>
+          
+
+         
+            <c-col [xs]="12">
+              <button  *ngIf="!onLoading" cButton data-mdb-dismiss="modal" type="submit" >Ajouter</button>
+              <button *ngIf="onLoading" cButton data-mdb-dismiss="modal" class="m-1" disabled>
+                <c-spinner aria-hidden="true" size="sm"></c-spinner>
+                Loading...
+              </button>
+            </c-col>
+          </form>
+        </c-card-body>
+      </c-card>
+  
+  
+    </c-col>
+  </c-row>
+  
+  
+  <ng-template #content class="box">
+    <c-row ngPreserveWhitespaces>
+      <c-col xs="12">
+        <c-card class="mb-4">
+          <c-card-header>
+            <strong>Ajouter un Client</strong>
+          </c-card-header>
+          <c-card-body>
+            <form cForm class="row g-3" *ngIf="currentCardData" #form="ngForm" (ngSubmit)="ajouter(form)">
+              <c-col [md]="6">
+                <label cLabel for="inputEmail4">Nom:</label>
+                <input cFormControl id="inputEmail4" name="firstName" formControlName="firstName" type="text" />
+    
+                <div
+                  *ngIf="profileForm.controls['firstName'].invalid && (profileForm.controls['firstName'].dirty || profileForm.controls['firstName'].touched || submitted)"
+                  class="alert alert-danger">
+                  <div *ngIf="profileForm.controls['firstName'].errors?.['required']">
+                    Le nom du client est requis.</div>
+                </div>
+    
+              </c-col>
+              <c-col [md]="6">
+                <label cLabel for="inputPassword4">Prenom:</label>
+                <input cFormControl id="inputPassword4" formControlName="lastName" name="lastName" type="text" />
+                <div
+                  *ngIf="profileForm.controls['lastName'].invalid && (profileForm.controls['lastName'].dirty || profileForm.controls['lastName'].touched || submitted)"
+                  class="alert alert-danger">
+                  <div *ngIf="profileForm.controls['lastName'].errors?.['required']">
+                    Le prenom est requis.</div>
+                </div>
+              </c-col>
+    
+              <c-row [gutter]="{g: 2}">
+                <c-col [md]>
+                  <div cFormFloating>
+                    <input cFormControl id="floatingInputGrid" type="email" value="email@example.com"
+                      formControlName="email" />
+                    <label cLabel for="floatingInputGrid">Email address</label>
+                  </div>
+                </c-col>
+    
+              </c-row>
+    
+              <c-col [xs]="12">
+                <label cLabel for="inputAddress">Address</label>
+                <input cFormControl id="inputAddress" name="address" formControlName="address"
+                  placeholder="1234 Bamako coura" />
+              </c-col>
+    
+              <c-col [md]="6">
+                <label cLabel for="inputCity">Contact: </label>
+                <input cFormControl id="inputCity" type="tel" name="contact" formControlName="phone"
+                  placeholder="numero de télephone" />
+    
+                <div
+                  *ngIf="profileForm.controls['phone'].invalid && (profileForm.controls['phone'].dirty || profileForm.controls['phone'].touched || submitted)"
+                  class="alert alert-danger">
+                  <div *ngIf="profileForm.controls['phone'].errors?.['required']">
+                    Le numero du client est requis.</div>
+                </div>
+    
+              </c-col>
+    
+    
+              <c-col [md]="6">
+                <label cLabel for="inputCity">Contact: </label>
+                <input cFormControl id="inputCity" type="text" name="occupation" formControlName="occupation"
+                  placeholder="occupation" />
+              </c-col>
+    
+    
+              <c-col [md]="6">
+                <label cLabel for="inputCity">Numero du point de Vente: </label>
+                <input cFormControl id="inputCity" type="text" name="pdvNumber" formControlName="pdvNumber"
+                  placeholder="numero pdv " />
+              </c-col>
+    
+              <c-col [xs]="12">
+                <button *ngIf="!onLoading" cButton type="submit">Ajouter</button>
+                <button *ngIf="onLoading" cButton class="m-1" disabled>
+                  <c-spinner aria-hidden="true" size="sm"></c-spinner>
+                  Loading...
+                </button>
+              </c-col>
+            </form>
+          </c-card-body>
+        </c-card>
+      </c-col>
+    </c-row>
+  </ng-template>
+
+
+
+  <ng-template #cardcontent>
+  <c-row ngPreserveWhitespaces>
+
+    <c-col xs="12">
+      <c-card class="mb-4">
+        <c-card-header>
+          <strong>Ajouter un Type de carte</strong>
+        </c-card-header>
+        <c-card-body>
+          <form cForm class="row g-3" [formGroup]="cardForm" (ngSubmit)="addcard()">
+
+            <c-col [md]="6">
+              <div></div>
+            </c-col>
+            <c-row [gutter]="{g: 3}">
+
+              <c-col [md]="6">
+                <label cLabel for="inputEmail4">Nom de la carte:</label>
+                <input cFormControl id="inputEmail4" name="name" formControlName="name" type="text" />
+    
+                <div
+                  *ngIf="cardForm.controls['name'].invalid && (cardForm.controls['name'].dirty || cardForm.controls['name'].touched || submitted)"
+                  class="alert alert-danger">
+                  <div *ngIf="cardForm.controls['name'].errors?.['required']">
+                    Le nom de la carte est obligatoire.</div>
+                </div>
+              </c-col>
+    
+              <c-col [md]="6">
+                  <label cLabel for="inputZip">prix(unit)</label>
+                  <input cFormControl id="inputZip"  name="unitPrice" formControlName="unitPrice" />
+                    <div
+                    *ngIf="cardForm.controls['unitPrice'].invalid && (cardForm.controls['unitPrice'].dirty || cardForm.controls['unitPrice'].touched || submitted)"
+                    class="alert alert-danger">
+                    <div *ngIf="cardForm.controls['unitPrice'].errors?.['required']">
+                      Le prix  est obligatoire.</div>
+                  </div>
+              </c-col>
+            </c-row>
+  
+  
+            <c-row [gutter]="{g: 2}">
+
+              <c-col [md]="6">
+                <div cFormFloating>
+                  <textarea [ngStyle]="{ 'height.px': 100 }"
+                            cFormControl
+                            id="floatingTextarea2"
+                            placeholder="Leave a comment here"
+                            name="description" formControlName="description"
+                  ></textarea>
+                  <label cLabel for="floatingTextarea2">Description</label>
+                </div>
+                <div
+                  *ngIf="cardForm.controls['description'].invalid && (cardForm.controls['description'].dirty || cardForm.controls['description'].touched || submitted)"
+                  class="alert alert-danger">
+                  <div *ngIf="cardForm.controls['description'].errors?.['required']">
+                    La description est requise.</div>
+                </div>
+              </c-col>
+            </c-row>
+            <c-col [xs]="12">
+              <button *ngIf="!onLoading" cButton type="submit">Ajouter</button>
+              <button *ngIf="onLoading" cButton class="m-1" disabled>
+                <c-spinner aria-hidden="true" size="sm"></c-spinner>
+                Loading...
+              </button>
+            </c-col>
+          </form>
+        </c-card-body>
+      </c-card>
+    </c-col>
+  </c-row>
+</ng-template>

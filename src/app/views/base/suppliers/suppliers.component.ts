@@ -135,7 +135,7 @@ export class SuppliersComponent implements OnInit {
           "individual": {
             "firstName": fname,
             "lastName":lname,
-          },
+          }
 
         }
 

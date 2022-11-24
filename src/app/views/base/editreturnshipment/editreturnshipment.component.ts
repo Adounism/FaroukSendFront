@@ -40,6 +40,7 @@ export class EditreturnshipmentComponent implements OnInit {
 
   ngOnInit(): void {
     this.getClientList();
+    this.getCurrentReturnShipment(this.returnShipmentId);
   }
 
   getCurrentReturnShipment(id:number){
@@ -59,13 +60,15 @@ export class EditreturnshipmentComponent implements OnInit {
     this.returnShipmentData = form.value;
     if(this.returnShipmentData.amount != "" && this.returnShipmentData.amount > 0){
       this.onLoading = true;
-      let pipe = new DatePipe('en-US'); 
+      let pipe = new DatePipe('en-US');
+      console.log(this.returnShipmentData);
+       
       const myFormattedDate = pipe.transform(this.returnShipmentData.date, "yyyy-MM-dd'T'HH:mm:ss'Z'");
       let data = {
         "amount": this.returnShipmentData.amount,
         "date":myFormattedDate,
-        "client": '/api/clients/'+this.transactionData.client["id"],
-        "sendType": this.returnShipmentData.sendType
+        "client": '/api/clients/'+this.returnShipmentData.client.id,
+        "sendType": "sendBack"
       }
       this.transService.editmobileTransfert(this.returnShipmentId, data).subscribe(data=>{
         console.log(data);

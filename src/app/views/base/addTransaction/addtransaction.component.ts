@@ -16,7 +16,7 @@ export class AddTransactionComponent implements OnInit {
   transactionForm!: FormGroup;
   profileForm!: FormGroup;
   clientListe: any[]=[];
-  listeOperations: any[]=[];
+
   listeTransactions: any[]=[];
   transactionData:any;
   onLoading = false;
@@ -41,14 +41,14 @@ export class AddTransactionComponent implements OnInit {
    
 
    this.getClientList();
-   this.getOperationList();
+  //  this.getOperationList();
   }
 
   ngOnInit(): void {
    
     this.transactionForm =  this.fb.group({
       client: ['', [Validators.required]],
-      operation: ['', [Validators.required]],
+      // operation: ['', [Validators.required]],
       montant:['', [Validators.required]],
       date:['', [Validators.required]],
       
@@ -83,13 +83,13 @@ export class AddTransactionComponent implements OnInit {
     })
   }
 
-  getOperationList(){
-    this.operationService.getAllOperations().subscribe(response=>{
-      this.listeOperations = response;
+  // getOperationList(){
+  //   this.operationService.getAllOperations().subscribe(response=>{
+  //     this.listeOperations = response;
 
       
-    })
-  }
+  //   })
+  // }
 
   ajouter(){
 
@@ -103,7 +103,7 @@ export class AddTransactionComponent implements OnInit {
       let transaction= {
         "amount": this.transactionData.montant,
         "client": '/api/clients/'+this.transactionData.client["id"] ,
-        "operation": '/api/operations/'+this.transactionData.operation["id"],
+        // "operation": '/api/operations/'+this.transactionData.operation["id"],
         "date":myFormattedDate
       }
 
@@ -117,8 +117,12 @@ export class AddTransactionComponent implements OnInit {
             summary:"transaction effectuée avec success",
             duration: 3000
             });
+
+            this.getClientList();
             this.router.navigate(['/base/transaction']);
             
+        }).catch(error=>{
+          this.onLoading = false;
         });
       }else{
         this.onLoading = false;

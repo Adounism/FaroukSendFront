@@ -40,7 +40,7 @@ export class AddmobiletransactionComponent implements OnInit {
    
 
    this.getClientList();
-   this.getOperationList();
+  //  this.getOperationList();
   }
 
   ngOnInit(): void {
@@ -81,13 +81,13 @@ export class AddmobiletransactionComponent implements OnInit {
     })
   }
 
-  getOperationList(){
-    this.operationService.getAllOperations().subscribe(response=>{
-      this.listeOperations = response;
+  // getOperationList(){
+  //   this.operationService.getAllOperations().subscribe(response=>{
+  //     this.listeOperations = response;
 
       
-    })
-  }
+  //   })
+  // }
 
   ajouter(){
 
@@ -170,7 +170,7 @@ export class AddmobiletransactionComponent implements OnInit {
           summary:"Client ajouter avec succes",
           duration: 3000
          });
-         
+         this.getClientList();
          this.submitted = false;
          if (first != null) {
           first.style.display = "none";

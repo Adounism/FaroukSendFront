@@ -78,19 +78,21 @@
 
          </c-row> -->
 
+         
+         <form cForm class="row g-3" [formGroup]="cardPanierForm" (ngSubmit)="addPurchase()">
           <c-row  style="align-items: end;">
             <c-col [md]="4">
               <div cFormFloating>
-                <select cSelect id="floatingSelectGrid" formControlName="carte" style="padding-right:60px;" ngModel>
+                <select cSelect id="floatingSelectGrid" formControlName="carte" style="padding-right:60px;"  ngModel >
           
-
-                  <option [ngValue]="null" disabled>Choose client</option>
-                  <option *ngFor="let client of clientListe" [ngValue]="client"> 
-                    {{client.firstName}}
+ 
+                  <option [ngValue]="null" disabled>Choose card</option>
+                  <option *ngFor="let carte of cardListe" [ngValue]="carte"> 
+                    {{carte.name}}
                   </option>
             
                 </select>                
-
+ 
                 <label cLabel for="floatingSelectGrid">sélectionner la carte</label>
                 <button type="button" (click)="openCardModal(cardcontent)" rel="tooltip" style="border: none;
                 background: none;
@@ -101,25 +103,60 @@
                   <svg cIcon class="me-2" class="center-align"  name="cil-plus"></svg>
               </button>
               </div>
-        </c-col>
+             </c-col>
+
+          <c-col md="2">
+            <label cLabel for="inputZip">prix(unit)</label>
+            <input cFormControl id="inputZip" type="number" (change)="onUnitPriceChange($event)"  name="unitPrice" formControlName="unitPrice" />
+          </c-col>
+          <c-col md="2">
+            <label cLabel for="inputZip">quantité</label>
+            <input cFormControl id="inputZip" type="number" name="quantity" (change)="onQuantityChange($event)" formControlName="quantity"  />
+          </c-col>
+          <c-col md="2">
+            <label cLabel for="inputZip">Montant HT</label>
+            <input cFormControl id="inputZip" type="number" value="{{amountHT}}" name="amountHT" formControlName="amountHT" />
+          </c-col>
+          <c-col  md="2" style="display: table-caption">
+            <button  cButton type="submit" >Ajouter</button>
+          </c-col>
+        </c-row>
+        </form>
+        
+
             
-          
-            <c-col md="2">
-              <label cLabel for="inputZip">quantité</label>
-              <input cFormControl id="inputZip" name="quantity" formControlName="quantity"  />
-            </c-col>
-            <c-col md="2">
-              <label cLabel for="inputZip">prix(unit)</label>
-              <input cFormControl id="inputZip"  name="unitPrice" formControlName="unitPrice" />
-            </c-col>
-            <c-col md="2">
-              <label cLabel for="inputZip">Montant HT</label>
-              <input cFormControl id="inputZip"  name="amountHT" formControlName="amountHT" />
-            </c-col>
-            <c-col  md="2" style="display: table-caption">
-              <button  cButton >Ajouter</button>
-            </c-col>
-          </c-row>
+         <c-row [gutter]="{g: 2}">
+              <c-col >
+                <table class="table" >
+                  <thead>
+                    <tr>
+                      <!-- <th scope="col">First</th>
+                      <th scope="col">Last</th>
+                      <th scope="col">Handle</th> -->
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let carpanier of listeCardPanier; index as i">
+                      <th scope="row" >{{i}}</th>
+                      <td>{{carpanier.carte?.name}}</td>
+                      <td>{{carpanier.unitPrice}}</td>
+                      <td>{{carpanier.quantity}}</td>
+                      <td>{{carpanier.amountHT}}</td>
+                      <td>
+                        <button type="button" rel="tooltip" class="btn btn-danger btn-just-icon btn-sm"  (click)="delete(i)">
+
+                          <svg cIcon class="me-2" class="center-align "  name="cil-trash"></svg>
+                        </button>
+
+                      </td>
+                      
+                    </tr>
+                  </tbody>
+                </table>
+
+              </c-col>
+         </c-row>
+
          
             <c-col [xs]="12">
               <button  *ngIf="!onLoading" cButton data-mdb-dismiss="modal" type="submit">Ajouter</button>
@@ -135,9 +172,6 @@
   
     </c-col>
   </c-row>
-  
-  
-  
   
   
   <ng-template #content class="box">
@@ -261,7 +295,7 @@
                 </div>
               </c-col>
     
-              <c-col [md]="6">
+              <!-- <c-col [md]="6">
                   <label cLabel for="inputZip">prix(unit)</label>
                   <input cFormControl id="inputZip"  name="unitPrice" formControlName="unitPrice" />
                     <div
@@ -270,7 +304,7 @@
                     <div *ngIf="cardForm.controls['unitPrice'].errors?.['required']">
                       Le prix  est obligatoire.</div>
                   </div>
-              </c-col>
+              </c-col> -->
             </c-row>
   
   

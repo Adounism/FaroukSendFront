@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -24,13 +25,12 @@ export class EditTransactionComponent implements OnInit{
      private transService: TransactionsService,
     private toast: NgToastService,private router: Router,
     private fb: FormBuilder,
-    private clientService: ClientService,
-    private operationService: OperationsService) { 
+    private clientService: ClientService) { 
 
     this.transactionId = this.route.snapshot.params['id'];
     this.getTransactionById(this.transactionId);
     this.getClientList();
-    this.getOperationList();
+    // this.getOperationList();
 
   }
   ngOnInit(): void {
@@ -64,20 +64,22 @@ export class EditTransactionComponent implements OnInit{
     });
   }
 
-  getOperationList(){
-    this.operationService.getAllOperations().subscribe(response=>{
-      this.listeOperations = response;
-    })
-  }
+  // getOperationList(){
+  //   this.operationService.getAllOperations().subscribe(response=>{
+  //     this.listeOperations = response;
+  //   })
+  // }
 
   ajouter(form:NgForm){
     this.transactionData = form.value;
     if(this.transactionData.amount != "" && this.transactionData.amount > 0){
       this.onLoading = true;
+      let pipe = new DatePipe('en-US'); 
+      const myFormattedDate = pipe.transform(this.transactionData.date, "yyyy-MM-dd'T'HH:mm:ss'Z'");
       let data = {
         "amount": this.transactionData.amount,
-        "client": '/api/clients/'+this.transactionData.client["id"] ,
-        "operation": '/api/operations/'+this.transactionData.operation["id"]
+        "client": '/api/clients/'+this.transactionData.client["id"],
+        "date":myFormattedDate
       }
       this.transService.editTransaction(this.transactionId, data).subscribe(datat=>{
         console.log(data);
@@ -91,7 +93,7 @@ export class EditTransactionComponent implements OnInit{
           this.onLoading = false;
           this.toast.error({
             detail:"Traitment error please try again",
-            summary:"",
+            summary:error.body.message,
             duration: 3000
            });
         })

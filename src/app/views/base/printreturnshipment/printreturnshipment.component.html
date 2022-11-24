@@ -19,9 +19,9 @@
               </th> -->
               <th>Clients</th>
               <th class="text-center">Numero pdv</th>
-              <th>Montant de retour</th>
+              <th class="text-center">Montant de retour</th>
               <th class="text-center">Date</th>
-              <th>Actions</th>
+              <th class="text-center" >Actions</th>
             </tr>
             </thead>
             <tbody>
@@ -30,14 +30,14 @@
               <td class="text-center">
                 {{returnShipment.client.firstName + " " + returnShipment.client.lastName}}
               </td>
-              <td>
+              <td class="text-center">
                 <div>{{ returnShipment.client.pdvNumber }}</div>
               </td>
               <td class="text-center">
                 {{returnShipment.amount}}
               </td>
               <td>
-                <div class="small text-medium-emphasis">
+                <div class="small text-center text-medium-emphasis">
                   {{returnShipment.date | date:'short'}}
                 </div>
      

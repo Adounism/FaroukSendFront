@@ -22,6 +22,12 @@ export class TransactionsService {
   create: this.BaseUrl +'/card_for_sales', 
   findById: this.BaseUrl + '/card_for_sales/',
 }
+
+relationCardToTypeCards= {
+  cardListe: this.BaseUrl + '/relation_card_to_type_cards',
+  create: this.BaseUrl +'/relation_card_to_type_cards', 
+  findById: this.BaseUrl + '/relation_card_to_type_cards/',
+}
 collection = {
   collectionListe: this.BaseUrl + '/collections',
   create: this.BaseUrl +'/collections', 
@@ -127,15 +133,15 @@ sendType = {
   }
 
   editCardSelling(id: number, data:any): Observable<any>{ 
-    return this.http.put(`${this.cardForSale.findById} ${id}`, data, {observe: 'response'});
+    return this.http.put(`${this.relationCardToTypeCards.findById} ${id}`, data, {observe: 'response'});
     
   }
 
   findSellingCard(id:number): Observable<any>{
-    return this.http.get<any>(this.cardForSale.findById+ id);
+    return this.http.get<any>(this.relationCardToTypeCards.findById+ id);
   }
 
   deleteCardSelle(id:number){
-    return this.http.delete(this.cardForSale.findById + id, {observe: 'response'});
+    return this.http.delete(this.relationCardToTypeCards.findById + id, {observe: 'response'});
   }
 }

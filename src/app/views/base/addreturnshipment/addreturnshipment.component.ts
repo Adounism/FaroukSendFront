@@ -117,6 +117,7 @@ export class AddreturnshipmentComponent implements OnInit {
             summary:"",
             duration: 3000
             });
+            this.getClientList();
             this.router.navigate(['/base/printreturnshipment']);
             
         });

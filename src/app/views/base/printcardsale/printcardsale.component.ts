@@ -11,6 +11,8 @@ import { TransactionsService } from 'src/app/services/transactions.service';
 })
 export class PrintcardsaleComponent implements OnInit {
   cardSellListes:any[]=[];
+  userCardSell:any;
+  cardForSales:any=[];
   page: number = 1;
   total: number = 0;
   constructor(private transaction: TransactionsService, 
@@ -24,14 +26,35 @@ export class PrintcardsaleComponent implements OnInit {
   getAllCardSells(){
     this.transaction.getAllCardSales(this.page).subscribe(data=>{
       this.cardSellListes = data;
-      console.log(this.cardSellListes);
-      
+      let allCards:any = [];
+      data.forEach((d:any)=>{
+        let obj:any = {}
+        obj['client']=d['client']['firstName']+" "+d['client']['lastName']
+        obj['pdvNumber']=d['client']['pdvNumber']
+        obj['date']=d['date']
+        if (d['cardToTypeCardRelation'].length > 0) {
+          d['cardToTypeCardRelation'].forEach((card:any)=>{
+            let copy = {...obj}
+            copy['typeCardForSale']=card['typeCardForSale']['name']
+            copy['quantity']=card['quantity']
+            copy['unitPrice']=card['unitPrice']
+            copy['amountHT']=card['amountHT']
+            copy['id']=card['id']
+            allCards.push(copy)
+          })
+        }else{
+          allCards.push(obj)
+        }
+      })
+      this.cardForSales = allCards;
+      data.forEach((card:any)=>{
+        this.getClientCreditPurchase(card);
+      })
     })
     
   }
 
   deleteCardSale(id:number){
-
       this.ngxComfirmService.confirm({
         title:'Voulez vous effacer cette client?',
         confirmLabel: 'Okay',
@@ -66,6 +89,18 @@ export class PrintcardsaleComponent implements OnInit {
           console.log('Cancel');
         }
       });
+    }
+
+    getClientCreditPurchase(client:any){
+      client["cardToTypeCardRelation"].forEach((data:any, index:number)=>{ 
+        
+        this.userCardSell = data;
+        // console.log(this.userCardSell);
+        
+  
+      })
+  
+      
     }
 
 }

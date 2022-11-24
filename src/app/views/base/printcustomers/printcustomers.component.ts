@@ -21,6 +21,7 @@ export class PrintcustomersComponent {
     private ngxComfirmService: NgxBootstrapConfirmService, private router: ActivatedRoute) { 
 
   this.getAllClient();
+  
   }
 
   getAllClient(){
@@ -62,14 +63,14 @@ export class PrintcustomersComponent {
             
           },
           error: error=>{
-            if(error.status == 404){
+
     
               this.toast.warning({
                 detail:"Le client n'existe pas!!!",
                 summary:error.body.message,
                 duration: 3000
                });
-            } 
+            
           }
         });
       } else {

@@ -24,7 +24,6 @@ export class TransactionComponent implements OnInit{
 
   transactionForm!: FormGroup;
   clientListe: any[]=[];
-  listeOperations: any[]=[];
   listeTransactions: any[]=[];
   transactionData:any;
 

@@ -18,7 +18,7 @@
           <div class="col-sm-7" style="    width: fit-content; display: -webkit-inline-box;">
             <!-- <input type="text" class="form-control" placeholder="Search user historique" (ngModelChange)="onSearchChange($event)" [(ngModel)]="searchText" ng aria-label="Search"> -->
             <form class="row row-cols-sm-auto">
-              <div class="col-12">
+              <div class="col-12" >
                 <div class="dp-hidden position-absolute">
                   <div class="input-group">
                     <input
@@ -58,10 +58,12 @@
                     (input)="fromDate = validateInput(fromDate, dpFromDate.value)"
                   />
                   
-                  <button class="btn btn-outline-secondary bi bi-calendar3" (click)="datepicker.toggle()" type="button"></button>
+                  <button class="btn btn-outline-secondary bi bi-calendar3" (click)="datepicker.toggle()" type="button">
+                    <svg cIcon class="me-2" class="center-align"  name="cil-calendar"></svg>
+                  </button>
                 </div>
               </div>
-              <div class="col-12">
+              <div class="col-12" style="padding: 0px;">
                 <div class="input-group">
                   <input
                     #dpToDate
@@ -71,7 +73,9 @@
                     [value]="formatter.format(toDate)"
                     (input)="toDate = validateInput(toDate, dpToDate.value)"
                   />
-                  <button class="btn btn-outline-secondary bi bi-calendar3" (click)="datepicker.toggle()" type="button"></button>
+                  <button class="btn btn-outline-secondary bi bi-calendar3" (click)="datepicker.toggle()" type="button">
+                    <svg cIcon class="me-2" class="center-align"  name="cil-calendar"></svg>
+                  </button>
                 </div>
               </div>
             </form>
@@ -90,8 +94,8 @@
           <tr>
             <th scope="col">Nom </th>
             <th scope="col">Prenom </th>
-            <th scope="col">operation name</th>
-            <th scope="col">Pdv Number</th>
+            <!-- <th scope="col">operation name</th> -->
+            <th scope="col">Numero pdv</th>
             <th scope="col">montant</th>
             <th scope="col">Date</th>
             <th scope="col">actions</th>
@@ -102,7 +106,7 @@
             <!-- <th scope="row">1</th> -->
             <td>{{transaction.client?.firstName}}</td>
             <td>{{transaction.client?.lastName}}</td>
-            <td>{{transaction.operation?.name}}</td>
+            <!-- <td>{{transaction.operation?.name}}</td> -->
             <td>{{transaction.client?.pdvNumber}}</td>
             <td>{{transaction.amount}}</td>
             <td>{{transaction.createdAt | date:'short'}}</td>

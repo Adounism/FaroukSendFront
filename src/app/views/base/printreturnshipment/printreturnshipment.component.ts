@@ -51,14 +51,12 @@ export class PrintreturnshipmentComponent implements OnInit {
             
           },
           error: error=>{
-            if(error.status == 404){
     
               this.toast.warning({
                 detail:"La Transaction n'existe pas!!!",
                 summary:error.body.message,
                 duration: 3000
                });
-            } 
           }
         });
       } else {

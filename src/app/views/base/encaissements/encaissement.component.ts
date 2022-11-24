@@ -53,14 +53,12 @@ export class PaginationsComponent implements OnInit{
             
           },
           error: error=>{
-            if(error.status == 404){
     
               this.toast.warning({
                 detail:"Cette encaissement est introuvable!!!",
                 summary:error.body.message,
                 duration: 3000
                });
-            } 
           }
         });
       } else {

@@ -39,6 +39,8 @@ import { EditdecaissementComponent } from './editdecaissement/editdecaissement.c
 import { AddcreditPurchaseComponent } from './addcredit-purchase/addcredit-purchase.component';
 import { AddmobileTransPurchaseComponent } from './addmobile-trans-purchase/addmobile-trans-purchase.component';
 import { EditcreditPurchaseComponent } from './editcredit-purchase/editcredit-purchase.component';
+import { EditmobileTransPurchaseComponent } from './editmobile-trans-purchase/editmobile-trans-purchase.component';
+import { EditcardsaleComponent } from './editcardsale/editcardsale.component';
 
 const routes: Routes = [
   {
@@ -256,7 +258,7 @@ const routes: Routes = [
 
       {
         path: 'editcardsale/:id',
-        component: AddcardsaleComponent,
+        component: EditcardsaleComponent,
         // canActivate:[AuthGuard],
         data: {
           title: 'Modifier la vente carte',
@@ -401,7 +403,7 @@ const routes: Routes = [
       
             {
               path: 'editmobiletransfertpurchase/:id',
-              component: EditmobiletransactionComponent,
+              component: EditmobileTransPurchaseComponent,
               // canActivate:[AuthGuard],
               data: {
                 title: "Modifier L'achat de transfert mobile",
