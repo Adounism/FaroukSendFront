@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { DocsComponentsModule } from '@docs-components/docs-components.module';
 
@@ -10,6 +10,7 @@ import { DropdownsComponent } from './dropdowns/dropdowns.component';
 import { ButtonsRoutingModule } from './buttons-routing.module';
 
 import {
+  BreadcrumbModule,
   ButtonGroupModule,
   ButtonModule,
   CardModule,
@@ -20,17 +21,47 @@ import {
   NavbarModule,
   NavModule,
   SharedModule,
+  SpinnerModule,
+  TableModule,
+  TooltipModule,
   UtilitiesModule
 } from '@coreui/angular';
 
 import { IconModule } from '@coreui/icons-angular';
 import { AchatComponent } from './achats/achat.component';
+import { AddcreditPurchaseComponent } from '../base/addcredit-purchase/addcredit-purchase.component';
+import { EditcreditPurchaseComponent } from './editcredit-purchase/editcredit-purchase.component';
+import { PrintcreditPurchaseComponent } from './printcredit-purchase/printcredit-purchase.component';
+import { AddcartePurchaseComponent } from './addcarte-purchase/addcarte-purchase.component';
+import { EditcartePurchaseComponent } from './editcarte-purchase/editcarte-purchase.component';
+import { PrintcartePurchaseComponent } from './printcarte-purchase/printcarte-purchase.component';
+import { AddmobileTransPurchaseComponent } from './addmobile-trans-purchase/addmobile-trans-purchase.component';
+import { EditmobileTransPurchaseComponent } from './editmobile-trans-purchase/editmobile-trans-purchase.component';
+import { PrintmobileTransPurchaseComponent } from './printmobile-trans-purchase/printmobile-trans-purchase.component';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { MdbModalModule } from 'mdb-angular-ui-kit/modal';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
+import { AddPurchaseComponent } from '../base/addpurchase/addpurchase.component';
+import { PrintAchatComponent } from '../base/listeachat/printachat.component';
 
 @NgModule({
   declarations: [
     AchatComponent,
     ButtonGroupsComponent,
     DropdownsComponent,
+    AddcreditPurchaseComponent,
+    EditcreditPurchaseComponent,
+    PrintcreditPurchaseComponent,
+    AddcartePurchaseComponent,
+    EditcartePurchaseComponent,
+    PrintcartePurchaseComponent,
+    AddmobileTransPurchaseComponent,
+    EditmobileTransPurchaseComponent,
+    PrintmobileTransPurchaseComponent,
+    AddcartePurchaseComponent,
+    AddPurchaseComponent,
+    PrintAchatComponent
   ],
   imports: [
     CommonModule,
@@ -44,12 +75,22 @@ import { AchatComponent } from './achats/achat.component';
     DropdownModule,
     SharedModule,
     FormModule,
+    TooltipModule,
+    FormsModule,
+    SpinnerModule,
+    BreadcrumbModule,
     ReactiveFormsModule,
     DocsComponentsModule,
     NavbarModule,
     CollapseModule,
     NavModule,
-    NavbarModule
+    NavbarModule,
+    TableModule,
+    NgxPaginationModule,
+    MdbModalModule,
+    NgbModule,
+    OwlDateTimeModule, 
+    OwlNativeDateTimeModule,
   ]
 })
 export class ButtonsModule {

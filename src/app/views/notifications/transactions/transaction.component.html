@@ -1,0 +1,130 @@
+
+<c-col xs="12">
+  <c-card class="mb-4">
+    <c-card-header>
+
+        <strong>Liste des Transactions</strong>
+
+        <!-- <input type="file" class="file-input" (change)="onFileSelected($event)" #fileUpload>
+          <button style="float: center; align-items: center; margin-left: 15px; background-color: rgb(80, 233, 80);"  class="btn float-center"  cButton> Importer Fichier
+          </button> -->
+
+          <input type="file" id="upload" name="upload" (change)="onFileSelected($event)"  style="visibility: hidden; width: 1px; height: 1px" />
+          <a type="file" onclick="document.getElementById('upload').click()"  class="btn btn-secondary"><i  class="material-icons">
+            <svg cIcon class="me-2" class="center-align" name="cil-notes"></svg>
+          </i> <span>Import Excel</span></a>	
+
+          
+          <div class="col-sm-7" style="    width: fit-content; display: -webkit-inline-box;">
+            <!-- <input type="text" class="form-control" placeholder="Search user historique" (ngModelChange)="onSearchChange($event)" [(ngModel)]="searchText" ng aria-label="Search"> -->
+            <form class="row row-cols-sm-auto">
+              <div class="col-12" >
+                <div class="dp-hidden position-absolute">
+                  <div class="input-group">
+                    <input
+                      name="datepicker"
+                      class="form-control"
+                      ngbDatepicker
+                      #datepicker="ngbDatepicker"
+                      [autoClose]="'outside'"
+                      (dateSelect)="onDateSelection($event)"
+                      [displayMonths]="2"
+                      [dayTemplate]="t"
+                      outsideDays="hidden"
+                      [startDate]="fromDate!"
+                      tabindex="-1"
+                    />
+                    <ng-template #t let-date let-focused="focused">
+                      <span
+                        class="custom-day"
+                        [class.focused]="focused"
+                        [class.range]="isRange(date)"
+                        [class.faded]="isHovered(date) || isInside(date)"
+                        (mouseenter)="hoveredDate = date"
+                        (mouseleave)="hoveredDate = null"
+                      >
+                        {{ date.day }}
+                      </span>
+                    </ng-template>
+                  </div>
+                </div>
+                <div class="input-group">
+                  <input
+                    #dpFromDate
+                    class="form-control"
+                    placeholder="yyyy-mm-dd"
+                    name="dpFromDate"
+                    [value]="formatter.format(fromDate)"
+                    (input)="fromDate = validateInput(fromDate, dpFromDate.value)"
+                  />
+                  
+                  <button class="btn btn-outline-secondary bi bi-calendar3" (click)="datepicker.toggle()" type="button">
+                    <svg cIcon class="me-2" class="center-align"  name="cil-calendar"></svg>
+                  </button>
+                </div>
+              </div>
+              <div class="col-12" style="padding: 0px;">
+                <div class="input-group">
+                  <input
+                    #dpToDate
+                    class="form-control"
+                    placeholder="yyyy-mm-dd"
+                    name="dpToDate"
+                    [value]="formatter.format(toDate)"
+                    (input)="toDate = validateInput(toDate, dpToDate.value)"
+                  />
+                  <button class="btn btn-outline-secondary bi bi-calendar3" (click)="datepicker.toggle()" type="button">
+                    <svg cIcon class="me-2" class="center-align"  name="cil-calendar"></svg>
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+
+          <button style="float: right;" class="btn float-right" color="primary"  [routerLink]="['/vente-credit/addtransaction']" cButton> ajouter
+    
+          </button>
+
+    </c-card-header>
+    <c-card-body>
+
+        <table cTable class="center-align">
+          <caption>Listes des Transactions</caption>
+          <thead>
+          <tr>
+            <th scope="col">Nom </th>
+            <th scope="col">Prenom </th>
+            <!-- <th scope="col">operation name</th> -->
+            <th scope="col">Numero pdv</th>
+            <th scope="col">montant</th>
+            <th scope="col">Date</th>
+            <th scope="col">actions</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let transaction of listeTransactions | paginate: { itemsPerPage: 25, currentPage: page, totalItems: total } ">
+            <!-- <th scope="row">1</th> -->
+            <td>{{transaction.client?.firstName}}</td>
+            <td>{{transaction.client?.lastName}}</td>
+            <!-- <td>{{transaction.operation?.name}}</td> -->
+            <td>{{transaction.client?.pdvNumber}}</td>
+            <td>{{transaction.amount}}</td>
+            <td>{{transaction.createdAt | date:'short'}}</td>
+            <td>
+              <button type="button" rel="tooltip" (click)="deleteTransaction(transaction.id)"  class="btn btn-danger btn-just-icon btn-sm">
+                <svg cIcon class="me-2" class="center-align" name="cil-trash"></svg>
+            </button>
+            <button type="button" rel="tooltip" class="btn btn-info btn-just-icon btn-sm" [routerLink]="['/vente-credit/edittransaction/',transaction.id]" data-original-title="" title="">
+              <svg cIcon class="me-2" class="center-align" name="cil-pencil"></svg>
+            </button>
+            </td>
+          </tr>
+          <tr class="center-align">
+            <td   class="center-align" *ngIf="total < 0" colspan="4">No Customers Found</td>
+          </tr>
+          </tbody>
+        </table>
+        <pagination-controls (pageChange)="pageChangeEvent($event)"></pagination-controls>
+    </c-card-body>
+  </c-card>
+</c-col>

@@ -49,7 +49,7 @@ const routes: Routes = [
           import('./views/forms/forms.module').then((m) => m.CoreUIFormsModule)
       },
       {
-        path: 'charts',
+        path: 'vente-carte',
         loadChildren: () =>
           import('./views/charts/charts.module').then((m) => m.ChartsModule)
       },
@@ -59,7 +59,7 @@ const routes: Routes = [
           import('./views/icons/icons.module').then((m) => m.IconsModule)
       },
       {
-        path: 'notifications',
+        path: 'vente-credit',
         loadChildren: () =>
           import('./views/notifications/notifications.module').then((m) => m.NotificationsModule)
       },

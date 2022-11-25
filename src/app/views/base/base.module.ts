@@ -7,6 +7,7 @@ import {
   AccordionModule,
   BadgeModule,
   BreadcrumbModule,
+  ButtonGroupModule,
   ButtonModule,
   CardModule,
   CarouselModule,
@@ -15,6 +16,7 @@ import {
   FormModule,
   GridModule,
   ListGroupModule,
+  NavbarModule,
   NavModule,
   PaginationModule,
   PlaceholderModule,
@@ -40,18 +42,18 @@ import { CustomersComponent } from './customers/customers.component';
 import {  SuppliersComponent } from './suppliers/suppliers.component';
 import { HistoryComponent } from './historiques/historique.component';
 import { AddOperationComponent } from './addoperation/addoperation.component';
-import {  TransactionComponent } from './transactions/transaction.component';
+import {  TransactionComponent } from '../notifications/transactions/transaction.component';
 import {  EditOperationComponent } from './editoperation/editoperation.component';
 import { PrintcustomersComponent } from './printcustomers/printcustomers.component';
 import {PrintsupplierComponent } from './printsuppliers/printsuppliers.component';
-import { PaginationsComponent } from './encaissements/encaissement.component';
-import { AddTransactionComponent } from './addTransaction/addtransaction.component';
+import { PaginationsComponent } from '../icons/encaissements/encaissement.component';
+import { AddTransactionComponent } from '../notifications/addTransaction/addtransaction.component';
 import { PrintAchatComponent } from './listeachat/printachat.component';
 import { EditCustomerComponent } from './editcustomer/editcustomer.component';
 import { AddPurchaseComponent } from './addpurchase/addpurchase.component';
 import { EditSupplierComponent } from './editsupplier/editsupplier.component';
 import { OperationComponent } from './operation/operation.component';
-import { EditTransactionComponent } from './editTransaction/edittransaction.component';
+import { EditTransactionComponent } from '../notifications/editTransaction/edittransaction.component';
 
 // Components Routing
 import { BaseRoutingModule } from './base-routing.module';
@@ -61,29 +63,29 @@ import { SearchPipe } from 'src/app/pipes/search.pipe';
 import { MdbModalModule } from 'mdb-angular-ui-kit/modal';
 import { NgbDate, NgbCalendar } from '@ng-bootstrap/ng-bootstrap';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { DecaissementComponent } from './decaissement/decaissement.component';
-import { AddcardsaleComponent } from './addcardsale/addcardsale.component';
-import { PrintcardsaleComponent } from './printcardsale/printcardsale.component';
-import { EditcardsaleComponent } from './editcardsale/editcardsale.component';
-import { AddmobiletransactionComponent } from './addmobiletransaction/addmobiletransaction.component';
-import { PrintmobiletransactionComponent } from './printmobiletransaction/printmobiletransaction.component';
-import { EditmobiletransactionComponent } from './editmobiletransaction/editmobiletransaction.component';
-import { AddreturnshipmentComponent } from './addreturnshipment/addreturnshipment.component';
-import { PrintreturnshipmentComponent } from './printreturnshipment/printreturnshipment.component';
-import { EditreturnshipmentComponent } from './editreturnshipment/editreturnshipment.component';
+import { DecaissementComponent } from '../icons/decaissement/decaissement.component';
+import { AddcardsaleComponent } from '../charts/addcardsale/addcardsale.component';
+import { PrintcardsaleComponent } from '../charts/printcardsale/printcardsale.component';
+import { EditcardsaleComponent } from '../charts/editcardsale/editcardsale.component';
+import { AddmobiletransactionComponent } from '../icons/addmobiletransaction/addmobiletransaction.component';
+import { PrintmobiletransactionComponent } from '../icons/printmobiletransaction/printmobiletransaction.component';
+import { EditmobiletransactionComponent } from '../icons/editmobiletransaction/editmobiletransaction.component';
+import { AddreturnshipmentComponent } from '../icons/addreturnshipment/addreturnshipment.component';
+import { PrintreturnshipmentComponent } from '../icons/printreturnshipment/printreturnshipment.component';
+import { EditreturnshipmentComponent } from '../icons/editreturnshipment/editreturnshipment.component';
 import { AddcreditPurchaseComponent } from './addcredit-purchase/addcredit-purchase.component';
-import { EditcreditPurchaseComponent } from './editcredit-purchase/editcredit-purchase.component';
-import { PrintcreditPurchaseComponent } from './printcredit-purchase/printcredit-purchase.component';
-import { AddcartePurchaseComponent } from './addcarte-purchase/addcarte-purchase.component';
-import { EditcartePurchaseComponent } from './editcarte-purchase/editcarte-purchase.component';
-import { PrintcartePurchaseComponent } from './printcarte-purchase/printcarte-purchase.component';
-import { AddmobileTransPurchaseComponent } from './addmobile-trans-purchase/addmobile-trans-purchase.component';
-import { EditmobileTransPurchaseComponent } from './editmobile-trans-purchase/editmobile-trans-purchase.component';
-import { PrintmobileTransPurchaseComponent } from './printmobile-trans-purchase/printmobile-trans-purchase.component';
-import { AddencaissementComponent } from './addencaissement/addencaissement.component';
-import { EditencaissementComponent } from './editencaissement/editencaissement.component';
-import { AdddecaissementComponent } from './adddecaissement/adddecaissement.component';
-import { EditdecaissementComponent } from './editdecaissement/editdecaissement.component';
+import { EditcreditPurchaseComponent } from '../buttons/editcredit-purchase/editcredit-purchase.component';
+import { PrintcreditPurchaseComponent } from '../buttons/printcredit-purchase/printcredit-purchase.component';
+import { AddcartePurchaseComponent } from '../buttons/addcarte-purchase/addcarte-purchase.component';
+import { EditcartePurchaseComponent } from '../buttons/editcarte-purchase/editcarte-purchase.component';
+import { PrintcartePurchaseComponent } from '../buttons/printcarte-purchase/printcarte-purchase.component';
+import { AddmobileTransPurchaseComponent } from '../buttons/addmobile-trans-purchase/addmobile-trans-purchase.component';
+import { EditmobileTransPurchaseComponent } from '../buttons/editmobile-trans-purchase/editmobile-trans-purchase.component';
+import { PrintmobileTransPurchaseComponent } from '../buttons/printmobile-trans-purchase/printmobile-trans-purchase.component';
+import { AddencaissementComponent } from '../icons/addencaissement/addencaissement.component';
+import { EditencaissementComponent } from '../icons/editencaissement/editencaissement.component';
+import { AdddecaissementComponent } from '../icons/adddecaissement/adddecaissement.component';
+import { EditdecaissementComponent } from '../icons/editdecaissement/editdecaissement.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -99,7 +101,6 @@ import { EditdecaissementComponent } from './editdecaissement/editdecaissement.c
     SharedModule,
     ListGroupModule,
     IconModule,
-    ListGroupModule,
     PlaceholderModule,
     ProgressModule,
     SpinnerModule,
@@ -113,10 +114,12 @@ import { EditdecaissementComponent } from './editdecaissement/editdecaissement.c
     DropdownModule,
     PaginationModule,
     PopoverModule,
+    NavbarModule,
     TableModule,
     DocsComponentsModule,
     NgxPaginationModule,
     MdbModalModule,
+    ButtonGroupModule,
     NgbModule,
     OwlDateTimeModule, 
     OwlNativeDateTimeModule,
@@ -129,42 +132,17 @@ import { EditdecaissementComponent } from './editdecaissement/editdecaissement.c
     SuppliersComponent,
     HistoryComponent,
     AddOperationComponent,
-    TransactionComponent,
+    // TransactionComponent,
     EditOperationComponent,
     PrintcustomersComponent,
     PrintsupplierComponent,
-    PaginationsComponent,
-    PrintAchatComponent,
     EditCustomerComponent,
-    AddPurchaseComponent,
     EditSupplierComponent,
     OperationComponent,
-    EditTransactionComponent,
-    AddTransactionComponent,
+
+    // AddTransactionComponent,
     SearchPipe,
-    DecaissementComponent,
-    AddcardsaleComponent,
-    PrintcardsaleComponent,
-    EditcardsaleComponent,
-    AddmobiletransactionComponent,
-    PrintmobiletransactionComponent,
-    EditmobiletransactionComponent,
-    AddreturnshipmentComponent,
-    PrintreturnshipmentComponent,
-    EditreturnshipmentComponent,
-    AddcreditPurchaseComponent,
-    EditcreditPurchaseComponent,
-    PrintcreditPurchaseComponent,
-    AddcartePurchaseComponent,
-    EditcartePurchaseComponent,
-    PrintcartePurchaseComponent,
-    AddmobileTransPurchaseComponent,
-    EditmobileTransPurchaseComponent,
-    PrintmobileTransPurchaseComponent,
-    AddencaissementComponent,
-    EditencaissementComponent,
-    AdddecaissementComponent,
-    EditdecaissementComponent
+
   ],
 })
 export class BaseModule {}

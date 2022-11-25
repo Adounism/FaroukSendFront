@@ -8,11 +8,11 @@ import { SupplierService } from 'src/app/services/supplier.service';
 import { PurchasesService } from 'src/app/services/purchases.service';
 
 @Component({
-  selector: 'app-addcredit-purchase',
-  templateUrl: './addcredit-purchase.component.html',
-  styleUrls: ['./addcredit-purchase.component.scss']
+  selector: 'app-addmobile-trans-purchase',
+  templateUrl: './addmobile-trans-purchase.component.html',
+  styleUrls: ['./addmobile-trans-purchase.component.scss']
 })
-export class AddcreditPurchaseComponent implements OnInit {
+export class AddmobileTransPurchaseComponent implements OnInit {
   transactionForm!: FormGroup;
   profileForm!: FormGroup;
   supplierListe: any[]=[];
@@ -29,13 +29,10 @@ export class AddcreditPurchaseComponent implements OnInit {
 
   constructor(private supplier: SupplierService,
     private purchaseService: PurchasesService,
-
      private toast: NgToastService,
      private router:Router,
      private fb: FormBuilder,
-     private modalService: MdbModalService,
-
-     
+     private modalService: MdbModalService
      ) {
    
 
@@ -94,7 +91,7 @@ export class AddcreditPurchaseComponent implements OnInit {
         "amount": this.transactionData.montant,
         "provider": '/api/providers/'+this.transactionData.provider["id"] ,
         "date":myFormattedDate,
-        "typePurchase":"purchaseOfCredits"
+        "typePurchase":"mobileTransferPurchase"
       }
 
       if(this.transactionData.montant != "" && this.transactionData.montant > 0){
@@ -106,8 +103,7 @@ export class AddcreditPurchaseComponent implements OnInit {
             summary:"",
             duration: 3000
             });
-            this.getSupplierList();
-            this.router.navigate(['/buttons/printcreditpurchase']);
+            this.router.navigate(['/buttons/printmobiletransfertpurchase']);
             
         }).catch(error=>{
           this.onLoading = false;
@@ -163,11 +159,13 @@ export class AddcreditPurchaseComponent implements OnInit {
          
          this.submitted = false;
       }).catch(error=>{
+
         this.toast.warning({
           detail:error.body.message,
           summary:"",
           duration: 3000
          });
+         
         this.submitted = false;
 
       });

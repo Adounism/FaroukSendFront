@@ -25,6 +25,7 @@ export const navItems: INavData[] = [
     url: '/base/listsuppliers',
     iconComponent: { name: 'cil-bookmark' }
   },
+
   // {
   //   name: 'Opérations',
   //   title: true
@@ -47,20 +48,30 @@ export const navItems: INavData[] = [
   //   ]
       
   // },
+
+
   {
     name: 'Vente Crédit',
-    url: '/base',
+    url: '/vente-credit',
     iconComponent: { name: 'cil-send' },
     children: [
       {
         name: 'Ajouter un Envoi de crédit',
-        url: '/base/addtransaction'
+        url: '/vente-credit/addtransaction'
       },
 
       {
         name: 'Liste des Envois',
-       url: '/base/transaction'
+       url: '/vente-credit/transaction'
       },
+    ]
+  },
+  // {
+  //   name: 'Vente Crédit',
+  //   url: '/base',
+  //   iconComponent: { name: 'cil-send' },
+  //   children: [
+
       // {
       //   name: 'Edit customer',
       //   url: '/base/editcustomer/:id'
@@ -111,60 +122,65 @@ export const navItems: INavData[] = [
       //   name: 'Tooltips',
       //   url: '/base/tooltips'
       // }
-    ]
-  },
+  //   ]
+  // },
 
-  {
+   {
     name: 'Ventes des cartes',
-    url: '/base',
+    url: '/vente-carte',
     iconComponent: { name: 'cil-credit-card' },
     children: [
       {
         name: 'ajouter un vente de carte',
-        url: '/base/addcardsale'
+        url: '/vente-carte/addcardsale'
       },
 
       {
         name: 'Liste des ventes',
-       url: '/base/printcardsale'
+       url: '/vente-carte/printcardsale'
       },
     ]
-  },
 
+  },
   {
     name: 'Transfert Mobile',
-    url: '/base',
     iconComponent: { name: 'cil-Phone' },
+    url: '/icons',
     children: [
       {
         name: 'Ajouter un Envoi',
-        url: '/base/addmobiletransaction'
+        url: '/icons/addmobiletransaction'
       },
 
       {
         name: 'Liste des Envois',
-       url: '/base/printmobiletransaction'
+       url: '/icons/printmobiletransaction'
       },
       
       {
         name: "Ajouter retour d'envoi",
-       url: '/base/addreturnshipment'
+       url: '/icons/addreturnshipment'
       },
       
       {
         name: "Liste des retours d'envoi",
-       url: '/base/printreturnshipment'
+       url: '/icons/printreturnshipment'
       },
       {
         name: "Encaissement",
-       url: '/base/encaissement'
+       url: '/icons/encaissement'
       },
       {
         name: "Décaissement",
-       url: '/base/decaissement'
+       url: '/icons/decaissement'
       },
     ]
+
   },
+
+
+
+ 
   {
     name: 'Achat',
     url: '/buttons',
@@ -172,22 +188,22 @@ export const navItems: INavData[] = [
     children: [
       {
         name: 'Liste des Achat crédit',
-        url: '/base/printcreditpurchase'
+        url: '/buttons/printcreditpurchase'
       },
 
       //  {
       //   name: 'Ajouter un achat',
-      //   url: '/base/addpurchase'
+      //   url: '/buttons/addpurchase'
       // },
 
       {
         name: 'Liste des Achats cartes',
-        url: '/base/printcartepurchase'
+        url: '/buttons/printcartepurchase'
       },
 
        {
         name: 'Achats de transfert mobile',
-        url: '/base/printmobiletransfertpurchase'
+        url: '/buttons/printmobiletransfertpurchase'
       },
       // {
       //   name: 'Dropdowns',
@@ -220,52 +236,25 @@ export const navItems: INavData[] = [
         name: "Rapport d'Achat",
         url: '/forms/range'
       },
-      {
-        name: 'Input Group',
-        url: '/forms/input-group'
-      },
-      {
-        name: 'Floating Labels',
-        url: '/forms/floating-labels'
-      },
-      {
-        name: 'Layout',
-        url: '/forms/layout'
-      },
+      // {
+      //   name: 'Input Group',
+      //   url: '/forms/input-group'
+      // },
+      // {
+      //   name: 'Floating Labels',
+      //   url: '/forms/floating-labels'
+      // },
+      // {
+      //   name: 'Layout',
+      //   url: '/forms/layout'
+      // },
   //     {
   //       name: 'Validation',
   //       url: '/forms/validation'
   //     }
     ]
   },
-  // {
-  //   name: 'Charts',
-  //   url: '/charts',
-  //   iconComponent: { name: 'cil-chart-pie' }
-  // },
-  // {
-  //   name: 'Icons',
-  //   iconComponent: { name: 'cil-star' },
-  //   url: '/icons',
-  //   children: [
-  //     {
-  //       name: 'CoreUI Free',
-  //       url: '/icons/coreui-icons',
-  //       badge: {
-  //         color: 'success',
-  //         text: 'FREE'
-  //       }
-  //     },
-  //     {
-  //       name: 'CoreUI Flags',
-  //       url: '/icons/flags'
-  //     },
-  //     {
-  //       name: 'CoreUI Brands',
-  //       url: '/icons/brands'
-  //     }
-  //   ]
-  // },
+
   // {
   //   name: 'Notifications',
   //   url: '/notifications',

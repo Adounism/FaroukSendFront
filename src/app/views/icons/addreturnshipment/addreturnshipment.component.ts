@@ -2,20 +2,22 @@ import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgToastService } from 'ng-angular-popup';
+import { ClientService } from 'src/app/services/client.service';
+import { OperationsService } from 'src/app/services/operations.service';
+import { TransactionsService } from 'src/app/services/transactions.service';
 import { MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
 import { DatePipe } from '@angular/common';
-import { SupplierService } from 'src/app/services/supplier.service';
-import { PurchasesService } from 'src/app/services/purchases.service';
-
 @Component({
-  selector: 'app-addcredit-purchase',
-  templateUrl: './addcredit-purchase.component.html',
-  styleUrls: ['./addcredit-purchase.component.scss']
+  selector: 'app-addreturnshipment',
+  templateUrl: './addreturnshipment.component.html',
+  styleUrls: ['./addreturnshipment.component.scss']
 })
-export class AddcreditPurchaseComponent implements OnInit {
+export class AddreturnshipmentComponent implements OnInit {
+
   transactionForm!: FormGroup;
   profileForm!: FormGroup;
-  supplierListe: any[]=[];
+  clientListe: any[]=[];
+  listeOperations: any[]=[];
   listeTransactions: any[]=[];
   transactionData:any;
   onLoading = false;
@@ -27,9 +29,9 @@ export class AddcreditPurchaseComponent implements OnInit {
   message:any;
 
 
-  constructor(private supplier: SupplierService,
-    private purchaseService: PurchasesService,
-
+  constructor(private clientService: ClientService,
+    private transService: TransactionsService,
+     private operationService: OperationsService,
      private toast: NgToastService,
      private router:Router,
      private fb: FormBuilder,
@@ -39,16 +41,17 @@ export class AddcreditPurchaseComponent implements OnInit {
      ) {
    
 
-   this.getSupplierList();
+   this.getClientList();
+   this.getOperationList();
   }
 
   ngOnInit(): void {
    
     this.transactionForm =  this.fb.group({
-      provider: ['', [Validators.required]],
-      montant:['', [Validators.required]],
-      date:['', [Validators.required]],
-      
+      client: ['', [Validators.required]],
+      amount: ['', [Validators.required]],
+      date: ['', [Validators.nullValidator]],
+      sendType:['sendBack', [Validators.required]],
 
     });
 
@@ -72,14 +75,21 @@ export class AddcreditPurchaseComponent implements OnInit {
 
   }
 
-  getSupplierList(){
-    this.supplier.getAllProviders().subscribe(data=>{
-      this.supplierListe = data;
+  getClientList(){
+    this.clientService.getAllClient().subscribe(data=>{
+      this.clientListe = data;
+
       
     })
   }
 
+  getOperationList(){
+    this.operationService.getAllOperations().subscribe(response=>{
+      this.listeOperations = response;
 
+      
+    })
+  }
 
   ajouter(){
 
@@ -91,32 +101,25 @@ export class AddcreditPurchaseComponent implements OnInit {
       let pipe = new DatePipe('en-US'); 
       const myFormattedDate = pipe.transform(this.transactionData.date, "yyyy-MM-dd'T'HH:mm:ss'Z'");
       let transaction= {
-        "amount": this.transactionData.montant,
-        "provider": '/api/providers/'+this.transactionData.provider["id"] ,
-        "date":myFormattedDate,
-        "typePurchase":"purchaseOfCredits"
+        "amount": this.transactionData.amount,
+        "date": myFormattedDate,
+        "client": '/api/clients/'+this.transactionData.client["id"] ,
+        "sendType": this.transactionData.sendType
       }
 
-      if(this.transactionData.montant != "" && this.transactionData.montant > 0){
+      console.log(transaction);
+      if(this.transactionData.amount != "" && this.transactionData.amount > 0){
 
-        this.purchaseService.create(transaction).then(resp=>{
+        this.transService.maketeMobileSend(transaction).then(resp=>{
 
           this.toast.success({
-            detail:"Achat effectuée avec success",
+            detail:"Retour d'achat Réçu avec success",
             summary:"",
             duration: 3000
             });
-            this.getSupplierList();
-            this.router.navigate(['/buttons/printcreditpurchase']);
+            this.getClientList();
+            this.router.navigate(['/icons/printreturnshipment']);
             
-        }).catch(error=>{
-          this.onLoading = false;
-
-          this.toast.warning({
-            detail:"error",
-            summary:error.body.message,
-            duration: 3000
-            });
         });
       }else{
         this.onLoading = false;
@@ -153,7 +156,8 @@ export class AddcreditPurchaseComponent implements OnInit {
   
     if(this.profileForm.valid){
       this.submitted = true;
-      this.supplier.create(this.profileForm.value).then((res)=>{
+      let first = document.querySelector('.box') as HTMLElement | null;
+      this.clientService.create(this.profileForm.value).then((res)=>{
 
         this.toast.success({
           detail:"Client ajouter",
@@ -162,12 +166,12 @@ export class AddcreditPurchaseComponent implements OnInit {
          });
          
          this.submitted = false;
+         if (first != null) {
+          first.style.display = "none";
+        }
       }).catch(error=>{
-        this.toast.warning({
-          detail:error.body.message,
-          summary:"",
-          duration: 3000
-         });
+        console.log(error);
+        
         this.submitted = false;
 
       });
@@ -178,3 +182,4 @@ export class AddcreditPurchaseComponent implements OnInit {
 
 
 }
+

@@ -1,24 +1,25 @@
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { FormBuilder, FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NgToastService } from 'ng-angular-popup';
 import { MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
 import { DatePipe } from '@angular/common';
 import { SupplierService } from 'src/app/services/supplier.service';
 import { PurchasesService } from 'src/app/services/purchases.service';
-
 @Component({
-  selector: 'app-addcredit-purchase',
-  templateUrl: './addcredit-purchase.component.html',
-  styleUrls: ['./addcredit-purchase.component.scss']
+  selector: 'app-editcredit-purchase',
+  templateUrl: './editcredit-purchase.component.html',
+  styleUrls: ['./editcredit-purchase.component.scss']
 })
-export class AddcreditPurchaseComponent implements OnInit {
+export class EditcreditPurchaseComponent implements OnInit {
   transactionForm!: FormGroup;
   profileForm!: FormGroup;
   supplierListe: any[]=[];
   listeTransactions: any[]=[];
   transactionData:any;
   onLoading = false;
+  creditPurchaseId!:number;
+  currentCreditPurchasedata:any;
 
 
  
@@ -34,23 +35,25 @@ export class AddcreditPurchaseComponent implements OnInit {
      private router:Router,
      private fb: FormBuilder,
      private modalService: MdbModalService,
+     private route : ActivatedRoute,
 
      
      ) {
    
-
+      this.creditPurchaseId = this.route.snapshot.params['id'];
    this.getSupplierList();
+   this.getCurrentCreditPurchase(this.creditPurchaseId);
   }
 
   ngOnInit(): void {
    
-    this.transactionForm =  this.fb.group({
-      provider: ['', [Validators.required]],
-      montant:['', [Validators.required]],
-      date:['', [Validators.required]],
+    // this.transactionForm =  this.fb.group({
+    //   provider: ['', [Validators.required]],
+    //   montant:['', [Validators.required]],
+    //   date:['', [Validators.required]],
       
 
-    });
+    // });
 
 
     this.profileForm = this.fb.group({
@@ -63,8 +66,6 @@ export class AddcreditPurchaseComponent implements OnInit {
       email: ['', [Validators.nullValidator]],
       occupation: ['', [Validators.nullValidator]],
       pdvNumber: ['', [Validators.nullValidator]],
-
-      //typeClient:['', [Validators.required]]
     });
 
 
@@ -72,22 +73,30 @@ export class AddcreditPurchaseComponent implements OnInit {
 
   }
 
+  getCurrentCreditPurchase(id:number){
+    this.purchaseService.find(id).subscribe(data=>{
+      this.currentCreditPurchasedata = data;
+   
+      
+    });
+  }
+
   getSupplierList(){
     this.supplier.getAllProviders().subscribe(data=>{
       this.supplierListe = data;
+      console.log(this.supplierListe);
       
     })
   }
 
 
 
-  ajouter(){
+  ajouter(form:NgForm){
 
 
-    if(this.transactionForm.valid){
+    if(form){
+      this.transactionData = form.value;
       this.onLoading = true;
-
-      this.transactionData = this.transactionForm.value;
       let pipe = new DatePipe('en-US'); 
       const myFormattedDate = pipe.transform(this.transactionData.date, "yyyy-MM-dd'T'HH:mm:ss'Z'");
       let transaction= {
@@ -97,19 +106,20 @@ export class AddcreditPurchaseComponent implements OnInit {
         "typePurchase":"purchaseOfCredits"
       }
 
+      console.log(transaction);
       if(this.transactionData.montant != "" && this.transactionData.montant > 0){
 
-        this.purchaseService.create(transaction).then(resp=>{
+        this.purchaseService.editPurchase(this.creditPurchaseId, transaction).subscribe(resp=>{
 
           this.toast.success({
-            detail:"Achat effectuée avec success",
+            detail:"Modifier avec success",
             summary:"",
             duration: 3000
             });
             this.getSupplierList();
             this.router.navigate(['/buttons/printcreditpurchase']);
             
-        }).catch(error=>{
+        },error=>{
           this.onLoading = false;
 
           this.toast.warning({
@@ -163,11 +173,8 @@ export class AddcreditPurchaseComponent implements OnInit {
          
          this.submitted = false;
       }).catch(error=>{
-        this.toast.warning({
-          detail:error.body.message,
-          summary:"",
-          duration: 3000
-         });
+        console.log(error);
+        
         this.submitted = false;
 
       });

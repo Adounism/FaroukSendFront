@@ -42,7 +42,7 @@ export class PrintsupplierComponent implements OnInit{
         this.supplierService.delete(id).subscribe({
           next: data=>{
             this.toast.success({
-              detail:"Founisser supprimer",
+              detail:"Founisseur supprimer",
               summary:data.body.message,
               duration: 3000
               });

@@ -149,7 +149,7 @@ export class AddPurchaseComponent implements OnInit{
               summary:"ajouter de l'achat en Cours",
               duration: 3000
               });
-              this.router.navigate(['/base/listeachats']);
+              this.router.navigate(['/buttons/listeachats']);
           })
         }else if(this.purchaseData.bprovider != ""){
           let data = {
@@ -162,7 +162,7 @@ export class AddPurchaseComponent implements OnInit{
               summary:"ajouter de l'achat en Cours",
               duration: 3000
               });
-              this.router.navigate(['/base/listeachats']);
+              this.router.navigate(['/buttons/listeachats']);
           });
         }
 
@@ -262,7 +262,7 @@ export class AddPurchaseComponent implements OnInit{
 
         this.service.create(provider).then(response=>{
           console.log(response);
-          this.router.navigate(['/base/listsuppliers']);
+          this.router.navigate(['/buttons/listsuppliers']);
           
         }, error=>{
           console.log(error);
@@ -297,7 +297,7 @@ export class AddPurchaseComponent implements OnInit{
 
         this.service.create(provider).then
         (response=>{
-          this.router.navigate(['/base/listsuppliers']);
+          this.router.navigate(['/buttons/listsuppliers']);
           
         })
       }

@@ -1,18 +1,17 @@
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { FormBuilder, FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NgToastService } from 'ng-angular-popup';
 import { MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
 import { DatePipe } from '@angular/common';
 import { SupplierService } from 'src/app/services/supplier.service';
 import { PurchasesService } from 'src/app/services/purchases.service';
-
 @Component({
-  selector: 'app-addcredit-purchase',
-  templateUrl: './addcredit-purchase.component.html',
-  styleUrls: ['./addcredit-purchase.component.scss']
+  selector: 'app-editmobile-trans-purchase',
+  templateUrl: './editmobile-trans-purchase.component.html',
+  styleUrls: ['./editmobile-trans-purchase.component.scss']
 })
-export class AddcreditPurchaseComponent implements OnInit {
+export class EditmobileTransPurchaseComponent implements OnInit {
   transactionForm!: FormGroup;
   profileForm!: FormGroup;
   supplierListe: any[]=[];
@@ -25,32 +24,33 @@ export class AddcreditPurchaseComponent implements OnInit {
   submitted = false;
   selected!: number;
   message:any;
-
+  currentMobileTransId!:number;
+  currentMobileTransPurchaseData:any;
 
   constructor(private supplier: SupplierService,
     private purchaseService: PurchasesService,
-
      private toast: NgToastService,
      private router:Router,
      private fb: FormBuilder,
      private modalService: MdbModalService,
-
-     
+     private route:ActivatedRoute
      ) {
    
 
+   this.currentMobileTransId = this.route.snapshot.params['id'];
    this.getSupplierList();
   }
 
   ngOnInit(): void {
    
-    this.transactionForm =  this.fb.group({
-      provider: ['', [Validators.required]],
-      montant:['', [Validators.required]],
-      date:['', [Validators.required]],
+    this.getCurrentMobilePurchase(this.currentMobileTransId);
+    // this.transactionForm =  this.fb.group({
+    //   provider: ['', [Validators.required]],
+    //   montant:['', [Validators.required]],
+    //   date:['', [Validators.required]],
       
 
-    });
+    // });
 
 
     this.profileForm = this.fb.group({
@@ -72,6 +72,16 @@ export class AddcreditPurchaseComponent implements OnInit {
 
   }
 
+  getCurrentMobilePurchase(id:number){
+    this.purchaseService.find(id).subscribe(data=>{
+      this.currentMobileTransPurchaseData = data;
+    },error=>{
+      if(error.status == 404){
+        this.router.navigate(['/404']);
+      }
+    });
+  }
+
   getSupplierList(){
     this.supplier.getAllProviders().subscribe(data=>{
       this.supplierListe = data;
@@ -81,35 +91,34 @@ export class AddcreditPurchaseComponent implements OnInit {
 
 
 
-  ajouter(){
+  update(form:NgForm){
 
 
-    if(this.transactionForm.valid){
+    if(form){
+
       this.onLoading = true;
 
-      this.transactionData = this.transactionForm.value;
+      this.transactionData = form.value;
       let pipe = new DatePipe('en-US'); 
       const myFormattedDate = pipe.transform(this.transactionData.date, "yyyy-MM-dd'T'HH:mm:ss'Z'");
       let transaction= {
         "amount": this.transactionData.montant,
         "provider": '/api/providers/'+this.transactionData.provider["id"] ,
         "date":myFormattedDate,
-        "typePurchase":"purchaseOfCredits"
+        "typePurchase":"mobileTransferPurchase"
       }
-
       if(this.transactionData.montant != "" && this.transactionData.montant > 0){
 
-        this.purchaseService.create(transaction).then(resp=>{
+        this.purchaseService.editPurchase(this.currentMobileTransId ,transaction).subscribe(resp=>{
 
           this.toast.success({
-            detail:"Achat effectuée avec success",
+            detail:"Modifier avec success",
             summary:"",
             duration: 3000
             });
-            this.getSupplierList();
-            this.router.navigate(['/buttons/printcreditpurchase']);
+            this.router.navigate(['/buttons/printmobiletransfertpurchase']);
             
-        }).catch(error=>{
+        },error=>{
           this.onLoading = false;
 
           this.toast.warning({
@@ -117,7 +126,7 @@ export class AddcreditPurchaseComponent implements OnInit {
             summary:error.body.message,
             duration: 3000
             });
-        });
+        })
       }else{
         this.onLoading = false;
 
@@ -163,11 +172,13 @@ export class AddcreditPurchaseComponent implements OnInit {
          
          this.submitted = false;
       }).catch(error=>{
+
         this.toast.warning({
           detail:error.body.message,
           summary:"",
           duration: 3000
          });
+        
         this.submitted = false;
 
       });

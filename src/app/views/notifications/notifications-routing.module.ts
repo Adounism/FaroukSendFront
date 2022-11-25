@@ -5,18 +5,46 @@ import { BadgesComponent } from './badges/badges.component';
 import { AlertsComponent } from './alerts/alerts.component';
 import { ModalsComponent } from './modals/modals.component';
 import { ToastersComponent } from './toasters/toasters.component';
+import { AddTransactionComponent } from './addTransaction/addtransaction.component';
+import { TransactionComponent } from './transactions/transaction.component';
+import { EditTransactionComponent } from './editTransaction/edittransaction.component';
 
 const routes: Routes = [
   {
     path: '',
     data: {
-      title: 'Notifications'
+      title: 'vente-credit'
     },
     children: [
       {
         path: '',
         pathMatch: 'full',
-        redirectTo: 'badges'
+        redirectTo: 'transaction'
+      },
+
+      {
+        path: 'addtransaction',
+        component: AddTransactionComponent,
+        // canActivate:[AuthGuard],
+        data: {
+          title: 'add transaction',
+        },
+      },
+      {
+        path: 'transaction',
+        component: TransactionComponent,
+        // canActivate:[AuthGuard],
+        data: {
+          title: 'Transaction',
+        },
+      },
+      {
+        path: 'edittransaction/:id',
+        component: EditTransactionComponent,
+        // canActivate:[AuthGuard],
+        data: {
+          title: 'Edit Transaction',
+        },
       },
       {
         path: 'alerts',

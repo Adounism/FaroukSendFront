@@ -1,0 +1,96 @@
+<c-row ngPreserveWhitespaces>
+  <c-col xs>
+    <c-card class="mb-4">
+      <c-card-header>ventes de cartes</c-card-header>
+      <c-card-body>
+        <table [hover]="true" [responsive]="true" [striped]="true" align="middle" cTable class="mb-0 border">
+          <thead cTableColor="light">
+            <tr>
+              <!-- <th class="text-center">
+                <svg cIcon name="cilPeople"></svg>
+              </th> -->
+              <th>Clients</th>
+              <th class="text-center">Numero pdv</th>
+              <th class="text-center">type de carte</th>
+              <th class="text-center">Quantité</th>
+              <th>Prix (unit)</th>
+              <th>MontantHT</th>
+              <th class="text-center">Date</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let card_sell of cardForSales; index as i">
+
+              <td class="text-center">
+                {{card_sell.client }}
+              </td>
+              <td class="text-center">
+                <div>{{ card_sell.pdvNumber }}</div>
+              </td>
+              <td class="text-center">
+                <div>{{ card_sell?.typeCardForSale ?? "Null" }}</div>
+              </td>
+              <td class="text-center">
+                <div>{{ card_sell?.quantity ?? "Null"}}</div>
+              </td>
+              <td class="text-center">
+                <div>{{ card_sell?.unitPrice ?? "Null" }}</div>
+              </td>
+              <td class="text-center">
+                <div>{{ card_sell?.amountHT ?? "Null"}}</div>
+              </td>
+              <td class="text-center">
+                <div class="small text-medium-emphasis text-center">
+
+                  {{card_sell.date | date: 'short'}}
+                </div>
+
+              </td>
+              <!-- <ng-container *ngFor="let carte_achat of card_sell.cardToTypeCardRelation ">
+                <td class="text-center" >
+                  <div>{{ carte_achat.typeCardForSale.name }}</div>
+                </td>
+                <td>
+                  <div class="clearfix">
+                    <div class="float-start">
+                      {{carte_achat.quantity}}
+                    </div>
+                  </div>
+  
+                </td>
+                <td class="text-center">
+                  {{ carte_achat.unitPrice }}
+                </td>
+                <td class="text-center">
+                  {{ carte_achat.amountHT }}
+                </td>
+                <td>
+                  <div class="small text-medium-emphasis">
+  
+                    {{card_sell.date | date: 'short'}}
+                  </div>
+  
+                </td>
+              </ng-container> -->
+
+              <td>
+                <button type="button" rel="tooltip" (click)="deleteCardSale(card_sell.id)"
+                  class="btn btn-danger btn-just-icon btn-sm">
+                  <svg cIcon class="me-2" class="center-align" name="cil-trash"></svg>
+                </button>
+                <button type="button" rel="tooltip" class="btn btn-info btn-just-icon btn-sm"
+                  [routerLink]="['/vente-carte/editcardsale/',card_sell.id]" data-original-title="" title="">
+                  <svg cIcon class="me-2" class="center-align" name="cil-pencil"></svg>
+                </button>
+                <!-- <button type="button" rel="tooltip" class="btn btn-warning btn-just-icon btn-sm" [routerLink]="['/base/historique/',card_sell.id]" data-original-title="" title="">
+                <svg cIcon class="me-2" class="center-align" name="cil-notes"></svg>
+              </button> -->
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </c-card-body>
+    </c-card>
+  </c-col>
+</c-row>

@@ -1,0 +1,79 @@
+
+  <c-row  ngPreserveWhitespaces>
+    <c-col xs>
+      <c-card class="mb-4">
+        <c-card-header>
+          Listes des decaissements
+          <button style="float: right;" class="btn float-right" color="primary"  [routerLink]="['/icons/add-decaissement']" cButton> ajouter
+    
+          </button>
+        </c-card-header>
+        <c-card-body>
+          <table
+            [hover]="true"
+            [responsive]="true"
+            [striped]="true"
+            align="middle"
+            cTable
+            class="mb-0 border"
+          >
+            <thead cTableColor="light">
+            <tr>
+              <!-- <th class="text-center">
+                <svg cIcon name="cilPeople"></svg>
+              </th> -->
+              <th>Numero Pdv</th>
+              <th class="text-center">Numero reçu</th>
+              <th class="text-center">Description</th>
+              <th class="text-center">Montant</th>
+              <th class="text-center">Date</th>
+              <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let oper of decaissementListe; index as i">
+            
+              <td class="text-center">
+                {{oper.pdvNumber}}
+              </td>
+              <td>
+                <div>{{ oper.numberReceived }}</div>
+                <div class="small text-medium-emphasis">
+                  <!-- <span>{{ user.state }}</span> | Registered:
+                  {{ user.registered }} -->
+                </div>
+              </td>
+              <td class="text-center small text-medium-emphasis">
+                {{oper.description}}
+              </td>
+              <td>
+                <div class="clearfix">
+                  <div class="float-start">
+                    <strong>{{ oper.amount}} cfa</strong>
+                  </div>
+                </div>
+  
+              </td>
+              <td>
+                <div class="small text-medium-emphasis">
+                  {{ oper.date | date:'short'}}
+                </div>
+                <!-- <strong>{{ user.activity }}</strong> -->
+              </td>
+              <td class="text-center">
+                
+                <button type="button" rel="tooltip" (click)="deletedecaissement(oper.id)"  class="btn btn-danger btn-just-icon btn-sm">
+                  <svg cIcon class="me-2" class="center-align" name="cil-trash"></svg>
+               </button>
+               <button type="button" rel="tooltip" class="btn btn-info btn-just-icon btn-sm" [routerLink]="['/icons/decaissement/',oper.id]" data-original-title="" title="">
+                  <svg cIcon class="me-2" class="center-align" name="cil-pencil"></svg>
+               </button>
+             </td>
+            </tr>
+            </tbody>
+          </table>
+        </c-card-body>
+      </c-card>
+    </c-col>
+  </c-row>
+  
