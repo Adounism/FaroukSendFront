@@ -145,7 +145,12 @@ export class SuppliersComponent implements OnInit {
           
         }, error=>{
           console.log(error);
-          
+          this.toast.warning({
+            detail:error.body.message,
+            summary:"",
+            duration: 3000
+            });
+          this.submitted = false;
         })
         
         // console.log("Send Data to Back");
@@ -180,6 +185,13 @@ export class SuppliersComponent implements OnInit {
         (response=>{
           this.router.navigate(['/base/listsuppliers']);
           
+        }).catch(error=>{
+          this.submitted = false;
+          this.toast.warning({
+            detail:error.body.message,
+            summary:"",
+            duration: 3000
+            });
         })
       }
 

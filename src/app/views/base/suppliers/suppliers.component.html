@@ -16,7 +16,7 @@
               <div cFormFloating>
                 <input cFormControl id="floatingInputGrid" type="email" value="email@example.com"
                   formControlName="email" />
-                <label cLabel for="floatingInputGrid">Email address</label>
+                <label cLabel for="floatingInputGrid">Adresse email <span class="req-field">*</span></label>
               </div>
             </c-col>
             <c-col [md]>
@@ -24,11 +24,11 @@
 
               <c-form-check>
                 <input cFormCheckInput type="radio" value="induvidual" [checked]="default" (click)="verifieCheck()" formControlName="induvidual" name="induvidual" />
-                <label cFormCheckLabel>Induvidual</label>
+                <label cFormCheckLabel>Individuelle</label>
               </c-form-check>
               <c-form-check>
                 <input cFormCheckInput type="radio" value="business" [checked]="second" (click)="verifieCheck()" formControlName="businessType"  name="businessType"/>
-                <label cFormCheckLabel>Business</label>
+                <label cFormCheckLabel>Entreprise</label>
 
                 <!-- <div
                 *ngIf="(profileForm.controls['business'].valid || profileForm.controls['induvidual'].valid
@@ -62,7 +62,7 @@
           </c-row>
 
           <c-col [md]="6" *ngIf="default">
-            <label cLabel for="inputEmail4">Nom du Fournisseur:</label>
+            <label cLabel for="inputEmail4">Nom du Fournisseur:<span class="req-field">*</span></label>
             <input cFormControl id="inputEmail4" name="firstName" formControlName="firstName" type="text" />
             <div
               *ngIf="profileForm.controls['firstName'].invalid && (profileForm.controls['firstName'].dirty ||  submitted)"
@@ -73,7 +73,7 @@
 
           </c-col>
           <c-col [md]="6" *ngIf="default">
-            <label cLabel for="inputPassword4">Prenom du Fournisseur:</label>
+            <label cLabel for="inputPassword4">Prénom du Fournisseur:<span class="req-field">*</span></label>
             <input cFormControl id="inputPassword4" formControlName="lastName" name="lastName" type="text" />
             <div
               *ngIf="profileForm.controls['lastName'].invalid && (profileForm.controls['lastName'].dirty || submitted)"
@@ -87,15 +87,15 @@
 
 
           <c-col [xs]="12">
-            <label cLabel for="inputAddress">Address du Fournisseur</label>
+            <label cLabel for="inputAddress">Address du Fournisseur:</label>
             <input cFormControl id="inputAddress" name="adresse" formControlName="adresse"
               placeholder="1234 Bamako coura" />
           </c-col>
 
           <c-col [md]="6" *ngIf="second">
-            <label cLabel for="businessName">Nom du Business: </label>
+            <label cLabel for="businessName">Nom de l'entreprise:<span class="req-field">*</span></label>
             <input cFormControl id="inputCity" type="text" name="business" formControlName="business"
-              placeholder="nom du business" />
+              placeholder="nom du entreprise" />
             <!-- <div
               *ngIf="profileForm.controls['business'].invalid && (profileForm.controls['business'].dirty || profileForm.controls['business'].touched || submitted)"
               class="alert alert-danger">
@@ -106,7 +106,7 @@
 
 
           <c-col [md]="6">
-            <label cLabel for="inputCity">Contact du Fournisseur: </label>
+            <label cLabel for="inputCity">Contact du Fournisseur:<span class="req-field">*</span></label>
             <input cFormControl id="inputCity" type="tel" name="firstPhone" formControlName="firstPhone"
               placeholder="numero de télephone" />
             <div
@@ -126,7 +126,11 @@
 
 
           <c-col [xs]="12">
-            <button cButton type="submit">Ajouter</button>
+            <button *ngIf="!submitted" cButton  type="submit">Ajouter</button>
+            <button *ngIf="submitted"  cButton class="m-1" disabled>
+              <c-spinner aria-hidden="true" size="sm"></c-spinner>
+              Loading...
+            </button>
           </c-col>
         </form>
       </c-card-body>

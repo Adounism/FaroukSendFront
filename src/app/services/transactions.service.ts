@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpEvent, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
@@ -42,6 +42,10 @@ send = {
   sendListe: this.BaseUrl + '/sends',
   create: this.BaseUrl +'/sends', 
   findById: this.BaseUrl + '/sends/',
+}
+
+reports = {
+  importTransaction: this.BaseUrl + '/reports',
 }
 
 sendType = {
@@ -88,6 +92,7 @@ sendType = {
   findencaissement(id:number): Observable<any>{
     return this.http.get<any>(this.collection.findById+ id);
   }
+
   getAllTresorie(type:string):Observable<any>{
     return this.http.get<any[]>(this.collection.collectionListe+ `?collectionType=${type}`);
   }
@@ -107,8 +112,20 @@ sendType = {
     return this.httpService.post(this.send.create, data, {observe: 'response'});
   }
 
-  getAllMobileSend(sendtype:string){
-    return this.http.get<any[]>(this.send.sendListe+ `?sendType=${sendtype}`);
+  findByRangeDateTransfert(from: any, to: any ): Observable<any>{
+    
+    return this.http.get<any>(this.send.sendListe+ `?operation=1&createdAt[after]=${from}&createdAt[before]=${to}`);
+  }
+
+  getAllMobileSend(sendtype:string, search:string): Observable<any>{
+    console.log(search);
+    
+    return this.http.get<any[]>(this.send.sendListe+ `?sendType[]=${sendtype}&?firstName=${search}&?lastName=${search}&?pdvNumber=${search}`);
+  }
+
+  getSearchMobileSend( search:string): Observable<any>{
+
+    return this.http.get<any[]>(this.send.sendListe+ `?client.firstName=${search}`);
   }
 
   deletemobileTransfert(id:number){
@@ -121,6 +138,10 @@ sendType = {
   }
   findmobileTransfert(id:number): Observable<any>{
     return this.http.get<any>(this.send.findById+ id);
+  }
+
+  getAllSenType():Observable<any>{
+    return this.http.get<any>(this.sendType.send_types);
   }
 
   // CARD SALES
@@ -143,5 +164,19 @@ sendType = {
 
   deleteCardSelle(id:number){
     return this.http.delete(this.relationCardToTypeCards.findById + id, {observe: 'response'});
+  }
+
+  //UPLOAD FILE 
+  upload(file: File): Promise<any> {
+    const formData: FormData = new FormData();
+
+    formData.append('file', file);
+    return this.httpService.post(this.reports.importTransaction, file, {observe: 'response'});
+    // const req = new HttpRequest('POST', `${this.reports.importTransaction}`, formData, {
+    //   reportProgress: true,
+    //   responseType: 'json'
+    // });
+
+    // return this.http.request(req);
   }
 }

@@ -34,7 +34,7 @@ export class PrintsupplierComponent implements OnInit{
 
   deletesupplier(id: number){
     this.ngxComfirmService.confirm({
-      title:'Voulez vous effacer cette Fournisseur?',
+      title:'Voulez-vous supprimer cette Fournisseur?',
       confirmLabel: 'Okay',
       declineLabel: 'Cancel'
     }).then((res: boolean) => {
@@ -52,7 +52,6 @@ export class PrintsupplierComponent implements OnInit{
           },
           error: error=>{
             if(error.status == 404){
-    
               this.toast.warning({
                 detail:"Founisseur inexistant !!!",
                 summary:error.body.message,

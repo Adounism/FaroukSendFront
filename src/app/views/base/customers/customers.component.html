@@ -10,7 +10,7 @@
         </p>
         <form cForm class="row g-3" [formGroup]="profileForm" (ngSubmit)="ajouter()">
           <c-col [md]="6">
-            <label cLabel for="inputEmail4">Nom:</label>
+            <label cLabel for="inputEmail4">Nom: <span class="req-field">*</span></label>
             <input cFormControl id="inputEmail4" name="firstName" formControlName="firstName" type="text" />
 
             <div
@@ -22,7 +22,7 @@
 
           </c-col>
           <c-col [md]="6">
-            <label cLabel for="inputPassword4">Prenom:</label>
+            <label cLabel for="inputPassword4">Prénom:<span class="req-field">*</span></label>
             <input cFormControl id="inputPassword4" formControlName="lastName" name="lastName" type="text" />
             <div
               *ngIf="profileForm.controls['lastName'].invalid && (profileForm.controls['lastName'].dirty || profileForm.controls['lastName'].touched || submitted)"
@@ -35,9 +35,9 @@
           <c-row [gutter]="{g: 2}">
             <c-col [md]>
               <div cFormFloating>
-                <input cFormControl id="floatingInputGrid" type="email" value="email@example.com"
+                <input cFormControl id="floatingInputGrid"  type="email" value="email@example.com"
                   formControlName="email" />
-                <label cLabel for="floatingInputGrid">Email address</label>
+                <label cLabel for="floatingInputGrid">Address Email <span class="req-field">*</span></label>
               </div>
             </c-col>
 
@@ -50,7 +50,7 @@
           </c-col>
 
           <c-col [md]="6">
-            <label cLabel for="inputCity">Contact: </label>
+            <label cLabel for="inputCity">Contact:<span class="req-field">*</span></label>
             <input cFormControl id="inputCity" type="tel" name="contact" formControlName="phone"
               placeholder="numero de télephone" />
 
@@ -65,20 +65,20 @@
 
 
           <c-col [md]="6">
-            <label cLabel for="inputCity">Contact: </label>
+            <label cLabel for="inputCity">Occupation: </label>
             <input cFormControl id="inputCity" type="text" name="occupation" formControlName="occupation"
               placeholder="occupation" />
           </c-col>
 
 
           <c-col [md]="6">
-            <label cLabel for="inputCity">Numero du point de Vente: </label>
+            <label cLabel for="inputCity">numéro du point de Vente:  <span class="req-field">*</span></label>
             <input cFormControl id="inputCity" type="text" name="pdvNumber" formControlName="pdvNumber"
               placeholder="pdvNumber " />
           </c-col>
 
           <c-col [xs]="12">
-            <button *ngIf="!submitted"  type="submit">Ajouter</button>
+            <button *ngIf="!submitted" cButton  type="submit">Ajouter</button>
             <button *ngIf="submitted"  cButton class="m-1" disabled>
               <c-spinner aria-hidden="true" size="sm"></c-spinner>
               Loading...

@@ -44,7 +44,7 @@ export class PrintcustomersComponent {
   deleteCustomer(id:number){
 
     this.ngxComfirmService.confirm({
-      title:'Voulez vous effacer cette client?',
+      title:'Voulez-vous supprimer cette client?',
       confirmLabel: 'Okay',
       declineLabel: 'Cancel'
     }).then((res: boolean) => {
@@ -63,14 +63,12 @@ export class PrintcustomersComponent {
             
           },
           error: error=>{
-
-    
-              this.toast.warning({
-                detail:"Le client n'existe pas!!!",
-                summary:error.body.message,
-                duration: 3000
-               });
-            
+            this.toast.warning({
+              detail:"Le client n'existe pas!!!",
+              summary:error.body.message,
+              duration: 3000
+            });
+          
           }
         });
       } else {

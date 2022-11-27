@@ -62,10 +62,22 @@ export class CustomersComponent implements OnInit {
       console.log(this.profileForm.value);
       
       this.clientService.create(this.profileForm.value).then((res)=>{
+        
+        this.toast.success({
+          detail:"Client ajouter avec success",
+          summary:"",
+          duration: 3000
+          });
 
          this.router.navigate(['/base/listcustomers']);
       }).catch(error=>{
         console.log(error);
+        this.toast.success({
+          detail:error.body.message,
+          summary:"",
+          duration: 3000
+          });
+
         
         this.submitted = false;
 

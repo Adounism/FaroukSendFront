@@ -21,14 +21,14 @@ export class AuthInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     const token = this.authService.getToken();
 
-    // request = request.clone({ 
-    //   setHeaders:{
-    //     'Content-Type': 'application/ld+json',
+    request = request.clone({ 
+      setHeaders:{
+        'Content-Type': 'application/ld+json',
        
 
-    //   }
+      }
 
-    // });
+    });
     
        if (token != null) {
         request = request.clone({ 
@@ -42,9 +42,12 @@ export class AuthInterceptor implements HttpInterceptor {
     }    
     return next.handle(request).pipe(catchError((err: HttpErrorResponse)=>{
       // console.log(err);
-      // if(err.status === 401){
-      //   this.route.navigate(['/login']);
-      // }
+      if(err.status === 401){
+        this.route.navigate(['/login']);
+      }else if(err.status === 0){
+        console.log("network not available");
+        
+      }
 
       return throwError(()=>err)
     }

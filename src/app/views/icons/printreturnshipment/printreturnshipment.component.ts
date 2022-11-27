@@ -11,6 +11,7 @@ import { TransactionsService } from 'src/app/services/transactions.service';
 export class PrintreturnshipmentComponent implements OnInit {
   returnShipmentListe:any[]=[];
   sendType= "sendBack";
+  searchTerm="";
 
   constructor(private transaction: TransactionsService,
     private toast: NgToastService,
@@ -22,7 +23,7 @@ export class PrintreturnshipmentComponent implements OnInit {
   }
 
   getAllReturnShippment(){
-    this.transaction.getAllMobileSend(this.sendType).subscribe(data=>{
+    this.transaction.getAllMobileSend(this.sendType, this.searchTerm).subscribe(data=>{
       this.returnShipmentListe = data;
       console.log(this.returnShipmentListe);
       

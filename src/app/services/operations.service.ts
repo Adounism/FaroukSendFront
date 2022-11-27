@@ -17,6 +17,10 @@ export class OperationsService {
 
  }
 
+ typePurchase={
+  listeTypePurchase: this.BaseUrl + '/type_purchases'
+ }
+
 
   constructor(private httpService: HttpService, private http: HttpClient) { }
 
@@ -24,6 +28,10 @@ export class OperationsService {
   
   getAllOperations(): Observable<any>{
     return this.http.get<any[]>(this.operationEndPoint.listeoperations);
+  }
+
+  getAllTypePurchases(): Observable<any>{
+    return this.http.get<any[]>(this.typePurchase.listeTypePurchase);
   }
 
   createOperation(data:any): Promise<any>{

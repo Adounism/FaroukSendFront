@@ -45,16 +45,16 @@
               </c-col> -->
   
              <c-col [md]="6">
-              <!-- <div cFormFloating>
+              <div cFormFloating>
                 <select cSelect id="floatingSelectGrid"  formControlName="operation" ngModel>
              
-                  <option [ngValue]="null" disabled>Choose operation</option>
-                  <option *ngFor="let operation of listeOperations" [ngValue]="operation">
-                    {{operation.name}}
+                  <option [ngValue]="null" disabled>Choisir l'opération</option>
+                  <option *ngFor="let typeSend of listeSendTypes" [ngValue]="typeSend">
+                    {{typeSend.name}}
                   </option>
                 </select>
                 <label cLabel for="floatingSelectGrid">sélectionner l'operation</label>
-              </div> -->
+              </div>
          </c-col>
         </c-row>
   
@@ -63,7 +63,7 @@
                 <label cLabel for="inputCity">transaction Montant: </label>
                 <input cFormControl id="inputCity" type="number" name="amount" formControlName="amount"
                   placeholder="Montant de la transaction" />
-                  <input cFormControl id="sendType" name="sendType" hidden formControlName="sendType" value="send" type="text" />
+                  <!-- <input cFormControl id="sendType" name="sendType" hidden formControlName="sendType" value="send" type="text" /> -->
               </c-col>
               <c-col [md]="6" style="align-self: flex-end;">
         

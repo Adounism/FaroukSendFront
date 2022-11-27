@@ -6,7 +6,8 @@ import { OperationsService } from 'src/app/services/operations.service';
 import {TransactionsService} from '../../../services/transactions.service';
 import { NgxBootstrapConfirmService } from 'ngx-bootstrap-confirm';
 import { NgbDate, NgbCalendar, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
+import { HttpEventType, HttpResponse } from '@angular/common/http';
 @Component({
   selector: 'app-collapses',
   templateUrl: './transaction.component.html',
@@ -20,6 +21,10 @@ export class TransactionComponent implements OnInit{
 	toDate!: NgbDate | null;
   page: number = 1;
   total: number = 0;
+  visible = true;
+  progress = 0;
+  message = '';
+  fileInfos?: Observable<any>;
 
 
   transactionForm!: FormGroup;
@@ -68,6 +73,10 @@ export class TransactionComponent implements OnInit{
     });
   }
 
+  toggleCollapse(): void {
+    this.visible = !this.visible;
+  }
+
   getTransactionList(){
     this.transService.getAllTransaction(this.page).subscribe(data=>{
       this.listeTransactions = data;
@@ -88,10 +97,28 @@ export class TransactionComponent implements OnInit{
 
         const formData = new FormData();
 
-        formData.append("thumbnail", file);
+        // formData.append("file", file);
         console.log(this.fileName);
-        
 
+        this.transService.upload(file).then(
+          (event: any) => {
+            if (event.type === HttpEventType.UploadProgress) {
+              this.progress = Math.round(100 * event.loaded / event.total);
+            } else if (event instanceof HttpResponse) {
+              this.message = event.body.message;
+
+            }
+          },
+          (err: any) => {
+            console.log(err);
+            this.progress = 0;
+
+            if (err.error && err.error.message) {
+              this.message = err.error.message;
+            } else {
+              this.message = 'Could not upload the file!';
+            }
+          });
       //  const upload$ = this.transService.post("/api/thumbnail-upload", formData);
 
       //   upload$.subscribe();

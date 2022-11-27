@@ -17,8 +17,8 @@ export class AddmobiletransactionComponent implements OnInit {
   transactionForm!: FormGroup;
   profileForm!: FormGroup;
   clientListe: any[]=[];
-  listeOperations: any[]=[];
-  listeTransactions: any[]=[];
+  listeSendTypes: any[]=[];
+  listeTypePurchase: any[]=[];
   transactionData:any;
   onLoading = false;
 
@@ -40,7 +40,7 @@ export class AddmobiletransactionComponent implements OnInit {
    
 
    this.getClientList();
-  //  this.getOperationList();
+   this.getTypePurchase();
   }
 
   ngOnInit(): void {
@@ -49,7 +49,7 @@ export class AddmobiletransactionComponent implements OnInit {
       client: ['', [Validators.required]],
       date: ['', [Validators.nullValidator]],
       amount:['', [Validators.required]],
-      sendType:['send', [Validators.nullValidator]],
+      operation:['', [Validators.nullValidator]],
 
     });
 
@@ -81,13 +81,11 @@ export class AddmobiletransactionComponent implements OnInit {
     })
   }
 
-  // getOperationList(){
-  //   this.operationService.getAllOperations().subscribe(response=>{
-  //     this.listeOperations = response;
-
-      
-  //   })
-  // }
+  getTypePurchase(){
+    this.transService.getAllSenType().subscribe(response=>{
+      this.listeSendTypes = response;
+    });
+  }
 
   ajouter(){
 
@@ -101,7 +99,7 @@ export class AddmobiletransactionComponent implements OnInit {
         "amount": this.transactionData.amount,
         "client": '/api/clients/'+this.transactionData.client["id"],
         "date": myFormattedDate,
-        "sendType":this.transactionData.sendType
+        "sendType":this.transactionData.operation["key"]
       }
 
       console.log(transaction);

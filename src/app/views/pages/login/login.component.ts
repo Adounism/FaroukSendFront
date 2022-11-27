@@ -5,6 +5,7 @@ import {AuthInterceptor} from '../../../interceptors/auth.interceptor';
 import { HttpResponse } from '@angular/common/http';
 import { map } from 'rxjs';
 import { Router } from '@angular/router';
+import { NgToastService } from 'ng-angular-popup';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -17,7 +18,8 @@ export class LoginComponent implements OnInit{
   submitted = false;
   isLoggedIn!:boolean;
 
-  constructor(private service: AuthService, private fb: FormBuilder, private route: Router) { }
+  constructor(private service: AuthService, private fb: FormBuilder, private route: Router,
+    private toast: NgToastService,) { }
 
   ngOnInit(): void {
 
@@ -46,11 +48,16 @@ export class LoginComponent implements OnInit{
         
         this.service.saveToken(res.body.token);
 
-        this.route.navigate(['/base/listcustomers']);
+        this.route.navigate(['/base/dashboard']);
       }
 
-    }, async error=> {
+    },  error=> {
       console.log(error.error);
+      this.toast.warning({
+        detail:error.error.message,
+        summary:"",
+        duration: 3000
+       });
       
     });
    }
