@@ -21,38 +21,38 @@ export class AuthInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     const token = this.authService.getToken();
 
-    request = request.clone({ 
-      setHeaders:{
-        'Content-Type': 'application/ld+json',
-       
-
-      }
-
-    });
-    console.log(request);
-
-    // if (token == null) {
     // request = request.clone({ 
     //   setHeaders:{
     //     'Content-Type': 'application/ld+json',
-    //     'Authorization': `Bearer ${token}`,
+       
 
     //   }
 
     // });
+    console.log(request);
 
-    // if(request.url == "http://testapp.ecoboostergroup.com/api/reports"){
-    //   request = request.clone({ 
-    //     setHeaders:{
-    //       'Content-Type': 'multipart/form-data',
-    //       'Authorization': `Bearer ${token}`,
-  
-    //     }
-  
-    //   });
-    // }
+    if (token != null) {
+    request = request.clone({ 
+      setHeaders:{
+        'Content-Type': 'application/ld+json',
+        'Authorization': `Bearer ${token}`,
 
-    // }    
+      }
+
+    });
+
+    if(request.url == "http://testapp.ecoboostergroup.com/api/reports"){
+      request = request.clone({ 
+        setHeaders:{
+          'Content-Type': 'multipart/form-data',
+          'Authorization': `Bearer ${token}`,
+  
+        }
+  
+      });
+    }
+
+    }    
     return next.handle(request).pipe(catchError((err: HttpErrorResponse)=>{
       // console.log(err);
       if(err.status === 401){

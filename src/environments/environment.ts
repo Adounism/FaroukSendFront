@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-   BaseUrl :'http://localhost:8000/api',
-  // BaseUrl:'http://testapp.ecoboostergroup.com/api'
+  //  BaseUrl :'http://localhost:8000/api',
+  BaseUrl:'http://testapp.ecoboostergroup.com/api'
   // BaseUrl:'http://127.0.0.1:8000/api'
   // BaseUrl:'http://192.168.1.7:8002/api'
 };

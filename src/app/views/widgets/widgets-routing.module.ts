@@ -4,8 +4,8 @@ import { EditCustomerComponent } from '../base/editcustomer/editcustomer.compone
 import { EditSupplierComponent } from '../base/editsupplier/editsupplier.component';
 import { HistoryComponent } from '../base/historiques/historique.component';
 import { CustomersComponent } from '../base/customers/customers.component';
-import { PrintcustomersComponent } from './printcustomers/printcustomers.component';
-import { PrintsupplierComponent } from './printsuppliers/printsuppliers.component';
+import { PrintcustomersComponent } from '../base/printcustomers/printcustomers.component';
+import { PrintsupplierComponent } from '../base/printsuppliers/printsuppliers.component';
 import { SuppliersComponent } from '../base/suppliers/suppliers.component';
 import { WidgetsComponent } from './widgets/widgets.component';
 
