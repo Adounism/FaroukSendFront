@@ -16,7 +16,7 @@
               <div cFormFloating>
                 <input cFormControl id="floatingInputGrid" type="email" [(ngModel)]="currentSupplier.email"
                   formControlName="email" />
-                <label cLabel for="floatingInputGrid">Email address</label>
+                <label cLabel for="floatingInputGrid">Email address:<span class="req-field">*</span></label>
               </div>
             </c-col>
             <c-col [md]>
@@ -28,7 +28,7 @@
               </c-form-check>
               <c-form-check>
                 <input cFormCheckInput type="radio" value="business" [checked]="second" (click)="verifieCheck()" formControlName="business"  name="business"/>
-                <label cFormCheckLabel>Business</label>
+                <label cFormCheckLabel>Entreprise</label>
 
                 <!-- <div
                 *ngIf="(profileForm.controls['business'].valid || profileForm.controls['induvidual'].valid
@@ -40,6 +40,11 @@
                     Le type de Fournisseur est requis.</div>
                 </div>
                 </div> -->
+              </c-form-check>
+              <c-form-check>
+                <div>
+                  <span class="req-field">*</span>
+                </div>
               </c-form-check>
 
 
@@ -62,7 +67,7 @@
           </c-row>
 
           <c-col [md]="6" *ngIf="default">
-            <label cLabel for="inputEmail4">Nom du Fournisseur:</label>
+            <label cLabel for="inputEmail4">Nom du Fournisseur:<span class="req-field">*</span></label>
             <input cFormControl id="inputEmail4" name="firstName" [(ngModel)]="firstName" formControlName="firstName" type="text" />
             <div
               *ngIf="profileForm.controls['firstName'].invalid && (profileForm.controls['firstName'].dirty ||  submitted)"
@@ -73,7 +78,7 @@
 
           </c-col>
           <c-col [md]="6" *ngIf="default">
-            <label cLabel for="inputPassword4">Prenom du Fournisseur:</label>
+            <label cLabel for="inputPassword4">Prenom du Fournisseur:<span class="req-field">*</span></label>
             <input cFormControl id="inputPassword4"  name="lastName" [(ngModel)]="lastName" formControlName="lastName" type="text" />
             <div
               *ngIf="profileForm.controls['lastName'].invalid && (profileForm.controls['lastName'].dirty || submitted)"
@@ -85,7 +90,7 @@
 
 
           <c-col [md]="6" *ngIf="second">
-            <label cLabel for="businessName">Nom du Business: </label>
+            <label cLabel for="businessName">Nom du Business:<span class="req-field">*</span> </label>
             <input cFormControl id="inputCity" type="text" name="businessName" [(ngModel)]="name" formControlName="businessName"
               placeholder="nom du business" />
             <!-- <div
@@ -98,7 +103,7 @@
 
 
           <c-col [md]="6">
-            <label cLabel for="inputCity">Contact du Fournisseur: </label>
+            <label cLabel for="inputCity">Contact du Fournisseur:<span class="req-field">*</span> </label>
             <input cFormControl id="inputCity" type="tel" name="firstPhone" formControlName="firstPhone"
               placeholder="numero de télephone" [(ngModel)]="currentSupplier.firstPhone" />
             <div
@@ -110,7 +115,7 @@
           </c-col>
 
           <c-col [md]="6">
-            <label cLabel for="inputCity">Conact 2: </label>
+            <label cLabel for="inputCity">Contact 2: </label>
             <input cFormControl id="inputCity" type="tel" name="secondPhone" formControlName="secondPhone"
             [(ngModel)]="currentSupplier.secondPhone" placeholder="numero de télephone sécondaire" />
           </c-col>

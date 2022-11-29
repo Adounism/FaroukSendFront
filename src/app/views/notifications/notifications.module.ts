@@ -43,6 +43,8 @@ import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 import { AddTransactionComponent } from './addTransaction/addtransaction.component';
 import { TransactionComponent } from './transactions/transaction.component';
 import { EditTransactionComponent } from './editTransaction/edittransaction.component';
+import { ImportedtransactionComponent } from './importedtransaction/importedtransaction.component';
+import { EditimportedtransactionComponent } from './editimportedtransaction/editimportedtransaction.component';
 
 @NgModule({
   declarations: [
@@ -54,7 +56,9 @@ import { EditTransactionComponent } from './editTransaction/edittransaction.comp
     AppToastComponent,
     AddTransactionComponent,
     TransactionComponent,
-    EditTransactionComponent
+    EditTransactionComponent,
+    ImportedtransactionComponent,
+    EditimportedtransactionComponent
   ],
   imports: [
     CommonModule,

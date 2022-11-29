@@ -10,17 +10,23 @@ import { DropdownsComponent } from './dropdowns/dropdowns.component';
 import { ButtonsRoutingModule } from './buttons-routing.module';
 
 import {
+  AlertModule,
   BreadcrumbModule,
   ButtonGroupModule,
   ButtonModule,
   CardModule,
+  CarouselModule,
   CollapseModule,
   DropdownModule,
   FormModule,
   GridModule,
+  ModalModule,
   NavbarModule,
   NavModule,
+  PopoverModule,
+  ProgressModule,
   SharedModule,
+  
   SpinnerModule,
   TableModule,
   TooltipModule,
@@ -44,6 +50,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 import { AddPurchaseComponent } from '../base/addpurchase/addpurchase.component';
 import { PrintAchatComponent } from '../base/listeachat/printachat.component';
+import { AppToastComponent } from '../notifications/toasters/toast-simple/toast.component';
+import { ToastersComponent } from '../notifications/toasters/toasters.component';
 
 @NgModule({
   declarations: [
@@ -73,8 +81,12 @@ import { PrintAchatComponent } from '../base/listeachat/printachat.component';
     CardModule,
     UtilitiesModule,
     DropdownModule,
+    CarouselModule,
     SharedModule,
+    AlertModule,
     FormModule,
+    PopoverModule,
+    ModalModule,
     TooltipModule,
     FormsModule,
     SpinnerModule,
@@ -85,6 +97,7 @@ import { PrintAchatComponent } from '../base/listeachat/printachat.component';
     CollapseModule,
     NavModule,
     NavbarModule,
+    ProgressModule,
     TableModule,
     NgxPaginationModule,
     MdbModalModule,

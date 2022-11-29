@@ -10,7 +10,7 @@
         </p>
         <form cForm class="row g-3" *ngIf="currentCustomer" [formGroup]="customerForm" >
           <c-col [md]="6">
-            <label cLabel for="inputEmail4">Nom:</label>
+            <label cLabel for="inputEmail4">Nom:<span class="req-field">*</span></label>
             <input cFormControl id="inputEmail4" name="firstName"  [(ngModel)]="currentCustomer.firstName" formControlName="firstName" type="text" />
             <div
               *ngIf="customerForm.controls['firstName'].invalid && (customerForm.controls['firstName'].dirty || customerForm.controls['firstName'].touched || submitted)"
@@ -21,7 +21,7 @@
 
           </c-col>
           <c-col [md]="6">
-            <label cLabel for="inputPassword4">Prenom:</label>
+            <label cLabel for="inputPassword4">Prenom:<span class="req-field">*</span></label>
             <input cFormControl id="inputPassword4" [(ngModel)]="currentCustomer.lastName" formControlName="lastName" name="lastName" type="text" />
             <div
               *ngIf="customerForm.controls['lastName'].invalid && (customerForm.controls['lastName'].dirty || customerForm.controls['lastName'].touched || submitted)"
@@ -36,7 +36,7 @@
               <div cFormFloating>
                 <input cFormControl id="floatingInputGrid" type="email" formControlName="email" value="email@example.com"
                 [(ngModel)]="currentCustomer.email" />
-                <label cLabel for="floatingInputGrid">Email address</label>
+                <label cLabel for="floatingInputGrid">Email address:<span class="req-field">*</span></label>
               </div>
             </c-col>
 
@@ -49,7 +49,7 @@
           </c-col>
 
           <c-col [md]="6">
-            <label cLabel for="inputCity">Contact: </label>
+            <label cLabel for="inputCity">Contact: <span class="req-field">*</span></label>
             <input cFormControl id="inputCity" type="tel" name="phone" formControlName="phone"  [(ngModel)]="currentCustomer.phone"
               placeholder="numero de télephone" />
 
@@ -71,7 +71,7 @@
 
 
           <c-col [md]="6">
-            <label cLabel for="inputCity">pdvNumber: </label>
+            <label cLabel for="inputCity">pdvNumber: <span class="req-field">*</span></label>
             <input cFormControl id="inputCity" type="text" name="pdvNumber"  formControlName="pdvNumber" [(ngModel)]="currentCustomer.pdvNumber"
               placeholder="pdvNumber " />
           </c-col>

@@ -10,21 +10,40 @@ export const navItems: INavData[] = [
       text: 'NEW'
     }
   },
-  {
-    title: true,
-    name: 'Contacts'
+  // {
+  //   title: true,
+  //   name: 'Contacts'
+  // },
+
+    {
+    name: 'Contacts',
+    url: '/widgets',
+    iconComponent: { name: 'cil-address-book' },
+    children:[
+      {
+        name: 'Gestion Client',
+        url: '/widgets/listcustomers',
+        iconComponent: { name: 'cil-people' },
+      },
+      {
+        name: 'Gestion Fournisseur',
+        url: '/widgets/listsuppliers',
+        iconComponent: { name: 'cil-bookmark' }
+      },
+    
+
+    ]
   },
-  {
-    name: 'Gestion Client',
-    url: '/base/listcustomers',
-    iconComponent: { name: 'cil-people' }
-  },
-  {
-    name: 'Gestion Fournisseur',
-    // url: '/base/suppliers',
-    url: '/base/listsuppliers',
-    iconComponent: { name: 'cil-bookmark' }
-  },
+  // {
+  //   name: 'Gestion Client',
+  //   url: '/base/listcustomers',
+  //   iconComponent: { name: 'cil-people' }
+  // },
+  // {
+  //   name: 'Gestion Fournisseur',
+  //   url: '/base/listsuppliers',
+  //   iconComponent: { name: 'cil-bookmark' }
+  // },
 
   // {
   //   name: 'Opérations',
@@ -64,6 +83,11 @@ export const navItems: INavData[] = [
       {
         name: 'Liste des Envois',
        url: '/vente-credit/transaction',
+       iconComponent: { name: 'cil-arrow-right' },
+      },
+      {
+        name: 'Ventes importer',
+       url: '/vente-credit/importedtransaction',
        iconComponent: { name: 'cil-arrow-right' },
       },
     ]
@@ -143,6 +167,11 @@ export const navItems: INavData[] = [
        url: '/vente-carte/printcardsale',
        iconComponent: { name: 'cil-arrow-right' },
       },
+      {
+        name: 'Liste des Cartes',
+       url: '/vente-carte/cartetype',
+       iconComponent: { name: 'cil-arrow-right' },
+      },
     ]
 
   },
@@ -174,16 +203,16 @@ export const navItems: INavData[] = [
       //  url: '/icons/printreturnshipment',
       //  iconComponent: { name: 'cil-arrow-right' },
       // },
-      {
-        name: "Encaissement",
-       url: '/icons/encaissement',
-       iconComponent: { name: 'cil-arrow-right' },
-      },
-      {
-        name: "Décaissement",
-       url: '/icons/decaissement',
-       iconComponent: { name: 'cil-arrow-right' },
-      },
+      // {
+      //   name: "Encaissement",
+      //  url: '/icons/encaissement',
+      //  iconComponent: { name: 'cil-arrow-right' },
+      // },
+      // {
+      //   name: "Décaissement",
+      //  url: '/icons/decaissement',
+      //  iconComponent: { name: 'cil-arrow-right' },
+      // },
     ]
 
   },
@@ -192,7 +221,7 @@ export const navItems: INavData[] = [
 
  
   {
-    name: 'Achat',
+    name: 'Achats',
     url: '/buttons',
     iconComponent: { name: 'cil-dollar' },
     children: [

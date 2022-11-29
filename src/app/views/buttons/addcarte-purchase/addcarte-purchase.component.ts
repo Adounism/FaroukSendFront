@@ -16,6 +16,9 @@ import { CardService } from 'src/app/services/card.service';
 export class AddcartePurchaseComponent implements OnInit {
  
   transactionForm!: FormGroup;
+  businessForm!: FormGroup;
+  individulForm!: FormGroup;
+
   cardForm!: FormGroup;
   profileForm!: FormGroup;
   cardPanierForm!:FormGroup;
@@ -31,6 +34,10 @@ export class AddcartePurchaseComponent implements OnInit {
   qut =0;
   unit =0;
   mtht= 0;
+
+  default!:boolean;
+  second!:boolean;
+  supplierData:any;
  
   submitted = false;
   selected!: number;
@@ -76,22 +83,27 @@ export class AddcartePurchaseComponent implements OnInit {
 
     });
 
-
     this.profileForm = this.fb.group({
-      firstName: ['', [Validators.required]],
-      lastName: ['', [Validators.required]],
-      address: ['', [Validators.nullValidator]],
 
-      phone: ['', [Validators.required, Validators.minLength(4)]],
-
+      adresse: ['', [Validators.nullValidator]],
+      firstPhone: ['', [Validators.required, Validators.minLength(4)]],
+      secondPhone: ['', [Validators.nullValidator]],
       email: ['', [Validators.nullValidator]],
-      occupation: ['', [Validators.nullValidator]],
-      pdvNumber: ['', [Validators.nullValidator]],
-
-      //typeClient:['', [Validators.required]]
+      firstName: ['', [Validators.nullValidator]],
+      lastName: ['', [Validators.nullValidator]],
+       business: ['', [Validators.nullValidator]],
+       induvidual: ['',[Validators.nullValidator]],
+      businessType:['', [Validators.nullValidator]],
     });
 
-
+    this.businessForm = this.fb.group({
+      business: ['',[Validators.required]]
+    });
+    
+    this.individulForm = this.fb.group({
+      firstName: ['', [Validators.required]],
+      lastName: ['', [Validators.required]],
+    })
     this.cardForm = this.fb.group({
       name:['', [Validators.required]],
       description:['', [Validators.nullValidator]],
@@ -179,45 +191,130 @@ export class AddcartePurchaseComponent implements OnInit {
 
 
 
-  ajouterclient() {
-
+  ajouterFounisseur() {
+ 
+      this.submitted = true;
+      this.supplierData = this.profileForm.value;
+      
+      if(this.default == undefined || this.second == undefined){
+        console.log("checked value no checked");
+        this.toast.warning({
+          detail:"Field Error",
+          summary:"Le typde de Fournisseur est réquis",
+          duration: 3000
+          });
+        
+      }
+      
+      if(this.supplierData.induvidual != ""){
+        if(!this.supplierData.firstName || !this.supplierData.lastName){
+        this.toast.warning({
+          detail:"Field Error",
+          summary:"Nom et prenom sont requis",
+          duration: 3000
+          });
+        }else{
+          let fname = this.supplierData.firstName;
+          let lname = this.supplierData.lastName;
+          let provider = {
+            "firstPhone" : this.supplierData.firstPhone,
+            "secondPhone": this.supplierData.secondPhone,
+            "email": this.supplierData.email,
+            "individual": {
+              "firstName": fname,
+              "lastName":lname,
+            }
+  
+          }
+  
+          this.supplier.create(provider).then(response=>{
+            console.log(response);
+            this.profileForm.reset();
+            this.businessForm.reset();
+            this.individulForm.reset();
+            this.toast.success({
+              detail:"Fournisseur Ajouter",
+              summary:"",
+              duration: 3000
+              });
+            // this.router.navigate(['/widgets/listsuppliers']);
+            
+          }, error=>{
+            console.log(error);
+            this.toast.warning({
+              detail:error.body.message,
+              summary:"",
+              duration: 3000
+              });
+            this.submitted = false;
+          })
+          
+          // console.log("Send Data to Back");
+          
+        }  
+      }
+  
+      if(this.supplierData.business != ""){
+        if(!this.supplierData.business){
+  
+          this.toast.warning({
+            detail:"Field Error",
+            summary:"Le nom du Business est requis!!",
+            duration: 3000
+            });
+        }else{
+          console.log("send data to Back!!");
+                  
+          let provider = {
+            "firstPhone" : this.supplierData.firstPhone,
+            "secondPhone": this.supplierData.secondPhone,
+            "email": this.supplierData.email,
+            "business" :{
+              "name": this.supplierData.business,
+          
+            }
+          }
+          console.log(provider);
+          
+  
+          this.supplier.create(provider).then
+          (response=>{
+            this.profileForm.reset();
+            this.businessForm.reset();
+            this.individulForm.reset();
+            this.toast.success({
+              detail:"Fournisseur Ajouter",
+              summary:"",
+              duration: 3000
+              });
+            // this.router.navigate(['/widgets/listsuppliers']);
+            
+          }).catch(error=>{
+            this.submitted = false;
+            this.toast.warning({
+              detail:error.body.message,
+              summary:"",
+              duration: 3000
+              });
+          })
+        }
+  
+      }
 
   
-    if(this.profileForm.valid){
-      this.submitted = true;
-      let first = document.querySelector('.box') as HTMLElement | null;
-      this.supplier.create(this.profileForm.value).then((res)=>{
-
-        this.toast.success({
-          detail:"Client ajouter",
-          summary:"Client ajouter avec succes",
-          duration: 3000
-         });
-         
-         this.getSupplierListe();
-         this.submitted = false;
-         if (first != null) {
-          first.style.display = "none";
-        }
-      }).catch(error=>{
-
-        
-        this.toast.warning({
-          detail:error.body.message,
-          summary:"",
-          duration: 3000
-         });
-         
-        this.submitted = false;
-
-      });
-    }
-
 
   }
 
   addPurchase(){
     // console.log(this.cardPanierForm.value);
+    if(this.cardPanierForm.controls['amountHT'].touched){
+      console.log(this.cardPanierForm.controls['amountHT']);
+      
+    }else{
+      this.cardPanierForm.controls['amountHT'].setValue(this.amountHT);
+  
+    }
+  
     if(this.cardPanierForm.valid){
       this.listeCardPanier.push(this.cardPanierForm.value);
       this.cardPanierForm.reset();
@@ -250,6 +347,46 @@ export class AddcartePurchaseComponent implements OnInit {
       this.cardListe = data;
     });
   }
+
+  updateAmount(){
+    this.amountHT =this.qut * this.unit;
+    console.log(this.amountHT);
+    
+  }
+
+  onUnitPriceChange(event: any) {
+    if(event.target.value){
+      this.unit = event.target.value
+      this.updateAmount()
+    }
+}
+
+onQuantityChange(event: any) {
+  if(event.target.value){
+    this.qut = event.target.value
+    this.updateAmount()
+  }
+}
+
+
+
+verifieCheck(){
+
+  this.profileForm.get('induvidual')?.valueChanges.subscribe(async data=>{
+    this.default = true;
+    this.second = false;
+    console.log(data);
+    
+  });
+
+  this.profileForm.get('businessType')?.valueChanges.subscribe(data=>{
+    this.default = false;
+    this.second = true;
+    console.log(data);
+    
+  });
+}
+
 
 }
 

@@ -23,7 +23,7 @@ export class PrintreturnshipmentComponent implements OnInit {
   }
 
   getAllReturnShippment(){
-    this.transaction.getAllMobileSend(this.sendType, this.searchTerm).subscribe(data=>{
+    this.transaction.getAllMobileSend(this.sendType).subscribe(data=>{
       this.returnShipmentListe = data;
       console.log(this.returnShipmentListe);
       

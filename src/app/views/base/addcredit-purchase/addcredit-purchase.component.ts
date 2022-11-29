@@ -14,12 +14,18 @@ import { PurchasesService } from 'src/app/services/purchases.service';
 })
 export class AddcreditPurchaseComponent implements OnInit {
   transactionForm!: FormGroup;
+  businessForm!: FormGroup;
+  individulForm!: FormGroup;
   profileForm!: FormGroup;
   supplierListe: any[]=[];
   listeTransactions: any[]=[];
   transactionData:any;
   onLoading = false;
 
+  supplierData:any;
+
+  default!:boolean;
+  second!:boolean;
 
  
   submitted = false;
@@ -54,19 +60,26 @@ export class AddcreditPurchaseComponent implements OnInit {
 
 
     this.profileForm = this.fb.group({
-      firstName: ['', [Validators.required]],
-      lastName: ['', [Validators.required]],
-      address: ['', [Validators.nullValidator]],
 
-      phone: ['', [Validators.required, Validators.minLength(4)]],
-
+      adresse: ['', [Validators.nullValidator]],
+      firstPhone: ['', [Validators.required, Validators.minLength(4)]],
+      secondPhone: ['', [Validators.nullValidator]],
       email: ['', [Validators.nullValidator]],
-      occupation: ['', [Validators.nullValidator]],
-      pdvNumber: ['', [Validators.nullValidator]],
-
-      //typeClient:['', [Validators.required]]
+      firstName: ['', [Validators.nullValidator]],
+      lastName: ['', [Validators.nullValidator]],
+       business: ['', [Validators.nullValidator]],
+       induvidual: ['',[Validators.nullValidator]],
+      businessType:['', [Validators.nullValidator]],
     });
 
+    this.businessForm = this.fb.group({
+      business: ['',[Validators.required]]
+    });
+    
+    this.individulForm = this.fb.group({
+      firstName: ['', [Validators.required]],
+      lastName: ['', [Validators.required]],
+    })
 
 
 
@@ -147,34 +160,137 @@ export class AddcreditPurchaseComponent implements OnInit {
     return this.profileForm.controls;
   }
 
-  ajouterclient() {
+  ajouterFounisseur() {
+ 
+    this.submitted = true;
+    this.supplierData = this.profileForm.value;
+    
+    if(this.default == undefined || this.second == undefined){
+      console.log("checked value no checked");
+      this.toast.warning({
+        detail:"Field Error",
+        summary:"Le typde de Fournisseur est réquis",
+        duration: 3000
+        });
+      
+    }
+    
+    if(this.supplierData.induvidual != ""){
+      if(!this.supplierData.firstName || !this.supplierData.lastName){
+      this.toast.warning({
+        detail:"Field Error",
+        summary:"Nom et prenom sont requis",
+        duration: 3000
+        });
+      }else{
+        let fname = this.supplierData.firstName;
+        let lname = this.supplierData.lastName;
+        let provider = {
+          "firstPhone" : this.supplierData.firstPhone,
+          "secondPhone": this.supplierData.secondPhone,
+          "email": this.supplierData.email,
+          "individual": {
+            "firstName": fname,
+            "lastName":lname,
+          }
 
+        }
 
-  
-    if(this.profileForm.valid){
-      this.submitted = true;
-      this.supplier.create(this.profileForm.value).then((res)=>{
+        this.supplier.create(provider).then(response=>{
+          console.log(response);
+          this.profileForm.reset();
+          this.businessForm.reset();
+          this.individulForm.reset();
+          this.toast.success({
+            detail:"Fournisseur Ajouter",
+            summary:"",
+            duration: 3000
+            });
+          // this.router.navigate(['/widgets/listsuppliers']);
+          
+        }, error=>{
+          console.log(error);
+          this.toast.warning({
+            detail:error.body.message,
+            summary:"",
+            duration: 3000
+            });
+          this.submitted = false;
+        })
+        
+        // console.log("Send Data to Back");
+        
+      }  
+    }
 
-        this.toast.success({
-          detail:"Client ajouter",
-          summary:"Client ajouter avec succes",
-          duration: 3000
-         });
-         
-         this.submitted = false;
-      }).catch(error=>{
+    if(this.supplierData.business != ""){
+      if(!this.supplierData.business){
+
         this.toast.warning({
-          detail:error.body.message,
-          summary:"",
+          detail:"Field Error",
+          summary:"Le nom du Business est requis!!",
           duration: 3000
-         });
-        this.submitted = false;
+          });
+      }else{
+        console.log("send data to Back!!");
+                
+        let provider = {
+          "firstPhone" : this.supplierData.firstPhone,
+          "secondPhone": this.supplierData.secondPhone,
+          "email": this.supplierData.email,
+          "business" :{
+            "name": this.supplierData.business,
+        
+          }
+        }
+        console.log(provider);
+        
 
-      });
+        this.supplier.create(provider).then
+        (response=>{
+          this.profileForm.reset();
+          this.businessForm.reset();
+          this.individulForm.reset();
+          this.toast.success({
+            detail:"Fournisseur Ajouter",
+            summary:"",
+            duration: 3000
+            });
+          // this.router.navigate(['/widgets/listsuppliers']);
+          
+        }).catch(error=>{
+          this.submitted = false;
+          this.toast.warning({
+            detail:error.body.message,
+            summary:"",
+            duration: 3000
+            });
+        })
+      }
+
     }
 
 
-  }
+
+}
+
+
+verifieCheck(){
+
+  this.profileForm.get('induvidual')?.valueChanges.subscribe(async data=>{
+    this.default = true;
+    this.second = false;
+    console.log(data);
+    
+  });
+
+  this.profileForm.get('businessType')?.valueChanges.subscribe(data=>{
+    this.default = false;
+    this.second = true;
+    console.log(data);
+    
+  });
+}
 
 
 }

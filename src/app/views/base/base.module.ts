@@ -44,8 +44,8 @@ import { HistoryComponent } from './historiques/historique.component';
 import { AddOperationComponent } from './addoperation/addoperation.component';
 import {  TransactionComponent } from '../notifications/transactions/transaction.component';
 import {  EditOperationComponent } from './editoperation/editoperation.component';
-import { PrintcustomersComponent } from './printcustomers/printcustomers.component';
-import {PrintsupplierComponent } from './printsuppliers/printsuppliers.component';
+import { PrintcustomersComponent } from '../widgets/printcustomers/printcustomers.component';
+import {PrintsupplierComponent } from '../widgets/printsuppliers/printsuppliers.component';
 import { PaginationsComponent } from '../icons/encaissements/encaissement.component';
 import { AddTransactionComponent } from '../notifications/addTransaction/addtransaction.component';
 import { PrintAchatComponent } from './listeachat/printachat.component';
@@ -128,20 +128,20 @@ import { EditdecaissementComponent } from '../icons/editdecaissement/editdecaiss
     
   ],
   declarations: [
-    CustomersComponent,
-    SuppliersComponent,
-    HistoryComponent,
+    // CustomersComponent,
+    // SuppliersComponent,
+    // HistoryComponent,
     AddOperationComponent,
     // TransactionComponent,
     EditOperationComponent,
-    PrintcustomersComponent,
-    PrintsupplierComponent,
-    EditCustomerComponent,
-    EditSupplierComponent,
+    // PrintcustomersComponent,
+    // PrintsupplierComponent,
+    // EditCustomerComponent,
+    // EditSupplierComponent,
     OperationComponent,
 
     // AddTransactionComponent,
-    SearchPipe,
+    // SearchPipe,
 
   ],
 })

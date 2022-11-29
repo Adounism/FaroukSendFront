@@ -213,7 +213,7 @@ onQuantityChange(event: any) {
       if(this.listeCardPanier.length < 0 ){
 
         this.toast.warning({
-          detail:"veillez ajoute un carte dans la liste",
+          detail:"veillez ajoute une carte dans la liste",
           summary:"",
           duration: 3000
           });

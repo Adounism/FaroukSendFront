@@ -26,9 +26,11 @@
                 <input cFormCheckInput type="radio" value="induvidual" [checked]="default" (click)="verifieCheck()" formControlName="induvidual" name="induvidual" />
                 <label cFormCheckLabel>Individuelle</label>
               </c-form-check>
+  
               <c-form-check>
                 <input cFormCheckInput type="radio" value="business" [checked]="second" (click)="verifieCheck()" formControlName="businessType"  name="businessType"/>
                 <label cFormCheckLabel>Entreprise</label>
+          
 
                 <!-- <div
                 *ngIf="(profileForm.controls['business'].valid || profileForm.controls['induvidual'].valid
@@ -41,6 +43,12 @@
                 </div>
                 </div> -->
               </c-form-check>
+              <c-form-check>
+                <div>
+                  <span class="req-field">*</span>
+                </div>
+              </c-form-check>
+      
 
 
               <!-- <div cFormFloating>
@@ -118,7 +126,7 @@
           </c-col>
 
           <c-col [md]="6">
-            <label cLabel for="inputCity">Conact 2: </label>
+            <label cLabel for="inputCity">Contact 2: </label>
             <input cFormControl id="inputCity" type="tel" name="secondPhone" formControlName="secondPhone"
               placeholder="numero de télephone sécondaire" />
           </c-col>

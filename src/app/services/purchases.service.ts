@@ -30,6 +30,17 @@ export class PurchasesService {
     return this.http.get<any[]>(this.purchaseEnpoint.listAchat+`?typePurchase=${typePurchase}`);
   }
 
+  findByRangeDateTransfertPurchase(from: any, to: any ): Observable<any>{
+    
+    return this.http.get<any>(this.purchaseEnpoint.listAchat+ `?date[after]=${from}&date[before]=${to}`);
+  }
+
+  getSearchPurchase( search:string): Observable<any>{
+
+    return this.http.get<any[]>(this.purchaseEnpoint.listAchat+ `?provider.firstName=${search}`);
+  }
+
+
   create(data: any): Promise<any>{
     return this.httpService.post(this.purchaseEnpoint.makeAchat, data);
   }
@@ -57,6 +68,16 @@ export class PurchasesService {
   createCardPurchase(data: any): Promise<any>{
     return this.httpService.post(this.carteCreditPurchase.makeAchat, data);
   }
+  findByRangeDateCreditCardPurchase(from: any, to: any ): Observable<any>{
+    
+    return this.http.get<any>(this.carteCreditPurchase.listAchat+ `?date[after]=${from}&date[before]=${to}`);
+  }
+
+  getSearchCreditCardPurchase( search:string): Observable<any>{
+
+    return this.http.get<any[]>(this.purchaseEnpoint.listAchat+ `?provider.firstName=${search}`);
+  }
+
 
   findCardPurchase(id:number): Observable<any>{
     return this.http.get<any>(this.carteCreditPurchase.findById+ id);

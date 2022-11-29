@@ -8,6 +8,7 @@ import { ToastersComponent } from './toasters/toasters.component';
 import { AddTransactionComponent } from './addTransaction/addtransaction.component';
 import { TransactionComponent } from './transactions/transaction.component';
 import { EditTransactionComponent } from './editTransaction/edittransaction.component';
+import { ImportedtransactionComponent } from './importedtransaction/importedtransaction.component';
 
 const routes: Routes = [
   {
@@ -36,6 +37,15 @@ const routes: Routes = [
         // canActivate:[AuthGuard],
         data: {
           title: 'Transaction',
+        },
+      },
+
+      {
+        path: 'importedtransaction',
+        component: ImportedtransactionComponent,
+        // canActivate:[AuthGuard],
+        data: {
+          title: 'Liste des tranferts importés',
         },
       },
       {

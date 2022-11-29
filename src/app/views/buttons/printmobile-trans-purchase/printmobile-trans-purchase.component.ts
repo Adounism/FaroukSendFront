@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NgbDate } from '@ng-bootstrap/ng-bootstrap';
+import { NgbCalendar, NgbDate, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
 import { NgToastService } from 'ng-angular-popup';
 import { NgxBootstrapConfirmService } from 'ngx-bootstrap-confirm';
 import { PurchasesService } from 'src/app/services/purchases.service';
@@ -11,16 +11,26 @@ import { PurchasesService } from 'src/app/services/purchases.service';
 })
 export class PrintmobileTransPurchaseComponent implements OnInit {
 
+  hoveredDate: NgbDate | null = null;
+
+	fromDate!: NgbDate | null;
+  toDate!: NgbDate | null;
+  transactionType:any[]=[];
+  sendType = "";
+  searchText = ""
+  visible = true;
   mobileTransfertListe:any[]=[];
   searchdate!: NgbDate | null;
   typePurchase = "mobileTransferPurchase";
   constructor(private purshaseService: PurchasesService,
     private ngxComfirmService: NgxBootstrapConfirmService,
-    private toast: NgToastService,) { }
+    private toast: NgToastService,
+    public formatter: NgbDateParserFormatter,
+    private calendar: NgbCalendar,) { }
 
   ngOnInit(): void {
-    this.isEmpty(this.searchdate);
-    // this.getAllMobileTransfertPurchase();
+    // this.isEmpty(this.searchdate);
+     this.getAllMobileTransfertPurchase();
   }
 
   getAllMobileTransfertPurchase(){
@@ -70,21 +80,104 @@ export class PrintmobileTransPurchaseComponent implements OnInit {
 
 
   }
-
-  onDateSelection(date: NgbDate){
-    if(date){
-
-      let fromdateFormate = date.year+'-'+date.month+'-'+date.day;
-
-      
-    }
+  toggleCollapse(): void {
+    this.visible = !this.visible;
   }
 
-  
-  isEmpty(searchDate: any){
-    if(!searchDate){
+
+
+
+  // onDateSelection(date: NgbDate){
+  //   if(date){
+
+  //     let fromdateFormate = date.year+'-'+date.month+'-'+date.day;
+  //     console.log(fromdateFormate);
+      
+      
+  //   }
+  // }
+
+
+   
+  onDateSelection(date: NgbDate) {
+		if (!this.fromDate && !this.toDate) {
+			this.fromDate = date;
+      this.mobileTransfertListe = [];
+      let fromdateFormate = this.fromDate.year+'-'+this.fromDate.month+'-'+this.fromDate.day;
+      console.log(fromdateFormate);
+      this.purshaseService.findByRangeDateTransfertPurchase(fromdateFormate, this.toDate = null).subscribe(data=>{
+        this.mobileTransfertListe = data;
+      })
+
+		} else if (this.fromDate && !this.toDate && date && date.after(this.fromDate)) {
+			this.toDate = date;
+      let fromdateFormate = this.fromDate.year+'-'+this.fromDate.month+'-'+this.fromDate.day;
+      let todateFormate = this.toDate.year+'-'+this.toDate.month+'-'+this.toDate.day;
+      this.mobileTransfertListe = [];
+      this.purshaseService.findByRangeDateTransfertPurchase(fromdateFormate, todateFormate).subscribe(data=>{
+        this.mobileTransfertListe = data;
+      })
+		} 
+    else {
+			this.toDate = null;
+			this.fromDate = date;
+
+      this.mobileTransfertListe = [];
+      let fromdateFormate = this.fromDate.year+'-'+this.fromDate.month+'-'+this.fromDate.day;
+      console.log(fromdateFormate);
+      this.purshaseService.findByRangeDateTransfertPurchase(fromdateFormate, this.toDate = null).subscribe(data=>{
+        this.mobileTransfertListe = data;
+      })
+
+		}
+	}
+
+  isEmpty(fromDate: any, toDate:any){
+    if(!fromDate || !toDate){
+      // this.getAllMobileTransfertPurchase(this.sendType, this.searchText);
       this.getAllMobileTransfertPurchase();
     }
   }
 
+
+  isHovered(date: NgbDate) {
+		return (
+			this.fromDate && !this.toDate && this.hoveredDate && date.after(this.fromDate) && date.before(this.hoveredDate)
+		);
+	}
+
+	isInside(date: NgbDate) {
+		return this.toDate && date.after(this.fromDate) && date.before(this.toDate);
+	}
+
+	isRange(date: NgbDate) {
+		return (
+			date.equals(this.fromDate) ||
+			(this.toDate && date.equals(this.toDate)) ||
+			this.isInside(date) ||
+			this.isHovered(date)
+		);
+	}
+
+
+
+	validateInput(currentValue: NgbDate | null, input: string): NgbDate | null {
+		const parsed = this.formatter.parse(input);
+		return parsed && this.calendar.isValid(NgbDate.from(parsed)) ? NgbDate.from(parsed) : currentValue;
+	}
+
+  searchTransactionByDateRange(from:any, to: any){
+
+  }
+
+  
+  onsearch(event:any){
+    this.searchText = event;
+    this.mobileTransfertListe = [];
+    this.purshaseService.getSearchPurchase(this.searchText).subscribe(data=>{
+      this.mobileTransfertListe = data;
+      console.log(this.mobileTransfertListe);
+      
+   })
+  }
 }

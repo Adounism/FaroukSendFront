@@ -23,7 +23,7 @@
                 
                     </select>                
 
-                    <label cLabel for="floatingSelectGrid">sélectionner le contact</label>
+                    <label cLabel for="floatingSelectGrid">sélectionner le contact:<span class="req-field">*</span></label>
                     <button type="button" (click)="openModal(content)" rel="tooltip" style="border: none;
                     background: none;
                     position: absolute;
@@ -53,13 +53,13 @@
 
           <c-row [gutter]="{g: 2}">
             <c-col [md]="6">
-              <label cLabel for="inputCity">Montant: </label>
+              <label cLabel for="inputCity">Montant:<span class="req-field">*</span></label>
               <input cFormControl id="inputCity" type="number" name="montant" formControlName="montant"
                 placeholder="Montant de la transaction" />
             </c-col>
 
             <c-col [md]="6">
-                <label cLabel for="inputCity">Date: </label>
+                <label cLabel for="inputCity">Date:<span class="req-field">*</span></label>
                 <input cFormControl name="date" formControlName="date" [owlDateTime]="dt" [owlDateTimeTrigger]="dt">
                 <owl-date-time #dt></owl-date-time>
             </c-col>
@@ -97,7 +97,7 @@
           </p>
           <form cForm class="row g-3" [formGroup]="profileForm" (ngSubmit)="ajouterclient()">
             <c-col [md]="6">
-              <label cLabel for="inputEmail4">Nom:</label>
+              <label cLabel for="inputEmail4">Nom:<span class="req-field">*</span></label>
               <input cFormControl id="inputEmail4" name="firstName" formControlName="firstName" type="text" />
   
               <div
@@ -109,7 +109,7 @@
   
             </c-col>
             <c-col [md]="6">
-              <label cLabel for="inputPassword4">Prenom:</label>
+              <label cLabel for="inputPassword4">Prénom:<span class="req-field">*</span></label>
               <input cFormControl id="inputPassword4" formControlName="lastName" name="lastName" type="text" />
               <div
                 *ngIf="profileForm.controls['lastName'].invalid && (profileForm.controls['lastName'].dirty || profileForm.controls['lastName'].touched || submitted)"
@@ -124,7 +124,7 @@
                 <div cFormFloating>
                   <input cFormControl id="floatingInputGrid" type="email" value="email@example.com"
                     formControlName="email" />
-                  <label cLabel for="floatingInputGrid">Email address</label>
+                  <label cLabel for="floatingInputGrid">Email address:<span class="req-field">*</span></label>
                 </div>
               </c-col>
   
@@ -137,7 +137,7 @@
             </c-col>
   
             <c-col [md]="6">
-              <label cLabel for="inputCity">Contact: </label>
+              <label cLabel for="inputCity">Contact:<span class="req-field">*</span></label>
               <input cFormControl id="inputCity" type="tel" name="contact" formControlName="phone"
                 placeholder="numero de télephone" />
   
@@ -152,14 +152,14 @@
   
   
             <c-col [md]="6">
-              <label cLabel for="inputCity">Contact: </label>
+              <label cLabel for="inputCity">occupation: </label>
               <input cFormControl id="inputCity" type="text" name="occupation" formControlName="occupation"
                 placeholder="occupation" />
             </c-col>
   
   
             <c-col [md]="6">
-              <label cLabel for="inputCity">Numero du point de Vente: </label>
+              <label cLabel for="inputCity">Numéro PDV:<span class="req-field">*</span></label>
               <input cFormControl id="inputCity" type="text" name="pdvNumber" formControlName="pdvNumber"
                 placeholder="pdvNumber " />
             </c-col>

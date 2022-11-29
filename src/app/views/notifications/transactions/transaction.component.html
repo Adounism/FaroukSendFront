@@ -34,9 +34,12 @@
       </c-col>
     </c-row>
 
-    <div class="col-sm-7" style="width: fit-content; display: -webkit-inline-box;">
+    <div class="col-sm-7" style="display: contents;
+    align-content: center;
+    margin: auto;">
       <!-- <input type="text" class="form-control" placeholder="Search user historique" (ngModelChange)="onSearchChange($event)" [(ngModel)]="searchText" ng aria-label="Search"> -->
-      <form class="row row-cols-sm-auto">
+      <form class="row row-cols-sm-auto" style="    text-align: center;
+      justify-content: center;">
         <div class="col-12" >
           <div class="dp-hidden position-absolute">
             <div class="input-group">
@@ -108,8 +111,12 @@
 
 
 <c-col xs="12">
-
-
+  <div style="background-color: #3c8dbc;
+  height: 5px;
+  border-radius: 5px;
+  width: 100%;">
+    
+  </div>
   <c-card class="mb-4">
     <c-card-header>
 
@@ -123,14 +130,14 @@
 
           <div class="col-sm-3">
             <label class="visually-hidden" for="specificSizeInputName">search</label>
-            <input type="search" class="form-control" style="font-size: 12px;" id="specificSizeInputName" placeholder="recherche">
+            <input type="search" class="form-control" style="font-size: 12px;" [ngModel]="searchText" (ngModelChange)="onsearch($event)"  id="specificSizeInputName" placeholder="recherche">
           </div>
-          <div>
+          <!-- <div>
             <input type="file" id="upload" name="upload" (change)="onFileSelected($event)"  style="visibility: hidden; width: 1px; height: 1px" />
             <a type="file" onclick="document.getElementById('upload').click()"  class="btn btn-secondary"><i  class="material-icons">
               <svg cIcon class="me-2" class="center-align" name="cil-notes"></svg>
             </i> <span>Import Excel</span></a>	
-          </div>
+          </div> -->
 
 
           <div >
@@ -151,7 +158,7 @@
             <th scope="col" data-field="prenom" data-filter-control="input" data-sortable="true" >Noms</th>
             <th scope="col">Prénoms</th>
             <!-- <th scope="col">operation name</th> -->
-            <th scope="col">Numero PDV</th>
+            <th scope="col">Numéro PDV</th>
             <th scope="col">Montant</th>
             <th scope="col">Date</th>
             <th scope="col">Actions</th>

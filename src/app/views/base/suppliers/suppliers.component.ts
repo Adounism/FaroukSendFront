@@ -141,7 +141,7 @@ export class SuppliersComponent implements OnInit {
 
         this.service.create(provider).then(response=>{
           console.log(response);
-          this.router.navigate(['/base/listsuppliers']);
+          this.router.navigate(['/widgets/listsuppliers']);
           
         }, error=>{
           console.log(error);
@@ -183,7 +183,7 @@ export class SuppliersComponent implements OnInit {
 
         this.service.create(provider).then
         (response=>{
-          this.router.navigate(['/base/listsuppliers']);
+          this.router.navigate(['/widgets/listsuppliers']);
           
         }).catch(error=>{
           this.submitted = false;

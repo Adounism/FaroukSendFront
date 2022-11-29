@@ -26,7 +26,7 @@
                 
                     </select>                
 
-                    <label cLabel for="floatingSelectGrid">sélectionner le contact</label>
+                    <label cLabel for="floatingSelectGrid">sélectionner le contact:<span class="req-field">*</span></label>
                     <button type="button" (click)="openModal(content)" rel="tooltip" style="border: none;
                     background: none;
                     position: absolute;
@@ -63,7 +63,7 @@
           </div> -->
 
           <c-col [md]="6" style="margin: 0;">
-            <label cLabel for="inputCity">Date: </label>
+            <label cLabel for="inputCity">Date: <span class="req-field">*</span></label>
             <input cFormControl name="date" formControlName="date" [owlDateTime]="dt" [owlDateTimeTrigger]="dt">
             <owl-date-time #dt></owl-date-time>
         </c-col>
@@ -93,7 +93,7 @@
           
               </select>                
 
-              <label cLabel for="floatingSelectGrid">sélectionner la carte</label>
+              <label cLabel for="floatingSelectGrid">sélectionner la carte:<span class="req-field">*</span></label>
               <button type="button" (click)="openCardModal(cardcontent)" rel="tooltip" style="border: none;
               background: none;
               position: absolute;
@@ -106,16 +106,16 @@
            </c-col>
 
         <c-col md="2">
-          <label cLabel for="inputZip">prix(unit)</label>
-          <input cFormControl id="inputZip" type="number"  name="unitPrice" formControlName="unitPrice" />
+          <label cLabel for="inputZip">prix(unit):<span class="req-field">*</span></label>
+          <input cFormControl id="inputZip" type="number"  (change)="onUnitPriceChange($event)" name="unitPrice" formControlName="unitPrice" />
         </c-col>
         <c-col md="2">
-          <label cLabel for="inputZip">quantité</label>
-          <input cFormControl id="inputZip" type="number" name="quantity"  formControlName="quantity"  />
+          <label cLabel for="inputZip">quantité:<span class="req-field">*</span></label>
+          <input cFormControl id="inputZip" type="number" (change)="onQuantityChange($event)" name="quantity"  formControlName="quantity"  />
         </c-col>
         <c-col md="2">
-          <label cLabel for="inputZip">Montant HT</label>
-          <input cFormControl id="inputZip" type="number"  name="amountHT" formControlName="amountHT" />
+          <label cLabel for="inputZip">Montant HT:<span class="req-field">*</span></label>
+          <input cFormControl id="inputZip" type="number" [value]="amountHT"  name="amountHT" formControlName="amountHT" />
         </c-col>
         <c-col  md="2" style="display: table-caption">
           <button  cButton type="submit" >Ajouter</button>
@@ -155,7 +155,7 @@
 
        
           <c-col [xs]="12">
-            <button  *ngIf="!onLoading" cButton data-mdb-dismiss="modal" type="submit">Ajouter</button>
+            <button  *ngIf="!onLoading" cButton data-mdb-dismiss="modal" type="submit">Enregistrer</button>
             <button *ngIf="onLoading" cButton data-mdb-dismiss="modal" class="m-1" disabled>
               <c-spinner aria-hidden="true" size="sm"></c-spinner>
               Loading...
@@ -178,81 +178,140 @@
     <c-col xs="12">
       <c-card class="mb-4">
         <c-card-header>
-          <strong>Ajouter un Client</strong>
+          <strong>Ajouter un Fournisseur</strong>
         </c-card-header>
         <c-card-body>
-          <form cForm class="row g-3" [formGroup]="profileForm" (ngSubmit)="ajouterclient()">
-            <c-col [md]="6">
-              <label cLabel for="inputEmail4">Nom:</label>
-              <input cFormControl id="inputEmail4" name="firstName" formControlName="firstName" type="text" />
+          <p class="text-medium-emphasis small">
+            Veillez fournir les informations du Fournisseur.
+          </p>
+          <form cForm class="row g-3" [formGroup]="profileForm" (ngSubmit)="ajouterFounisseur()">
   
-              <div
-                *ngIf="profileForm.controls['firstName'].invalid && (profileForm.controls['firstName'].dirty || profileForm.controls['firstName'].touched || submitted)"
-                class="alert alert-danger">
-                <div *ngIf="profileForm.controls['firstName'].errors?.['required']">
-                  Le nom du client est requis.</div>
-              </div>
-  
-            </c-col>
-            <c-col [md]="6">
-              <label cLabel for="inputPassword4">Prenom:</label>
-              <input cFormControl id="inputPassword4" formControlName="lastName" name="lastName" type="text" />
-              <div
-                *ngIf="profileForm.controls['lastName'].invalid && (profileForm.controls['lastName'].dirty || profileForm.controls['lastName'].touched || submitted)"
-                class="alert alert-danger">
-                <div *ngIf="profileForm.controls['lastName'].errors?.['required']">
-                  Le prenom est requis.</div>
-              </div>
-            </c-col>
   
             <c-row [gutter]="{g: 2}">
               <c-col [md]>
                 <div cFormFloating>
                   <input cFormControl id="floatingInputGrid" type="email" value="email@example.com"
                     formControlName="email" />
-                  <label cLabel for="floatingInputGrid">Email address</label>
+                  <label cLabel for="floatingInputGrid">Adresse email <span class="req-field">*</span></label>
                 </div>
               </c-col>
+              <c-col [md]>
   
+  
+                <c-form-check>
+                  <input cFormCheckInput type="radio" value="induvidual" [checked]="default" (click)="verifieCheck()" formControlName="induvidual" name="induvidual" />
+                  <label cFormCheckLabel>Individuelle</label>
+                </c-form-check>
+    
+                <c-form-check>
+                  <input cFormCheckInput type="radio" value="business" [checked]="second" (click)="verifieCheck()" formControlName="businessType"  name="businessType"/>
+                  <label cFormCheckLabel>Entreprise</label>
+            
+  
+                  <!-- <div
+                  *ngIf="(profileForm.controls['business'].valid || profileForm.controls['induvidual'].valid
+                  
+                  || submitted)"
+                  class="alert alert-danger">
+                  <div *ngIf="!chekisValid">
+                    <div *ngIf="profileForm.controls['business'].errors?.['required'] || profileForm.controls['induvidual'].errors?.['required'] ">
+                      Le type de Fournisseur est requis.</div>
+                  </div>
+                  </div> -->
+                </c-form-check>
+                <c-form-check>
+                  <div>
+                    <span class="req-field">*</span>
+                  </div>
+                </c-form-check>
+        
+  
+  
+                <!-- <div cFormFloating>
+                  <select cSelect id="floatingSelectGrid" aria-label="Type de Fournisseur" (change)="typeChanged($event.target)"
+                    formControlName="typeFournisseur">
+                    <option value="1">Induvidual</option>
+                    <option value="2">Groupe</option>
+                  </select>
+                  <label cLabel for="floatingSelectGrid">Selectionner le type de Fournisseur</label>
+                </div>
+  
+                <div
+                  *ngIf="profileForm.controls['typeFournisseur'].invalid && (profileForm.controls['typeFournisseur'].dirty  || submitted)"
+                  class="alert alert-danger">
+                  <div *ngIf="profileForm.controls['typeFournisseur'].errors?.['required']">
+                    Le type de Fournisseur est requis.</div>
+                </div>-->
+              </c-col> 
             </c-row>
   
-            <c-col [xs]="12">
-              <label cLabel for="inputAddress">Address</label>
-              <input cFormControl id="inputAddress" name="address" formControlName="address"
-                placeholder="1234 Bamako coura" />
-            </c-col>
-  
-            <c-col [md]="6">
-              <label cLabel for="inputCity">Contact: </label>
-              <input cFormControl id="inputCity" type="tel" name="contact" formControlName="phone"
-                placeholder="numero de télephone" />
-  
+            <c-col [md]="6" *ngIf="default">
+              <label cLabel for="inputEmail4">Nom du Fournisseur:<span class="req-field">*</span></label>
+              <input cFormControl id="inputEmail4" name="firstName" formControlName="firstName" type="text" />
               <div
-                *ngIf="profileForm.controls['phone'].invalid && (profileForm.controls['phone'].dirty || profileForm.controls['phone'].touched || submitted)"
+                *ngIf="profileForm.controls['firstName'].invalid && (profileForm.controls['firstName'].dirty ||  submitted)"
                 class="alert alert-danger">
-                <div *ngIf="profileForm.controls['phone'].errors?.['required']">
-                  Le numero du client est requis.</div>
+                <div *ngIf="profileForm.controls['firstName'].errors?.['required']">
+                  Le nom du Fournisseur est requis.</div>
               </div>
   
             </c-col>
-  
-  
-            <c-col [md]="6">
-              <label cLabel for="inputCity">Contact: </label>
-              <input cFormControl id="inputCity" type="text" name="occupation" formControlName="occupation"
-                placeholder="occupation" />
+            <c-col [md]="6" *ngIf="default">
+              <label cLabel for="inputPassword4">Prénom du Fournisseur:<span class="req-field">*</span></label>
+              <input cFormControl id="inputPassword4" formControlName="lastName" name="lastName" type="text" />
+              <div
+                *ngIf="profileForm.controls['lastName'].invalid && (profileForm.controls['lastName'].dirty || submitted)"
+                class="alert alert-danger">
+                <div *ngIf="profileForm.controls['lastName'].errors?.['required']">
+                  Le prenom est requis.</div>
+              </div>
             </c-col>
   
   
-            <c-col [md]="6">
-              <label cLabel for="inputCity">Numero du point de Vente: </label>
-              <input cFormControl id="inputCity" type="text" name="pdvNumber" formControlName="pdvNumber"
-                placeholder="numero pdv " />
-            </c-col>
+  
   
             <c-col [xs]="12">
-              <button *ngIf="!onLoading" cButton type="submit">Ajouter</button>
-              <button *ngIf="onLoading" cButton class="m-1" disabled>
+              <label cLabel for="inputAddress">Address du Fournisseur:</label>
+              <input cFormControl id="inputAddress" name="adresse" formControlName="adresse"
+                placeholder="1234 Bamako coura" />
+            </c-col>
+  
+            <c-col [md]="6" *ngIf="second">
+              <label cLabel for="businessName">Nom de l'entreprise:<span class="req-field">*</span></label>
+              <input cFormControl id="inputCity" type="text" name="business" formControlName="business"
+                placeholder="nom du entreprise" />
+              <!-- <div
+                *ngIf="profileForm.controls['business'].invalid && (profileForm.controls['business'].dirty || profileForm.controls['business'].touched || submitted)"
+                class="alert alert-danger">
+                <div *ngIf="profileForm.controls['business'].errors?.['required']">
+                  Le nom du business est requis.</div>
+              </div> -->
+            </c-col>
+  
+  
+            <c-col [md]="6">
+              <label cLabel for="inputCity">Contact du Fournisseur:<span class="req-field">*</span></label>
+              <input cFormControl id="inputCity" type="tel" name="firstPhone" formControlName="firstPhone"
+                placeholder="numero de télephone" />
+              <div
+                *ngIf="profileForm.controls['firstPhone'].invalid && (profileForm.controls['firstPhone'].dirty || profileForm.controls['firstPhone'].touched || submitted)"
+                class="alert alert-danger">
+                <div *ngIf="profileForm.controls['firstPhone'].errors?.['required']">
+                  Le numero du Fournisseur est requis.</div>
+              </div>
+            </c-col>
+  
+            <c-col [md]="6">
+              <label cLabel for="inputCity">Contact 2: </label>
+              <input cFormControl id="inputCity" type="tel" name="secondPhone" formControlName="secondPhone"
+                placeholder="numero de télephone sécondaire" />
+            </c-col>
+  
+  
+  
+            <c-col [xs]="12">
+              <button *ngIf="!submitted" cButton  type="submit">Ajouter</button>
+              <button *ngIf="submitted"  cButton class="m-1" disabled>
                 <c-spinner aria-hidden="true" size="sm"></c-spinner>
                 Loading...
               </button>
@@ -260,6 +319,7 @@
           </form>
         </c-card-body>
       </c-card>
+  
     </c-col>
   </c-row>
 </ng-template>

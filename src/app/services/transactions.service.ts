@@ -65,6 +65,11 @@ sendType = {
   getAllTransaction(page: number):Observable<any>{
     return this.http.get<any[]>(this.transactionEndPoint.transactionListe+ '?page=' +page);
   }
+  getSearchCreditSeal( search:string): Observable<any>{
+
+    return this.http.get<any[]>(this.transactionEndPoint.transactionListe+ `?client.firstName=${search}&client.lastName=${search}`);
+  }
+
 
 
   find(id:number): Observable<any>{
@@ -72,7 +77,7 @@ sendType = {
   }
   findByRangeDate(from: any, to: any ): Observable<any>{
     
-    return this.http.get<any>(this.transactionEndPoint.findById+ `?operation=1&createdAt[after]=${from}&createdAt[before]=${to}`);
+    return this.http.get<any>(this.transactionEndPoint.findById+ `?date[after]=${from}&date[before]=${to}`);
   }
 
   delete(id:number): Observable<any>{
@@ -114,13 +119,17 @@ sendType = {
 
   findByRangeDateTransfert(from: any, to: any ): Observable<any>{
     
-    return this.http.get<any>(this.send.sendListe+ `?operation=1&createdAt[after]=${from}&createdAt[before]=${to}`);
+    return this.http.get<any>(this.send.sendListe+ `?date[after]=${from}&date[before]=${to}`);
   }
 
-  getAllMobileSend(sendtype:string, search:string): Observable<any>{
-    console.log(search);
+  getAllMobileSends(): Observable<any>{
     
-    return this.http.get<any[]>(this.send.sendListe+ `?sendType[]=${sendtype}&?firstName=${search}&?lastName=${search}&?pdvNumber=${search}`);
+    return this.http.get<any[]>(this.send.sendListe);
+  }
+
+  getAllMobileSend(sendtype:string): Observable<any>{
+    
+    return this.http.get<any[]>(this.send.sendListe+ `?sendType[]=${sendtype}`);
   }
 
   getSearchMobileSend( search:string): Observable<any>{
@@ -148,6 +157,22 @@ sendType = {
   saleCard(data:any): Promise<any>{
     return this.httpService.post(this.cardForSale.create, data, {observe: 'response'});
   }
+
+  findByRangeDateMobileTransfert(from: any, to: any ): Observable<any>{
+    
+    return this.http.get<any>(this.cardForSale.cardListe+ `?date[after]=${from}&date[before]=${to}`);
+  }
+
+  getSearchCardSalling(search:string): Observable<any>{
+
+    return this.http.get<any[]>(this.cardForSale.cardListe+ `?client.firstName=${search}`);
+  }
+
+  getSearchCardByCardType(search:string): Observable<any>{
+
+    return this.http.get<any[]>(this.cardForSale.cardListe+ `?cardToTypeCardRelation.typeCardForSale=${search}`);
+  }
+
 
   getAllCardSales(page:number){
     return this.http.get<any[]>(this.cardForSale.cardListe + '?page=' +page);

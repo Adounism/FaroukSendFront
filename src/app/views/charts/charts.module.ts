@@ -17,12 +17,18 @@ import { NotificationsRoutingModule } from '../notifications/notifications-routi
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PrintcardsaleComponent } from './printcardsale/printcardsale.component';
 import { EditcardsaleComponent } from './editcardsale/editcardsale.component';
+import { CarteTypeComponent } from './carte-type/carte-type.component';
+import { AddcarteTypeComponent } from './addcarte-type/addcarte-type.component';
+import { EditcarteTypeComponent } from './editcarte-type/editcarte-type.component';
 
 @NgModule({
   declarations: [ChartsComponent,
     AddcardsaleComponent,
     PrintcardsaleComponent,
-    EditcardsaleComponent
+    EditcardsaleComponent,
+    CarteTypeComponent,
+    AddcarteTypeComponent,
+    EditcarteTypeComponent
   ],
   imports: [
     CommonModule,

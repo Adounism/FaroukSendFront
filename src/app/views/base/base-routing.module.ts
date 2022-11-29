@@ -7,8 +7,8 @@ import { HistoryComponent } from './historiques/historique.component';
 import { AddOperationComponent } from './addoperation/addoperation.component';
 import { TransactionComponent } from '../notifications/transactions/transaction.component';
 import { EditOperationComponent } from './editoperation/editoperation.component';
-import { PrintcustomersComponent } from './printcustomers/printcustomers.component';
-import {PrintsupplierComponent } from './printsuppliers/printsuppliers.component';
+import { PrintcustomersComponent } from '../widgets/printcustomers/printcustomers.component';
+import {PrintsupplierComponent } from '../widgets/printsuppliers/printsuppliers.component';
 import { PaginationsComponent } from '../icons/encaissements/encaissement.component';
 import { PrintAchatComponent } from './listeachat/printachat.component';
 import { EditCustomerComponent } from './editcustomer/editcustomer.component';
@@ -54,30 +54,30 @@ const routes: Routes = [
         pathMatch: 'full',
         redirectTo: 'cards',
       },
-      {
-        path: 'customers',
-        component: CustomersComponent,
-        // canActivate:[AuthGuard],
-        data: {
-          title: 'Ajouter un client',
-        },
-      },
-      {
-        path: 'suppliers',
-        component: SuppliersComponent,
-        // canActivate:[AuthGuard],
-        data: {
-          title: 'Ajouter un founisseur',
-        },
-      },
-      {
-        path: 'historique/:id',
-        component: HistoryComponent,
-        // canActivate:[AuthGuard],
-        data: {
-          title: 'Client Historique',
-        },
-      },
+      // {
+      //   path: 'customers',
+      //   component: CustomersComponent,
+      //   // canActivate:[AuthGuard],
+      //   data: {
+      //     title: 'Ajouter un client',
+      //   },
+      // },
+      // {
+      //   path: 'suppliers',
+      //   component: SuppliersComponent,
+      //   // canActivate:[AuthGuard],
+      //   data: {
+      //     title: 'Ajouter un founisseur',
+      //   },
+      // },
+      // {
+      //   path: 'historique/:id',
+      //   component: HistoryComponent,
+      //   // canActivate:[AuthGuard],
+      //   data: {
+      //     title: 'Client Historique',
+      //   },
+      // },
       {
         path: 'addoperation',
         component: AddOperationComponent,
@@ -95,23 +95,23 @@ const routes: Routes = [
           title: 'Edit operation',
         },
       },
-      {
-        path: 'listcustomers',
-        component: PrintcustomersComponent,
-        // canActivate:[AuthGuard],
-        data: {
-          title: 'List des Clients',
-        },
-      },
+      // {
+      //   path: 'listcustomers',
+      //   component: PrintcustomersComponent,
+      //   // canActivate:[AuthGuard],
+      //   data: {
+      //     title: 'List des Clients',
+      //   },
+      // },
 
-      {
-        path: 'listsuppliers',
-        component: PrintsupplierComponent,
-        // canActivate:[AuthGuard],
-        data: {
-          title: 'List des Fournisseurs',
-        },
-      },
+      // {
+      //   path: 'listsuppliers',
+      //   component: PrintsupplierComponent,
+      //   // canActivate:[AuthGuard],
+      //   data: {
+      //     title: 'List des Fournisseurs',
+      //   },
+      // },
 
 
 
@@ -125,14 +125,14 @@ const routes: Routes = [
           title: 'Liste des Achats effectués',
         },
       },
-      {
-        path: 'editcustomer/:id',
-        component: EditCustomerComponent,
-        // canActivate:[AuthGuard],
-        data: {
-          title: 'Edit Customer',
-        },
-      },
+      // {
+      //   path: 'editcustomer/:id',
+      //   component: EditCustomerComponent,
+      //   // canActivate:[AuthGuard],
+      //   data: {
+      //     title: 'Edit Customer',
+      //   },
+      // },
       {
         path: 'addpurchase',
         component: AddPurchaseComponent,
@@ -141,14 +141,14 @@ const routes: Routes = [
           title: 'Ajouter un Achat',
         },
       },
-      {
-        path: 'editsupplier/:id',
-        component: EditSupplierComponent,
-        // canActivate:[AuthGuard],
-        data: {
-          title: 'Edit Supplier',
-        },
-      },
+      // {
+      //   path: 'editsupplier/:id',
+      //   component: EditSupplierComponent,
+      //   // canActivate:[AuthGuard],
+      //   data: {
+      //     title: 'Edit Supplier',
+      //   },
+      // },
 
       {
         path: 'operation',

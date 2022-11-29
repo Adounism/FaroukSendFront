@@ -1,0 +1,41 @@
+<c-col xs="12">
+    <c-card class="mb-4">
+      <c-card-header>
+        <strong>Liste des cartes de crédit</strong>
+        <button style="float: right;" class="btn float-right" color="primary"  [routerLink]="['/vente-carte/addcartetype']" cButton> ajouter
+      
+        </button>
+  
+      </c-card-header>
+      <c-card-body>
+        <!-- <p class="text-medium-emphasis small">
+          Use  property to enable a hover state on table rows within a
+          <code>&lt;tbody&gt;</code>.
+        </p> -->
+          <table [hover]="true" [responsive]="true" [striped]="true" align="middle" cTable class="mb-0 border">
+            <thead>
+            <tr>
+              <th scope="col">Carte</th>
+              <th scope="col">Description</th>
+              <th scope="col">Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let carte of listCarteTypes">
+              <td>{{carte.name}}</td>
+              <td>{{carte?.description}}</td>
+              <td>
+                <button type="button" rel="tooltip" (click)="deleteCarte(carte.id)" class="btn btn-danger btn-just-icon btn-sm">
+                  <svg cIcon class="me-2" name="cil-trash"></svg>
+              </button>
+              <button type="button" rel="tooltip" class="btn btn-info btn-just-icon btn-sm" [routerLink]="['/vente-carte/editcartetype/',carte.id]"  data-original-title="" title="">
+                <svg cIcon class="me-2" name="cil-pencil"></svg>
+              </button>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+  
+      </c-card-body>
+    </c-card>
+  </c-col>

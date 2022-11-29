@@ -19,7 +19,7 @@ export class PrintmobiletransactionComponent implements OnInit {
   toDate!: NgbDate | null;
   mobileTransactions:any[]=[];
   transactionType:any[]=[];
-  sendType = "";
+  sendTypeCollection = "collection";
   searchText = ""
   visible = true;
   constructor(private mobileTransaction: TransactionsService,
@@ -29,7 +29,7 @@ export class PrintmobiletransactionComponent implements OnInit {
     private calendar: NgbCalendar,) { }
 
   ngOnInit(): void {
-    this.getAllMobiletransaction(this.sendType, this.searchText);
+    this.getAllMobileTransactions();
     this.getAllTransactionTypes();
 
     
@@ -40,33 +40,45 @@ export class PrintmobiletransactionComponent implements OnInit {
     this.visible = !this.visible;
   }
 
+  getAllMobileTransactions(){
+    this.mobileTransaction.getAllMobileSends().subscribe(data=>{
+      this.mobileTransactions = data;
+      console.log(this.mobileTransactions);
+    });
+  }
 
   
-  getAllMobiletransaction(type:string,searchTerm:string){    
-    this.mobileTransaction.getAllMobileSend(type, searchTerm).subscribe(data=>{
+  getAllMobiletransaction(type:string){    
+
+    this.mobileTransactions =[];
+    this.mobileTransaction.getAllMobileSend(type).subscribe(data=>{
        this.mobileTransactions = data;
-       console.log(this.mobileTransactions);
+    
        
     })
   }
 
   onFilterChange(event: any){
-    if(event.target.checked){
-      this.getAllMobiletransaction(event.target.value, this.searchText);
+    if(event.target.value != ""){
+      this.getAllMobiletransaction(event.target.value);
       
-    }else{
-      this.getAllMobiletransaction(this.sendType, this.searchText);
+    }else if(event.target.value == ""){
+      console.log("Hello");
+      
+      this.getAllMobileTransactions();
     }
     console.log(event.target.value);
     console.log(event.target.checked);
     
-    
   }
+
+
+
 
   deletetransaction(id:number){
 
     this.ngxComfirmService.confirm({
-      title:'Voulez-vous effacer cette Transaction?',
+      title:'Voulez-vous supprimer cette Transaction?',
       confirmLabel: 'Okay',
       declineLabel: 'Cancel'
     }).then((res: boolean) => {
@@ -80,7 +92,7 @@ export class PrintmobiletransactionComponent implements OnInit {
                 summary:"",
                 duration: 3000
                });
-               this.getAllMobiletransaction(this.sendType, this.searchText);
+               this.getAllMobileTransactions();
             }
             
           },
@@ -145,7 +157,7 @@ export class PrintmobiletransactionComponent implements OnInit {
 
   isEmpty(fromDate: any, toDate:any){
     if(!fromDate || !toDate){
-      this.getAllMobiletransaction(this.sendType, this.searchText);
+      this.getAllMobileTransactions();
     }
   }
 

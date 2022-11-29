@@ -1,0 +1,67 @@
+<c-row ngPreserveWhitespaces>
+    <c-col xs="12">
+      <c-card class="mb-4">
+        <c-card-header>
+          <strong>Modifier la carte</strong>
+        </c-card-header>
+        <c-card-body>
+          <p class="text-medium-emphasis small">
+            Veillez fournir les informations de la carte.
+          </p>
+  
+  
+  
+          <form cForm class="row g-3" *ngIf="currentCard" [formGroup]="cardtypeForm" >
+  
+            <c-row [gutter]="{g: 2}">
+              <c-col [md]="6">
+                <label cLabel for="inputCity">Nom de la carte:<span class="req-field">*</span></label>
+                <input cFormControl id="inputCity" type="text" name="name"  formControlName="name"  [(ngModel)]="currentCard.name" 
+                  placeholder="Orange 2000F" />
+            
+                  <div
+                  *ngIf="cardtypeForm.controls['name'].invalid && (cardtypeForm.controls['name'].dirty || cardtypeForm.controls['name'].touched || submitted)"
+                  class="alert alert-danger">
+                  <div *ngIf="cardtypeForm.controls['name'].errors?.['required']">
+                    Le nom de la carte est requis.</div>
+                </div>
+              </c-col>
+    
+    
+              <c-col [md]="6">
+                <label cLabel for="inputCity">Description: </label>
+                <input cFormControl id="inputCity" type="text" name="description" formControlName="description" [(ngModel)]="currentCard.description" 
+                  placeholder="description " />
+              </c-col>
+            </c-row>
+  
+  
+            <c-col [xs]="12">
+              <button  cButton type="submit" (click)="updateOperation()">Ajouter</button>
+            </c-col>
+          </form>
+        </c-card-body>
+      </c-card>
+  
+      <!-- <c-card class="mb-4">
+          <c-card-header>
+            <strong>Angular Accordion</strong> alwaysOpen
+          </c-card-header>
+          <c-card-body>
+            <app-docs-example href="components/accordion#always-open">
+              <c-accordion [alwaysOpen]="true" class="shadow accordion-custom">
+                <c-accordion-item *ngFor="let item of items; let i = index;" [visible]="i===1">
+                  <ng-template cTemplateId="accordionHeader">
+                    Custom Accordion item #{{i}}
+                  </ng-template>
+                  <ng-template cTemplateId="accordionBody">
+                    <small><i>{{i}}.</i></small>
+                    <span [innerHTML]="getAccordionBodyText(i.toString())"></span>
+                  </ng-template>
+                </c-accordion-item>
+              </c-accordion>
+            </app-docs-example>
+          </c-card-body>
+        </c-card> -->
+    </c-col>
+  </c-row>

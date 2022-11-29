@@ -167,6 +167,7 @@ export class AddTransactionComponent implements OnInit {
           summary:"Client ajouter avec succes",
           duration: 3000
          });
+         this.getClientList();
          
          this.submitted = false;
          if (first != null) {

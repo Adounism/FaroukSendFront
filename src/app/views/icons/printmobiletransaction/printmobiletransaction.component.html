@@ -19,28 +19,27 @@
           </div>
            -->
   
-        
-           <c-col md="2" *ngFor="let type of transactionType">
-             <input class="form-check-input" type="checkbox" (change)="onFilterChange($event)" [value]="type.key" id="defaultCheck1">
-             <label style="margin-right: 10px;position: absolute;" class="form-check-label" for="defaultCheck1">
-               {{type.name}}
-             </label>
-           </c-col>
-           
-        <!-- <c-col md="2">
-          <label cLabel for="inputZip">quantité</label>
-          <input cFormControl id="inputZip" type="number"  name="quantity"  />
-        </c-col>
-        <c-col md="2">
-          <label cLabel for="inputZip">Montant HT</label>
-          <input cFormControl id="inputZip" type="number"  name="amountHT"  />
-        </c-col> -->
+           <div style="display: contents;">
+
+             <div class="form-check form-check-inline" *ngFor="let type of transactionType; index as i">
+              <input class="form-check-input" type="radio" name="inlineRadioOptions"  (change)="onFilterChange($event)" [value]="type.key" id="inlineRadio1" >
+              <label class="form-check-label" for="inlineRadio1"> {{type.name}}</label>
+            </div>
+           </div>
+           <!-- <div class="form-check form-check-inline" >
+            <input class="form-check-input" type="radio" name="inlineRadioOptions"  (change)="onFilterChange($event)" [value]="" id="inlineRadio1" >
+            <label class="form-check-label" for="inlineRadio1">All</label>
+          </div> -->
+          
       </c-row>
   
-      <div class="col-sm-7" style="width: fit-content;   justify-content: center;">
+      <div class="col-sm-7"  style="display: contents;
+      align-content: center;
+      margin-top: 20px;">
         <!-- <input type="text" class="form-control" placeholder="Search user historique" (ngModelChange)="onSearchChange($event)" [(ngModel)]="searchText" ng aria-label="Search"> -->
-        <form class="row row-cols-sm-auto">
-          <div class="col-12" >
+        <form class="row row-cols-sm-auto"  style="    text-align: center;
+        justify-content: center;">
+          <div class="col-12">
             <div class="dp-hidden position-absolute">
               <div class="input-group">
                 <input
@@ -111,6 +110,12 @@
   
   <c-row  ngPreserveWhitespaces>
     <c-col xs>
+      <div style="background-color: #3c8dbc;
+      height: 5px;
+      border-radius: 5px;
+      width: 100%;">
+        
+      </div>
       <c-card class="mb-4">
         <c-card-header>
           Transactions
@@ -161,7 +166,7 @@
                 {{transaction.amount}}
               </td>
               <td class="text-center">
-                {{transaction.sendType.name}}
+                {{transaction.sendType}}
               </td>
               <td>
                 <div class="small text-medium-emphasis text-center">

@@ -24,7 +24,7 @@
                     </option>
                
                   </select>
-                  <label cLabel for="floatingSelectGrid">sélectionner le contact</label>
+                  <label cLabel for="floatingSelectGrid">sélectionner le contact:<span class="req-field">*</span></label>
                 </div>
            </c-col>
 
@@ -44,13 +44,13 @@
 
           <c-row [gutter]="{g: 2}">
             <c-col [md]="6">
-              <label cLabel for="inputCity">transaction Montant: </label>
+              <label cLabel for="inputCity">transaction Montant:<span class="req-field">*</span></label>
               <input cFormControl id="inputCity" type="number" name="amount" [(ngModel)]="currentTransaction.amount" 
                 placeholder="Montant de la transaction" />
             </c-col>
 
             <c-col [md]="6">
-              <label cLabel for="inputCity">Date: </label>
+              <label cLabel for="inputCity">Date:<span class="req-field">*</span></label>
               <input cFormControl name="date" [(ngModel)]="currentTransaction.date"   [owlDateTime]="dt" [owlDateTimeTrigger]="dt">
               <owl-date-time #dt></owl-date-time>
           </c-col>

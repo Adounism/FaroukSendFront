@@ -24,7 +24,7 @@
               
                   </select>                
     
-                  <label cLabel for="floatingSelectGrid">sélectionner la carte</label>
+                  <label cLabel for="floatingSelectGrid">sélectionner la carte:<span class="req-field">*</span></label>
                   <!-- <button type="button" (click)="openCardModal(cardcontent)" rel="tooltip" style="border: none;
                   background: none;
                   position: absolute;
@@ -37,15 +37,15 @@
                </c-col>
     
             <c-col md="2">
-                <label cLabel for="inputZip">prix(unit)</label>
+                <label cLabel for="inputZip">prix(unit):<span class="req-field">*</span></label>
                 <input cFormControl id="inputZip" type="number" name="unitPrice" [(ngModel)]="currentCardData.unitPrice" />
             </c-col>
             <c-col md="2">
-                <label cLabel for="inputZip">quantité</label>
+                <label cLabel for="inputZip">quantité:<span class="req-field">*</span></label>
                 <input cFormControl id="inputZip" type="number" name="quantity" [(ngModel)]="currentCardData.quantity"    />
             </c-col>
             <c-col md="2">
-                <label cLabel for="inputZip">Montant HT</label>
+                <label cLabel for="inputZip">Montant HT:<span class="req-field">*</span></label>
                 <input cFormControl id="inputZip" type="number"   name="amountHT" [(ngModel)]="currentCardData.amountHT"  />
             </c-col>
           </c-row>

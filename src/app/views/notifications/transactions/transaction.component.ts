@@ -247,4 +247,19 @@ export class TransactionComponent implements OnInit{
       this.page = event;
       this.getTransactionList();
     }
+
+    onsearch(event:any){
+      this.searchText = event;
+      if(this.searchText  != ""){
+
+        this.listeTransactions = [];
+        this.transService.getSearchMobileSend(this.searchText).subscribe(data=>{
+          this.listeTransactions = data;
+          console.log(this.listeTransactions);
+          
+       })
+      }else{
+        this.getTransactionList();
+      }
+    }
 }

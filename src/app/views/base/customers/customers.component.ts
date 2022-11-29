@@ -69,7 +69,7 @@ export class CustomersComponent implements OnInit {
           duration: 3000
           });
 
-         this.router.navigate(['/base/listcustomers']);
+         this.router.navigate(['/widgets/listcustomers']);
       }).catch(error=>{
         console.log(error);
         this.toast.success({
