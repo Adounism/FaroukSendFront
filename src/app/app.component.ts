@@ -31,13 +31,7 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
-    console.log(this.coockieService.check('PHPSESSID'));
-
     this.operation.getAllOperations().subscribe(data=>{
-      console.log('Hello');
-
-      
     })
     this.router.events.subscribe((evt) => {
       if (!(evt instanceof NavigationEnd)) {

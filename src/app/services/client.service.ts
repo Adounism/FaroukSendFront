@@ -11,15 +11,15 @@ import { environment } from 'src/environments/environment';
 })
 export class ClientService  {
   private BaseUrl = environment.BaseUrl;
-  
+
    clientEndPoint= {
     listClients: this.BaseUrl + '/clients',
-    addNewClient: this.BaseUrl +'/clients', 
+    addNewClient: this.BaseUrl +'/clients',
     findById: this.BaseUrl + '/clients/',
 
   }
 
-  constructor(private http: HttpClient,private httpService: HttpService) { 
+  constructor(private http: HttpClient,private httpService: HttpService) {
 
   }
 
@@ -32,7 +32,7 @@ export class ClientService  {
   }
 
   searchCustomers(searchValue:any): Observable<any>{
-    
+
     return this.http.get<any[]>(this.clientEndPoint.listClients+`?firstName=${searchValue}`);
   }
 
@@ -45,14 +45,14 @@ export class ClientService  {
     return this.http.post<any[]>(this.clientEndPoint.addNewClient, user);
   }
 
-  
+
 
   // create(user: any): Observable<any>{
   //   return this.http.post(this.clientEndPoint.addNewClient, user,  {observe: 'response'})
   //   .pipe(map((res:any)=>{
   //     console.log(res);
   //     return res;
-      
+
   //   }));
   // }
 
@@ -64,10 +64,14 @@ export class ClientService  {
     return this.http.delete(this.clientEndPoint.findById + id, {observe: 'response'});
   }
 
-  editClient(id:number, user: Users): Observable<any>{ 
+  editClient(id:number, user: Users): Observable<any>{
     return this.http.put(`${this.clientEndPoint.findById} ${id}`, user).pipe(map((res:any)=>{
       return res;
     }));
+  }
+
+  getSendType(sendtype:any):Observable<any>{
+    return this.http.get<any>(this.clientEndPoint.listClients+ `?sends.sendType=${sendtype}`);
   }
 
 }

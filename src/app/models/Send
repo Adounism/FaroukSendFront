@@ -1,0 +1,6 @@
+ interface Send {
+  id: number;
+  amount: number;
+  date: Date;
+  sendType: string;
+}

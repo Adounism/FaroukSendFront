@@ -1,23 +1,113 @@
 <c-col xs="12">
   <c-card class="mb-4">
+    <div>
+      <a (click)="toggleCollapse()" style="background-color: grey" cButton class="me-1" color="primary">
+        <svg cIcon class="me-2" class="center-align" name="cil-filter"></svg>
+      </a>
+      <label for="filter" style="font-size: 18px">Filtres</label>
+
+      <div *ngIf="visible" cCollapse>
+        <c-card class="mt-3 shadow">
+          <c-card-body>
+            <c-row style="
+                align-items: center;
+                justify-content: space-between;
+                margin: 15px;
+              ">
+              <!-- <div class="col-sm-3">
+            <label for="inputState" class="form-label">State</label>
+            <select id="inputState" class="form-select">
+              <option selected>Choose...</option>
+              <option>...</option>
+            </select>
+          </div>
+           -->
+
+              <div style="display: contents">
+                <div class="form-check form-check-inline" *ngFor="let type of transactionType; index as i">
+                  <input class="form-check-input" type="radio" name="inlineRadioOptions"
+                    (change)="onFilterChange($event)" [value]="type.key" id="inlineRadio1" />
+                  <label class="form-check-label" for="inlineRadio1">
+                    {{ type.name }}</label>
+                </div>
+              </div>
+
+
+              <!-- <div class="form-check form-check-inline" >
+            <input class="form-check-input" type="radio" name="inlineRadioOptions"  (change)="onFilterChange($event)" [value]="" id="inlineRadio1" >
+            <label class="form-check-label" for="inlineRadio1">All</label>
+          </div> -->
+            </c-row>
+
+            <div class="col-sm-7" style="display: contents; align-content: center; margin-top: 20px">
+              <!-- <input type="text" class="form-control" placeholder="Search user historique" (ngModelChange)="onSearchChange($event)" [(ngModel)]="searchText" ng aria-label="Search"> -->
+              <form class="row row-cols-sm-auto" style="text-align: center; justify-content: center">
+                <div class="col-12">
+                  <div class="dp-hidden position-absolute">
+                    <div class="input-group">
+                      <input name="datepicker" class="form-control" ngbDatepicker #datepicker="ngbDatepicker"
+                        [autoClose]="'outside'" (dateSelect)="onDateSelection($event)" [displayMonths]="2"
+                        [dayTemplate]="t" outsideDays="hidden" [startDate]="fromDate!" tabindex="-1" />
+                      <ng-template #t let-date let-focused="focused">
+                        <span class="custom-day" [class.focused]="focused" [class.range]="isRange(date)"
+                          [class.faded]="isHovered(date) || isInside(date)" (mouseenter)="hoveredDate = date"
+                          (mouseleave)="hoveredDate = null">
+                          {{ date.day }}
+                        </span>
+                      </ng-template>
+                    </div>
+                  </div>
+                  <div class="input-group">
+                    <input #dpFromDate class="form-control" placeholder="yyyy-mm-dd" name="dpFromDate"
+                      [value]="formatter.format(fromDate)" (input)="
+                        fromDate = validateInput(fromDate, dpFromDate.value)
+                      " />
+
+                    <button class="btn btn-outline-secondary bi bi-calendar3" (click)="datepicker.toggle()"
+                      type="button">
+                      <svg cIcon class="me-2" class="center-align" name="cil-calendar"></svg>
+                    </button>
+                  </div>
+                </div>
+                <div class="col-12" style="padding: 0px">
+                  <div class="input-group">
+                    <input #dpToDate class="form-control" placeholder="yyyy-mm-dd" name="dpToDate"
+                      [value]="formatter.format(toDate)" (input)="toDate = validateInput(toDate, dpToDate.value)" />
+                    <button class="btn btn-outline-secondary bi bi-calendar3" (click)="datepicker.toggle()"
+                      type="button">
+                      <svg cIcon class="me-2" class="center-align" name="cil-calendar"></svg>
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </c-card-body>
+        </c-card>
+      </div>
+    </div>
+  </c-card>
+</c-col>
+
+<c-col xs="12">
+  <c-card class="mb-4">
     <div style="background-color: #3c8dbc;
     height: 5px;
     border-radius: 5px;
     width: 100%;">
-      
+
     </div>
     <c-card-header>
 
         <strong>Liste des Clients</strong>
 
           <button style="float: right;" class="btn float-right" color="primary"  [routerLink]="['/widgets/customers']" cButton> ajouter
-    
+
           </button>
 
           <div class="col-sm-7">
             <input type="text" class="form-control" placeholder="Search user historique" (ngModelChange)="onSearchChange($event)" [(ngModel)]="searchText" ng aria-label="Search">
           </div>
-          
+
 
 
     </c-card-header>
@@ -33,26 +123,37 @@
             <th scope="col">Prénoms</th>
             <th scope="col">Numéro PDV</th>
             <th scope="col">Contact</th>
+            <th scope="col">Total Retour d'achat</th>
+            <th scope="col">Total Transaction</th>
+            <th scope="col">Total Encaissement</th>
+            <th scope="col">Total Décaissement</th>
             <th scope="col" class="text-center">Actions</th>
           </tr>
           </thead>
           <tbody>
           <tr *ngFor="let customer of customers | paginate: { itemsPerPage: 25, currentPage: page, totalItems: total } ">
             <!-- <th scope="row">1</th> -->
-            <td>{{customer.firstName}}</td>
-            <td>{{customer.lastName}}</td>
-            <td>{{customer.pdvNumber}}</td>
-            <td>{{customer.phone}}</td>
+            <td>{{customer?.firstName}}</td>
+            <td>{{customer?.lastName}}</td>
+            <td>{{customer?.pdvNumber}}</td>
+            <td>{{customer?.phone}}</td>
+            <td>{{getTotalSend(customer).sendback}}</td>
+            <td>{{getTotalSend(customer).send}}</td>
+            <td>{{getTotalSend(customer).collection}}</td>
+            <td>{{getTotalSend(customer).disbursement}}</td>
             <td class="text-center">
-              <button type="button" rel="tooltip" (click)="deleteCustomer(customer.id)" class="btn btn-danger btn-just-icon btn-sm">
-                <svg cIcon class="me-2" class="center-align" name="cil-trash"></svg>
-            </button>
-            <button type="button" rel="tooltip" class="btn btn-info btn-just-icon btn-sm" [routerLink]="['/widgets/editcustomer/',customer.id]" data-original-title="" title="">
-              <svg cIcon class="me-2" class="center-align" name="cil-pencil"></svg>
-            </button>
-            <button type="button" rel="tooltip" class="btn btn-warning btn-just-icon btn-sm" [routerLink]="['/widgets/historique/',customer.id]" data-original-title="" title="">
-              <svg cIcon class="me-2" class="center-align" name="cil-notes"></svg>
-            </button>
+              <div class="btn-tooltip">
+
+                <button type="button" rel="tooltip" (click)="deleteCustomer(customer.id)" class="btn btn-danger btn-just-icon btn-sm">
+                  <svg cIcon class="me-2" class="center-align" name="cil-trash"></svg>
+              </button>
+              <button type="button" rel="tooltip" class="btn btn-info btn-just-icon btn-sm" [routerLink]="['/widgets/editcustomer/',customer.id]" data-original-title="" title="">
+                <svg cIcon class="me-2" class="center-align" name="cil-pencil"></svg>
+              </button>
+              <button type="button" rel="tooltip" class="btn btn-warning btn-just-icon btn-sm" [routerLink]="['/widgets/historique/',customer.id]" data-original-title="" title="">
+                <svg cIcon class="me-2" class="center-align" name="cil-notes"></svg>
+              </button>
+              </div>
             </td>
           </tr>
           <!-- <tr class="center-align">
@@ -60,7 +161,7 @@
           </tr> -->
           </tbody>
         </table>
-        
+
   <pagination-controls (pageChange)="pageChangeEvent($event)"></pagination-controls>
     </c-card-body>
   </c-card>
