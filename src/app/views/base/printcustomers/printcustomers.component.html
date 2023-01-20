@@ -119,14 +119,45 @@
           <caption>Listes des Clients</caption>
           <thead>
           <tr>
-            <th scope="col">Noms</th>
-            <th scope="col">Prénoms</th>
-            <th scope="col">Numéro PDV</th>
-            <th scope="col">Contact</th>
-            <th scope="col">Total Retour d'achat</th>
-            <th scope="col">Total Transaction</th>
-            <th scope="col">Total Encaissement</th>
+            <th scope="col" (click)="sortData('firstName')">Noms
+              <span *ngIf="sortColumn === 'firstName'">
+
+                <svg cIcon *ngIf="isAscending" class="arrow-icon" name="cil-arrow-top"></svg>
+                <svg cIcon *ngIf="!isAscending" class="arrow-icon" name="cil-arrow-bottom"></svg>
+              </span>
+            </th>
+            <th scope="col" (click)="sortData('lastName')">Prénoms
+              <span *ngIf="sortColumn === 'lastName'">
+                <svg cIcon *ngIf="isAscending" class="arrow-icon" name="cil-arrow-top"></svg>
+                <svg cIcon *ngIf="!isAscending" class="arrow-icon" name="cil-arrow-bottom"></svg>
+              </span>
+            </th>
+            <th scope="col" (click)="sortData('pdvNumber')">Numéro PDV
+              <span *ngIf="sortColumn === 'pdvNumber'">
+                <svg cIcon *ngIf="isAscending" class="arrow-icon" name="cil-arrow-top"></svg>
+                <svg cIcon *ngIf="!isAscending" class="arrow-icon" name="cil-arrow-bottom"></svg>
+              </span>
+            </th>
+            <th scope="col" (click)="sortData('phone')">Contact
+              <span *ngIf="sortColumn === 'phone'">
+                <svg cIcon *ngIf="isAscending" class="arrow-icon" name="cil-arrow-top"></svg>
+                <svg cIcon *ngIf="!isAscending" class="arrow-icon" name="cil-arrow-bottom"></svg>
+              </span>
+            </th>
+            <th scope="col" (click)="sortData('address')">Adresse
+              <span *ngIf="sortColumn === 'address'">
+                <svg cIcon *ngIf="isAscending" class="arrow-icon" name="cil-arrow-top"></svg>
+                <svg cIcon *ngIf="!isAscending" class="arrow-icon" name="cil-arrow-bottom"></svg>
+              </span>
+            </th>
+
+            <th scope="col">Solde initial</th>
+            <th scope="col">Status</th>
+            <!-- <th scope="col" >Total Retour d'achat</th> -->
+            <!-- <th scope="col">Total Transaction</th> -->
+            <!-- <th scope="col">Total Encaissement</th>
             <th scope="col">Total Décaissement</th>
+            <th scope="col">Total Vente crédit</th> -->
             <th scope="col" class="text-center">Actions</th>
           </tr>
           </thead>
@@ -137,10 +168,11 @@
             <td>{{customer?.lastName}}</td>
             <td>{{customer?.pdvNumber}}</td>
             <td>{{customer?.phone}}</td>
-            <td>{{getTotalSend(customer).sendback}}</td>
+            <!-- <td>{{getTotalSend(customer).sendback}}</td>
             <td>{{getTotalSend(customer).send}}</td>
             <td>{{getTotalSend(customer).collection}}</td>
-            <td>{{getTotalSend(customer).disbursement}}</td>
+            <td>{{getTotalSend(customer).disbursement}}</td> -->
+            <td>{{totals.get(customer.id)}}</td>
             <td class="text-center">
               <div class="btn-tooltip">
 

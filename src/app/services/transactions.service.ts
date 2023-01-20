@@ -10,27 +10,27 @@ import { HttpService } from '../service/http.service';
 export class TransactionsService {
 
   private BaseUrl = environment.BaseUrl;
-  
+
   transactionEndPoint= {
    transactionListe: this.BaseUrl + '/transactions',
-   create: this.BaseUrl +'/transactions', 
+   create: this.BaseUrl +'/transactions',
    findById: this.BaseUrl + '/transactions/',
  }
 
  cardForSale= {
   cardListe: this.BaseUrl + '/card_for_sales',
-  create: this.BaseUrl +'/card_for_sales', 
+  create: this.BaseUrl +'/card_for_sales',
   findById: this.BaseUrl + '/card_for_sales/',
 }
 
 relationCardToTypeCards= {
   cardListe: this.BaseUrl + '/relation_card_to_type_cards',
-  create: this.BaseUrl +'/relation_card_to_type_cards', 
+  create: this.BaseUrl +'/relation_card_to_type_cards',
   findById: this.BaseUrl + '/relation_card_to_type_cards/',
 }
 collection = {
   collectionListe: this.BaseUrl + '/collections',
-  create: this.BaseUrl +'/collections', 
+  create: this.BaseUrl +'/collections',
   findById: this.BaseUrl + '/collections/',
 }
 
@@ -40,7 +40,7 @@ collectionType = {
 
 send = {
   sendListe: this.BaseUrl + '/sends',
-  create: this.BaseUrl +'/sends', 
+  create: this.BaseUrl +'/sends',
   findById: this.BaseUrl + '/sends/',
 }
 
@@ -53,7 +53,7 @@ sendType = {
 }
 
 
-  constructor(private httpService: HttpService, private http: HttpClient) { 
+  constructor(private httpService: HttpService, private http: HttpClient) {
 
 
   }
@@ -65,6 +65,15 @@ sendType = {
   getAllTransaction(page: number):Observable<any>{
     return this.http.get<any[]>(this.transactionEndPoint.transactionListe+ '?page=' +page);
   }
+
+  //ENDPOINT METHODE TO GET CREDENTIAL FOR CLIENT
+   getClientTransaction(id:number){
+    return this.http.get<any[]>(this.transactionEndPoint.transactionListe+ '?client.id=' +id);
+
+  }
+
+
+
   getSearchCreditSeal( search:string): Observable<any>{
 
     return this.http.get<any[]>(this.transactionEndPoint.transactionListe+ `?client.firstName=${search}&client.lastName=${search}`);
@@ -76,7 +85,7 @@ sendType = {
     return this.http.get<any>(this.transactionEndPoint.findById+ id);
   }
   findByRangeDate(from: any, to: any ): Observable<any>{
-    
+
     return this.http.get<any>(this.transactionEndPoint.findById+ `?date[after]=${from}&date[before]=${to}`);
   }
 
@@ -84,12 +93,12 @@ sendType = {
     return this.http.delete(this.transactionEndPoint.findById + id, {observe: 'response'});
   }
 
-  editTransaction(id:number, data:any): Observable<any>{ 
+  editTransaction(id:number, data:any): Observable<any>{
     return this.http.put(`${this.transactionEndPoint.findById} ${id}`, data, {observe: 'response'});
   }
 
 
-  //Encaissement et Decaissment 
+  //Encaissement et Decaissment
   createtresorieOpe(data:any): Promise<any>{
     return this.httpService.post(this.collection.create, data, {observe: 'response'});
   }
@@ -102,13 +111,13 @@ sendType = {
     return this.http.get<any[]>(this.collection.collectionListe+ `?collectionType=${type}`);
   }
 
-  
+
   deleteTresorieOpe(id:number):Observable<any>{
     return this.http.delete(this.collection.findById + id, {observe: 'response'});
   }
 
 
-  editTresorieOpe(id:number, data:any): Observable<any>{ 
+  editTresorieOpe(id:number, data:any): Observable<any>{
     return this.http.put(`${this.collection.findById} ${id}`, data, {observe: 'response'});
   }
 
@@ -118,17 +127,17 @@ sendType = {
   }
 
   findByRangeDateTransfert(from: any, to: any ): Observable<any>{
-    
+
     return this.http.get<any>(this.send.sendListe+ `?date[after]=${from}&date[before]=${to}`);
   }
 
   getAllMobileSends(): Observable<any>{
-    
+
     return this.http.get<any[]>(this.send.sendListe);
   }
 
   getAllMobileSend(sendtype:string): Observable<any>{
-    
+
     return this.http.get<any[]>(this.send.sendListe+ `?sendType[]=${sendtype}`);
   }
 
@@ -141,9 +150,9 @@ sendType = {
     return this.http.delete(this.send.findById + id, {observe: 'response'});
   }
 
-  editmobileTransfert(id:number, data:any): Observable<any>{ 
+  editmobileTransfert(id:number, data:any): Observable<any>{
     return this.http.put(`${this.send.findById} ${id}`, data, {observe: 'response'});
-    
+
   }
   findmobileTransfert(id:number): Observable<any>{
     return this.http.get<any>(this.send.findById+ id);
@@ -159,7 +168,7 @@ sendType = {
   }
 
   findByRangeDateMobileTransfert(from: any, to: any ): Observable<any>{
-    
+
     return this.http.get<any>(this.cardForSale.cardListe+ `?date[after]=${from}&date[before]=${to}`);
   }
 
@@ -178,9 +187,9 @@ sendType = {
     return this.http.get<any[]>(this.cardForSale.cardListe + '?page=' +page);
   }
 
-  editCardSelling(id: number, data:any): Observable<any>{ 
+  editCardSelling(id: number, data:any): Observable<any>{
     return this.http.put(`${this.relationCardToTypeCards.findById} ${id}`, data, {observe: 'response'});
-    
+
   }
 
   findSellingCard(id:number): Observable<any>{
@@ -191,7 +200,7 @@ sendType = {
     return this.http.delete(this.relationCardToTypeCards.findById + id, {observe: 'response'});
   }
 
-  //UPLOAD FILE 
+  //UPLOAD FILE
   upload(file: File): Promise<any> {
     const formData: FormData = new FormData();
 

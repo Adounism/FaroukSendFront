@@ -25,7 +25,7 @@ export class PrintcartePurchaseComponent implements OnInit {
   userCardSell:any;
   page: number = 1;
   total: number = 0;
-  constructor(private puchase: PurchasesService, 
+  constructor(private puchase: PurchasesService,
     private toast: NgToastService,
     private ngxComfirmService: NgxBootstrapConfirmService,
     public formatter: NgbDateParserFormatter,
@@ -50,8 +50,11 @@ export class PrintcartePurchaseComponent implements OnInit {
         obj['provider']=d['provider']
         if(obj['provider']['business']){
           obj['provider']=d['provider']['business']['name'];
-        }else{
+        }else if(obj['provider']=d['provider']['individual']) {
           obj['provider']=d['provider']['individual']['firstName']+" "+d['provider']['individual']['lastName']
+
+        }else{
+          console.log("Hello");
 
         }
         obj['date']=d['date']
@@ -68,15 +71,17 @@ export class PrintcartePurchaseComponent implements OnInit {
         }
       })
       this.cardPurchase = allCards;
-      
+      console.log(allCards);
+
+
       // data.forEach((card:any)=>{
       //   this.getSupplierCreditPurchase(card);
-        
+
       // })
 
-      
+
     })
-    
+
   }
 
   deleteCardPurchase(id:number){
@@ -90,7 +95,7 @@ export class PrintcartePurchaseComponent implements OnInit {
           this.puchase.deleteCardPurchase(id).subscribe({
             next: data=>{
               if(data.status == 200){
-      
+
                 this.toast.success({
                   detail:"carte supprimer",
                   summary:"",
@@ -98,28 +103,28 @@ export class PrintcartePurchaseComponent implements OnInit {
                  });
                  this.getAllPuchasedCard();
               }
-              
+
             },
             error: error=>{
               if(error.status == 404){
-      
+
                 this.toast.warning({
                   detail:"La carte n'existe pas!!!",
                   summary:error.body.message,
                   duration: 3000
                  });
-              } 
+              }
             }
           });
         } else {
-    
+
         }
       });
     }
 
     getSupplierCreditPurchase(client:any){
-      client["cardToTypeCardRelation"].forEach((data:any, index:number)=>{ 
-        
+      client["cardToTypeCardRelation"].forEach((data:any, index:number)=>{
+
         this.userCardSell = data;
         // console.log(this.userCardSell);
       });
@@ -134,7 +139,7 @@ export class PrintcartePurchaseComponent implements OnInit {
         this.puchase.findByRangeDateCreditCardPurchase(fromdateFormate, this.toDate = null).subscribe(data=>{
           this.cartePurchaseListe = data;
         })
-  
+
       } else if (this.fromDate && !this.toDate && date && date.after(this.fromDate)) {
         this.toDate = date;
         let fromdateFormate = this.fromDate.year+'-'+this.fromDate.month+'-'+this.fromDate.day;
@@ -143,37 +148,37 @@ export class PrintcartePurchaseComponent implements OnInit {
         this.puchase.findByRangeDateCreditCardPurchase(fromdateFormate, todateFormate).subscribe(data=>{
           this.cartePurchaseListe = data;
         })
-      } 
+      }
       else {
         this.toDate = null;
         this.fromDate = date;
-  
+
         this.cartePurchaseListe = [];
         let fromdateFormate = this.fromDate.year+'-'+this.fromDate.month+'-'+this.fromDate.day;
         console.log(fromdateFormate);
         this.puchase.findByRangeDateCreditCardPurchase(fromdateFormate, this.toDate = null).subscribe(data=>{
           this.cartePurchaseListe = data;
         })
-  
+
       }
     }
-  
+
     isEmpty(fromDate: any, toDate:any){
       if(!fromDate || !toDate){
         this.getAllPuchasedCard();
       }
     }
-  
+
     isHovered(date: NgbDate) {
       return (
         this.fromDate && !this.toDate && this.hoveredDate && date.after(this.fromDate) && date.before(this.hoveredDate)
       );
     }
-  
+
     isInside(date: NgbDate) {
       return this.toDate && date.after(this.fromDate) && date.before(this.toDate);
     }
-  
+
     isRange(date: NgbDate) {
       return (
         date.equals(this.fromDate) ||
@@ -182,17 +187,17 @@ export class PrintcartePurchaseComponent implements OnInit {
         this.isHovered(date)
       );
     }
-  
+
     validateInput(currentValue: NgbDate | null, input: string): NgbDate | null {
       const parsed = this.formatter.parse(input);
       return parsed && this.calendar.isValid(NgbDate.from(parsed)) ? NgbDate.from(parsed) : currentValue;
     }
-  
+
     searchTransactionByDateRange(from:any, to: any){
-  
+
     }
-  
-    
+
+
     onsearch(event:any){
       this.searchText = event;
       this.cartePurchaseListe = [];
@@ -206,7 +211,7 @@ export class PrintcartePurchaseComponent implements OnInit {
             obj['provider']=d['provider']['business']['name'];
           }else{
             obj['provider']=d['provider']['individual']['firstName']+" "+d['provider']['individual']['lastName']
-  
+
           }
           obj['date']=d['date']
           if (d['cardToTypeCardRelation'].length > 0) {
@@ -222,7 +227,7 @@ export class PrintcartePurchaseComponent implements OnInit {
           }
         })
         this.cardPurchase = allCards;
-        
+
      })
     }
 

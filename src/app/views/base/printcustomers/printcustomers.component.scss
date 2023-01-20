@@ -6,6 +6,16 @@ body{
     overflow-y: auto;
 }
 
+.arrow-icon {
+  margin-left: 5px;
+  position: relative;
+  top: 2px;
+}
+
+th {
+  position:relative;
+}
+
 label{
     font-weight: 700;
     font-family: 'Source Sans Pro','Helvetica Neue',Helvetica,Arial,sans-serif;

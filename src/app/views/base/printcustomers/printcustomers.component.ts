@@ -30,30 +30,36 @@ export class PrintcustomersComponent {
   totaldecaissement = 0;
   totalsendBack = 0;
   ischeked :any;
+  totals:any;
   transactionType:any [] = [];
+
+
+  //SORTING
+  isAscending: boolean = true;
+  sortColumn!: string;
 
   constructor(private clientService: ClientService, private toast: NgToastService,
     public formatter: NgbDateParserFormatter,
     private calendar: NgbCalendar,
+    private transactionServicce: TransactionsService,
     private mobileTransaction: TransactionsService,
     private ngxComfirmService: NgxBootstrapConfirmService, private router: ActivatedRoute) {
 
   this.getAllClient();
   this.getAllTransactionTypes();
+  this.getClientTransaction();
 
   }
 
   getAllTransactionTypes(){
     this.mobileTransaction.getAllSenType().subscribe(data=>{
       this.transactionType = data;
-      console.log(this.transactionType);
     })
   }
 
   getAllClient(){
     this.clientService.getAllClientPage(this.page).subscribe(async data=>{
       this.customers = data;
-      this.total = data.length;
       this.customers.reverse();
       // this.customers.forEach(element => {
       //   this.calculateTotals(element);
@@ -81,7 +87,7 @@ export class PrintcustomersComponent {
     this.customers = [];
     this.clientService.getSendType(type).subscribe((data:any)=>{
       this.customers = data;
-      console.log(this.customers);
+
 
    })
   }
@@ -270,6 +276,47 @@ export class PrintcustomersComponent {
     })
     return {send,sendback,collection,disbursement};
 
+  }
+
+  sortData(sortColumn: string) {
+    // toggle the sort order
+
+    this.sortColumn = sortColumn;
+
+    this.isAscending = !this.isAscending;
+
+    // sort the data
+    this.customers.sort((a:any, b:any) => {
+      if (a[this.sortColumn] < b[this.sortColumn]) {
+        return this.isAscending ? -1 : 1;
+      } else if (a[this.sortColumn] > b[this.sortColumn]) {
+        return this.isAscending ? 1 : -1;
+      } else {
+        return 0;
+      }
+    });
+  }
+
+
+  //GET CLIENT TRANSACTION FOR TABLE VENTE DE CREDIT
+  getClientTransaction(){
+    this.transactionServicce.getAllTransaction(this.page).subscribe(data=>{
+      console.log(data);
+      this.calculateTotalTransactionAmount(data);
+    })
+  }
+
+   calculateTotalTransactionAmount(transactions: any[]) {
+    this.totals = new Map<string, number>();
+    for (let transaction of transactions) {
+      let clientId = transaction.client.id;
+      let currentTotal = this.totals.get(clientId) || 0;
+      this.totals.set(clientId, currentTotal + transaction.amount);
+    }
+
+    console.log(this.totals);
+
+    return this.totals;
   }
 }
 

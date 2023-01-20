@@ -37,6 +37,7 @@ import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 // utils
 import { DocsComponentsModule } from '@docs-components/docs-components.module';
 
+
 // views
 import { CustomersComponent } from './customers/customers.component';
 import {  SuppliersComponent } from './suppliers/suppliers.component';
@@ -121,11 +122,11 @@ import { EditdecaissementComponent } from '../icons/editdecaissement/editdecaiss
     MdbModalModule,
     ButtonGroupModule,
     NgbModule,
-    OwlDateTimeModule, 
+    OwlDateTimeModule,
     OwlNativeDateTimeModule,
 
 
-    
+
   ],
   declarations: [
     // CustomersComponent,

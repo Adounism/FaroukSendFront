@@ -20,6 +20,8 @@ export class PrintcreditPurchaseComponent implements OnInit {
   creditPurchaseListe:any[]=[];
   typePurchase="purchaseOfCredits";
   userCardSell:any;
+  individualProvider = "individual"
+  businessProvider = "business"
 
   constructor(private purchaseService:PurchasesService,
     private toast: NgToastService,
@@ -29,7 +31,7 @@ export class PrintcreditPurchaseComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAllCreditPurchase();
-    
+
   }
 
 
@@ -45,7 +47,7 @@ export class PrintcreditPurchaseComponent implements OnInit {
 
   toggleCollapse(): void {
     console.log("Hello");
-    
+
     this.visible = !this.visible;
   }
 
@@ -53,14 +55,14 @@ export class PrintcreditPurchaseComponent implements OnInit {
   // onFilterChange(event: any){
   //   if(event.target.checked){
   //     this.getAllMobiletransaction(event.target.value, this.searchText);
-      
+
   //   }else{
   //     this.getAllMobiletransaction(this.sendType, this.searchText);
   //   }
   //   console.log(event.target.value);
   //   console.log(event.target.checked);
-    
-    
+
+
   // }
 
 
@@ -74,7 +76,7 @@ export class PrintcreditPurchaseComponent implements OnInit {
         this.purchaseService.delete(id).subscribe({
           next: data=>{
             if(data.status == 200){
-    
+
               this.toast.success({
                 detail:"Transaction supprimer",
                 summary:"",
@@ -82,7 +84,7 @@ export class PrintcreditPurchaseComponent implements OnInit {
                });
                this.getAllCreditPurchase();
             }
-            
+
           },
           error: error=>{
 
@@ -91,7 +93,7 @@ export class PrintcreditPurchaseComponent implements OnInit {
                 summary:error.body.message,
                 duration: 3000
                });
-          
+
           }
         });
       } else {
@@ -101,7 +103,7 @@ export class PrintcreditPurchaseComponent implements OnInit {
 
   }
 
-   
+
   onDateSelection(date: NgbDate) {
 		if (!this.fromDate && !this.toDate) {
 			this.fromDate = date;
@@ -120,7 +122,7 @@ export class PrintcreditPurchaseComponent implements OnInit {
       this.purchaseService.findByRangeDateTransfertPurchase(fromdateFormate, todateFormate).subscribe(data=>{
         this.creditPurchaseListe = data;
       })
-		} 
+		}
     else {
 			this.toDate = null;
 			this.fromDate = date;
@@ -170,15 +172,30 @@ export class PrintcreditPurchaseComponent implements OnInit {
 
   }
 
-  
+
   onsearch(event:any){
     this.searchText = event;
     this.creditPurchaseListe = [];
     this.purchaseService.getSearchPurchase(this.searchText).subscribe(data=>{
       this.creditPurchaseListe = data;
       console.log(this.creditPurchaseListe);
-      
+
    })
+  }
+
+  getIndividuallProviders(type:any){
+    console.log(type.target.value);
+
+    if(type.target.value == "All"){
+      this.getAllCreditPurchase()
+    }else{
+
+      this.creditPurchaseListe = [];
+      this.purchaseService.getAllPurchaseByProviderType(type.target.value).subscribe(data=>{
+        this.creditPurchaseListe = data;
+      })
+    }
+
   }
 
 

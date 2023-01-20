@@ -14,7 +14,7 @@ import { CardService } from 'src/app/services/card.service';
   styleUrls: ['./addcarte-purchase.component.scss']
 })
 export class AddcartePurchaseComponent implements OnInit {
- 
+
   transactionForm!: FormGroup;
   businessForm!: FormGroup;
   individulForm!: FormGroup;
@@ -23,7 +23,7 @@ export class AddcartePurchaseComponent implements OnInit {
   profileForm!: FormGroup;
   cardPanierForm!:FormGroup;
   cardPanierTaille:any;
-  
+
   supplierListe: any[]=[];
   cardListe: any[]=[];
   listeOperations: any[]=[];
@@ -38,7 +38,7 @@ export class AddcartePurchaseComponent implements OnInit {
   default!:boolean;
   second!:boolean;
   supplierData:any;
- 
+
   submitted = false;
   selected!: number;
   message:any;
@@ -99,7 +99,7 @@ export class AddcartePurchaseComponent implements OnInit {
     this.businessForm = this.fb.group({
       business: ['',[Validators.required]]
     });
-    
+
     this.individulForm = this.fb.group({
       firstName: ['', [Validators.required]],
       lastName: ['', [Validators.required]],
@@ -118,7 +118,7 @@ export class AddcartePurchaseComponent implements OnInit {
     this.supplier.getAllProviders().subscribe(data=>{
       this.supplierListe = data;
 
-      
+
     })
   }
 
@@ -129,9 +129,9 @@ export class AddcartePurchaseComponent implements OnInit {
     this.onLoading = true;
 
     this.transactionData = this.transactionForm.value;
-    
-    
-    let pipe = new DatePipe('en-US'); 
+
+
+    let pipe = new DatePipe('en-US');
     const myFormattedDate = pipe.transform(this.transactionData.date, "yyyy-MM-dd'T'HH:mm:ss'Z'");
     let transaction:any= {
       // "operation": '/api/operations/'+this.transactionData.operation["id"]
@@ -144,23 +144,25 @@ export class AddcartePurchaseComponent implements OnInit {
       let obj ={
         "typeCardForSale": '/api/type_card_for_sales/'+cardPanier.carte.id,
         "amountHT": cardPanier.amountHT,
-        "quantity": cardPanier.quantity, 
+        "quantity": cardPanier.quantity,
         "unitPrice":cardPanier.unitPrice,
       };
+
+
       transaction['cardToTypeCardRelation']=[...transaction['cardToTypeCardRelation'],obj]
     }
 
-      this.purchase.createCardPurchase(transaction).then(resp=>{        
+      this.purchase.createCardPurchase(transaction).then(resp=>{
         this.toast.success({
           detail:"Transaction Réçu avec success",
           summary:"transaction effectuée avec success",
           duration: 3000
           });
           this.router.navigate(['/buttons/printcartepurchase']);
-          
+
       }).catch(error=>{
         this.onLoading = false;
-                
+
         this.toast.warning({
           detail:"Transaction Failed",
           summary:error.body.message,
@@ -169,7 +171,7 @@ export class AddcartePurchaseComponent implements OnInit {
       });
     // debugger
 
-      
+
 
   }
 
@@ -192,10 +194,10 @@ export class AddcartePurchaseComponent implements OnInit {
 
 
   ajouterFounisseur() {
- 
+
       this.submitted = true;
       this.supplierData = this.profileForm.value;
-      
+
       if(this.default == undefined || this.second == undefined){
         console.log("checked value no checked");
         this.toast.warning({
@@ -203,9 +205,9 @@ export class AddcartePurchaseComponent implements OnInit {
           summary:"Le typde de Fournisseur est réquis",
           duration: 3000
           });
-        
+
       }
-      
+
       if(this.supplierData.induvidual != ""){
         if(!this.supplierData.firstName || !this.supplierData.lastName){
         this.toast.warning({
@@ -224,9 +226,9 @@ export class AddcartePurchaseComponent implements OnInit {
               "firstName": fname,
               "lastName":lname,
             }
-  
+
           }
-  
+
           this.supplier.create(provider).then(response=>{
             console.log(response);
             this.profileForm.reset();
@@ -238,7 +240,7 @@ export class AddcartePurchaseComponent implements OnInit {
               duration: 3000
               });
             // this.router.navigate(['/widgets/listsuppliers']);
-            
+
           }, error=>{
             console.log(error);
             this.toast.warning({
@@ -248,15 +250,15 @@ export class AddcartePurchaseComponent implements OnInit {
               });
             this.submitted = false;
           })
-          
+
           // console.log("Send Data to Back");
-          
-        }  
+
+        }
       }
-  
+
       if(this.supplierData.business != ""){
         if(!this.supplierData.business){
-  
+
           this.toast.warning({
             detail:"Field Error",
             summary:"Le nom du Business est requis!!",
@@ -264,19 +266,19 @@ export class AddcartePurchaseComponent implements OnInit {
             });
         }else{
           console.log("send data to Back!!");
-                  
+
           let provider = {
             "firstPhone" : this.supplierData.firstPhone,
             "secondPhone": this.supplierData.secondPhone,
             "email": this.supplierData.email,
             "business" :{
               "name": this.supplierData.business,
-          
+
             }
           }
           console.log(provider);
-          
-  
+
+
           this.supplier.create(provider).then
           (response=>{
             this.profileForm.reset();
@@ -288,7 +290,7 @@ export class AddcartePurchaseComponent implements OnInit {
               duration: 3000
               });
             // this.router.navigate(['/widgets/listsuppliers']);
-            
+
           }).catch(error=>{
             this.submitted = false;
             this.toast.warning({
@@ -298,10 +300,10 @@ export class AddcartePurchaseComponent implements OnInit {
               });
           })
         }
-  
+
       }
 
-  
+
 
   }
 
@@ -309,17 +311,17 @@ export class AddcartePurchaseComponent implements OnInit {
     // console.log(this.cardPanierForm.value);
     if(this.cardPanierForm.controls['amountHT'].touched){
       console.log(this.cardPanierForm.controls['amountHT']);
-      
+
     }else{
       this.cardPanierForm.controls['amountHT'].setValue(this.amountHT);
-  
+
     }
-  
+
     if(this.cardPanierForm.valid){
       this.listeCardPanier.push(this.cardPanierForm.value);
       this.cardPanierForm.reset();
     }
-    
+
   }
 
 
@@ -351,7 +353,7 @@ export class AddcartePurchaseComponent implements OnInit {
   updateAmount(){
     this.amountHT =this.qut * this.unit;
     console.log(this.amountHT);
-    
+
   }
 
   onUnitPriceChange(event: any) {
@@ -376,14 +378,14 @@ verifieCheck(){
     this.default = true;
     this.second = false;
     console.log(data);
-    
+
   });
 
   this.profileForm.get('businessType')?.valueChanges.subscribe(data=>{
     this.default = false;
     this.second = true;
     console.log(data);
-    
+
   });
 }
 

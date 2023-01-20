@@ -10,8 +10,16 @@ import {
   FormModule,
   GridModule,
   ListGroupModule,
+  BreadcrumbModule,
+  CollapseModule,
+  PopoverModule,
   SharedModule,
-  TableModule
+  TableModule,
+  TooltipModule,
+  CarouselModule,
+  UtilitiesModule,
+  SpinnerModule,
+  PlaceholderModule
 } from '@coreui/angular';
 
 import { DocsComponentsModule } from '@docs-components/docs-components.module';
@@ -26,6 +34,9 @@ import { InputGroupsComponent } from './input-groups/input-groups.component';
 import { LayoutComponent } from './layout/layout.component';
 import { ValidationComponent } from './validation/validation.component';
 import { SearchPipe } from 'src/app/pipes/search.pipe';
+import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { IconModule } from '@coreui/icons-angular';
 
 
 @NgModule({
@@ -45,19 +56,32 @@ import { SearchPipe } from 'src/app/pipes/search.pipe';
     FormsRoutingModule,
     DocsComponentsModule,
     CardModule,
+    BreadcrumbModule,
     FormModule,
+    CollapseModule,
     GridModule,
     ButtonModule,
+    PopoverModule,
     FormsModule,
     ReactiveFormsModule,
-    FormModule,
+    PlaceholderModule,
+
     ButtonModule,
+    IconModule,
     ButtonGroupModule,
+    UtilitiesModule,
+    SpinnerModule,
     DropdownModule,
     SharedModule,
     ListGroupModule,
+    CarouselModule,
     TableModule,
-  
+
+    NgbModule,
+    TooltipModule,
+    OwlDateTimeModule,
+    OwlNativeDateTimeModule,
+
 
   ]
 })

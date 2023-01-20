@@ -10,17 +10,17 @@ import { HttpService } from '../service/http.service';
 })
 export class SupplierService {
   private BaseUrl = environment.BaseUrl;
-  
+
   providerEndPoint= {
    supliersList: this.BaseUrl + '/providers',
-   creatProvider: this.BaseUrl +'/providers', 
+   creatProvider: this.BaseUrl +'/providers',
    findById: this.BaseUrl + '/providers/',
 
  }
 
   constructor(private http: HttpClient, private customHttp: HttpService) { }
 
-  
+
   getAllProviders(): Observable<any>{
     return this.http.get<any[]>(this.providerEndPoint.supliersList);
   }
@@ -37,7 +37,12 @@ export class SupplierService {
     return this.http.delete(this.providerEndPoint.findById+ id, {observe: 'response'});
   }
 
-  editProvider(id:number, user: any): Observable<any>{ 
+  editProvider(id:number, user: any): Observable<any>{
     return this.http.put(this.providerEndPoint.findById+ id, user);
+  }
+
+
+  getProviderByType(type:any){
+    return this.http.get<any[]>(this.providerEndPoint.supliersList + `?exists[${type}]=${true}`);
   }
 }
