@@ -2,10 +2,10 @@
   <c-card class="mb-4">
     <c-card-header>
 
-        <strong>Liste des Historique</strong>
+        <strong>Rapport des ventes de crédit</strong>
 
           <!-- <button style="float: right;" class="btn float-right" color="primary"   cButton> ajouter
-    
+
           </button> -->
           <div class="col-sm-7">
             <input type="text" class="form-control" placeholder="Search user historique" [(ngModel)]="searchText" ng aria-label="Search">
@@ -15,22 +15,39 @@
     <c-card-body>
 
         <table cTable class="center-align">
-          <caption>Historique des Transactions</caption>
+          <caption>Rapport des ventes de crédit</caption>
           <thead>
           <tr >
-            <th scope="col" *ngFor="let ope of allOperations"><i class="fa fa-sort">{{ope.key}}</i> Total </th>
+            <th scope="col">Produits</th>
+            <th scope="col">Clients</th>
+            <th scope="col">Numéro PDV</th>
+            <th scope="col">Date</th>
+            <th scope="col">Montant</th>
+            <th scope="col">Total</th>
+            <th scope="col">Solde initial</th>
+            <th scope="col">Status</th>
+            <!-- <th scope="col" *ngFor="let ope of allOperations"><i class="fa fa-sort">{{ope.key}}</i> Total </th> -->
             <!-- <th scope="col">Depôt</th>
             <th scope="col">Retrait</th> -->
-            <th scope="col">nombre d'operation Total</th>
+            <!-- <th scope="col">nombre d'operation Total</th> -->
           </tr>
           </thead>
           <tbody>
-          <tr>
-            <!-- <th scope="row">1</th> -->
-            <!-- <td *ngFor="let op of getUserOperations(historique)" >{{op["value"]}}</td> -->
+          <tr *ngFor="let transac of listeTransactions">
 
-            <td *ngFor="let ope of allOperations">{{ope.value}}</td>
-            <td>{{listeTransactions.length}}</td>
+            <td>Vente de crédit</td>
+            <td>{{transac.client?.firstName + " " + transac.client.lastName}}</td>
+            <td>{{transac.client?.pdvNumber}}</td>
+            <td>{{transac.createdAt | date:'short'}}</td>
+            <td>{{transac?.amount}}</td>
+            <td>{{transac?.amount}}</td>
+            <td>0</td>
+            <td>
+              <button type="button" rel="tooltip"  class="btn btn-success btn-just-icon btn-sm">
+                ACTIVE
+              </button>
+            </td>
+
           </tr>
           <tr class="center-align">
             <!-- <td *ngIf="historiqueData.length == 0"  class="center-align" colspan="4">No Historique Found</td> -->
