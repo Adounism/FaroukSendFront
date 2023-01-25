@@ -45,4 +45,9 @@ export class SupplierService {
   getProviderByType(type:any){
     return this.http.get<any[]>(this.providerEndPoint.supliersList + `?exists[${type}]=${true}`);
   }
+
+  getSendType(sendtype:any):Observable<any>{
+    return this.http.get<any>(this.providerEndPoint.supliersList+ `?sends.sendType=${sendtype}`);
+  }
+
 }

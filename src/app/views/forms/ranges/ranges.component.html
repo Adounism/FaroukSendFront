@@ -1,11 +1,137 @@
 <c-col xs="12">
   <c-card class="mb-4">
+  <div>
+      <a (click)="toggleCollapse()" style="background-color: grey" cButton class="me-1" color="primary">
+        <svg cIcon class="me-2" class="center-align" name="cil-filter"></svg>
+      </a>
+      <label for="filter" style="font-size: 18px;">Filtres</label>
+
+    <div *ngIf="visible" >
+    <c-card class="mt-3 shadow">
+      <c-card-body>
+        <c-row  style="align-items: center;  margin: 15px">
+          <div class="col-sm-3">
+            <label for="inputState" class="form-label">Carte de crédit</label>
+            <select id="inputState"  (change)="onChange($event)" class="form-select">
+              <option selected> </option>
+              <option *ngFor="let cardtype of listeCardTypes" [ngValue]="cardtype">
+                {{cardtype.name}}
+              </option>
+            </select>
+          </div>
+          <!-- <div class="col-sm-3">
+            <label for="inputState" class="form-label">Clients</label>
+            <select id="inputState"  (change)="onChange($event)" class="form-select">
+              <option selected> </option>
+              <option *ngFor="let cardtype of listeCardTypes" [ngValue]="cardtype">
+                {{cardtype.name}}
+              </option>
+            </select>
+          </div> -->
+
+
+
+           <!-- <c-col md="2" *ngFor="let type of transactionType">
+             <input class="form-check-input" type="checkbox" (change)="onFilterChange($event)" [value]="type.key" id="defaultCheck1">
+             <label style="margin-right: 10px;position: absolute;" class="form-check-label" for="defaultCheck1">
+               {{type.name}}
+             </label>
+           </c-col> -->
+
+        <!-- <c-col md="2">
+          <label cLabel for="inputZip">quantité</label>
+          <input cFormControl id="inputZip" type="number"  name="quantity"  />
+        </c-col>
+        <c-col md="2">
+          <label cLabel for="inputZip">Montant HT</label>
+          <input cFormControl id="inputZip" type="number"  name="amountHT"  />
+        </c-col> -->
+      </c-row>
+
+      <div class="col-sm-7"  style="display: contents;
+      align-content: center;
+      margin-top: 20px;">
+        <!-- <input type="text" class="form-control" placeholder="Search user historique" (ngModelChange)="onSearchChange($event)" [(ngModel)]="searchText" ng aria-label="Search"> -->
+        <form class="row row-cols-sm-auto"  style="    text-align: center;
+        justify-content: center;">
+          <div class="col-12">
+            <div class="dp-hidden position-absolute">
+              <div class="input-group">
+                <input
+                  name="datepicker"
+                  class="form-control"
+                  ngbDatepicker
+                  #datepicker="ngbDatepicker"
+                  [autoClose]="'outside'"
+                  (dateSelect)="onDateSelection($event)"
+                  [displayMonths]="2"
+                  [dayTemplate]="t"
+                  outsideDays="hidden"
+                  [startDate]="fromDate!"
+                  tabindex="-1"
+                />
+                <ng-template #t let-date let-focused="focused">
+                  <span
+                    class="custom-day"
+                    [class.focused]="focused"
+                    [class.range]="isRange(date)"
+                    [class.faded]="isHovered(date) || isInside(date)"
+                    (mouseenter)="hoveredDate = date"
+                    (mouseleave)="hoveredDate = null"
+                  >
+                    {{ date.day }}
+                  </span>
+                </ng-template>
+              </div>
+            </div>
+            <div class="input-group">
+              <input
+                #dpFromDate
+                class="form-control"
+                placeholder="yyyy-mm-dd"
+                name="dpFromDate"
+                [value]="formatter.format(fromDate)"
+                (input)="fromDate = validateInput(fromDate, dpFromDate.value)"
+              />
+
+              <button class="btn btn-outline-secondary bi bi-calendar3" (click)="datepicker.toggle()" type="button">
+                <svg cIcon class="me-2" class="center-align"  name="cil-calendar"></svg>
+              </button>
+            </div>
+          </div>
+          <div class="col-12" style="padding: 0px;">
+            <div class="input-group">
+              <input
+                #dpToDate
+                class="form-control"
+                placeholder="yyyy-mm-dd"
+                name="dpToDate"
+                [value]="formatter.format(toDate)"
+                (input)="toDate = validateInput(toDate, dpToDate.value)"
+              />
+              <button class="btn btn-outline-secondary bi bi-calendar3" (click)="datepicker.toggle()" type="button">
+                <svg cIcon class="me-2" class="center-align"  name="cil-calendar"></svg>
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+      </c-card-body>
+    </c-card>
+    </div>
+  </div>
+  </c-card>
+  </c-col>
+
+
+<c-col xs="12">
+  <c-card class="mb-4">
     <c-card-header>
 
-        <strong>Liste des Historique</strong>
+        <strong>Rapport des ventes de carte</strong>
 
           <!-- <button style="float: right;" class="btn float-right" color="primary"   cButton> ajouter
-    
+
           </button> -->
           <div class="col-sm-7">
             <input type="text" class="form-control" placeholder="Search user historique" [(ngModel)]="searchText" ng aria-label="Search">
@@ -15,22 +141,58 @@
     <c-card-body>
 
         <table cTable class="center-align">
-          <caption>Historique des Achat</caption>
+          <caption>Rapport des ventes de carte</caption>
           <thead>
           <tr >
-            <th scope="col"><i class="fa fa-sort">Acahat Total</i> </th>
-            <th scope="col"><i class="fa fa-sort">Nombre d'achat Total</i> </th>
+            <!-- <th scope="col"><i class="fa fa-sort">Acahat Total</i> </th>
+            <th scope="col"><i class="fa fa-sort">Nombre d'achat Total</i> </th> -->
             <!-- <th scope="col">Depôt</th>
             <th scope="col">Retrait</th> -->
+            <th scope="col">Produits</th>
+            <th scope="col">Clients</th>
+            <th class="text-center">Numéro PDV</th>
+            <th class="text-center">Type de carte</th>
+            <th class="text-center">Quantité</th>
+            <th>Prix (unit)</th>
+            <th>Montant Total</th>
+            <th class="text-center">Date</th>
           </tr>
           </thead>
           <tbody>
-          <tr>
+            <tr *ngFor="let card_sell of cardForSales; index as i">
+
+              <td class="text-center">Vente de carte</td>
+
+              <td class="text-center">
+                {{card_sell.client }}
+              </td>
+              <td class="text-center">
+                <div>{{ card_sell.pdvNumber }}</div>
+              </td>
+              <td class="text-center">
+                <div>{{ card_sell?.typeCardForSale ?? "Null" }}</div>
+              </td>
+              <td class="text-center">
+                <div>{{ card_sell?.quantity ?? "Null"}}</div>
+              </td>
+              <td class="text-center">
+                <div>{{ card_sell?.unitPrice ?? "Null" }}</div>
+              </td>
+              <td class="text-center">
+                <div>{{ card_sell?.amountHT ?? "Null"}}</div>
+              </td>
+              <td class="text-center">
+                <div class="small text-medium-emphasis text-center">
+
+                  {{card_sell.date | date: 'short'}}
+                </div>
+
+              </td>
             <!-- <th scope="row">1</th> -->
             <!-- <td *ngFor="let op of getUserOperations(historique)" >{{op["value"]}}</td> -->
-
+<!--
             <td >{{total}} Franc cfa</td>
-            <td >{{nombreAchat}} </td>
+            <td >{{nombreAchat}} </td> -->
           </tr>
           <tr class="center-align">
             <!-- <td *ngIf="historiqueData.length == 0"  class="center-align" colspan="4">No Historique Found</td> -->

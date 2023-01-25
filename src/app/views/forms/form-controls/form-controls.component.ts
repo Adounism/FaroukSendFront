@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbCalendar, NgbDate, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
 import { count } from 'rxjs';
+import { Customers } from 'src/app/models/Customers';
 import { ClientService } from 'src/app/services/client.service';
 import { OperationsService } from 'src/app/services/operations.service';
 import { TransactionsService } from 'src/app/services/transactions.service';
@@ -30,6 +31,7 @@ export class FormControlsComponent {
   allOperationsName:any[]=[];
   clientTransNumber=0;
   transTaille:any;
+  customers: Customers[]=[];
   transactionType:any [] = [];
   visible = true;
   page: number = 1;
@@ -38,7 +40,14 @@ export class FormControlsComponent {
 
   ischeked :any;
   totals:any;
-  constructor(private clienService: ClientService, private route: ActivatedRoute,
+
+  //SORTING
+  isAscending: boolean = true;
+  sortColumn!: string;
+
+  Total_sendBack = 0;
+  Total_transaction = 0;
+  constructor(private clientService: ClientService, private route: ActivatedRoute,
     public formatter: NgbDateParserFormatter,
     private calendar: NgbCalendar,
     private transactionServicce: TransactionsService,
@@ -48,8 +57,10 @@ export class FormControlsComponent {
   }
   ngOnInit(): void {
 
-    // this. getOperations();
+
     this.getAllTransactionTypes();
+    this.getAllClient();
+    this.getClientTransaction();
     // this.getCustomerData();
     // this.getAllTransaction();
 
@@ -65,6 +76,18 @@ export class FormControlsComponent {
   // }
 
 
+
+  getAllClient(){
+    this.clientService.getAllClientPage(this.page).subscribe(async data=>{
+      this.customers = data;
+      this.customers.reverse();
+    },
+    async error => {
+    });
+
+  }
+
+
   getAllTransactionTypes(){
     this.mobileTransaction.getAllSenType().subscribe(data=>{
       this.transactionType = data;
@@ -74,7 +97,7 @@ export class FormControlsComponent {
   onFilterChange(event: any){
     if(event.target.value != ""){
       this.ischeked = event.target.value;
-      // this.getCustomersTans(event.target.value);
+      this.getCustomersTans(event.target.value);
 
 
     }else if(event.target.value == ""){
@@ -83,6 +106,14 @@ export class FormControlsComponent {
 
   }
 
+  getCustomersTans(type:any){
+    this.customers = [];
+    this.clientService.getSendType(type).subscribe((data:any)=>{
+      this.customers = data;
+
+
+   })
+  }
 
 
   getUserOperations(client: any){
@@ -137,7 +168,7 @@ export class FormControlsComponent {
 
 
   getCustomerData(){
-    this.clienService.getAllClientPage(this.page).subscribe(data=>{
+    this.clientService.getAllClientPage(this.page).subscribe(data=>{
 
       this.historiqueData = data;
       // data.forEach((d:any)=>{
@@ -222,8 +253,79 @@ export class FormControlsComponent {
     this.visible = !this.visible;
   }
 
+  getTotalSend(customer:any){
+    let send:number = 0;
+    let sendback:number = 0;
+    let collection:number = 0;
+    let disbursement:number = 0;
 
 
+
+
+    customer.sends.forEach((s:any)=>{
+      if (s.sendType==="send") {
+        send+=s.amount
+        this.Total_transaction =+ send;
+      }
+      if (s.sendType==="sendBack") {
+        sendback+=s.amount
+
+      }
+      if (s.sendType==="collection") {
+        collection+=s.amount
+      }
+      if (s.sendType==="disbursement") {
+        disbursement+=s.amount
+      }
+    })
+    this.Total_sendBack = this.Total_sendBack+ sendback;
+    return {send,sendback,collection,disbursement};
+
+  }
+
+
+
+
+  sortData(sortColumn: string) {
+    // toggle the sort order
+
+    this.sortColumn = sortColumn;
+
+    this.isAscending = !this.isAscending;
+
+    // sort the data
+    this.customers.sort((a:any, b:any) => {
+      if (a[this.sortColumn] < b[this.sortColumn]) {
+        return this.isAscending ? -1 : 1;
+      } else if (a[this.sortColumn] > b[this.sortColumn]) {
+        return this.isAscending ? 1 : -1;
+      } else {
+        return 0;
+      }
+    });
+  }
+
+
+  //GET CLIENT TRANSACTION FOR TABLE VENTE DE CREDIT
+  getClientTransaction(){
+    this.transactionServicce.getAllTransaction(this.page).subscribe(data=>{
+      console.log(data);
+      this.calculateTotalTransactionAmount(data);
+    })
+  }
+
+   calculateTotalTransactionAmount(transactions: any[]) {
+    this.totals = new Map<string, number>();
+    for (let transaction of transactions) {
+      let clientId = transaction.client.id;
+      let currentTotal = this.totals.get(clientId) || 0;
+      this.totals.set(clientId, currentTotal + transaction.amount);
+    }
+
+    console.log(this.totals);
+
+    return this.totals;
+  }
 
 
 }

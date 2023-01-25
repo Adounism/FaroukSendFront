@@ -29,10 +29,11 @@ export class TransactionComponent implements OnInit{
 
   transactionForm!: FormGroup;
   clientListe: any[]=[];
+  customers: any[]=[];
   listeTransactions: any[]=[];
   transactionData:any;
 
-  
+
   searchText= "";
   fileName = '';
   uploadProgress!: number;
@@ -44,37 +45,61 @@ export class TransactionComponent implements OnInit{
       private operationService: OperationsService,
       private ngxComfirmService: NgxBootstrapConfirmService,
       private toast: NgToastService,
+
       private calendar: NgbCalendar,
      public formatter: NgbDateParserFormatter) {
 
       // this.fromDate = calendar.getToday();
       // this.toDate = calendar.getNext(calendar.getToday(), 'd', 10);
-    
-    this.getTransactionList();
 
+    this.getTransactionList();
+    this.getAllCutomers();
   }
+
+
   ngOnInit(): void {
     this.isEmpty(this.fromDate, this.toDate);
-   
+
     this.transactionForm = new FormGroup({
-  
+
       montant: new FormControl([
         Validators.required,
         Validators.minLength(2),
       ]),
-  
+
       client: new FormControl([
         Validators.required,
       ]),
       operation: new FormControl([
         Validators.required,
       ]),
-  
+
     });
   }
 
   toggleCollapse(): void {
     this.visible = !this.visible;
+  }
+
+  getAllCutomers(){
+    this.clientService.getAllClient().subscribe(data=>{
+      this.customers = data;
+    })
+  }
+
+
+
+  onChange(client:any) {
+    console.log(client.target.value);
+    if(client.target.value){
+      console.log(client.target.value);
+
+      this.listeTransactions = [];
+       this.transService.getClientTransaction(client.target.value).subscribe(data=>{
+        this.listeTransactions = data;
+       })
+
+    }
   }
 
   getTransactionList(){
@@ -83,7 +108,7 @@ export class TransactionComponent implements OnInit{
       this.listeTransactions.reverse();
       this.total = data.length;
       console.log(this.listeTransactions);
-      
+
     })
   }
 
@@ -136,7 +161,7 @@ export class TransactionComponent implements OnInit{
         this.transService.delete(id).subscribe({
           next: data=>{
             if(data.status == 200){
-    
+
               this.toast.success({
                 detail:"Transaction deleted",
                 summary:data.body.message,
@@ -144,17 +169,17 @@ export class TransactionComponent implements OnInit{
                });
                this.getTransactionList();
             }
-            
+
           },
           error: error=>{
             if(error.status == 404){
-    
+
               this.toast.warning({
                 detail:"La transaction est inexistante!!!",
                 summary:error.body.message,
                 duration: 3000
                });
-            } 
+            }
           }
         });
       } else {
@@ -164,7 +189,7 @@ export class TransactionComponent implements OnInit{
 
 
   }
- 
+
 
   onDateSelection(date: NgbDate) {
 		if (!this.fromDate && !this.toDate) {
@@ -184,7 +209,7 @@ export class TransactionComponent implements OnInit{
       this.transService.findByRangeDate(fromdateFormate, todateFormate).subscribe(data=>{
         this.listeTransactions = data;
       })
-		} 
+		}
     else {
 			this.toDate = null;
 			this.fromDate = date;
@@ -242,7 +267,7 @@ export class TransactionComponent implements OnInit{
         this.page = event;
         this.getTransactionList();
     }
-  
+
     onTableDataChange(event: any) {
       this.page = event;
       this.getTransactionList();
@@ -256,7 +281,7 @@ export class TransactionComponent implements OnInit{
         this.transService.getSearchMobileSend(this.searchText).subscribe(data=>{
           this.listeTransactions = data;
           console.log(this.listeTransactions);
-          
+
        })
       }else{
         this.getTransactionList();

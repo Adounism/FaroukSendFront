@@ -17,6 +17,7 @@ export class LoginComponent implements OnInit{
 
   submitted = false;
   isLoggedIn!:boolean;
+  text_error_message!:string;
 
   constructor(private service: AuthService, private fb: FormBuilder, private route: Router,
     private toast: NgToastService,) { }
@@ -45,7 +46,7 @@ export class LoginComponent implements OnInit{
       console.log('response from server:', res);
       if(res.status === 200){
         console.log(res.body.token);
-        
+
         this.service.saveToken(res.body.token);
 
         this.route.navigate(['/base/dashboard']);
@@ -53,12 +54,13 @@ export class LoginComponent implements OnInit{
 
     },  error=> {
       console.log(error.error);
+      this.text_error_message = error.error.message;
       this.toast.warning({
         detail:error.error.message,
         summary:"",
         duration: 3000
        });
-      
+
     });
    }
 

@@ -77,7 +77,6 @@ import { EditimportedtransactionComponent } from './editimportedtransaction/edit
     SpinnerModule,
     TabsModule,
     NavModule,
-    TooltipModule,
     FormsModule,
     CarouselModule,
     FormModule,
@@ -95,7 +94,7 @@ import { EditimportedtransactionComponent } from './editimportedtransaction/edit
     NgxPaginationModule,
     MdbModalModule,
     NgbModule,
-    OwlDateTimeModule, 
+    OwlDateTimeModule,
     OwlNativeDateTimeModule,
   ],
 })

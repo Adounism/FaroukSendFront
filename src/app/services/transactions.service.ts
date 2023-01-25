@@ -131,9 +131,9 @@ sendType = {
     return this.http.get<any>(this.send.sendListe+ `?date[after]=${from}&date[before]=${to}`);
   }
 
-  getAllMobileSends(): Observable<any>{
+  getAllMobileSends(page:number): Observable<any>{
 
-    return this.http.get<any[]>(this.send.sendListe);
+    return this.http.get<any[]>(this.send.sendListe +'?page=' +page);
   }
 
   getAllMobileSend(sendtype:string): Observable<any>{
@@ -178,6 +178,11 @@ sendType = {
   }
 
   getSearchCardByCardType(search:string): Observable<any>{
+
+    return this.http.get<any[]>(this.cardForSale.cardListe+ `?cardToTypeCardRelation.typeCardForSale.name=${search}`);
+  }
+
+  getSearchCardPurchaseByCardType(search:string): Observable<any>{
 
     return this.http.get<any[]>(this.cardForSale.cardListe+ `?cardToTypeCardRelation.typeCardForSale=${search}`);
   }

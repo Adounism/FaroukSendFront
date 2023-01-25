@@ -23,7 +23,13 @@
           </div>
            -->
 
-              <div style="display: contents">
+
+           <div style="display: contents">
+              <div class="form-check form-check-inline" >
+                <input class="form-check-input"  type="radio" checked="true"  name="inlineRadioOptions"
+                  (change)="onFilterChange($event)" [value]="''" id="inlineRadio1" />
+                <label class="form-check-label" for="inlineRadio1">All</label>
+              </div>
                 <div class="form-check form-check-inline" *ngFor="let type of transactionType; index as i">
                   <input class="form-check-input" type="radio" name="inlineRadioOptions"
                     (change)="onFilterChange($event)" [value]="type.key" id="inlineRadio1" />
@@ -127,7 +133,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let transaction of mobileTransactions; index as i">
+            <tr *ngFor="let transaction of mobileTransactions | paginate: { itemsPerPage: 25, currentPage: page, totalItems: total } ">
               <td>
                 {{
                 transaction.client.firstName +
@@ -164,6 +170,7 @@
             </tr>
           </tbody>
         </table>
+        <pagination-controls (pageChange)="pageChangeEvent($event)"></pagination-controls>
       </c-card-body>
     </c-card>
   </c-col>

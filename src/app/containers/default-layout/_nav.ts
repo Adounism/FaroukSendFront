@@ -30,7 +30,7 @@ export const navItems: INavData[] = [
         url: '/widgets/listsuppliers',
         iconComponent: { name: 'cil-bookmark' }
       },
-    
+
 
     ]
   },
@@ -65,7 +65,7 @@ export const navItems: INavData[] = [
   //      url: '/base/operation'
   //     },
   //   ]
-      
+
   // },
 
 
@@ -191,13 +191,13 @@ export const navItems: INavData[] = [
        url: '/icons/printmobiletransaction',
        iconComponent: { name: 'cil-arrow-right' },
       },
-      
+
       // {
       //   name: "Ajouter retour d'envoi",
       //  url: '/icons/addreturnshipment',
       //  iconComponent: { name: 'cil-arrow-right' },
       // },
-      
+
       // {
       //   name: "Liste des retours d'envoi",
       //  url: '/icons/printreturnshipment',
@@ -219,7 +219,7 @@ export const navItems: INavData[] = [
 
 
 
- 
+
   {
     name: 'Achats',
     url: '/buttons',
@@ -274,23 +274,25 @@ export const navItems: INavData[] = [
         iconComponent: { name: 'cil-arrow-right' },
       },
       {
-        name: 'Rapport des transactions',
+        name: 'Rapport  vente de crédit',
         url: '/forms/checks-radios',
         iconComponent: { name: 'cil-arrow-right' },
       },
       {
-        name: "Rapport d'Achat",
+        name: "Rapport  vente de carte",
         url: '/forms/range',
         iconComponent: { name: 'cil-arrow-right' },
       },
-      // {
-      //   name: 'Input Group',
-      //   url: '/forms/input-group'
-      // },
-      // {
-      //   name: 'Floating Labels',
-      //   url: '/forms/floating-labels'
-      // },
+      {
+        name: 'Rapport  Transfert mobile',
+        url: '/forms/input-group',
+        iconComponent: { name: 'cil-arrow-right' },
+      },
+      {
+        name: 'Rapport  Achat de carte',
+        url: '/forms/floating-labels',
+        iconComponent: { name: 'cil-arrow-right' },
+      },
       // {
       //   name: 'Layout',
       //   url: '/forms/layout'

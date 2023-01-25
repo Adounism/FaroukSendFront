@@ -7,7 +7,7 @@
       </a>
       <label for="filter" style="font-size: 18px">Filtres</label>
 
-      <div *ngIf="visible" cCollapse>
+      <div *ngIf="visible" >
         <c-card class="mt-3 shadow">
           <c-card-body>
             <c-row style="
@@ -25,6 +25,15 @@
               </div>
 
 
+              <div style="display: contents;">
+                <div class="form-check form-check-inline" >
+                  <input class="form-check-input"  type="radio" checked="true"  name="inlineRadioOptions"
+                    (change)="onFilterChange($event)" [value]="''" id="inlineRadio1" />
+                  <label class="form-check-label" for="inlineRadio1">All</label>
+                </div>
+              </div>
+
+
               <div style="display: contents">
                 <div class="form-check form-check-inline" >
                   <input class="form-check-input" type="radio" name="inlineRadioOptions"
@@ -34,6 +43,7 @@
               </div>
 
               <div style="display: contents">
+
                 <div class="form-check form-check-inline" >
                   <input class="form-check-input" type="radio" name="inlineRadioOptions"
                     (change)="onFilterChange($event)" [value]="mobileTransferPurchase" id="inlineRadio1" />
@@ -111,20 +121,45 @@
           <caption>Historique des Achats</caption>
           <thead>
           <tr >
-            <th scope="col"><i class="fa fa-sort">Fournisseur </i></th>
+            <!-- <th scope="col"><i class="fa fa-sort">Fournisseur </i></th> -->
+            <th scope="col">Noms</th>
+            <th scope="col">Prénoms</th>
+            <th scope="col">Entreprise</th>
+            <th scope="col">Email</th>
+            <th scope="col">Contact principal</th>
+            <th scope="col">Contact secondaire</th>
+            <th scope="col">Achat de crédit</th>
+            <th scope="col">Achat de transfert mobile</th>
+            <th scope="col">Achat de carte</th>
+            <th scope="col">Solde initial</th>
+            <th scope="col">Status</th>
             <!-- <th scope="col" *ngFor="let ope of listOperation"><i class="fa fa-sort">{{ope.name}} </i></th> -->
-            <th scope="col">Achat  Total</th>
-            <th scope="col">Nombre Total d'achat</th>
-            <th scope="col">Times</th>
+            <!-- <th scope="col">Achat  Total</th>
+            <th scope="col">Nombre Total d'achat</th> -->
+            <!-- <th scope="col">Times</th> -->
           </tr>
           </thead>
           <tbody>
-          <tr *ngFor="let data of supplierData ">
-            <td>{{getProviderName(data)}}</td>
-            <td >{{getProviderTotalPurchase(data)}}</td>
-            <td >{{getProviderTotalPurchaseNumber(data)}}</td>
+          <tr *ngFor="let provider of providers ">
 
-            <td>{{data.createdAt | date :'short'}}</td>
+            <td>{{provider.individual?.firstName}}</td>
+            <td>{{provider.individual?.lastName}}</td>
+            <td>{{provider.business?.name}}</td>
+            <td>{{provider?.email}}</td>
+            <td>{{provider?.firstPhone}}</td>
+            <td>{{provider?.secondPhone}}</td>
+            <td>{{getTotalPurchase(provider).creditPurchase}}</td>
+            <td>{{getTotalPurchase(provider).mobileTransferPurchase}}</td>
+            <td>{{getTotalCartePurchase(provider).totalCarte}}</td>
+            <td>{{0}}</td>
+            <td>{{true}}</td>
+
+
+            <!-- <td>{{getProviderName(data)}}</td>
+            <td >{{getProviderTotalPurchase(data)}}</td>
+            <td >{{getProviderTotalPurchaseNumber(data)}}</td> -->
+
+            <!-- <td>{{data.createdAt | date :'short'}}</td> -->
           </tr>
           <tr class="center-align">
             <!-- <td *ngIf="historiqueData.length == 0"  class="center-align" colspan="4">No Historique Found</td> -->

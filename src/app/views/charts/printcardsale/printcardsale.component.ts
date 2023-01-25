@@ -28,7 +28,7 @@ export class PrintcardsaleComponent implements OnInit {
   cardForSales:any=[];
   page: number = 1;
   total: number = 0;
-  constructor(private transaction: TransactionsService, 
+  constructor(private transaction: TransactionsService,
     private toast: NgToastService,
     private cardService:CardService,
     private ngxComfirmService: NgxBootstrapConfirmService,
@@ -43,7 +43,7 @@ export class PrintcardsaleComponent implements OnInit {
   getAllCardSells(){
     this.transaction.getAllCardSales(this.page).subscribe(data=>{
       this.cardSellListes = data;
-   
+
       let allCards:any = [];
       data.forEach((d:any)=>{
         let obj:any = {}
@@ -67,7 +67,7 @@ export class PrintcardsaleComponent implements OnInit {
         this.getClientCreditPurchase(card);
       })
     })
-    
+
   }
 
   toggleCollapse(): void {
@@ -91,7 +91,7 @@ export class PrintcardsaleComponent implements OnInit {
           this.transaction.deleteCardSelle(id).subscribe({
             next: data=>{
               if(data.status == 200){
-      
+
                 this.toast.success({
                   detail:"carte supprimer",
                   summary:"",
@@ -99,17 +99,17 @@ export class PrintcardsaleComponent implements OnInit {
                  });
                  this.getAllCardSells();
               }
-              
+
             },
             error: error=>{
               if(error.status == 404){
-      
+
                 this.toast.warning({
                   detail:"La carte n'existe pas!!!",
                   summary:error.body.message,
                   duration: 3000
                  });
-              } 
+              }
             }
           });
         } else {
@@ -119,15 +119,15 @@ export class PrintcardsaleComponent implements OnInit {
     }
 
     getClientCreditPurchase(client:any){
-      client["cardToTypeCardRelation"].forEach((data:any, index:number)=>{ 
-        
+      client["cardToTypeCardRelation"].forEach((data:any, index:number)=>{
+
         this.userCardSell = data;
         // console.log(this.userCardSell);
-        
-  
+
+
       })
-  
-      
+
+
     }
 
     onDateSelection(date: NgbDate) {
@@ -139,7 +139,7 @@ export class PrintcardsaleComponent implements OnInit {
         this.transaction.findByRangeDateMobileTransfert(fromdateFormate, this.toDate = null).subscribe(data=>{
           this.cardForSales = data;
         })
-  
+
       } else if (this.fromDate && !this.toDate && date && date.after(this.fromDate)) {
         this.toDate = date;
         let fromdateFormate = this.fromDate.year+'-'+this.fromDate.month+'-'+this.fromDate.day;
@@ -148,37 +148,37 @@ export class PrintcardsaleComponent implements OnInit {
         this.transaction.findByRangeDateMobileTransfert(fromdateFormate, todateFormate).subscribe(data=>{
           this.cardForSales = data;
         })
-      } 
+      }
       else {
         this.toDate = null;
         this.fromDate = date;
-  
+
         this.cardForSales = [];
         let fromdateFormate = this.fromDate.year+'-'+this.fromDate.month+'-'+this.fromDate.day;
         console.log(fromdateFormate);
         this.transaction.findByRangeDateMobileTransfert(fromdateFormate, this.toDate = null).subscribe(data=>{
           this.cardForSales = data;
         })
-  
+
       }
     }
-  
+
     isEmpty(fromDate: any, toDate:any){
       if(!fromDate || !toDate){
         this.getAllCardSells();
       }
     }
-  
+
     isHovered(date: NgbDate) {
       return (
         this.fromDate && !this.toDate && this.hoveredDate && date.after(this.fromDate) && date.before(this.hoveredDate)
       );
     }
-  
+
     isInside(date: NgbDate) {
       return this.toDate && date.after(this.fromDate) && date.before(this.toDate);
     }
-  
+
     isRange(date: NgbDate) {
       return (
         date.equals(this.fromDate) ||
@@ -187,16 +187,16 @@ export class PrintcardsaleComponent implements OnInit {
         this.isHovered(date)
       );
     }
-  
+
     validateInput(currentValue: NgbDate | null, input: string): NgbDate | null {
       const parsed = this.formatter.parse(input);
       return parsed && this.calendar.isValid(NgbDate.from(parsed)) ? NgbDate.from(parsed) : currentValue;
     }
-  
+
     searchTransactionByDateRange(from:any, to: any){
-  
+
     }
-  
+
 
     onsearch(event:any){
       this.searchText = event;
@@ -225,14 +225,14 @@ export class PrintcardsaleComponent implements OnInit {
         data.forEach((card:any)=>{
           this.getClientCreditPurchase(card);
         });
-        
+
      })
     }
 
-    
+
 onChange(cardType:any) {
   console.log(cardType.target.value);
-  if(cardType.target.value){
+  if(cardType.target.value != "All"){
     this.cardForSales = [];
     this.transaction.getSearchCardByCardType(cardType.target.value).subscribe(data=>{
       this.cardForSales = data;
@@ -255,11 +255,32 @@ onChange(cardType:any) {
         }
       })
       this.cardForSales = allCards;
+      console.log(this.cardForSales);
+
       data.forEach((card:any)=>{
         this.getClientCreditPurchase(card);
       });
     });
 
+  }else{
+    this.getAllCardSells();
   }
 }
+
+
+    /**
+   * Write code on Method
+   *
+   * @return response()
+   */
+    pageChangeEvent(event: number){
+      this.page = event;
+      this.getAllCardSells();
+  }
+
+  onTableDataChange(event: any) {
+    this.page = event;
+    this.getAllCardSells();
+  }
+
 }

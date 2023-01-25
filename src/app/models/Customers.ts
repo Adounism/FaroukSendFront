@@ -6,6 +6,7 @@ export interface Customers {
   createdAt: Date;
   pdvNumber: string;
   phone: string;
+
   email?: string;
   occupation?: string;
   sends: sends[];

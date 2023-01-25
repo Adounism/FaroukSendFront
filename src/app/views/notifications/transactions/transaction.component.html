@@ -6,32 +6,23 @@
       <svg cIcon class="me-2" class="center-align" name="cil-filter"></svg>
     </a>
     <label for="filter" style="font-size: 18px;">Filtres</label>
-    
+
   <div *ngIf="visible" cCollapse>
   <c-card class="mt-3 shadow">
     <c-card-body>
-      <c-row  style="align-items: center; justify-content: space-evenly;">
+      <c-row  style="align-items: center; ">
         <div class="col-sm-3">
-          <label for="inputState" class="form-label">State</label>
-          <select id="inputState" class="form-select">
-            <option selected>Choose...</option>
-            <option>...</option>
+          <label for="inputState" class="form-label">Clients</label>
+          <select id="inputState" (change)="onChange($event)"  class="form-select">
+            <option selected> </option>
+            <option *ngFor="let customer of customers" [value]="customer.id">
+              {{customer.firstName + " " + customer.lastName}}
+            </option>
           </select>
         </div>
-        
 
-      <c-col md="2">
-        <label cLabel for="inputZip">prix(unit)</label>
-        <input cFormControl id="inputZip" type="number"   name="unitPrice"  />
-      </c-col>
-      <c-col md="2">
-        <label cLabel for="inputZip">quantité</label>
-        <input cFormControl id="inputZip" type="number"  name="quantity"  />
-      </c-col>
-      <c-col md="2">
-        <label cLabel for="inputZip">Montant HT</label>
-        <input cFormControl id="inputZip" type="number"  name="amountHT"  />
-      </c-col>
+
+
     </c-row>
 
     <div class="col-sm-7" style="display: contents;
@@ -79,7 +70,7 @@
               [value]="formatter.format(fromDate)"
               (input)="fromDate = validateInput(fromDate, dpFromDate.value)"
             />
-            
+
             <button class="btn btn-outline-secondary bi bi-calendar3" (click)="datepicker.toggle()" type="button">
               <svg cIcon class="me-2" class="center-align"  name="cil-calendar"></svg>
             </button>
@@ -115,14 +106,14 @@
   height: 5px;
   border-radius: 5px;
   width: 100%;">
-    
+
   </div>
   <c-card class="mb-4">
     <c-card-header>
 
       <strong>Liste des Transactions</strong>
       <div style="display: flex; justify-content: space-between;">
-        
+
 
         <!-- <input type="file" class="file-input" (change)="onFileSelected($event)" #fileUpload>
           <button style="float: center; align-items: center; margin-left: 15px; background-color: rgb(80, 233, 80);"  class="btn float-center"  cButton> Importer Fichier
@@ -136,14 +127,14 @@
             <input type="file" id="upload" name="upload" (change)="onFileSelected($event)"  style="visibility: hidden; width: 1px; height: 1px" />
             <a type="file" onclick="document.getElementById('upload').click()"  class="btn btn-secondary"><i  class="material-icons">
               <svg cIcon class="me-2" class="center-align" name="cil-notes"></svg>
-            </i> <span>Import Excel</span></a>	
+            </i> <span>Import Excel</span></a>
           </div> -->
 
 
           <div >
 
             <button class="btn float-right" color="primary"  [routerLink]="['/vente-credit/addtransaction']" cButton> ajouter
-    
+
             </button>
           </div>
         </div>
@@ -161,6 +152,9 @@
             <th scope="col">Numéro PDV</th>
             <th scope="col">Montant</th>
             <th scope="col">Date</th>
+            <th scope="col">Solde initial</th>
+            <th scope="col">Status</th>
+
             <th scope="col">Actions</th>
           </tr>
           </thead>
@@ -173,6 +167,12 @@
             <td>{{transaction.client?.pdvNumber}}</td>
             <td>{{transaction.amount}}</td>
             <td>{{transaction.createdAt | date:'short'}}</td>
+            <td>0</td>
+            <td>
+              <button type="button" rel="tooltip"  class="btn btn-success btn-just-icon btn-sm">
+                ACTIVE
+              </button>
+            </td>
             <td>
               <button type="button" rel="tooltip" (click)="deleteTransaction(transaction.id)"  class="btn btn-danger btn-just-icon btn-sm">
                 <svg cIcon class="me-2" class="center-align" name="cil-trash"></svg>

@@ -5,30 +5,39 @@
         <svg cIcon class="me-2" class="center-align" name="cil-filter"></svg>
       </a>
       <label for="filter" style="font-size: 18px;">Filtres</label>
-      
+
     <div *ngIf="visible" cCollapse>
     <c-card class="mt-3 shadow">
       <c-card-body>
-        <c-row  style="align-items: center; justify-content: space-between; margin: 15px">
+        <c-row  style="align-items: center;  margin: 15px">
           <div class="col-sm-3">
             <label for="inputState" class="form-label">Carte de crédit</label>
+            <select id="inputState"  (change)="onChange($event)" class="form-select">
+              <option selected [value]="">All</option>
+              <option *ngFor="let cardtype of listeCardTypes" [ngValue]="cardtype">
+                {{cardtype.name}}
+              </option>
+            </select>
+          </div>
+          <!-- <div class="col-sm-3">
+            <label for="inputState" class="form-label">Clients</label>
             <select id="inputState"  (change)="onChange($event)" class="form-select">
               <option selected> </option>
               <option *ngFor="let cardtype of listeCardTypes" [ngValue]="cardtype">
                 {{cardtype.name}}
               </option>
             </select>
-          </div>
-          
-  
-        
+          </div> -->
+
+
+
            <!-- <c-col md="2" *ngFor="let type of transactionType">
              <input class="form-check-input" type="checkbox" (change)="onFilterChange($event)" [value]="type.key" id="defaultCheck1">
              <label style="margin-right: 10px;position: absolute;" class="form-check-label" for="defaultCheck1">
                {{type.name}}
              </label>
            </c-col> -->
-           
+
         <!-- <c-col md="2">
           <label cLabel for="inputZip">quantité</label>
           <input cFormControl id="inputZip" type="number"  name="quantity"  />
@@ -38,7 +47,7 @@
           <input cFormControl id="inputZip" type="number"  name="amountHT"  />
         </c-col> -->
       </c-row>
-  
+
       <div class="col-sm-7"  style="display: contents;
       align-content: center;
       margin-top: 20px;">
@@ -84,7 +93,7 @@
                 [value]="formatter.format(fromDate)"
                 (input)="fromDate = validateInput(fromDate, dpFromDate.value)"
               />
-              
+
               <button class="btn btn-outline-secondary bi bi-calendar3" (click)="datepicker.toggle()" type="button">
                 <svg cIcon class="me-2" class="center-align"  name="cil-calendar"></svg>
               </button>
@@ -113,7 +122,7 @@
   </div>
   </c-card>
   </c-col>
-  
+
 
 
 <c-row ngPreserveWhitespaces>
@@ -122,7 +131,7 @@
     height: 5px;
     border-radius: 5px;
     width: 100%;">
-      
+
     </div>
     <c-card class="mb-4">
       <c-card-header>Ventes de cartes
@@ -133,7 +142,7 @@
           </div>
 
           <button style="float: right;" class="btn float-right" color="primary"  [routerLink]="['/vente-carte/addcardsale']" cButton> ajouter
-    
+
           </button>
         </div>
       </c-card-header>
@@ -155,7 +164,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let card_sell of cardForSales; index as i">
+            <tr *ngFor="let card_sell of cardForSales| paginate: { itemsPerPage: 25, currentPage: page, totalItems: total } ">
 
               <td class="text-center">
                 {{card_sell.client }}
@@ -192,7 +201,7 @@
                       {{carte_achat.quantity}}
                     </div>
                   </div>
-  
+
                 </td>
                 <td class="text-center">
                   {{ carte_achat.unitPrice }}
@@ -202,10 +211,10 @@
                 </td>
                 <td>
                   <div class="small text-medium-emphasis">
-  
+
                     {{card_sell.date | date: 'short'}}
                   </div>
-  
+
                 </td>
               </ng-container> -->
 
@@ -225,6 +234,7 @@
             </tr>
           </tbody>
         </table>
+        <pagination-controls (pageChange)="pageChangeEvent($event)"></pagination-controls>
       </c-card-body>
     </c-card>
   </c-col>

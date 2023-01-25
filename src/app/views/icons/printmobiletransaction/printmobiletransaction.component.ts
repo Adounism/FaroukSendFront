@@ -22,6 +22,8 @@ export class PrintmobiletransactionComponent implements OnInit {
   sendTypeCollection = "collection";
   searchText = ""
   visible = true;
+  page: number = 1;
+  total: number = 0;
   constructor(private mobileTransaction: TransactionsService,
     private toast: NgToastService,
     private ngxComfirmService: NgxBootstrapConfirmService,
@@ -32,7 +34,7 @@ export class PrintmobiletransactionComponent implements OnInit {
     this.getAllMobileTransactions();
     this.getAllTransactionTypes();
 
-    
+
   }
 
 
@@ -41,35 +43,35 @@ export class PrintmobiletransactionComponent implements OnInit {
   }
 
   getAllMobileTransactions(){
-    this.mobileTransaction.getAllMobileSends().subscribe(data=>{
+    this.mobileTransaction.getAllMobileSends(this.page).subscribe(data=>{
       this.mobileTransactions = data;
       console.log(this.mobileTransactions);
     });
   }
 
-  
-  getAllMobiletransaction(type:string){    
+
+  getAllMobiletransaction(type:string){
 
     this.mobileTransactions =[];
     this.mobileTransaction.getAllMobileSend(type).subscribe(data=>{
        this.mobileTransactions = data;
-    
-       
+
+
     })
   }
 
   onFilterChange(event: any){
     if(event.target.value != ""){
       this.getAllMobiletransaction(event.target.value);
-      
+
     }else if(event.target.value == ""){
       console.log("Hello");
-      
+
       this.getAllMobileTransactions();
     }
     console.log(event.target.value);
     console.log(event.target.checked);
-    
+
   }
 
 
@@ -86,7 +88,7 @@ export class PrintmobiletransactionComponent implements OnInit {
         this.mobileTransaction.deletemobileTransfert(id).subscribe({
           next: data=>{
             if(data.status == 200){
-    
+
               this.toast.success({
                 detail:"Transaction supprimer",
                 summary:"",
@@ -94,17 +96,17 @@ export class PrintmobiletransactionComponent implements OnInit {
                });
                this.getAllMobileTransactions();
             }
-            
+
           },
           error: error=>{
             if(error.status == 404){
-    
+
               this.toast.warning({
                 detail:"La Transaction n'existe pas!!!",
                 summary:error.body.message,
                 duration: 3000
                });
-            } 
+            }
           }
         });
       } else {
@@ -121,7 +123,7 @@ export class PrintmobiletransactionComponent implements OnInit {
     })
   }
 
-  
+
   onDateSelection(date: NgbDate) {
 		if (!this.fromDate && !this.toDate) {
 			this.fromDate = date;
@@ -140,7 +142,7 @@ export class PrintmobiletransactionComponent implements OnInit {
       this.mobileTransaction.findByRangeDateTransfert(fromdateFormate, todateFormate).subscribe(data=>{
         this.mobileTransactions = data;
       })
-		} 
+		}
     else {
 			this.toDate = null;
 			this.fromDate = date;
@@ -189,14 +191,30 @@ export class PrintmobiletransactionComponent implements OnInit {
 
   }
 
-  
+
   onsearch(event:any){
     this.searchText = event;
     this.mobileTransactions = [];
     this.mobileTransaction.getSearchMobileSend(this.searchText).subscribe(data=>{
       this.mobileTransactions = data;
       console.log(this.mobileTransactions);
-      
+
    })
   }
+
+
+      /**
+   * Write code on Method
+   *
+   * @return response()
+   */
+      pageChangeEvent(event: number){
+        this.page = event;
+        this.getAllMobileTransactions();
+    }
+
+    onTableDataChange(event: any) {
+      this.page = event;
+      this.getAllMobileTransactions();
+    }
 }

@@ -1,524 +1,161 @@
-<c-row>
-  <c-col xs="12">
-    <app-docs-callout href="forms/input-group" name="Input Group"></app-docs-callout>
-  </c-col>
-  <c-col xs="12">
-    <c-card class="mb-4">
-      <c-card-header ngPreserveWhitespaces>
-        <strong>Angular Input group</strong> <small>Basic example</small>
-      </c-card-header>
-      <c-card-body>
-        <p class="text-medium-emphasis small">
-          Place one add-on or button on either side of an input. You may also place one on both
-          sides of an input. Remember to place <code>&lt;label&gt;</code>s outside the
-          input group.
-        </p>
-        <app-docs-example href="forms/input-group">
-          <c-input-group class="mb-3">
-            <span cInputGroupText id="basic-addon1">@</span>
-            <input aria-describedby="basic-addon1"
-                   aria-label="Username"
-                   cFormControl
-                   placeholder="Username"
-            />
-          </c-input-group>
-          <c-input-group class="mb-3">
-            <input aria-describedby="basic-addon2"
-                   aria-label="Recipient&#39;s username"
-                   cFormControl
-                   placeholder="Recipient&#39;s username"
-            />
-            <span cInputGroupText id="basic-addon2">@example.com</span>
-          </c-input-group>
-          <label cLabel for="basic-url">Your vanity URL</label>
-          <c-input-group class="mb-3">
-            <span cInputGroupText id="basic-addon3">https://example.com/users/</span>
-            <input aria-describedby="basic-addon3" cFormControl id="basic-url"/>
-          </c-input-group>
-          <c-input-group class="mb-3">
-            <span cInputGroupText>$</span>
-            <input aria-label="Amount (to the nearest dollar)" cFormControl/>
-            <span cInputGroupText>.00</span>
-          </c-input-group>
-          <c-input-group class="mb-3">
-            <input aria-label="Username" cFormControl placeholder="Username"/>
-            <span cInputGroupText>@</span>
-            <input aria-label="Server" cFormControl placeholder="Server"/>
-          </c-input-group>
-          <c-input-group>
-            <span cInputGroupText>With textarea</span>
-            <textarea aria-label="With textarea" cFormControl></textarea>
-          </c-input-group>
-        </app-docs-example>
-      </c-card-body>
-    </c-card>
-  </c-col>
-  <c-col xs="12">
-    <c-card class="mb-4">
-      <c-card-header ngPreserveWhitespaces>
-        <strong>Angular Input group</strong> <small>Wrapping</small>
-      </c-card-header>
-      <c-card-body>
-        <p class="text-medium-emphasis small">
-          Input groups wrap by default via <code>flex-wrap: wrap</code> in order to accommodate
-          custom form field validation within an input group. You may disable this with
-          <code>.flex-nowrap</code>.
-        </p>
-        <app-docs-example href="forms/input-group#wrapping">
-          <c-input-group class="flex-nowrap">
-            <span cInputGroupText id="addon-wrapping">@</span>
-            <input aria-describedby="addon-wrapping"
-                   aria-label="Username"
-                   cFormControl
-                   placeholder="Username"
-            />
-          </c-input-group>
-        </app-docs-example>
-      </c-card-body>
-    </c-card>
-  </c-col>
-  <c-col xs="12">
-    <c-card class="mb-4">
-      <c-card-header ngPreserveWhitespaces>
-        <strong>Angular Input group</strong> <small>Sizing</small>
-      </c-card-header>
-      <c-card-body>
-        <p class="text-medium-emphasis small">
-          Add the relative form sizing classes to the <code>&lt;c-input-group&gt;</code> itself
-          and contents within will automatically resize—no need for repeating the form control
-          size classes on each element.
-        </p>
-        <p class="text-medium-emphasis small">
-          <strong>Sizing on the individual input group elements isn&#39;t supported.</strong>
-        </p>
-        <app-docs-example href="forms/input-group#sizing">
-          <c-input-group class="mb-3" sizing="sm">
-            <span cInputGroupText id="inputGroup-sizing-sm">Small</span>
-            <input aria-describedby="inputGroup-sizing-sm"
-                   aria-label="Sizing example input"
-                   cFormControl
-            />
-          </c-input-group>
-          <c-input-group class="mb-3">
-            <span cInputGroupText id="inputGroup-sizing-default">Default</span>
-            <input aria-describedby="inputGroup-sizing-default"
-                   aria-label="Sizing example input"
-                   cFormControl
-            />
-          </c-input-group>
-          <c-input-group sizing="lg">
-            <span cInputGroupText id="inputGroup-sizing-lg">Large</span>
-            <input aria-describedby="inputGroup-sizing-lg"
-                   aria-label="Sizing example input"
-                   cFormControl
-            />
-          </c-input-group>
-        </app-docs-example>
-      </c-card-body>
-    </c-card>
-  </c-col>
-  <c-col xs="12">
-    <c-card class="mb-4">
-      <c-card-header ngPreserveWhitespaces>
-        <strong>Angular Input group</strong> <small>Checkboxes and radios</small>
-      </c-card-header>
-      <c-card-body>
-        <p class="text-medium-emphasis small">
-          Place any checkbox or radio option within an input group&#39;s addon instead of text.
-        </p>
-        <app-docs-example href="forms/input-group#checkboxes-and-radios">
-          <c-input-group class="mb-3">
-            <span cInputGroupText>
-              <div>
-                <input cFormCheckInput id="checkOne" type="checkbox"/>
+<c-col xs="12">
+  <c-card class="mb-4">
+    <div>
+      <a (click)="toggleCollapse()" style="background-color: grey" cButton class="me-1" color="primary">
+        <svg cIcon class="me-2" class="center-align" name="cil-filter"></svg>
+      </a>
+      <label for="filter" style="font-size: 18px">Filtres</label>
+
+      <div *ngIf="visible" >
+        <c-card class="mt-3 shadow">
+          <c-card-body>
+            <c-row style="
+                align-items: center;
+                justify-content: space-between;
+                margin: 15px;
+              ">
+              <!-- <div class="col-sm-3">
+            <label for="inputState" class="form-label">State</label>
+            <select id="inputState" class="form-select">
+              <option selected>Choose...</option>
+              <option>...</option>
+            </select>
+          </div>
+           -->
+
+              <div style="display: contents">
+                <div class="form-check form-check-inline" >
+                  <input class="form-check-input"  type="radio" checked="true"  name="inlineRadioOptions"
+                    (change)="onFilterChange($event)" [value]="''" id="inlineRadio1" />
+                  <label class="form-check-label" for="inlineRadio1">Tous</label>
+                </div>
+                <div class="form-check form-check-inline" *ngFor="let type of transactionType; index as i">
+                  <input class="form-check-input" type="radio" name="inlineRadioOptions"
+                    (change)="onFilterChange($event)" [value]="type.key" id="inlineRadio1" />
+                  <label class="form-check-label" for="inlineRadio1">
+                    {{ type.name }}</label>
+                </div>
               </div>
-            </span>
-            <input aria-label="Text input with checkbox" cFormControl/>
-          </c-input-group>
-          <c-input-group>
-            <span cInputGroupText>
-              <div>
-                <input cFormCheckInput id="radioOne" type="radio"/>
-              </div>
-            </span>
-            <input aria-label="Text input with radio button" cFormControl/>
-          </c-input-group>
-        </app-docs-example>
-      </c-card-body>
-    </c-card>
-  </c-col>
-  <c-col xs="12">
+              <!-- <div class="form-check form-check-inline" >
+            <input class="form-check-input" type="radio" name="inlineRadioOptions"  (change)="onFilterChange($event)" [value]="" id="inlineRadio1" >
+            <label class="form-check-label" for="inlineRadio1">All</label>
+          </div> -->
+            </c-row>
+
+            <div class="col-sm-7" style="display: contents; align-content: center; margin-top: 20px">
+              <!-- <input type="text" class="form-control" placeholder="Search user historique" (ngModelChange)="onSearchChange($event)" [(ngModel)]="searchText" ng aria-label="Search"> -->
+              <form class="row row-cols-sm-auto" style="text-align: center; justify-content: center">
+                <div class="col-12">
+                  <div class="dp-hidden position-absolute">
+                    <div class="input-group">
+                      <input name="datepicker" class="form-control" ngbDatepicker #datepicker="ngbDatepicker"
+                        [autoClose]="'outside'" (dateSelect)="onDateSelection($event)" [displayMonths]="2"
+                        [dayTemplate]="t" outsideDays="hidden" [startDate]="fromDate!" tabindex="-1" />
+                      <ng-template #t let-date let-focused="focused">
+                        <span class="custom-day" [class.focused]="focused" [class.range]="isRange(date)"
+                          [class.faded]="isHovered(date) || isInside(date)" (mouseenter)="hoveredDate = date"
+                          (mouseleave)="hoveredDate = null">
+                          {{ date.day }}
+                        </span>
+                      </ng-template>
+                    </div>
+                  </div>
+                  <div class="input-group">
+                    <input #dpFromDate class="form-control" placeholder="yyyy-mm-dd" name="dpFromDate"
+                      [value]="formatter.format(fromDate)" (input)="
+                        fromDate = validateInput(fromDate, dpFromDate.value)
+                      " />
+
+                    <button class="btn btn-outline-secondary bi bi-calendar3" (click)="datepicker.toggle()"
+                      type="button">
+                      <svg cIcon class="me-2" class="center-align" name="cil-calendar"></svg>
+                    </button>
+                  </div>
+                </div>
+                <div class="col-12" style="padding: 0px">
+                  <div class="input-group">
+                    <input #dpToDate class="form-control" placeholder="yyyy-mm-dd" name="dpToDate"
+                      [value]="formatter.format(toDate)" (input)="toDate = validateInput(toDate, dpToDate.value)" />
+                    <button class="btn btn-outline-secondary bi bi-calendar3" (click)="datepicker.toggle()"
+                      type="button">
+                      <svg cIcon class="me-2" class="center-align" name="cil-calendar"></svg>
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </c-card-body>
+        </c-card>
+      </div>
+    </div>
+  </c-card>
+</c-col>
+
+<c-row ngPreserveWhitespaces>
+  <c-col xs>
+    <div style="
+        background-color: #3c8dbc;
+        height: 5px;
+        border-radius: 5px;
+        width: 100%;
+      "></div>
     <c-card class="mb-4">
-      <c-card-header ngPreserveWhitespaces>
-        <strong>Angular Input group</strong> <small>Multiple inputs</small>
+      <c-card-header>
+        Rapport de transfert mobile
+        <div style="display: flex; justify-content: space-between">
+          <div class="col-sm-3">
+            <label class="visually-hidden" for="specificSizeInputName">search</label>
+            <input type="search" cFormControl class="form-control" name="search" [ngModel]="searchText"
+              (ngModelChange)="onsearch($event)" style="font-size: 12px" id="specificSizeInputName"
+              placeholder="recherche" />
+          </div>
+
+        </div>
       </c-card-header>
       <c-card-body>
-        <p class="text-medium-emphasis small">
-          While multiple <code>&lt;CFormInput&gt;</code>s are supported visually, validation
-          styles are only available for input groups with a single
-          <code>cFormControl</code>.
-        </p>
-        <app-docs-example href="forms/input-group#multiple-inputs">
-          <c-input-group>
-            <span cInputGroupText>First and last name</span>
-            <input aria-label="First name" cFormControl/>
-            <input aria-label="Last name" cFormControl/>
-          </c-input-group>
-        </app-docs-example>
-      </c-card-body>
-    </c-card>
-  </c-col>
-  <c-col xs="12">
-    <c-card class="mb-4">
-      <c-card-header ngPreserveWhitespaces>
-        <strong>Angular Input group</strong> <small>Multiple addons</small>
-      </c-card-header>
-      <c-card-body>
-        <p class="text-medium-emphasis small">
-          Multiple add-ons are supported and can be mixed with checkbox and radio input
-          versions..
-        </p>
-        <app-docs-example href="forms/input-group#multiple-addons">
-          <c-input-group class="mb-3">
-            <span cInputGroupText>$</span>
-            <span cInputGroupText>0.00</span>
-            <input aria-label="Dollar amount (with dot and two decimal places)" cFormControl/>
-          </c-input-group>
-          <c-input-group>
-            <input aria-label="Dollar amount (with dot and two decimal places)" cFormControl/>
-            <span cInputGroupText>$</span>
-            <span cInputGroupText>0.00</span>
-          </c-input-group>
-        </app-docs-example>
-      </c-card-body>
-    </c-card>
-  </c-col>
-  <c-col xs="12">
-    <c-card class="mb-4">
-      <c-card-header ngPreserveWhitespaces>
-        <strong>Angular Input group</strong> <small>Button addons</small>
-      </c-card-header>
-      <c-card-body>
-        <p class="text-medium-emphasis small">
-          Button add-ons are supported.
-        </p>
-        <app-docs-example href="forms/input-group#button-addons">
-          <c-input-group class="mb-3">
-            <button cButton color="secondary" id="button-addon1" type="button" variant="outline">
-              Button
-            </button>
-            <input aria-describedby="button-addon1"
-                   aria-label="Example text with button addon"
-                   cFormControl
-                   placeholder=""
-            />
-          </c-input-group>
-          <c-input-group class="mb-3">
-            <input aria-describedby="button-addon2"
-                   aria-label="Recipient's username"
-                   cFormControl
-                   placeholder="Recipient's username"
-            />
-            <button cButton color="secondary" id="button-addon2" type="button" variant="outline">
-              Button
-            </button>
-          </c-input-group>
-          <c-input-group class="mb-3">
-            <button cButton color="secondary" type="button" variant="outline">
-              Button
-            </button>
-            <button cButton color="secondary" type="button" variant="outline">
-              Button
-            </button>
-            <input aria-label="Example text with two button addons" cFormControl placeholder=""/>
-          </c-input-group>
-          <c-input-group>
-            <input aria-label="Recipient's username with two button addons"
-                   cFormControl
-                   placeholder="Recipient's username"
-            />
-            <button cButton color="secondary" type="button" variant="outline">
-              Button
-            </button>
-            <button cButton color="secondary" type="button" variant="outline">
-              Button
-            </button>
-          </c-input-group>
-        </app-docs-example>
-      </c-card-body>
-    </c-card>
-  </c-col>
-  <c-col xs="12">
-    <c-card class="mb-4">
-      <c-card-header ngPreserveWhitespaces>
-        <strong>Angular Input group</strong> <small>Buttons with dropdowns</small>
-      </c-card-header>
-      <c-card-body>
-        <app-docs-example href="forms/input-group#buttons-with-dropdowns">
-          <c-input-group class="mb-3">
-            <c-dropdown>
-              <button cButton cDropdownToggle color="secondary" variant="outline">
-                Dropdown
-              </button>
-              <ul cDropdownMenu>
-                <li><a routerLink="./" cDropdownItem>Action</a></li>
-                <li><a routerLink="./" cDropdownItem>Another action</a></li>
-                <li><a routerLink="./" cDropdownItem>Something else here</a></li>
-                <li>
-                  <hr cDropdownDivider>
-                </li>
-                <li><a routerLink="./" cDropdownItem>Separated link</a></li>
-              </ul>
-            </c-dropdown>
-            <input aria-label="Text input with dropdown button" cFormControl/>
-          </c-input-group>
-          <c-input-group class="mb-3">
-            <input aria-label="Text input with dropdown button" cFormControl/>
-            <c-dropdown alignment="end">
-              <button cButton cDropdownToggle color="secondary" variant="outline">
-                Dropdown
-              </button>
-              <ul cDropdownMenu>
-                <li><a routerLink="./" cDropdownItem>Action</a></li>
-                <li><a routerLink="./" cDropdownItem>Another action</a></li>
-                <li><a routerLink="./" cDropdownItem>Something else here</a></li>
-                <li>
-                  <hr cDropdownDivider>
-                </li>
-                <li><a routerLink="./" cDropdownItem>Separated link</a></li>
-              </ul>
-            </c-dropdown>
-          </c-input-group>
-          <c-input-group>
-            <c-dropdown>
-              <button cButton cDropdownToggle color="secondary" variant="outline">
-                Dropdown
-              </button>
-              <ul cDropdownMenu>
-                <li><a routerLink="./" cDropdownItem>Action</a></li>
-                <li><a routerLink="./" cDropdownItem>Another action</a></li>
-                <li><a routerLink="./" cDropdownItem>Something else here</a></li>
-                <li>
-                  <hr cDropdownDivider>
-                </li>
-                <li><a routerLink="./" cDropdownItem>Separated link</a></li>
-              </ul>
-            </c-dropdown>
-            <input aria-label="Text input with 2 dropdown buttons" cFormControl/>
-            <c-dropdown alignment="end">
-              <button cButton cDropdownToggle color="secondary" variant="outline">
-                Dropdown
-              </button>
-              <ul cDropdownMenu>
-                <li><a routerLink="./" cDropdownItem>Other Action</a></li>
-                <li><a routerLink="./" cDropdownItem>Another action</a></li>
-                <li><a routerLink="./" cDropdownItem>Something else here</a></li>
-                <li>
-                  <hr cDropdownDivider>
-                </li>
-                <li><a routerLink="./" cDropdownItem>Separated link</a></li>
-              </ul>
-            </c-dropdown>
-          </c-input-group>
-        </app-docs-example>
-      </c-card-body>
-    </c-card>
-  </c-col>
-  <c-col xs="12">
-    <c-card class="mb-4">
-      <c-card-header ngPreserveWhitespaces>
-        <strong>Angular Input group</strong> <small>Segmented buttons</small>
-      </c-card-header>
-      <c-card-body>
-        <app-docs-example href="forms/input-group#segmented-buttons">
-          <c-input-group class="mb-3">
-            <c-dropdown>
-              <button cButton color="secondary" type="button" variant="outline">
-                Action
-              </button>
-              <button [split]="true" cButton cDropdownToggle color="secondary" variant="outline">
-                <span class="visually-hidden">Toggle Dropdown</span>
-              </button>
-              <ul cDropdownMenu>
-                <li><a routerLink="./" cDropdownItem>Action</a></li>
-                <li><a routerLink="./" cDropdownItem>Another action</a></li>
-                <li><a routerLink="./" cDropdownItem>Something else here</a></li>
-                <li>
-                  <hr cDropdownDivider>
-                </li>
-                <li><a routerLink="./" cDropdownItem>Separated link</a></li>
-              </ul>
-            </c-dropdown>
-            <input aria-label="Text input with segmented dropdown button" cFormControl/>
-          </c-input-group>
-          <c-input-group class="mb-3">
-            <input aria-label="Text input with segmented dropdown button" cFormControl/>
-            <c-dropdown alignment="end">
-              <button cButton color="secondary" variant="outline">
-                Action
-              </button>
-              <button [split]="true" cButton cDropdownToggle color="secondary" variant="outline">
-                <span class="visually-hidden">Toggle Dropdown</span>
-              </button>
-              <ul cDropdownMenu>
-                <li><a routerLink="./" cDropdownItem>Action</a></li>
-                <li><a routerLink="./" cDropdownItem>Another action</a></li>
-                <li><a routerLink="./" cDropdownItem>Something else here</a></li>
-                <li>
-                  <hr cDropdownDivider>
-                </li>
-                <li><a routerLink="./" cDropdownItem>Separated link</a></li>
-              </ul>
-            </c-dropdown>
-          </c-input-group>
-          <c-input-group>
-            <c-dropdown>
-              <button cButton color="secondary" type="button" variant="outline">
-                Action
-              </button>
-              <button [split]="true" cButton cDropdownToggle color="secondary" variant="outline">
-                <span class="visually-hidden">Toggle Dropdown</span>
-              </button>
-              <ul cDropdownMenu>
-                <li><a routerLink="./" cDropdownItem>Action</a></li>
-                <li><a routerLink="./" cDropdownItem>Another action</a></li>
-                <li><a routerLink="./" cDropdownItem>Something else here</a></li>
-                <li>
-                  <hr cDropdownDivider>
-                </li>
-                <li><a routerLink="./" cDropdownItem>Separated link</a></li>
-              </ul>
-            </c-dropdown>
-            <input aria-label="Text input with segmented dropdown button" cFormControl/>
-            <c-dropdown alignment="end">
-              <button cButton color="secondary" variant="outline">
-                Action
-              </button>
-              <button [split]="true" cButton cDropdownToggle color="secondary" variant="outline">
-                <span class="visually-hidden">Toggle Dropdown</span>
-              </button>
-              <ul cDropdownMenu>
-                <li><a routerLink="./" cDropdownItem>Action</a></li>
-                <li><a routerLink="./" cDropdownItem>Another action</a></li>
-                <li><a routerLink="./" cDropdownItem>Something else here</a></li>
-                <li>
-                  <hr cDropdownDivider>
-                </li>
-                <li><a routerLink="./" cDropdownItem>Separated link</a></li>
-              </ul>
-            </c-dropdown>
-          </c-input-group>
-        </app-docs-example>
-      </c-card-body>
-    </c-card>
-  </c-col>
-  <c-col xs="12">
-    <c-card class="mb-4">
-      <c-card-header ngPreserveWhitespaces>
-        <strong>Angular Input group</strong> <small>Custom select</small>
-      </c-card-header>
-      <c-card-body>
-        <app-docs-example href="forms/input-group#custom-select">
-          <c-input-group class="mb-3">
-            <label cInputGroupText for="inputGroupSelect01">
-              Options
-            </label>
-            <select cSelect id="inputGroupSelect01">
-              <option>Choose...</option>
-              <option value="1">One</option>
-              <option value="2">Two</option>
-              <option value="3">Three</option>
-            </select>
-          </c-input-group>
-          <c-input-group class="mb-3">
-            <select cSelect id="inputGroupSelect02">
-              <option>Choose...</option>
-              <option value="1">One</option>
-              <option value="2">Two</option>
-              <option value="3">Three</option>
-            </select>
-            <label cInputGroupText for="inputGroupSelect02">
-              Options
-            </label>
-          </c-input-group>
-          <c-input-group class="mb-3">
-            <button cButton color="secondary" type="button" variant="outline">
-              Button
-            </button>
-            <select aria-label="Example select with button addon" cSelect id="inputGroupSelect03">
-              <option>Choose...</option>
-              <option value="1">One</option>
-              <option value="2">Two</option>
-              <option value="3">Three</option>
-            </select>
-          </c-input-group>
-          <c-input-group>
-            <select aria-label="Example select with button addon" cSelect id="inputGroupSelect04">
-              <option>Choose...</option>
-              <option value="1">One</option>
-              <option value="2">Two</option>
-              <option value="3">Three</option>
-            </select>
-            <button cButton color="secondary" type="button" variant="outline">
-              Button
-            </button>
-          </c-input-group>
-        </app-docs-example>
-      </c-card-body>
-    </c-card>
-  </c-col>
-  <c-col xs="12">
-    <c-card class="mb-4">
-      <c-card-header ngPreserveWhitespaces>
-        <strong>Angular Input group</strong> <small>Custom file input</small>
-      </c-card-header>
-      <c-card-body>
-        <app-docs-example href="forms/input-group#custom-file-input">
-          <c-input-group class="mb-3">
-            <label cInputGroupText for="inputGroupFile01">
-              Upload
-            </label>
-            <input cFormControl id="inputGroupFile01" type="file"/>
-          </c-input-group>
-          <c-input-group class="mb-3">
-            <input cFormControl id="inputGroupFile02" type="file"/>
-            <label cInputGroupText for="inputGroupFile02">
-              Upload
-            </label>
-          </c-input-group>
-          <c-input-group class="mb-3">
-            <button cButton
-                    color="secondary"
-                    id="inputGroupFileAddon03"
-                    type="button"
-                    variant="outline"
-            >
-              Button
-            </button>
-            <input aria-describedby="inputGroupFileAddon03"
-                   aria-label="Upload"
-                   cFormControl
-                   id="inputGroupFile03"
-                   type="file"
-            />
-          </c-input-group>
-          <c-input-group>
-            <input aria-describedby="inputGroupFileAddon04"
-                   aria-label="Upload"
-                   cFormControl
-                   id="inputGroupFile04"
-                   type="file"
-            />
-            <button cButton
-                    color="secondary"
-                    id="inputGroupFileAddon04"
-                    type="button"
-                    variant="outline"
-            >
-              Button
-            </button>
-          </c-input-group>
-        </app-docs-example>
+        <table [hover]="true" [responsive]="true" [striped]="true" align="middle" cTable class="mb-0 border">
+          <thead cTableColor="light">
+            <tr>
+              <!-- <th class="text-center">
+                <svg cIcon name="cilPeople"></svg>
+              </th> -->
+              <th>Produits</th>
+              <th>Clients</th>
+              <th class="text-center">Numéro PDV</th>
+              <th class="text-center">Montant</th>
+              <th class="text-center">Transaction type</th>
+              <th class="text-center">Date</th>
+              <!-- <th class="text-center">Actions</th> -->
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let transaction of mobileTransactions; index as i">
+
+              <td>Transfert mobile</td>
+              <td>
+                {{
+                transaction.client.firstName +
+                " " +
+                transaction.client.lastName
+                }}
+              </td>
+              <td class="text-center">
+                <div>{{ transaction.client.pdvNumber }}</div>
+              </td>
+              <td class="text-center">
+                {{ transaction.amount }}
+              </td>
+              <td class="text-center">
+                {{ transaction.sendType }}
+              </td>
+              <td>
+                <div class="small text-medium-emphasis text-center">
+                  {{ transaction.date | date : "short" : "+1" }}
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </c-card-body>
     </c-card>
   </c-col>

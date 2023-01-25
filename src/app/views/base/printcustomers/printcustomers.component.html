@@ -1,4 +1,4 @@
-<c-col xs="12">
+<!-- <c-col xs="12">
   <c-card class="mb-4">
     <div>
       <a (click)="toggleCollapse()" style="background-color: grey" cButton class="me-1" color="primary">
@@ -14,14 +14,6 @@
                 justify-content: space-between;
                 margin: 15px;
               ">
-              <!-- <div class="col-sm-3">
-            <label for="inputState" class="form-label">State</label>
-            <select id="inputState" class="form-select">
-              <option selected>Choose...</option>
-              <option>...</option>
-            </select>
-          </div>
-           -->
 
               <div style="display: contents">
                 <div class="form-check form-check-inline" *ngFor="let type of transactionType; index as i">
@@ -33,14 +25,11 @@
               </div>
 
 
-              <!-- <div class="form-check form-check-inline" >
-            <input class="form-check-input" type="radio" name="inlineRadioOptions"  (change)="onFilterChange($event)" [value]="" id="inlineRadio1" >
-            <label class="form-check-label" for="inlineRadio1">All</label>
-          </div> -->
+
             </c-row>
 
             <div class="col-sm-7" style="display: contents; align-content: center; margin-top: 20px">
-              <!-- <input type="text" class="form-control" placeholder="Search user historique" (ngModelChange)="onSearchChange($event)" [(ngModel)]="searchText" ng aria-label="Search"> -->
+               <input type="text" class="form-control" placeholder="Search user historique" (ngModelChange)="onSearchChange($event)" [(ngModel)]="searchText" ng aria-label="Search">
               <form class="row row-cols-sm-auto" style="text-align: center; justify-content: center">
                 <div class="col-12">
                   <div class="dp-hidden position-absolute">
@@ -86,7 +75,7 @@
       </div>
     </div>
   </c-card>
-</c-col>
+</c-col> -->
 
 <c-col xs="12">
   <c-card class="mb-4">
@@ -168,11 +157,18 @@
             <td>{{customer?.lastName}}</td>
             <td>{{customer?.pdvNumber}}</td>
             <td>{{customer?.phone}}</td>
+            <td>{{customer?.address}}</td>
+            <td>{{0}}</td>
+            <td>
+              <button type="button" rel="tooltip"  class="btn btn-success btn-just-icon btn-sm">
+                ACTIVE
+              </button>
+            </td>
             <!-- <td>{{getTotalSend(customer).sendback}}</td>
             <td>{{getTotalSend(customer).send}}</td>
             <td>{{getTotalSend(customer).collection}}</td>
             <td>{{getTotalSend(customer).disbursement}}</td> -->
-            <td>{{totals.get(customer.id)}}</td>
+            <!-- <td>{{totals.get(customer.id)}}</td> -->
             <td class="text-center">
               <div class="btn-tooltip">
 

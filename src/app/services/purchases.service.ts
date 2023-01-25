@@ -90,6 +90,10 @@ export class PurchasesService {
 
     return this.http.get<any[]>(this.purchaseEnpoint.listAchat+ `?provider.firstName=${search}`);
   }
+  getSearchCardPurchaseByCardType(search:string): Observable<any>{
+
+    return this.http.get<any[]>(this.carteCreditPurchase.listAchat+ `?cardToTypeCardRelation.typeCardForSale.name=${search}`);
+  }
 
 
   findCardPurchase(id:number): Observable<any>{

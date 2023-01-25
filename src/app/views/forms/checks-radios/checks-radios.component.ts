@@ -29,15 +29,15 @@ export class ChecksRadiosComponent {
   total: number = 0;
   constructor(private clienService: ClientService, private route: ActivatedRoute,
     private router: Router,private transService: TransactionsService, private operationService:OperationsService ) {
-   
+
   }
   ngOnInit(): void {
 
     // this. getOperations();
     // this.getAllTransaction();
     this.getTransactionList();
-    this.getAllCustomers();
-    
+    // this.getAllCustomers();
+
   }
 
   getAllCustomers(){
@@ -46,7 +46,7 @@ export class ChecksRadiosComponent {
       let operations:any[] = [];
       data.forEach((user:any)=>{
         user['transactions'].forEach((t:any)=>{
-          let operationName = t['operation']['name'];
+          let operationName = t['operation']?.['name'];
           let existObject:any = operations.find((op)=>op["key"]===operationName);
           // debugger
           if (existObject) {
@@ -58,10 +58,10 @@ export class ChecksRadiosComponent {
 
             operations.push(obj);
             this.operationTotal = operations.length;
-            
+
           }
         })
-      })  
+      })
       this.allOperations = operations;
     })
   }
@@ -69,8 +69,8 @@ export class ChecksRadiosComponent {
   getTransactionList(){
     this.transService.getAllTransaction(this.page).subscribe(data=>{
       this.listeTransactions = data;
-      console.log(this.listeTransactions.length);
-      
+      console.log(this.listeTransactions);
+
     })
   }
 
@@ -88,7 +88,7 @@ export class ChecksRadiosComponent {
   //   this.allOperationsName.forEach((n:any)=>{
   //     operations[n]=0
   //   })
-  //   client["transactions"].forEach((trans:any, index:number)=>{   
+  //   client["transactions"].forEach((trans:any, index:number)=>{
   //       let key = trans["operation"]["name"];
   //       if(operations[key]){
   //         operations[key] += trans["amount"];
@@ -100,13 +100,13 @@ export class ChecksRadiosComponent {
   //     return Object.keys(operations).map((k:any)=>({"key":k,"value":operations[k]}));
   // }
 
-  
+
   // getAllTransaction(){
   //   this.transService.getAllTransaction().subscribe(response=>{
   //     this.transactionData = response;
   //     console.log(this.transactionData);
   //     let operations:any = {};
-      
+
   //     this.transactionData.forEach(trans=>{
   //       let key = trans["operation"]["name"];
   //       if(operations[key]){
@@ -115,14 +115,14 @@ export class ChecksRadiosComponent {
   //       }else{
   //         operations[key] = trans["amount"];
   //       }
-        
+
   //     })
   //     this.operationTotal = operations;
   //   });
-  
-    
 
-    
+
+
+
   // }
 
 
@@ -132,20 +132,20 @@ export class ChecksRadiosComponent {
       this.historiqueData = data;
       data.forEach((d:any)=>{
         // console.log(this.getUserOperations(d));
-        
+
       })
-      
+
       // console.log(data.transactions);
-    
+
       // this.historiqueData = data;
-      
-      
+
+
       // this.userTransactionData = data;
       // // console.log(this.userTransactionData);
       // let operations:any = {};
-      // this.userTransactionData.forEach((trans, index)=>{   
+      // this.userTransactionData.forEach((trans, index)=>{
       //   // console.log(trans.transactions[index]["operation"]["name"]);
-        
+
       //   let key = trans.transactions[index]["operation"]["name"];
       //   if(operations[key]){
       //     operations[key] += trans["amount"];
@@ -153,15 +153,15 @@ export class ChecksRadiosComponent {
       //   }else{
       //     operations[key] = trans["amount"];
       //   }
-        
+
       // })
       // this.operationTotal = operations;
       // console.log(this.operationTotal);
-      
+
     });
-      
-    
+
+
   }
 
-  
+
 }

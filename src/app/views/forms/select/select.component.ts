@@ -42,7 +42,8 @@ export class SelectComponent {
 
   }
   ngOnInit(): void {
-    this.getAllSupplier();
+    // this.getAllSupplier();
+    this.getAllProviders();
   }
 
   // getAchatHistorique(){
@@ -51,6 +52,21 @@ export class SelectComponent {
   //     this.getSupplierPurchase(this.historiqueAchats);
   //   });
   // }
+
+
+  getAllProviders(){
+
+    this.supplierService.getAllProviders().subscribe(async data=>{
+      this.providers = data;
+      console.log(this.providers);
+
+
+    },
+    async error => {
+      console.log(error.message);
+    });
+
+  }
 
   getProviderTotalPurchase(provider:any){
     let total = 0;
@@ -92,13 +108,13 @@ export class SelectComponent {
   }
 
 
-  getAllSupplier(){
-    this.supplierService.getAllProviders().subscribe(data=>{
-      this.supplierData = data;
+  // getAllSupplier(){
+  //   this.supplierService.getAllProviders().subscribe(data=>{
+  //     this.supplierData = data;
 
 
-    })
-  }
+  //   })
+  // }
 
 
 
@@ -130,13 +146,22 @@ export class SelectComponent {
   onFilterChange(event: any){
     if(event.target.value != ""){
       this.ischeked = event.target.value;
-      // this.getCustomersTans(event.target.value);
+      this.getSupplierTans(event.target.value);
 
 
     }else if(event.target.value == ""){
       // this.getAllMobileTransactions();
     }
 
+  }
+
+  getSupplierTans(type:any){
+    this.providers = [];
+    this.supplierService.getSendType(type).subscribe((data:any)=>{
+      this.providers = data;
+
+
+   })
   }
 
   onDateSelection(date: NgbDate) {
@@ -203,6 +228,46 @@ export class SelectComponent {
 	}
 
 
+  getTotalPurchase(provider:any){
+    let creditPurchase:number = 0;
+    let mobileTransferPurchase:number = 0;
+    let collection:number = 0;
+    let disbursement:number = 0;
+
+
+    provider.purchases.forEach((s:any)=>{
+      if (s.typePurchase==="purchaseOfCredits") {
+        creditPurchase+=s.amount
+      }
+      if (s.typePurchase==="mobileTransferPurchase") {
+        mobileTransferPurchase+=s.amount
+      }
+      if (s.sendType==="collection") {
+        collection+=s.amount
+      }
+      if (s.sendType==="disbursement") {
+        disbursement+=s.amount
+      }
+    })
+    return {creditPurchase,mobileTransferPurchase};
+
+  }
+
+  getTotalCartePurchase(provider:any){
+    let totalCarte:number = 0;
+    provider.cardPurchases.forEach((c:any)=>{
+      c.cardToTypeCardRelation.forEach((element:any) => {
+        totalCarte += element.amountHT;
+      });
+
+    })
+
+
+    return {totalCarte};
+  }
+
+
+
   getIndividuallProviders(type:any){
     console.log(type.target.value);
 
@@ -217,5 +282,8 @@ export class SelectComponent {
     }
 
   }
+
+
+
 
 }

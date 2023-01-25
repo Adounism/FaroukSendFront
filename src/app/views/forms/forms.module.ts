@@ -19,7 +19,13 @@ import {
   CarouselModule,
   UtilitiesModule,
   SpinnerModule,
-  PlaceholderModule
+  PlaceholderModule,
+  AccordionModule,
+  BadgeModule,
+  ProgressModule,
+  TabsModule,
+  NavModule,
+  PaginationModule
 } from '@coreui/angular';
 
 import { DocsComponentsModule } from '@docs-components/docs-components.module';
@@ -37,6 +43,9 @@ import { SearchPipe } from 'src/app/pipes/search.pipe';
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { IconModule } from '@coreui/icons-angular';
+import { MdbModalModule } from 'mdb-angular-ui-kit/modal';
+import { BaseRoutingModule } from '../base/base-routing.module';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 
 @NgModule({
@@ -54,10 +63,16 @@ import { IconModule } from '@coreui/icons-angular';
   imports: [
     CommonModule,
     FormsRoutingModule,
+    AccordionModule,
+    BadgeModule,
     DocsComponentsModule,
     CardModule,
     BreadcrumbModule,
+    BaseRoutingModule,
     FormModule,
+    ProgressModule,
+    TabsModule,
+    NavModule,
     CollapseModule,
     GridModule,
     ButtonModule,
@@ -65,19 +80,20 @@ import { IconModule } from '@coreui/icons-angular';
     FormsModule,
     ReactiveFormsModule,
     PlaceholderModule,
-
     ButtonModule,
     IconModule,
     ButtonGroupModule,
     UtilitiesModule,
     SpinnerModule,
+    PaginationModule,
     DropdownModule,
     SharedModule,
     ListGroupModule,
     CarouselModule,
     TableModule,
-
+    MdbModalModule,
     NgbModule,
+    NgxPaginationModule,
     TooltipModule,
     OwlDateTimeModule,
     OwlNativeDateTimeModule,

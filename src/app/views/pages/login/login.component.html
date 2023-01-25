@@ -93,6 +93,29 @@
         </c-card>
       </c-col>
     </c-row>
+
+   <template *ngIf="text_error_message">
+    <div>
+
+      <c-alert color="secondary">
+        A simple secondary alert with <a cAlertLink routerLink="./">an example link</a>.
+        Give it a click if you like.
+      </c-alert>
+
+      <c-alert  color="warning" closeButton>
+        {{text_error_message}}
+      </c-alert >
+      <c-alert
+        color="danger"
+        :show.sync="currentAlertCounter"
+        closeButton
+      >
+        <!-- This alert will close after {{currentAlertCounter}} seconds. -->
+
+    </c-alert >
+    </div>
+   </template>
+
   </c-container>
 </div>
 
