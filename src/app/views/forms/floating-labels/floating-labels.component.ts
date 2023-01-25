@@ -48,14 +48,14 @@ export class FloatingLabelsComponent implements OnInit{
 
 
   getAllPuchasedCard(){
-    this.puchase.getAllCardPurchase().subscribe(data=>{
+    this.puchase.getAllCardPurchase(this.page).subscribe(data=>{
       this.cartePurchaseListe = data;
       let allCards:any = [];
       data.forEach((d:any)=>{
         let obj:any = {}
         obj['provider']=d['provider']
         if(obj['provider']['business']){
-          obj['provider']=d['provider']['business']['name'];
+          obj['provider']=d['provider']['business'];
         }else if(obj['provider']=d['provider']['individual']) {
           obj['provider']=d['provider']['individual']['firstName']+" "+d['provider']['individual']['lastName']
 
@@ -99,8 +99,8 @@ export class FloatingLabelsComponent implements OnInit{
   }
 
   onChange(cardType:any) {
-    console.log(cardType.target.value);
-    if(cardType.target.value){
+
+    if(cardType.target.value != "Tous"){
       this.cardForSales = [];
       this.puchase.getSearchCardPurchaseByCardType(cardType.target.value).subscribe(data=>{
         this.cardForSales = data;
@@ -111,10 +111,13 @@ export class FloatingLabelsComponent implements OnInit{
           let obj:any = {}
           if(d['provider']['business']){
             obj['provider']=d['provider']['business']
+
           }else{
 
-            obj['provider']=d['provider']['firstName']+" "+d['provider']['lastName']
+            obj['provider']=d['provider']['individual']['firstName']+" "+d['provider']['individual']['lastName']
           }
+
+          console.log(obj['provider']);
 
           obj['date']=d['date']
           if (d['cardToTypeCardRelation'].length > 0) {
@@ -129,12 +132,14 @@ export class FloatingLabelsComponent implements OnInit{
             })
           }
         })
-        this.cardForSales = allCards;
+        this.cardPurchase = allCards;
         data.forEach((card:any)=>{
           // this.getClientCreditPurchase(card);
         });
       });
 
+    }else{
+      this.getAllPuchasedCard();
     }
   }
 
@@ -237,4 +242,18 @@ export class FloatingLabelsComponent implements OnInit{
   }
 
 
+     /**
+   * Write code on Method
+   *
+   * @return response()
+   */
+      pageChangeEvent(event: number){
+        this.page = event;
+        this.getAllPuchasedCard();
+    }
+
+    onTableDataChange(event: any) {
+      this.page = event;
+      this.getAllPuchasedCard();
+    }
 }

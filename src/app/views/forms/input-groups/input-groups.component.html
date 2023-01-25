@@ -129,7 +129,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let transaction of mobileTransactions; index as i">
+            <tr *ngFor="let transaction of mobileTransactions | paginate: { itemsPerPage: 25, currentPage: page, totalItems: total }">
 
               <td>Transfert mobile</td>
               <td>
@@ -146,7 +146,7 @@
                 {{ transaction.amount }}
               </td>
               <td class="text-center">
-                {{ transaction.sendType }}
+                {{  transaction.sendType  == "sendBack" ? "Retour d'achat" : "Envoi"  }}
               </td>
               <td>
                 <div class="small text-medium-emphasis text-center">
@@ -156,6 +156,7 @@
             </tr>
           </tbody>
         </table>
+        <pagination-controls (pageChange)="pageChangeEvent($event)"></pagination-controls>
       </c-card-body>
     </c-card>
   </c-col>

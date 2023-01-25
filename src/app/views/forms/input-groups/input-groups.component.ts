@@ -21,6 +21,7 @@ export class InputGroupsComponent  implements OnInit{
   searchText = ""
   visible = true;
   page: number = 1;
+  total:number=0;
 
   constructor(private mobileTransaction: TransactionsService,
     private toast: NgToastService,
@@ -42,7 +43,7 @@ export class InputGroupsComponent  implements OnInit{
     getAllMobileTransactions(){
       this.mobileTransaction.getAllMobileSends(this.page).subscribe(data=>{
         this.mobileTransactions = data;
-        console.log(this.mobileTransactions);
+
       });
     }
 
@@ -157,5 +158,21 @@ export class InputGroupsComponent  implements OnInit{
 
    })
   }
+
+        /**
+   * Write code on Method
+   *
+   * @return response()
+   */
+    pageChangeEvent(event: number){
+      this.page = event;
+      this.getAllMobileTransactions();
+  }
+
+  onTableDataChange(event: any) {
+    this.page = event;
+    this.getAllMobileTransactions();
+  }
+
 
 }

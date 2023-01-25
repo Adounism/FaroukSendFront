@@ -13,7 +13,7 @@
           <div class="col-sm-3">
             <label for="inputState" class="form-label">Carte de crédit</label>
             <select id="inputState"  (change)="onChange($event)" class="form-select">
-              <option selected> </option>
+              <option selected  [ngValue]="''">Tous</option>
               <option *ngFor="let cardtype of listeCardTypes" [ngValue]="cardtype">
                 {{cardtype.name}}
               </option>
@@ -163,7 +163,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let card_sell of cardPurchase; index as i">
+            <tr *ngFor="let card_sell of cardPurchase | paginate: { itemsPerPage: 25, currentPage: page, totalItems: total }">
 
               <td class="text-center">
                 Achat de carte
@@ -228,6 +228,7 @@
             </tr>
           </tbody>
         </table>
+        <pagination-controls (pageChange)="pageChangeEvent($event)"></pagination-controls>
       </c-card-body>
     </c-card>
   </c-col>

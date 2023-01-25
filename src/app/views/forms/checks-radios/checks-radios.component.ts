@@ -163,5 +163,20 @@ export class ChecksRadiosComponent {
 
   }
 
+    /**
+   * Write code on Method
+   *
+   * @return response()
+   */
+    pageChangeEvent(event: number){
+      this.page = event;
+      this.getTransactionList();
+  }
+
+  onTableDataChange(event: any) {
+    this.page = event;
+    this.getTransactionList();
+  }
+
 
 }

@@ -184,7 +184,7 @@ sendType = {
 
   getSearchCardPurchaseByCardType(search:string): Observable<any>{
 
-    return this.http.get<any[]>(this.cardForSale.cardListe+ `?cardToTypeCardRelation.typeCardForSale=${search}`);
+    return this.http.get<any[]>(this.cardForSale.cardListe+ `?cardToTypeCardRelation.typeCardForSale.name=${search}`);
   }
 
 

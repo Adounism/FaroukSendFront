@@ -51,7 +51,7 @@ export class RangesComponent {
 
   onChange(cardType:any) {
     console.log(cardType.target.value);
-    if(cardType.target.value){
+    if(cardType.target.value != "Tous"){
       this.cardForSales = [];
       this.transaction.getSearchCardPurchaseByCardType(cardType.target.value).subscribe(data=>{
         this.cardForSales = data;
@@ -79,6 +79,8 @@ export class RangesComponent {
         });
       });
 
+    }else{
+      this.getAllCardSells();
     }
   }
 
@@ -204,5 +206,20 @@ export class RangesComponent {
     const parsed = this.formatter.parse(input);
     return parsed && this.calendar.isValid(NgbDate.from(parsed)) ? NgbDate.from(parsed) : currentValue;
   }
+
+      /**
+   * Write code on Method
+   *
+   * @return response()
+   */
+      pageChangeEvent(event: number){
+        this.page = event;
+        this.getAllCardSells();
+    }
+
+    onTableDataChange(event: any) {
+      this.page = event;
+      this.getAllCardSells();
+    }
 
 }

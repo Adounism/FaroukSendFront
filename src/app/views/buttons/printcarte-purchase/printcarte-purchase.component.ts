@@ -54,7 +54,7 @@ export class PrintcartePurchaseComponent implements OnInit {
 
 
   getAllPuchasedCard(){
-    this.puchase.getAllCardPurchase().subscribe(data=>{
+    this.puchase.getAllCardPurchase(this.page).subscribe(data=>{
       this.cartePurchaseListe = data;
       let allCards:any = [];
       data.forEach((d:any)=>{

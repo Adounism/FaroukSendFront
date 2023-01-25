@@ -140,7 +140,7 @@
           </tr>
           </thead>
           <tbody>
-          <tr *ngFor="let provider of providers ">
+          <tr *ngFor="let provider of providers  | paginate: { itemsPerPage: 25, currentPage: page, totalItems: total } ">
 
             <td>{{provider.individual?.firstName}}</td>
             <td>{{provider.individual?.lastName}}</td>
@@ -166,6 +166,7 @@
           </tr>
           </tbody>
         </table>
+        <pagination-controls (pageChange)="pageChangeEvent($event)"></pagination-controls>
     </c-card-body>
   </c-card>
 </c-col>

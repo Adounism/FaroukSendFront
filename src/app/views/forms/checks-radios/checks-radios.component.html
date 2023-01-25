@@ -33,7 +33,7 @@
           </tr>
           </thead>
           <tbody>
-          <tr *ngFor="let transac of listeTransactions">
+          <tr *ngFor="let transac of listeTransactions | paginate: { itemsPerPage: 25, currentPage: page, totalItems: total } ">
 
             <td>Vente de crédit</td>
             <td>{{transac.client?.firstName + " " + transac.client.lastName}}</td>
@@ -54,6 +54,7 @@
           </tr>
           </tbody>
         </table>
+        <pagination-controls (pageChange)="pageChangeEvent($event)"></pagination-controls>
     </c-card-body>
   </c-card>
 </c-col>

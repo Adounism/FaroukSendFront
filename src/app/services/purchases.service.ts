@@ -74,8 +74,8 @@ export class PurchasesService {
 
 
   //Carte de credit Achat Fournisseur
-  getAllCardPurchase(): Observable<any>{
-    return this.http.get<any[]>(this.carteCreditPurchase.listAchat);
+  getAllCardPurchase(page:number): Observable<any>{
+    return this.http.get<any[]>(this.carteCreditPurchase.listAchat + `?page=${page}`);
   }
 
   createCardPurchase(data: any): Promise<any>{
