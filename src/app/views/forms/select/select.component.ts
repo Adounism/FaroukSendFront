@@ -284,6 +284,20 @@ export class SelectComponent {
   }
 
 
+  /**
+   * Write code on Method
+   *
+   * @return response()
+   */
+    pageChangeEvent(event: number){
+      this.page = event;
+      this.getAllProviders();
+  }
+
+  onTableDataChange(event: any) {
+    this.page = event;
+    this.getAllProviders();
+  }
 
 
 }
